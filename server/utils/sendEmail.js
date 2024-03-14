@@ -8,11 +8,28 @@ dotenv.config();
 const { AUTH_EMAIL, AUTH_PASSWORD } = process.env;
 
 let transporter = nodemailer.createTransport({
-  host: "smtp-mail.outlook.com",
+  // host: "smtp-mail.outlook.com",
+  // auth: {
+  //   user: AUTH_EMAIL,
+  //   pass: AUTH_PASSWORD,
+  // },
+  service: "gmail",
+  // host: 'smtp.example.com',
+  // port: 587,
   auth: {
-    user: AUTH_EMAIL,
-    pass: AUTH_PASSWORD,
+    user: "engmadev2021@gmail.com",
+    pass: "edtdtqelvvmbione",
   },
+  secure: true,
+  tls: {
+    // do not fail on invalid certs
+    rejectUnauthorized: false,
+  },
+  // service: 'gmail',
+  // auth: {
+  //     user: 'engmadev2021@gmail.com',
+  //     pass: 'Engma@2021'
+  // }
 });
 
 export const sendVerificationEmail = async (user, res, token) => {

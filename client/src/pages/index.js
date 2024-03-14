@@ -5,5 +5,15 @@ import SignIn from "./Login";
 import SignUp from "./Signup";
 import WriterPage from "./WriterPage";
 import Blog from "./Blog";
+import OTPVerification from "./OTPVerification";
 
-export { BlogDetail, CategoryPage, Home, SignIn, SignUp, WriterPage, Blog };
+export {
+  BlogDetail,
+  CategoryPage,
+  Home,
+  SignIn,
+  SignUp,
+  WriterPage,
+  Blog,
+  OTPVerification,
+};

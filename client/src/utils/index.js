@@ -7,6 +7,8 @@ import {
 import { toast } from "sonner";
 import { app } from "./firebase";
 
+export const API_URL = "http://localhost:8800";
+
 export function formatNumber(num) {
   if (num >= 1000000) {
     return (num / 1000000).toFixed(1) + "M";
@@ -15,6 +17,14 @@ export function formatNumber(num) {
   }
   return num.toString();
 }
+
+export const createSlug = (str) =>
+  str
+    ?.toLowerCase()
+    ?.trim()
+    ?.replace(/[^\w\s-]/g, "")
+    ?.replace(/[\s_-]+/g, "-")
+    ?.replace(/^-+|-+$/g, "");
 
 export const uploadFile = (setFileURL, file) => {
   const storage = getStorage(app);
@@ -79,3 +89,13 @@ export const saveUserInfo = (user, signIn) => {
     window.history.back();
   }, 1500);
 };
+
+export function getInitials(fullName) {
+  const names = fullName.split(" ");
+
+  const initials = names.slice(0, 2).map((name) => name[0].toUpperCase());
+
+  const initialsStr = initials.join("");
+
+  return initialsStr;
+}

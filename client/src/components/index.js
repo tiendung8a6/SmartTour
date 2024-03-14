@@ -12,6 +12,8 @@ import Pagination from "./Pagination";
 import PopularPosts from "./PopularPosts";
 import PopularWriters from "./PopularWriters";
 import ThemeSwitch from "./Switch";
+import { PasswordStrength } from "./PasswordInput";
+import SignUpForm from "./SignUp";
 
 export {
   Banner,
@@ -28,4 +30,6 @@ export {
   PopularPosts,
   PopularWriters,
   ThemeSwitch,
+  PasswordStrength,
+  SignUpForm,
 };

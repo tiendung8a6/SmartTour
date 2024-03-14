@@ -1,3 +1,8 @@
+import { MantineProvider } from "@mantine/core";
+import "@mantine/core/styles.css";
+import "@mantine/tiptap/styles.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -9,13 +14,18 @@ import "./index.css";
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+const queryClient = new QueryClient();
 
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <GoogleOAuthProvider clientId={clientId}>
-        <App />
-      </GoogleOAuthProvider>
+      <QueryClientProvider client={queryClient}>
+        <MantineProvider>
+          <GoogleOAuthProvider clientId={clientId}>
+            <App />
+          </GoogleOAuthProvider>
+        </MantineProvider>
+      </QueryClientProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
