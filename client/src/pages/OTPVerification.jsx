@@ -1,5 +1,4 @@
-import { Paper, PinInput, useMantineColorScheme } from "@mantine/core";
-import clsx from "clsx";
+import { Paper, PinInput } from "@mantine/core";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Toaster, toast } from "sonner";
@@ -8,9 +7,6 @@ import { useResend, useVerification } from "../hooks/auth-hook";
 import useStore from "../store/store";
 
 const OTPVerification = () => {
-  const { colorScheme } = useMantineColorScheme();
-  const theme = colorScheme === "dark";
-
   const otpData = JSON.parse(localStorage.getItem("otp_data"));
   const navigate = useNavigate();
 
@@ -74,32 +70,37 @@ const OTPVerification = () => {
 
   return (
     <div
-      className={clsx(
-        "w-full h-screen flex flex-col items-center justify-center",
-        theme
+      className={`w-full h-screen flex flex-col items-center justify-center ${
+        localStorage.getItem("theme") === "dark"
           ? "bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#302943] via-slate-900 to-black"
-          : "bg-gray-200"
-      )}
+          : "bg-white"
+      }`}
     >
       <Paper
         shadow="lg"
         p="xl"
-        className={clsx(theme ? "bg-[#0e1627]" : "bg-white")}
+        className={`${
+          localStorage.getItem("theme") === "dark"
+            ? "bg-[#0e1627]"
+            : " bg-white"
+        }`}
       >
         <div className="flex flex-col items-center justify-center mb-6 ">
           <p
-            className={clsx(
-              "text-2xl font-semibold text-center",
-              theme ? "text-gray-400" : "text-slate-700"
-            )}
+            className={`text-2xl font-semibold text-center ${
+              localStorage.getItem("theme") === "dark"
+                ? "text-gray-400"
+                : "text-slate-700"
+            }`}
           >
             OTP Verification
           </p>
           <span
-            className={clsx(
-              "text-sm",
-              theme ? "text-gray-500" : "text-slate-700"
-            )}
+            className={`text-sm ${
+              localStorage.getItem("theme") === "dark"
+                ? "text-gray-500"
+                : "text-slate-700"
+            }`}
           >
             Please OTP code sent to your mail.
           </span>

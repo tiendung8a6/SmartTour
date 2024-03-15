@@ -35,13 +35,12 @@ function App() {
           <Route element={<Layout />}>
             <Route path="/" />
             {/* <Route path="/" element={<Home />} /> */}
-            <Route path="/otp-verification" element={<OTPVerification />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/category" element={<CategoryPage />} />
             <Route path="/:slug/:id?" element={<BlogDetail />} />
             <Route path="/writer/:id" element={<WriterPage />} />
           </Route>
-
+          <Route path="/otp-verification" element={<OTPVerification />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/sign-in" element={<SignIn />} />
         </Routes>
