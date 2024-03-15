@@ -70,26 +70,27 @@ const OTPVerification = () => {
 
   return (
     <div
-      className={`w-full h-screen flex flex-col items-center justify-center ${
+      className={`w-full h-screen flex flex-col items-center justify-center overflow-hidden  ${
         localStorage.getItem("theme") === "dark"
-          ? "bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#302943] via-slate-900 to-black"
+          ? "bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#385998] via-slate-900 to-black "
           : "bg-white"
       }`}
+      style={{ maxWidth: "100%", maxHeight: "100vh" }}
     >
       <Paper
         shadow="lg"
         p="xl"
         className={`${
           localStorage.getItem("theme") === "dark"
-            ? "bg-[#0e1627]"
-            : " bg-white"
+            ? "dark:bg-[#0b111e]"
+            : "bg-slate-50"
         }`}
       >
         <div className="flex flex-col items-center justify-center mb-6 ">
           <p
             className={`text-2xl font-semibold text-center ${
               localStorage.getItem("theme") === "dark"
-                ? "text-gray-400"
+                ? "dark:text-gray-100"
                 : "text-slate-700"
             }`}
           >
@@ -98,7 +99,7 @@ const OTPVerification = () => {
           <span
             className={`text-sm ${
               localStorage.getItem("theme") === "dark"
-                ? "text-gray-500"
+                ? "dark:text-gray-100"
                 : "text-slate-700"
             }`}
           >
@@ -124,7 +125,7 @@ const OTPVerification = () => {
             </a>
           ) : (
             <>
-              <p>OTP will expire in:</p>
+              <p className="dark:text-white">OTP will expire in:</p>
               <span className="text-rose-600 font-semibold">
                 {formatTime(seconds)}
               </span>
