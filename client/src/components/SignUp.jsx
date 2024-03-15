@@ -8,18 +8,19 @@ import { useSignUp } from "../hooks/auth-hook";
 import { uploadFile } from "../utils";
 import { PasswordStrength } from "./PasswordInput";
 import { Inputbox } from "../components";
+import useStore from "../store";
 
 const SignUpForm = ({ toast }) => {
   const [isSignin, setIsSignin] = useState(false);
   const { colorScheme } = useMantineColorScheme();
   const theme = colorScheme === "dark";
 
-  const { mutate, isLoading } = useSignUp(toast, setIsSignin); // Thêm isLoading từ hook useSignUp
+  const { mutate } = useSignUp(toast, setIsSignin);
   const [strength, setStrength] = useState(0);
   const [file, setFile] = useState("");
   const [fileURL, setFileURL] = useState("");
   const [passValue, setPassValue] = useInputState("");
-  const [formLoading, setFormLoading] = useState(false); // Thêm state để theo dõi trạng thái loading của form
+  const { setIsLoading } = useStore();
 
   const form = useForm({
     initialValues: {
@@ -36,18 +37,23 @@ const SignUpForm = ({ toast }) => {
   });
 
   const handleSubmit = async (values) => {
-    if (!isSignin && strength < 90) return;
+    try {
+      setIsLoading(true);
+      if (!isSignin && strength < 90) return;
 
-    setFormLoading(true); // Set trạng thái loading của form là true khi người dùng bấm nút "Submit"
-
-    const res = await mutate({
-      ...values,
-      password: passValue,
-      image: fileURL,
-      accountType: "Writer",
-    });
-
-    setFormLoading(false); // Set trạng thái loading của form là false khi kết thúc xử lý
+      const res = await mutate({
+        ...values,
+        password: passValue,
+        image: fileURL,
+        accountType: "Writer",
+      });
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
+    }
   };
 
   useEffect(() => {
@@ -128,10 +134,8 @@ const SignUpForm = ({ toast }) => {
         <Button
           type="submit"
           className={clsx(theme ? "bg-black	" : "bg-sky-500	")}
-          disabled={formLoading || isLoading} // Disable nút "Submit" khi form đang loading hoặc khi hook useSignUp đang loading
         >
-          {formLoading || isLoading ? "Loading..." : "Submit"}{" "}
-          {/* Thay đổi nội dung của nút "Submit" khi form đang loading hoặc khi hook useSignUp đang loading */}
+          Submit
         </Button>
       </Group>
     </form>
