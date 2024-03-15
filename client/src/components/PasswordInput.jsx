@@ -81,7 +81,7 @@ export function PasswordStrength({ value, setValue, setStrength, isSignin }) {
         onChange={setValue}
         placeholder="Your password"
         label="Password"
-        required
+        isRequired={true}
       />
 
       {!isSignin && (

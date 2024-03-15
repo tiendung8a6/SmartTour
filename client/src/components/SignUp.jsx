@@ -14,11 +14,12 @@ const SignUpForm = ({ toast }) => {
   const { colorScheme } = useMantineColorScheme();
   const theme = colorScheme === "dark";
 
-  const { mutate } = useSignUp(toast, setIsSignin);
+  const { mutate, isLoading } = useSignUp(toast, setIsSignin); // Thêm isLoading từ hook useSignUp
   const [strength, setStrength] = useState(0);
   const [file, setFile] = useState("");
   const [fileURL, setFileURL] = useState("");
   const [passValue, setPassValue] = useInputState("");
+  const [formLoading, setFormLoading] = useState(false); // Thêm state để theo dõi trạng thái loading của form
 
   const form = useForm({
     initialValues: {
@@ -34,15 +35,19 @@ const SignUpForm = ({ toast }) => {
     },
   });
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     if (!isSignin && strength < 90) return;
 
-    const res = mutate({
+    setFormLoading(true); // Set trạng thái loading của form là true khi người dùng bấm nút "Submit"
+
+    const res = await mutate({
       ...values,
       password: passValue,
       image: fileURL,
       accountType: "Writer",
     });
+
+    setFormLoading(false); // Set trạng thái loading của form là false khi kết thúc xử lý
   };
 
   useEffect(() => {
@@ -58,6 +63,7 @@ const SignUpForm = ({ toast }) => {
         <Inputbox
           className="w-full"
           withAsterisk
+          isRequired={true}
           label="First Name"
           placeholder="First Name"
           {...form.getInputProps("firstName")}
@@ -66,6 +72,7 @@ const SignUpForm = ({ toast }) => {
           className="w-full"
           withAsterisk
           label="Last Name"
+          isRequired={true}
           placeholder="Last Name"
           {...form.getInputProps("lastName")}
         />
@@ -74,6 +81,8 @@ const SignUpForm = ({ toast }) => {
       <Inputbox
         withAsterisk
         label="Email Address"
+        type="email"
+        isRequired={true}
         placeholder="your@email.com"
         {...form.getInputProps("email")}
       />
@@ -119,8 +128,10 @@ const SignUpForm = ({ toast }) => {
         <Button
           type="submit"
           className={clsx(theme ? "bg-black	" : "bg-sky-500	")}
+          disabled={formLoading || isLoading} // Disable nút "Submit" khi form đang loading hoặc khi hook useSignUp đang loading
         >
-          Submit
+          {formLoading || isLoading ? "Loading..." : "Submit"}{" "}
+          {/* Thay đổi nội dung của nút "Submit" khi form đang loading hoặc khi hook useSignUp đang loading */}
         </Button>
       </Group>
     </form>
