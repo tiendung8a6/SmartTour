@@ -1,6 +1,9 @@
 import Users from "../models/userModel.js";
 import { compareString, createJWT, hashString } from "../utils/index.js";
 import { sendVerificationEmail } from "../utils/sendEmail.js";
+import nodemailer from "nodemailer";
+
+const { AUTH_EMAIL, AUTH_PASSWORD } = process.env;
 
 export const register = async (req, res, next) => {
   const { firstName, lastName, email, password, image, accountType, provider } =
@@ -125,7 +128,6 @@ export const login = async (req, res, next) => {
 
     if (!isMatch) {
       return next("Invalid email or password");
-      // return;
     }
 
     // if (user?.accountType === "Writer" && !user?.emailVerified) {
@@ -146,5 +148,68 @@ export const login = async (req, res, next) => {
   } catch (error) {
     console.log(error);
     res.status(404).json({ success: "failed", message: error.message });
+  }
+};
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: AUTH_EMAIL,
+    pass: AUTH_PASSWORD,
+  },
+});
+
+export const forgotPassword = async (req, res, next) => {
+  const { email } = req.body;
+
+  try {
+    const user = await Users.findOne({ email });
+
+    if (!user) {
+      return next("Email does not exist");
+    }
+
+    const newPassword = Math.random().toString(36).slice(-8);
+
+    const hashedPassword = await hashString(newPassword);
+
+    user.password = hashedPassword;
+    await user.save();
+
+    const mailOptions = {
+      from: AUTH_EMAIL,
+      to: email,
+      subject: "Password Reset",
+      html: `<div
+      style='font-family: Arial, sans-serif; font-size: 20px; color: #333; background-color: #f7f7f7; padding: 20px; border-radius: 5px;'>
+      <h3 style="color: rgb(8, 56, 188)">Password Reset Request</h3>
+      <hr>
+      <h4>Hello, </h4>
+      <p>
+      We have received a request to reset your password. Below is your new temporary password: 
+          <br>
+          <h1 styles='font-size: 20px; color: rgb(8, 56, 188);'>${newPassword}</h1>
+          <p>Please use this temporary password to access your account. You should not share your password to avoid losing your account.</b></p>
+      <p>If you did not request a password reset, please ignore this email.</b></p>
+      </p>
+      <div style="margin-top: 20px;">
+          <h5>Regards,</h5>
+          <h5>SmartTour</h5>
+      </div>
+  </div>`,
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log("Error occurred while sending email:", error);
+        return next("Error occurred while sending email");
+      } else {
+        console.log("Email sent:", info.response);
+        res.status(200).json({ message: "New password sent to your email" });
+      }
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: error.message });
   }
 };
