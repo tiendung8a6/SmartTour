@@ -7,15 +7,16 @@ import {
   Center,
 } from "@mantine/core";
 import { IconCheck, IconX } from "@tabler/icons-react";
+import { Inputbox } from "../components";
 
 function PasswordRequirement({ meets, label }) {
   return (
-    <Text component='div' c={meets ? "teal" : "red"} mt={5} size='sm'>
+    <Text component="div" c={meets ? "teal" : "red"} mt={5} size="sm">
       <Center inline>
         {meets ? (
-          <IconCheck size='0.9rem' stroke={1.5} />
+          <IconCheck size="0.9rem" stroke={1.5} />
         ) : (
-          <IconX size='0.9rem' stroke={1.5} />
+          <IconX size="0.9rem" stroke={1.5} />
         )}
         <Box ml={7}>{label}</Box>
       </Center>
@@ -73,23 +74,24 @@ export function PasswordStrength({ value, setValue, setStrength, isSignin }) {
     ));
 
   return (
-    <div className='w-full'>
-      <PasswordInput
+    <div className="w-full">
+      <Inputbox
+        type="password"
         value={value}
         onChange={setValue}
-        placeholder='Your password'
-        label='Password'
+        placeholder="Your password"
+        label="Password"
         required
       />
 
       {!isSignin && (
         <>
-          <Group gap={5} grow mt='xs' mb='xs'>
+          <Group gap={5} grow mt="xs" mb="xs">
             {bars}
           </Group>
 
           <PasswordRequirement
-            label='Has at least 6 characters'
+            label="Has at least 6 characters"
             meets={value.length > 5}
           />
           {checks}

@@ -7,6 +7,7 @@ import { clsx } from "clsx";
 import { useSignUp } from "../hooks/auth-hook";
 import { uploadFile } from "../utils";
 import { PasswordStrength } from "./PasswordInput";
+import { Inputbox } from "../components";
 
 const SignUpForm = ({ toast }) => {
   const [isSignin, setIsSignin] = useState(false);
@@ -51,17 +52,17 @@ const SignUpForm = ({ toast }) => {
   return (
     <form
       onSubmit={form.onSubmit(handleSubmit)}
-      className="flex flex-col gap-3"
+      className="max-w-md w-full mt-8 space-y-6"
     >
       <div className="w-full flex gap-2 ">
-        <TextInput
+        <Inputbox
           className="w-full"
           withAsterisk
           label="First Name"
           placeholder="First Name"
           {...form.getInputProps("firstName")}
         />
-        <TextInput
+        <Inputbox
           className="w-full"
           withAsterisk
           label="Last Name"
@@ -70,7 +71,7 @@ const SignUpForm = ({ toast }) => {
         />
       </div>
 
-      <TextInput
+      <Inputbox
         withAsterisk
         label="Email Address"
         placeholder="your@email.com"
@@ -84,7 +85,7 @@ const SignUpForm = ({ toast }) => {
         isSignin={false}
       />
 
-      <Group className={`w-full flex  justify-between`} mt="md">
+      <Group className={`w-full flex  justify-between py-3`} mt="md">
         <div className={`flex flex-col items-center justify-between`}>
           <label
             className={clsx(
@@ -102,26 +103,26 @@ const SignUpForm = ({ toast }) => {
               accept=".jpg, .png, .jpeg"
             />
             <BiImages />
-            <span>Picture</span>
+            <span className="mr-[10px]">Picture</span>
+            <div>
+              {fileURL && (
+                <img
+                  src={fileURL || file}
+                  alt=""
+                  className="w-16 h-16 rounded-full"
+                />
+              )}
+            </div>
           </label>
         </div>
 
         <Button
           type="submit"
-          className={clsx(theme ? "bg-blue-600" : "bg-black")}
+          className={clsx(theme ? "bg-black	" : "bg-sky-500	")}
         >
           Submit
         </Button>
       </Group>
-      <p className="text-sm">
-        {isSignin ? "Don't have an account?" : "Already has an account?"}
-        <span
-          className="underline text-blue-600 ml-1 cursor-pointer"
-          onClick={() => setIsSignin((prev) => !prev)}
-        >
-          {isSignin ? "Sign up" : "Sign in"}
-        </span>
-      </p>
     </form>
   );
 };

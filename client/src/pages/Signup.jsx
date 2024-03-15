@@ -93,7 +93,7 @@ function SignUp() {
           </div>
 
           <div className="w-full space-y-6 flex flex-col  justify-start">
-            <div className="max-w-md w-full flex gap-3 md:gap-4 items-center justify-center mb-12">
+            <div className="max-w-md w-full flex gap-3 md:gap-4 items-center justify-center mb-8">
               {showForm && (
                 <IoArrowBackCircleSharp
                   className="text-2xl lg:text-3xl cursor-pointer text-gray-800 dark:text-gray-400"
