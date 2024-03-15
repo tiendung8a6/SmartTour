@@ -14,6 +14,9 @@ const OTPVerification = () => {
   const { mutate, isPending } = useVerification(toast);
   const resend = useResend(toast);
 
+  console.log("isPending", isPending);
+  console.log("resend.isPending", resend.isPending);
+
   const [seconds, setSeconds] = useState(120);
   const [countdown, setCountdown] = useState(null);
   const [showPage, setShowPage] = useState(true); // State để điều khiển hiển thị trang
@@ -114,7 +117,6 @@ const OTPVerification = () => {
           size="xl"
           onComplete={(value) => handleSubmit(value)}
         />
-
         <div className="pt-5 flex items-center justify-center gap-3 text-base">
           {seconds === 0 ? (
             <a
@@ -132,8 +134,7 @@ const OTPVerification = () => {
             </>
           )}
         </div>
-
-        {/* <Loading visible={isPending || resend.isPending} /> */}
+        {isPending || resend.isPending ? <Loading visible={true} /> : null}{" "}
         <Toaster richColors />
       </Paper>
     </div>
