@@ -128,7 +128,8 @@ export const login = async (req, res, next) => {
       // return;
     }
 
-    if (user?.accountType === "Writer" && !user?.emailVerified) {
+    // if (user?.accountType === "Writer" && !user?.emailVerified) {
+    if (!user?.emailVerified) {
       return next("Please verify your email address.");
     }
 

@@ -14,22 +14,14 @@ let transporter = nodemailer.createTransport({
   //   pass: AUTH_PASSWORD,
   // },
   service: "gmail",
-  // host: 'smtp.example.com',
-  // port: 587,
   auth: {
-    user: "engmadev2021@gmail.com",
-    pass: "edtdtqelvvmbione",
+    user: AUTH_EMAIL,
+    pass: AUTH_PASSWORD,
   },
   secure: true,
   tls: {
-    // do not fail on invalid certs
     rejectUnauthorized: false,
   },
-  // service: 'gmail',
-  // auth: {
-  //     user: 'engmadev2021@gmail.com',
-  //     pass: 'Engma@2021'
-  // }
 });
 
 export const sendVerificationEmail = async (user, res, token) => {
@@ -45,7 +37,7 @@ export const sendVerificationEmail = async (user, res, token) => {
     style='font-family: Arial, sans-serif; font-size: 20px; color: #333; background-color: #f7f7f7; padding: 20px; border-radius: 5px;'>
     <h3 style="color: rgb(8, 56, 188)">Please verify your email address</h3>
     <hr>
-    <h4>Hi, ${name},</h4>
+    <h4>Hi ${name},</h4>
     <p>
         Please verify your email address with the OTP.
         <br>

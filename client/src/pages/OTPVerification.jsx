@@ -64,7 +64,7 @@ const OTPVerification = () => {
     if (showPage === false) {
       // Nếu không hiển thị trang thì chuyển hướng
       alert("Account has automatically been activated. Try login");
-      navigate("/auth");
+      navigate("/sign-in");
       localStorage.removeItem("otp_data");
     }
   }, [showPage]);
