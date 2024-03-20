@@ -205,7 +205,9 @@ export const forgotPassword = async (req, res, next) => {
         return next("Error occurred while sending email");
       } else {
         console.log("Email sent:", info.response);
-        res.status(200).json({ message: "New password sent to your email" });
+        res
+          .status(200)
+          .json({ success: true, message: "New password sent to your email" });
       }
     });
   } catch (error) {

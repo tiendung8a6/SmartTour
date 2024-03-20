@@ -176,3 +176,16 @@ export const followWriter = async (id, token) => {
     return err;
   }
 };
+
+export const forgotpassword = async (data) => {
+  try {
+    const result = await axios.post(`${API_URI}auth/forgot-password`, data);
+
+    return result?.data;
+  } catch (error) {
+    const err = error?.response?.data || error?.response;
+    console.log(error);
+
+    return err;
+  }
+};

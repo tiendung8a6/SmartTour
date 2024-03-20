@@ -6,6 +6,7 @@ import SignUp from "./Signup";
 import WriterPage from "./WriterPage";
 import Blog from "./Blog";
 import OTPVerification from "./OTPVerification";
+import ForgotPassword from "./ForgotPassword";
 
 export {
   BlogDetail,
@@ -16,4 +17,5 @@ export {
   WriterPage,
   Blog,
   OTPVerification,
+  ForgotPassword,
 };

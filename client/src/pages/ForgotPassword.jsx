@@ -1,4 +1,3 @@
-import { useGoogleLogin } from "@react-oauth/google";
 import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
@@ -7,9 +6,9 @@ import { Button, Divider, Inputbox, Logo } from "../components";
 import { Modal, useMantineColorScheme } from "@mantine/core";
 import useStore from "../store";
 import { saveUserInfo } from "../utils";
-import { emailLogin, googleSignin } from "../utils/apiCalls";
+import { forgotpassword, googleSignin } from "../utils/apiCalls";
 
-function SignIn() {
+function ForgotPassword() {
   const { user, signIn, setIsLoading } = useStore();
 
   const [data, setData] = useState({
@@ -29,31 +28,15 @@ function SignIn() {
     e.preventDefault();
 
     setIsLoading(true);
-    const result = await emailLogin(data);
+    const result = await forgotpassword(data);
     setIsLoading(false);
 
     if (result?.success === true) {
-      saveUserInfo(result, signIn);
+      toast.success(result.message);
     } else {
       toast.error(result?.message);
     }
   };
-
-  const googleLogin = useGoogleLogin({
-    onSuccess: async (tokenResponse) => {
-      const user = await googleSignin(tokenResponse?.access_token);
-
-      if (user?.success === true) {
-        saveUserInfo(user, signIn);
-      } else {
-        toast.error("Something went wrong. Try signing up.");
-      }
-    },
-    onError: (error) => {
-      console.log(error);
-      toast.error("Login Error, Try again!");
-    },
-  });
 
   if (user?.token) window.location.replace("/");
 
@@ -61,7 +44,7 @@ function SignIn() {
     <div className="flex w-full  h-[100vh]">
       <div className="hidden md:flex flex-col gap-y-4 w-1/3 min-h-screen bg-black items-center justify-center">
         <Logo type="sigin" />
-        <span className="text-xl font-semibold text-white">Welcome, back!</span>
+        <span className="text-xl font-semibold text-white">Hello !</span>
       </div>
 
       <div className="flex w-full md:w-2/3 h-full bg-white dark:bg-gradient-to-b md:dark:bg-gradient-to-r from-black via-[#071b3e] to-black items-center px-10 md:px-20 lg:px-40">
@@ -72,18 +55,19 @@ function SignIn() {
           <div className="max-w-md w-full space-y-8">
             <div>
               <h2 className="mt-6 text-center text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white">
-                Sign in to your account
+                Reset password
               </h2>
             </div>
 
-            <Button
-              onClick={() => googleLogin()}
-              label="Sign in with Google"
-              icon={<FcGoogle className="" />}
-              styles="w-full flex flex-row-reverse gap-4 bg-white dark:bg-transparent text-black dark:text-white px-5 py-2.5 rounded-full border border-gray-300"
-            />
-
-            <Divider label="or sign in with email" />
+            {/* <Divider label="or sign in with email" /> */}
+            <div className="flex items-center mt-4">
+              {/* <div className="flex-1 border-t border-gray-300 dark:border-gray-500"></div> */}
+              <div className="mx-4 text-gray-400 text-sm text-center	">
+                Please enter your email. You will receive a new password from
+                this email
+              </div>
+              {/* <div className="flex-1 border-t border-gray-300 dark:border-gray-500"></div> */}
+            </div>
 
             <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
               <div className="flex flex-col rounded-md shadow-sm -space-y-px gap-5">
@@ -96,30 +80,10 @@ function SignIn() {
                   value={data?.email}
                   onChange={handleChange}
                 />
-
-                <Inputbox
-                  label="Password"
-                  name="password"
-                  type="password"
-                  isRequired={true}
-                  placeholder="Password"
-                  value={data?.password}
-                  onChange={handleChange}
-                />
-                <div className="flex items-center justify-end text-gray-600 dark:text-gray-300">
-                  <p>
-                    <Link
-                      to="/forgot-password"
-                      className="text-sky-800 font-medium"
-                    >
-                      Forgot password
-                    </Link>
-                  </p>
-                </div>
               </div>
 
               <Button
-                label=" Sign In"
+                label="Send"
                 type="submit"
                 styles="group relative w-full flex justify-center py-2.5 2xl:py-3 px-4 border border-transparent text-sm font-medium rounded-full text-white bg-black dark:bg-sky-800 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 mt-8"
               />
@@ -127,7 +91,18 @@ function SignIn() {
 
             <div className="flex items-center justify-center text-gray-600 dark:text-gray-300">
               <p>
-                Dont't have an account?{" "}
+                <Link
+                  to="/sign-in"
+                  className="text-sky-800 font-medium text-center"
+                >
+                  Sign in
+                </Link>
+              </p>
+              <div className="text-sky-800 font-medium text-center mx-9	 ">
+                {" "}
+                |{" "}
+              </div>
+              <p>
                 <Link to="/sign-up" className="text-sky-800 font-medium">
                   Sign up
                 </Link>
@@ -142,4 +117,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default ForgotPassword;
