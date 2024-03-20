@@ -159,6 +159,20 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+// const generateRandomPassword = () => {
+//   const length = 10;
+//   const charset =
+//     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
+
+//   let password = "";
+//   for (let i = 0; i < length; i++) {
+//     const randomIndex = Math.floor(Math.random() * charset.length);
+//     password += charset[randomIndex];
+//   }
+
+//   return password;
+// };
+
 export const forgotPassword = async (req, res, next) => {
   const { email } = req.body;
 
@@ -169,6 +183,7 @@ export const forgotPassword = async (req, res, next) => {
       return next("Email does not exist");
     }
 
+    // const newPassword = generateRandomPassword();
     const newPassword = Math.random().toString(36).slice(-8);
 
     const hashedPassword = await hashString(newPassword);
