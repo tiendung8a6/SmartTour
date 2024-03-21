@@ -111,6 +111,11 @@ export const login = async (req, res, next) => {
       return next("Invalid email or password");
     }
 
+    // Check if the account is locked
+    if (user.isLock) {
+      return next("This account has been locked");
+    }
+
     // Google account signed in
     if (!password && user?.provider === "Google") {
       const token = createJWT(user?._id);
