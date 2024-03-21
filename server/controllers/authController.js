@@ -156,6 +156,59 @@ export const login = async (req, res, next) => {
   }
 };
 
+export const loginAdmin = async (req, res, next) => {
+  const { email, password } = req.body;
+
+  try {
+    // validation
+    if (!email || !password) {
+      return next("Please provide user credentials");
+    }
+
+    // find user by email
+    const user = await Users.findOne({ email }).select("+password");
+
+    if (!user) {
+      return next("Invalid email or password");
+    }
+
+    // Check if the account is locked
+    if (user.isLock) {
+      return next("This account has been locked");
+    }
+
+    // Check if the user is an admin
+    if (!user.isAdmin) {
+      return next("Access denied. Insufficient permissions");
+    }
+
+    // compare password
+    const isMatch = await compareString(password, user.password);
+
+    if (!isMatch) {
+      return next("Invalid email or password");
+    }
+
+    if (!user.emailVerified) {
+      return next("Please verify your email address.");
+    }
+
+    user.password = undefined;
+
+    const token = createJWT(user._id);
+
+    res.status(201).json({
+      success: true,
+      message: "Login successfully",
+      user,
+      token,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ success: false, message: error.message });
+  }
+};
+
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {

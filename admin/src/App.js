@@ -6,7 +6,7 @@ import {
   Contents,
   Dashboard,
   Followers,
-  OTPVerification,
+  // OTPVerification,
   StartPage,
   Users,
   WritePost,
@@ -56,7 +56,7 @@ function App() {
         </Route>
 
         <Route path="/auth" element={<StartPage />} />
-        <Route path="/otp-verification" element={<OTPVerification />} />
+        {/* <Route path="/otp-verification" element={<OTPVerification />} /> */}
       </Routes>
     </main>
   );
