@@ -71,10 +71,10 @@ const Sidebar = ({ close = () => {} }) => {
   return (
     <nav
       className={
-        "h-full flex flex-col gap-5 md:border-r border-slate-700 px-6 2xl:px-14"
+        "h-full flex flex-col gap-1 md:border-r border-slate-700 px-6 2xl:px-14"
       }
     >
-      <p className="py-2">MENU</p>
+      <p className="py-2 pt-6 text-lg font-semibold ">MENU</p>
       <div className={""}>
         <Stack justify="center" gap={10}>
           {links}
