@@ -4,6 +4,7 @@ import Dashboard from "./Dashboard";
 import Followers from "./Followers";
 import OTPVerification from "./OTPVerification";
 import StartPage from "./StartPage";
+import Users from "./Users";
 import WritePost from "./WritePost";
 
 export {
@@ -14,4 +15,5 @@ export {
   OTPVerification,
   StartPage,
   WritePost,
+  Users,
 };

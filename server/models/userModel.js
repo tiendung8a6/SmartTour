@@ -8,8 +8,10 @@ const userSchema = new mongoose.Schema(
     accountType: { type: String, default: "User" },
     image: { type: String },
     password: { type: String, select: true },
-    provider: { type: String, default: "Website" },
+    provider: { type: String, default: "Email" },
     followers: [{ type: Schema.Types.ObjectId, ref: "Followers" }],
+    isLock: { type: Boolean, default: false },
+    isAdmin: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

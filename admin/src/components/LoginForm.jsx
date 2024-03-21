@@ -50,6 +50,8 @@ const LoginForm = ({ toast, isSignin, setIsSignin, setFormClose, toggle }) => {
       className="flex flex-col gap-4"
     >
       <TextInput
+        required
+        type="email"
         withAsterisk
         label="Email Address"
         placeholder="your@email.com"

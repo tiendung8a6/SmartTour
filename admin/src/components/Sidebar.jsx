@@ -14,13 +14,14 @@ import {
   IconSettings,
   IconSun,
   IconUser,
+  IconUsers,
 } from "@tabler/icons-react";
 import { BsPencilSquare } from "react-icons/bs";
 import { useLocation, useNavigate } from "react-router-dom";
 
 function NavbarLink({ icon: Icon, label, active, onClick }) {
   return (
-    <Tooltip label={label} position='right' transitionProps={{ duration: 0 }}>
+    <Tooltip label={label} position="right" transitionProps={{ duration: 0 }}>
       <UnstyledButton
         onClick={onClick}
         className={`flex items-center gap-2 px-4 py-1.5 rounded-full ${
@@ -38,6 +39,7 @@ function NavbarLink({ icon: Icon, label, active, onClick }) {
 const mockdata = [
   { icon: IconGauge, label: "Dashboard", to: "dashboard" },
   { icon: IconDeviceDesktopAnalytics, label: "Analytics", to: "analytics" },
+  { icon: IconUsers, label: "Users", to: "users" },
   { icon: IconCalendarStats, label: "Content", to: "contents" },
   { icon: IconUser, label: "Followers", to: "followers" },
   { icon: BsPencilSquare, label: "Create Post", to: "write" },
@@ -72,9 +74,9 @@ const Sidebar = ({ close = () => {} }) => {
         "h-full flex flex-col gap-5 md:border-r border-slate-700 px-6 2xl:px-14"
       }
     >
-      <p className='py-2'>MENU</p>
+      <p className="py-2">MENU</p>
       <div className={""}>
-        <Stack justify='center' gap={10}>
+        <Stack justify="center" gap={10}>
           {links}
         </Stack>
       </div>
@@ -83,10 +85,10 @@ const Sidebar = ({ close = () => {} }) => {
         onClick={() =>
           setColorScheme(colorScheme === "light" ? "dark" : "light")
         }
-        variant='default'
-        size='xl'
-        aria-label='Toggle color scheme'
-        className='w-full rounded-full mt-10'
+        variant="default"
+        size="xl"
+        aria-label="Toggle color scheme"
+        className="w-full rounded-full mt-10"
       >
         {colorScheme === "dark" ? (
           <IconSun stroke={1.5} />

@@ -5,6 +5,9 @@ import {
   getWriter,
   resendOTP,
   updateUser,
+  getAllUsers,
+  updateUserLock,
+  deleteUser,
 } from "../controllers/userController.js";
 import userAuth from "../middleware/authMiddleware.js";
 
@@ -18,5 +21,9 @@ router.post("/follower/:id", userAuth, followWritter);
 router.put("/update-user", userAuth, updateUser);
 
 router.get("/get-user/:id?", getWriter);
+
+router.post("/admin-users", userAuth, getAllUsers);
+router.patch("/update-user-lock/:id", userAuth, updateUserLock);
+router.delete("/delete-user/:id", userAuth, deleteUser);
 
 export default router;

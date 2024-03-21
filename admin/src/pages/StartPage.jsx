@@ -42,8 +42,8 @@ const StartPage = () => {
       )}
     >
       <Navbar />
-      <div className='w-full h-full flex flex-col items-center justify-center md:pt-24 gap-8 md:gap-6 px-4'>
-        <div className='w-full md:max-w-[630px] 2xl:max-w-3xl flex flex-col items-center justify-center gap-y-10 2xl:-mt-20'>
+      <div className="w-full h-full flex flex-col items-center justify-center md:pt-24 gap-8 md:gap-6 px-4">
+        <div className="w-full md:max-w-[630px] 2xl:max-w-3xl flex flex-col items-center justify-center gap-y-10 2xl:-mt-20">
           <span
             className={clsx(
               "hidden md:flex gap-1 py-1 px-3 border rounded-full text-xs 2xl:text-sm md:text-base",
@@ -84,7 +84,7 @@ const StartPage = () => {
             turpis, non venenatis augue congue.
           </span>
 
-          <div className='flex gap-6 items-center mt-6'>
+          <div className="flex gap-6 items-center mt-6">
             <Button
               onClick={open}
               className={`${
@@ -93,7 +93,7 @@ const StartPage = () => {
             >
               Get Started
             </Button>
-            <Link to='#' className='flex gap-2 items-center font-semibold'>
+            <Link to="#" className="flex gap-2 items-center font-semibold">
               Contact
               <MdArrowForward />
             </Link>
@@ -104,7 +104,7 @@ const StartPage = () => {
       <Modal
         opened={opened || signInModal}
         onClose={formClose ? () => {} : handleCloseModal}
-        title='User Authentication'
+        title="Login Admin"
         centered
       >
         {isSignin ? (
