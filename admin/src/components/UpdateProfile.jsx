@@ -1,8 +1,8 @@
+import React, { useEffect, useState } from "react";
+import { FaEdit } from "react-icons/fa";
 import { Button, Modal, TextInput, useMantineColorScheme } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import clsx from "clsx";
-import React, { useEffect, useState } from "react";
-import { FaEdit } from "react-icons/fa";
 import { Toaster, toast } from "sonner";
 import { useUpdateUser } from "../hooks/auth-hook";
 import useStore from "../store/store";
@@ -21,7 +21,7 @@ const UpdateProfile = () => {
 
   const [isUploading, setIsUploading] = useState(false);
   const [file, setFile] = useState("");
-  const [fileURL, setFileURL] = useState("");
+  const [fileURL, setFileURL] = useState(user?.user?.image || ""); // Initialize with current image URL
 
   const name = user?.user.name.split(" ");
 
@@ -42,7 +42,7 @@ const UpdateProfile = () => {
   const handleSubmit = async (values) => {
     mutate({
       ...values,
-      image: fileURL ?? user.user.image,
+      image: fileURL || user.user.image, // Use current image URL if no new image selected
     });
 
     if (isSuccess) {
@@ -52,12 +52,14 @@ const UpdateProfile = () => {
   };
 
   useEffect(() => {
-    const uplaod = () => {
-      setIsUploading(true);
-      file && uploadFile(setFileURL, file);
-      setIsUploading(false);
+    const upload = () => {
+      if (file) {
+        setIsUploading(true);
+        uploadFile(setFileURL, file);
+        setIsUploading(false);
+      }
     };
-    uplaod();
+    upload();
   }, [file]);
 
   return (
@@ -65,35 +67,35 @@ const UpdateProfile = () => {
       <Modal
         opened={editProfile}
         onClose={() => setEditProfile(false)}
-        title='Update Profile'
+        title="Update Profile"
         centered
-        size='md'
+        size="md"
         transitionProps={{ transition: "fade", duration: 200 }}
       >
         <form
           onSubmit={form.onSubmit(handleSubmit)}
-          className='flex flex-col items-center gap-5 px-5 pb-5'
+          className="flex flex-col items-center gap-5 px-5 pb-5"
         >
-          <div className='relative flex w-20 h-20  justify-center'>
+          <div className="relative flex w-20 h-20  justify-center">
             <img
-              src={fileURL || user?.user?.image}
-              alt='Profile'
-              className='w-20 h-20 rounded-full object-cover'
+              src={fileURL}
+              alt="Profile"
+              className="w-20 h-20 rounded-full object-cover"
             />
 
             <label
               className={clsx(
                 "absolute bottom-0 -right-1 w-6 h-6 shadow-xl rounded-full bg-white text-base cursor-pointer flex items-center justify-center text-gray-600"
               )}
-              htmlFor='imgUpload'
+              htmlFor="imgUpload"
             >
               <input
-                type='file'
+                type="file"
                 onChange={(e) => setFile(e.target.files[0])}
-                className='hidden'
-                id='imgUpload'
-                data-max-size='5120'
-                accept='.jpg, .png, .jpeg'
+                className="hidden"
+                id="imgUpload"
+                data-max-size="5120"
+                accept=".jpg, .png, .jpeg"
               />
               <FaEdit />
             </label>
@@ -111,30 +113,31 @@ const UpdateProfile = () => {
 
           <TextInput
             withAsterisk
-            className='w-full'
-            label='Email Address'
-            placeholder='your@email.com'
+            className="w-full"
+            label="Email Address"
+            placeholder="your@email.com"
+            disabled
             readOnly
             {...form.getInputProps("email")}
           />
 
           <TextInput
-            className='w-full'
+            className="w-full"
             withAsterisk
-            label='First Name'
-            placeholder='First Name'
+            label="First Name"
+            placeholder="First Name"
             {...form.getInputProps("firstName")}
           />
           <TextInput
-            className='w-full'
+            className="w-full"
             withAsterisk
-            label='Last Name'
-            placeholder='Last Name'
+            label="Last Name"
+            placeholder="Last Name"
             {...form.getInputProps("lastName")}
           />
 
           <Button
-            type='submit'
+            type="submit"
             className={clsx(theme ? "bg-blue-600" : "bg-black", "w-full mt-2")}
           >
             Update

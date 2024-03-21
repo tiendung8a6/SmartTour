@@ -42,14 +42,16 @@ function UserMenu({ user, theme }) {
             className="w-8 h-8 rounded-full"
           />
           <div className="hidden md:flex flex-col items-start ml-1">
-            <p className="font-medium">{user?.name}</p>
-            <span className="text-sm font-normal">{user?.accountType}</span>
+            <div className="text-center	">
+              <p className="font-semibold">{user?.name}</p>
+              <span className="text-sm font-normal">{user?.email}</span>
+            </div>
           </div>
         </Button>
       </Menu.Target>
 
       <Menu.Dropdown>
-        <Menu.Label>Application</Menu.Label>
+        <Menu.Label>Settings</Menu.Label>
         <Menu.Item
           leftSection={<FaUser style={{ width: rem(14), height: rem(14) }} />}
           onClick={() => setEditProfile(true)}
