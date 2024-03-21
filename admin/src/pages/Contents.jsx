@@ -16,6 +16,7 @@ import { Toaster, toast } from "sonner";
 
 import { Comments, ConfirmDialog, EditPost, Loading } from "../components";
 import { useAction, useContent, useDeletePost } from "../hooks/post-hook";
+import { getWriterInfo } from "../hooks/user-hook";
 import useCommentStore from "../store/comments";
 import useStore from "../store/store";
 import { formatNumber, updateURL } from "../utils";
@@ -37,6 +38,7 @@ const Contents = () => {
 
   const [selected, setSelected] = useState("");
   const [editPost, setEditPost] = useState(false);
+  const [writerNames, setWriterNames] = useState({}); // State to store writer names
 
   const [type, setType] = useState(null);
   const [status, setStatus] = useState(null);
@@ -88,9 +90,26 @@ const Contents = () => {
     fetchData();
   }, [page]);
 
+  // Function to fetch writer names based on IDs
+  const fetchWriterNames = async (ids) => {
+    const names = {};
+    for (const id of ids) {
+      const writerInfo = await getWriterInfo(id);
+      names[id] = writerInfo?.name || "Unknown";
+    }
+    setWriterNames(names);
+  };
+
+  useEffect(() => {
+    if (data?.data?.length > 0) {
+      const userIds = data.data.map((el) => el?.user);
+      fetchWriterNames(userIds);
+    }
+  }, [data]);
+
   return (
     <>
-      <div className='w-full h-full flex flex-col'>
+      <div className="w-full h-full flex flex-col">
         <p
           className={`
             ${
@@ -98,7 +117,7 @@ const Contents = () => {
             } text-lg pb-1 font-semibold`}
         >
           Contents ({" "}
-          <span className='text-sm'>
+          <span className="text-sm">
             {data?.data?.length * data?.page +
               " of " +
               data?.totalPost +
@@ -114,47 +133,48 @@ const Contents = () => {
               <Table.Th>Views</Table.Th>
               <Table.Th>Comments</Table.Th>
               <Table.Th>Post Date</Table.Th>
+              <Table.Th>Edit Date</Table.Th>
+              <Table.Th>Writer</Table.Th>
               <Table.Th>Status</Table.Th>
               <Table.Th>Action</Table.Th>
             </Table.Tr>
           </Table.Thead>
 
-          <Table.Tbody className=''>
+          <Table.Tbody className="">
             {data?.data?.length > 0 &&
               data?.data?.map((el) => (
                 <Table.Tr
                   key={el?._id}
                   className={theme ? "text-gray-400" : `text-slate-600`}
                 >
-                  <Table.Td className='flex gap-2 items-center'>
+                  <Table.Td className="flex gap-2 items-center">
                     <img
                       src={el?.img}
                       alt={el?.title}
-                      className='w-10 h-10 rounded-full object-conver'
+                      className="w-10 h-10 rounded-full object-conver"
                     />
 
-                    <p className='text-base'>{el?.title}</p>
+                    <p className="text-base">{el?.title}</p>
                   </Table.Td>
                   <Table.Td>{el?.cat}</Table.Td>
-
                   <Table.Td>
-                    <div className='flex gap-1 items-center'>
+                    <div className="flex gap-1 items-center">
                       <AiOutlineEye size={18} />
                       {formatNumber(el?.views?.length)}
                     </div>
                   </Table.Td>
-
                   <Table.Td
                     onClick={() => handleComment(el?._id, el?.comments?.length)}
                   >
-                    <div className='flex gap-1 items-center cursor-pointer'>
-                      <MdMessage size={18} className='text-slate-500' />
+                    <div className="flex gap-1 items-center cursor-pointer">
+                      <MdMessage size={18} className="text-slate-500" />
                       {formatNumber(el?.comments?.length)}
                     </div>
                   </Table.Td>
-
                   <Table.Td>{moment(el?.createdAt).fromNow()}</Table.Td>
+                  <Table.Td>{moment(el?.updatedAt).fromNow()}</Table.Td>
 
+                  <Table.Td>{writerNames[el?.user]}</Table.Td>
                   <Table.Td>
                     <span
                       className={`${
@@ -170,14 +190,13 @@ const Contents = () => {
                       {el?.status === true ? "Active" : "Disabled"}
                     </span>
                   </Table.Td>
-
                   <Table.Td width={5}>
                     <Menu
                       transitionProps={{
                         transition: "rotate-right",
                         duration: 150,
                       }}
-                      shadow='lg'
+                      shadow="lg"
                       width={200}
                     >
                       <Menu.Target>
@@ -214,7 +233,7 @@ const Contents = () => {
                         <Menu.Label>Danger zone</Menu.Label>
 
                         <Menu.Item
-                          color='red'
+                          color="red"
                           leftSection={<MdOutlineDeleteOutline />}
                           onClick={() => handlePerformAction("delete", el?._id)}
                         >
@@ -232,7 +251,7 @@ const Contents = () => {
           )}
         </Table>
 
-        <div className='w-full mt-5 flex items-center justify-center'>
+        <div className="w-full mt-5 flex items-center justify-center">
           <Pagination
             total={data?.numOfPage}
             siblings={1}
@@ -250,7 +269,7 @@ const Contents = () => {
 
       {!editPost && (
         <ConfirmDialog
-          message='Are you sure you want to perform this action?'
+          message="Are you sure you want to perform this action?"
           opened={opened}
           close={close}
           handleClick={handleActions}

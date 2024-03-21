@@ -263,10 +263,10 @@ export const commentPost = async (req, res, next) => {
 export const deletePost = async (req, res, next) => {
   // Admin Only can delete post
   try {
-    const { userId } = req.bosy.user;
+    // const { userId } = req.bosy.user;
     const { id } = req.params;
 
-    await Posts.findOneAndDelete({ _id: id, user: userId });
+    await Posts.findOneAndDelete({ _id: id });
 
     res.status(200).json({
       success: true,
@@ -434,9 +434,7 @@ export const getFollowers = async (req, res, next) => {
 
 export const getPostContent = async (req, res, next) => {
   try {
-    const { userId } = req.body.user;
-
-    let queryResult = Posts.find({ user: userId }).sort({
+    let queryResult = Posts.find().sort({
       _id: -1,
     });
 
@@ -446,7 +444,7 @@ export const getPostContent = async (req, res, next) => {
     const skip = (page - 1) * limit;
 
     //records count
-    const totalPost = await Posts.countDocuments({ user: userId });
+    const totalPost = await Posts.countDocuments();
     const numOfPage = Math.ceil(totalPost / limit);
 
     queryResult = queryResult.skip(skip).limit(limit);
