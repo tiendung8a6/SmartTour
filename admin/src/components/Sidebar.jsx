@@ -15,6 +15,7 @@ import {
   IconSun,
   IconUser,
   IconUsers,
+  IconClipboardText,
 } from "@tabler/icons-react";
 import { BsPencilSquare } from "react-icons/bs";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -40,6 +41,7 @@ const mockdata = [
   { icon: IconGauge, label: "Dashboard", to: "dashboard" },
   { icon: IconDeviceDesktopAnalytics, label: "Analytics", to: "analytics" },
   { icon: IconUsers, label: "Users", to: "users" },
+  { icon: IconClipboardText, label: "Contacts", to: "contacts" },
   { icon: IconCalendarStats, label: "Content", to: "contents" },
   { icon: IconUser, label: "Followers", to: "followers" },
   { icon: BsPencilSquare, label: "Create Post", to: "write" },

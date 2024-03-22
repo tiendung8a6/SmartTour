@@ -179,7 +179,7 @@ const Contact = () => {
                   <div className="mb-6">
                     <input
                       className="w-full rounded border border-stroke px-[14px] py-3 text-base text-body-color outline-none focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
-                      type="tel"
+                      type="number"
                       id="phone"
                       name="phone"
                       placeholder="Your Phone"
@@ -190,7 +190,7 @@ const Contact = () => {
                   </div>
 
                   <div className="mb-6">
-                    <input
+                    <textarea
                       className="w-full resize-none rounded border border-stroke px-[14px] py-3 text-base text-body-color outline-none focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
                       type="textarea"
                       id="message"
@@ -199,6 +199,7 @@ const Contact = () => {
                       value={formData.message}
                       onChange={handleChange}
                       required
+                      maxLength={500}
                     />
                   </div>
 

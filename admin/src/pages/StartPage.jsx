@@ -52,7 +52,7 @@ const StartPage = () => {
                 : "border-gray-300 text-gray-600"
             )}
           >
-            Unleash Your Words, and share with others{" "}
+            Explore Beyond Boundaries: Your Journey, Our Expertise!{" "}
             <Link
               onClick={open}
               className={clsx(
@@ -70,7 +70,7 @@ const StartPage = () => {
               theme ? "text-gray-400" : "text-slate-700"
             )}
           >
-            Join Our Community of Passionate Writers!
+            Welcome to the administration page!
           </h1>
 
           <span
@@ -79,9 +79,7 @@ const StartPage = () => {
               theme ? "text-gray-500" : "text-slate-600"
             )}
           >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-            feugiat dolor id lorem rutrum viverra. Vivamus dignissim ipsum
-            turpis, non venenatis augue congue.
+            Wishing you a good experience with the site
           </span>
 
           <div className="flex gap-6 items-center mt-6">
@@ -91,12 +89,13 @@ const StartPage = () => {
                 theme ? "bg-blue-600" : "bg-black"
               } text-white rounded h-10 text-sm `}
             >
-              Get Started
+              Login
+              <MdArrowForward />
             </Button>
-            <Link to="#" className="flex gap-2 items-center font-semibold">
+            {/* <Link to="#" className="flex gap-2 items-center font-semibold">
               Contact
               <MdArrowForward />
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>

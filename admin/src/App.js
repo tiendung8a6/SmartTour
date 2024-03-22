@@ -10,6 +10,7 @@ import {
   StartPage,
   Users,
   WritePost,
+  Contacts,
 } from "./pages";
 import useStore from "./store/store";
 
@@ -51,7 +52,7 @@ function App() {
           <Route path="/followers" element={<Followers />} />
           <Route path="/contents" element={<Contents />} />
           <Route path="/users" element={<Users />} />
-
+          <Route path="/contacts" element={<Contacts />} />
           <Route path="/write/:postId?" element={<WritePost />} />
         </Route>
 

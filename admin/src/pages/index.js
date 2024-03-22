@@ -6,7 +6,7 @@ import OTPVerification from "./OTPVerification";
 import StartPage from "./StartPage";
 import Users from "./Users";
 import WritePost from "./WritePost";
-
+import Contacts from "./Contacts";
 export {
   Analytics,
   Contents,
@@ -16,4 +16,5 @@ export {
   StartPage,
   WritePost,
   Users,
+  Contacts,
 };
