@@ -1,6 +1,7 @@
 import Verification from "../models/emailVerification.js";
 import Followers from "../models/followers.js";
 import Users from "../models/userModel.js";
+import Contact from "../models/contactModel.js";
 import { compareString, createJWT, hashString } from "../utils/index.js";
 import { sendVerificationEmail } from "../utils/sendEmail.js";
 
@@ -223,5 +224,33 @@ export const deleteUser = async (req, res, next) => {
   } catch (error) {
     console.log(error);
     res.status(404).json({ message: error.message });
+  }
+};
+
+export const createContact = async (req, res) => {
+  const { name, email, phone, message } = req.body;
+
+  if (!name || !email || !phone || !message) {
+    return res
+      .status(400)
+      .json({ message: "Name, email, phone, and message are required fields" });
+  }
+
+  try {
+    // Create a new contact
+    const newContact = new Contact({
+      name,
+      email,
+      phone,
+      message,
+    });
+
+    // Save the new contact
+    await newContact.save();
+
+    res.status(201).json({ message: "Contact created successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to create contact" });
   }
 };

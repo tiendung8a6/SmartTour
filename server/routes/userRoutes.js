@@ -8,6 +8,7 @@ import {
   getAllUsers,
   updateUserLock,
   deleteUser,
+  createContact,
 } from "../controllers/userController.js";
 import userAuth from "../middleware/authMiddleware.js";
 
@@ -25,5 +26,8 @@ router.get("/get-user/:id?", getWriter);
 router.post("/admin-users", userAuth, getAllUsers);
 router.patch("/update-user-lock/:id", userAuth, updateUserLock);
 router.delete("/delete-user/:id", userAuth, deleteUser);
+
+//contact
+router.post("/contact", createContact);
 
 export default router;
