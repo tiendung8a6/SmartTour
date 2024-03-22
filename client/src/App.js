@@ -9,6 +9,7 @@ import {
   WriterPage,
   OTPVerification,
   ForgotPassword,
+  Contact,
 } from "./pages";
 import { Footer, Loading, Navbar } from "./components";
 import useStore from "./store";
@@ -36,6 +37,7 @@ function App() {
           <Route element={<Layout />}>
             {/* <Route path="/" /> */}
             <Route path="/" element={<Home />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/category" element={<CategoryPage />} />
             <Route path="/:slug/:id?" element={<BlogDetail />} />

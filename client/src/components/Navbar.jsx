@@ -52,7 +52,7 @@ const MobileMenu = ({ user, signOut }) => {
               <Link to="/">Home</Link>
             </li>
             <li onClick={toggleMenu}>
-              <Link to="/">Contact</Link>
+              <Link to="/contact">Contact</Link>
             </li>
             <li onClick={toggleMenu}>
               <Link to="/blog">Blog</Link>
@@ -125,7 +125,7 @@ const Navbar = () => {
       <div className="hidden md:flex gap-14 items-center">
         <ul className="flex gap-8 text-base text-black dark:text-white">
           <Link to="/">Home</Link>
-          <Link to="/">Contact</Link>
+          <Link to="/contact">Contact</Link>
           <Link to="/blog">Blog</Link>
         </ul>
 

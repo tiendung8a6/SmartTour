@@ -7,7 +7,7 @@ import WriterPage from "./WriterPage";
 import Blog from "./Blog";
 import OTPVerification from "./OTPVerification";
 import ForgotPassword from "./ForgotPassword";
-
+import Contact from "./Contact";
 export {
   BlogDetail,
   CategoryPage,
@@ -18,4 +18,5 @@ export {
   Blog,
   OTPVerification,
   ForgotPassword,
+  Contact,
 };
