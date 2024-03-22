@@ -29,7 +29,7 @@ function Layout() {
         <div className="w-full flex-1 px-4 md:px-8 py-6 overflow-y-auto">
           <Outlet />
 
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </div>
 

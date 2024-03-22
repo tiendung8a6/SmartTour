@@ -83,16 +83,13 @@ const Users = () => {
         >
           Users ({" "}
           <span className="text-sm">
-            {data?.data?.length * data?.page +
-              " of " +
-              data?.totalUsers +
-              " records"}
+            {"Total: " + data?.totalUsers + " records "}
           </span>
           )
         </p>
         <Table highlightOnHover withTableBorder>
           <Table.Thead>
-            <Table.Tr>
+            <Table.Tr className="bg-black text-white">
               <Table.Th>Name</Table.Th>
               <Table.Th>Email</Table.Th>
               <Table.Th>Access Control</Table.Th>
@@ -112,14 +109,14 @@ const Users = () => {
                   key={el?._id}
                   className={theme ? "text-gray-400" : `text-slate-600`}
                 >
-                  <Table.Td className="flex gap-2 items-center">
+                  <Table.Td className="lg:flex lg:items-center lg:space-x-2">
                     <img
                       src={el?.image}
                       alt={el?.name}
-                      className="w-10 h-10 rounded-full object-conver"
+                      className="w-10 h-10 rounded-full object-cover"
                     />
 
-                    <p className="text-base">{el?.name}</p>
+                    <p className="text-base lg:ml-2">{el?.name}</p>
                   </Table.Td>
 
                   <Table.Td>{el?.email}</Table.Td>
@@ -229,7 +226,7 @@ const Users = () => {
 
         <div className="w-full mt-5 flex items-center justify-center">
           <Pagination
-            total={data?.numOfPage}
+            total={data?.numOfPages}
             siblings={1}
             defaultValue={data?.page}
             // gap={10}
