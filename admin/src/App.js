@@ -11,6 +11,7 @@ import {
   Users,
   WritePost,
   Contacts,
+  CreateAdmin,
 } from "./pages";
 import useStore from "./store/store";
 
@@ -54,6 +55,7 @@ function App() {
           <Route path="/users" element={<Users />} />
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/write/:postId?" element={<WritePost />} />
+          <Route path="/create-admin" element={<CreateAdmin />} />
         </Route>
 
         <Route path="/auth" element={<StartPage />} />
