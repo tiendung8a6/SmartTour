@@ -320,3 +320,43 @@ export const getContacts = async (req, res, next) => {
     res.status(404).json({ message: error.message });
   }
 };
+
+export const createAdmin = async (req, res, next) => {
+  const { firstName, lastName, email, password, image } = req.body;
+
+  try {
+    const userExist = await Users.findOne({ email });
+
+    if (userExist) {
+      return next("Email Address already exists");
+    }
+
+    const hashedPassword = await hashString(password);
+
+    const user = await Users.create({
+      name: firstName + " " + lastName,
+      email,
+      password: hashedPassword,
+      image,
+      accountType: "Writer",
+      provider: "Email",
+      emailVerified: true,
+      isLock: false,
+      isAdmin: true,
+    });
+
+    user.password = undefined;
+
+    const token = createJWT(user?._id);
+
+    res.status(201).json({
+      success: true,
+      message: "Admin account created successfully",
+      user,
+      token,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: error.message });
+  }
+};
