@@ -16,6 +16,7 @@ import {
   IconUser,
   IconUsers,
   IconClipboardText,
+  IconUserPlus,
 } from "@tabler/icons-react";
 import { BsPencilSquare } from "react-icons/bs";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -45,7 +46,7 @@ const mockdata = [
   { icon: IconCalendarStats, label: "Content", to: "contents" },
   { icon: IconUser, label: "Followers", to: "followers" },
   { icon: BsPencilSquare, label: "Create Post", to: "write" },
-  { icon: BsPencilSquare, label: "Add Admin", to: "create-admin" },
+  { icon: IconUserPlus, label: "Add Admin", to: "create-admin" },
 
   { icon: IconSettings, label: "Settings" },
 ];

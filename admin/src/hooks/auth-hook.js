@@ -134,3 +134,33 @@ export const useUpdateUser = (toast, token) => {
     },
   });
 };
+
+export const useCreateAdmin = (toast, token) => {
+  return useMutation({
+    mutationFn: async (formData) => {
+      const { data } = await axios.post(
+        `${API_URL}/auth/create-admin`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return data;
+    },
+
+    onError: async (error) => {
+      toast.error(error?.response?.data?.message ?? error.message);
+    },
+
+    onSuccess: async (data) => {
+      toast.success(data?.message);
+
+      setTimeout(() => {
+        window.location.replace("/users");
+      }, 2000);
+    },
+  });
+};

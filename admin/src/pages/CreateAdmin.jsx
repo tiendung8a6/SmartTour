@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { BiImages } from "react-icons/bi";
 import { Toaster, toast } from "sonner";
 import { Loading } from "../components";
-import { useCreateAdmin } from "../hooks/post-hook";
+import { useCreateAdmin } from "../hooks/auth-hook";
 import useStore from "../store/store";
 import { uploadFile } from "../utils";
 import { useDisclosure } from "@mantine/hooks";
