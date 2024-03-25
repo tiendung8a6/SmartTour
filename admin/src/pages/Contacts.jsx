@@ -90,22 +90,21 @@ const Contacts = () => {
               colorScheme === "dark" ? "text-white" : "text-vlack"
             } text-lg pb-1 font-semibold`}
         >
-          Contact ({" "}
+          Contact (
           <span className="text-sm">
-            {data?.data?.length * data?.page +
-              " of " +
-              data?.totalPolicies +
-              " records"}
+            {"Total: " + data?.totalContacts + " records"}
           </span>
           )
         </p>
         <Table highlightOnHover withTableBorder>
           <Table.Thead>
             <Table.Tr>
-              <Table.Th>name</Table.Th>
-              <Table.Th>email</Table.Th>
-              <Table.Th>message</Table.Th>
-              <Table.Th>createdAt</Table.Th>
+              <Table.Th>Name</Table.Th>
+              <Table.Th>Email</Table.Th>
+              <Table.Th>Phone</Table.Th>
+              <Table.Th>Message</Table.Th>
+              <Table.Th>Sent date</Table.Th>
+              <Table.Th>Status</Table.Th>
               <Table.Th>Action</Table.Th>
             </Table.Tr>
           </Table.Thead>
@@ -117,15 +116,26 @@ const Contacts = () => {
                   key={el?._id}
                   className={theme ? "text-gray-400" : `text-slate-600`}
                 >
-                  <Table.Td className="flex gap-2 items-center">
-                    {el?.name}
-                  </Table.Td>
+                  <Table.Td>{el?.name}</Table.Td>
                   <Table.Td>{el?.email}</Table.Td>
+                  <Table.Td>{el?.phone}</Table.Td>
                   <Table.Td>{el?.message}</Table.Td>
-                  <Table.Td className="flex gap-2 items-center">
-                    {moment(el?.updatedAt).fromNow()}
+                  <Table.Td>{moment(el?.createdAt).fromNow()}</Table.Td>
+                  <Table.Td>
+                    <span
+                      className={`${
+                        el?.isReply
+                          ? "bg-blue-800 text-white"
+                          : "bg-green-600 text-white"
+                      } ${
+                        colorScheme === "dark"
+                          ? "bg-opacity-30"
+                          : "bg-opacity-70"
+                      } rounded-full  font-semibold px-4 py-1.5`}
+                    >
+                      {el?.isReply === true ? "Replied" : "New"}
+                    </span>
                   </Table.Td>
-
                   <Table.Td width={5}>
                     <Menu
                       transitionProps={{
@@ -152,7 +162,7 @@ const Contacts = () => {
                           leftSection={<BiSolidEdit />}
                           onClick={() => handleEdit(el)}
                         >
-                          Edit contact
+                          Reply Contact
                         </Menu.Item>
                       </Menu.Dropdown>
                     </Menu>
@@ -168,7 +178,7 @@ const Contacts = () => {
 
         <div className="w-full mt-5 flex items-center justify-center">
           <Pagination
-            total={data?.numOfPage}
+            total={data?.numOfPages}
             siblings={3}
             defaultValue={data?.page}
             // gap={10}

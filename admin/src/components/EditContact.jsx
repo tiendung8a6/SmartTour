@@ -70,7 +70,7 @@ const EditContact = ({ opened, close }) => {
       fullScreen // ={isMobile}
       radius={0}
       transitionProps={{ transition: "fade", duration: 200 }}
-      title={"Edit contact"}
+      title={"Reply Contact"}
     >
       <div className="p-4">
         <RichTextEditor editor={editor}>
@@ -164,7 +164,7 @@ const EditContact = ({ opened, close }) => {
           className={theme ? "bg-blue-600" : "bg-black"}
           onClick={() => handleSubmit()}
         >
-          Submit contact
+          Reply
         </Button>
       </div>
 
