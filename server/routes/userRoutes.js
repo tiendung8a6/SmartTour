@@ -9,6 +9,7 @@ import {
   updateUserLock,
   deleteUser,
   createContact,
+  sendEmailResponse,
 } from "../controllers/userController.js";
 import userAuth from "../middleware/authMiddleware.js";
 
@@ -29,5 +30,6 @@ router.delete("/delete-user/:id", userAuth, deleteUser);
 
 //contact
 router.post("/contact", createContact);
+router.post("/reply-email/:id", sendEmailResponse);
 
 export default router;

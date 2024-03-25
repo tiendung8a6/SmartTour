@@ -4,6 +4,58 @@ import Users from "../models/userModel.js";
 import Contact from "../models/contactModel.js";
 import { compareString, createJWT, hashString } from "../utils/index.js";
 import { sendVerificationEmail } from "../utils/sendEmail.js";
+import Contacts from "../models/contactModel.js";
+import nodemailer from "nodemailer";
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.AUTH_EMAIL,
+    pass: process.env.AUTH_PASSWORD,
+  },
+});
+
+export const sendEmailResponse = async (req, res) => {
+  const { id } = req.params;
+  const { content } = req.body;
+
+  try {
+    // Tìm kiếm contact theo ID
+    const contact = await Contacts.findById(id);
+
+    if (!contact) {
+      return res.status(404).json({ message: "Contact not found" });
+    }
+
+    // // Kiểm tra xem email đã được gửi phản hồi trước đó hay chưa
+    // if (contact.isReply) {
+    //   return res
+    //     .status(400)
+    //     .json({ message: "Email response has been sent already" });
+    // }
+
+    // Gửi email phản hồi
+    const mailOptions = {
+      from: process.env.AUTH_EMAIL,
+      to: contact.email,
+      subject: "Response to SmartTour",
+      html: `<p>${content}</p>`, // Lấy nội dung từ req.body.content
+    };
+    console.log("Content===========:", content);
+
+    await transporter.sendMail(mailOptions);
+
+    // Cập nhật cờ isReply của contact thành true
+    contact.isReply = true;
+    contact.content = content; // Lưu lại nội dung đã gửi
+    await contact.save();
+
+    res.status(200).json({ message: "Email response sent successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to send email response" });
+  }
+};
 
 export const OPTVerification = async (req, res, next) => {
   try {
