@@ -117,13 +117,13 @@ const Policy = () => {
                   key={el?._id}
                   className={theme ? "text-gray-400" : `text-slate-600`}
                 >
-                  <Table.Td className="flex gap-2 items-center">
+                  <Table.Td className="flex gap-2 items-center text-justify">
                     {el?.title}
                   </Table.Td>
-                  <Table.Td>
+                  <Table.Td className="text-justify">
                     <div dangerouslySetInnerHTML={{ __html: el?.content }} />
                   </Table.Td>
-                  <Table.Td className="flex gap-2 items-center">
+                  <Table.Td className="flex gap-2 items-center text-justify">
                     {moment(el?.updatedAt).format("DD-MM-YYYY HH:mm:ss")}
                   </Table.Td>
 

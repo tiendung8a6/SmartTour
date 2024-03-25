@@ -109,7 +109,7 @@ const Users = () => {
                   key={el?._id}
                   className={theme ? "text-gray-400" : `text-slate-600`}
                 >
-                  <Table.Td className="lg:flex lg:items-center lg:space-x-2">
+                  <Table.Td className="lg:flex lg:items-center lg:space-x-2 text-justify">
                     <img
                       src={el?.image}
                       alt={el?.name}
@@ -119,10 +119,10 @@ const Users = () => {
                     <p className="text-base lg:ml-2">{el?.name}</p>
                   </Table.Td>
 
-                  <Table.Td>{el?.email}</Table.Td>
-                  <Table.Td>{el?.provider}</Table.Td>
+                  <Table.Td className="text-justify">{el?.email}</Table.Td>
+                  <Table.Td className="text-justify">{el?.provider}</Table.Td>
 
-                  <Table.Td>
+                  <Table.Td className="text-justify">
                     <span
                       className={`${
                         el?.emailVerified
@@ -138,9 +138,11 @@ const Users = () => {
                     </span>
                   </Table.Td>
 
-                  <Table.Td>{moment(el?.createdAt).fromNow()}</Table.Td>
+                  <Table.Td className="text-justify">
+                    {moment(el?.createdAt).format("DD-MM-YYYY HH:mm:ss")}
+                  </Table.Td>
                   <Table.Td>{moment(el?.updatedAt).fromNow()}</Table.Td>
-                  <Table.Td>
+                  <Table.Td className="text-justify">
                     <span
                       className={`${
                         el?.isLock
@@ -155,7 +157,7 @@ const Users = () => {
                       {el?.isLock === true ? "Locked" : "Unlocked"}
                     </span>
                   </Table.Td>
-                  <Table.Td>
+                  <Table.Td className="text-justify">
                     <span
                       className={`${
                         el?.isAdmin

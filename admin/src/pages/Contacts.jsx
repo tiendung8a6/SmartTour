@@ -103,7 +103,7 @@ const Contacts = () => {
               <Table.Th>Email</Table.Th>
               <Table.Th>Phone</Table.Th>
               <Table.Th>Message</Table.Th>
-              <Table.Th>Sent date</Table.Th>
+              <Table.Th>Received date</Table.Th>
               <Table.Th>Status</Table.Th>
               <Table.Th>Action</Table.Th>
             </Table.Tr>
@@ -119,7 +119,7 @@ const Contacts = () => {
                   <Table.Td>{el?.name}</Table.Td>
                   <Table.Td>{el?.email}</Table.Td>
                   <Table.Td>{el?.phone}</Table.Td>
-                  <Table.Td>{el?.message}</Table.Td>
+                  <Table.Td className="text-justify">{el?.message}</Table.Td>
                   <Table.Td>{moment(el?.createdAt).fromNow()}</Table.Td>
                   <Table.Td>
                     <span
