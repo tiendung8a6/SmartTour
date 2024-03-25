@@ -2,6 +2,7 @@ import Verification from "../models/emailVerification.js";
 import Followers from "../models/followers.js";
 import Users from "../models/userModel.js";
 import Contact from "../models/contactModel.js";
+import Policy from "../models/policyModel.js";
 import { compareString, createJWT, hashString } from "../utils/index.js";
 import { sendVerificationEmail } from "../utils/sendEmail.js";
 import Contacts from "../models/contactModel.js";
@@ -304,5 +305,60 @@ export const createContact = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Failed to create contact" });
+  }
+};
+
+export const updatePolicy = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { title, content } = req.body;
+
+    const policy = await Policy.findByIdAndUpdate(
+      id,
+      { title, content },
+      { new: true }
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "Policy updated successfully",
+      data: policy,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const getPolicyContent = async (req, res, next) => {
+  try {
+    let queryResult = Policy.find().sort({
+      _id: -1,
+    });
+
+    // Phân trang
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+
+    // Số lượng bản ghi
+    const totalPolicies = await Policy.countDocuments();
+    const numOfPages = Math.ceil(totalPolicies / limit);
+
+    queryResult = queryResult.skip(skip).limit(limit);
+
+    const policies = await queryResult;
+
+    res.status(200).json({
+      success: true,
+      message: "Content Loaded successfully",
+      totalPolicies,
+      data: policies,
+      page,
+      numOfPages,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: error.message });
   }
 };

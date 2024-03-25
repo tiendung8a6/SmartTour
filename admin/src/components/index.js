@@ -14,7 +14,7 @@ import SignUpForm from "./SignUp";
 import { Stats } from "./Stats";
 import { RecentFollowersTable, RecentPostTable } from "./Table";
 import UpdateProfile from "./UpdateProfile";
-
+import EditPolicy from "./EditPolicy";
 export {
   Comments,
   ConfirmDialog,
@@ -32,4 +32,5 @@ export {
   SignUpForm,
   Stats,
   UpdateProfile,
+  EditPolicy,
 };

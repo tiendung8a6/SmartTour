@@ -12,6 +12,7 @@ import {
   WritePost,
   Contacts,
   CreateAdmin,
+  Policy,
 } from "./pages";
 import useStore from "./store/store";
 
@@ -50,6 +51,8 @@ function App() {
           <Route index psth="/" element={<Navigate to="/dashboard" />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/analytics" element={<Analytics />} />
+          <Route path="/policy" element={<Policy />} />
+
           <Route path="/followers" element={<Followers />} />
           <Route path="/contents" element={<Contents />} />
           <Route path="/users" element={<Users />} />

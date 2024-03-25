@@ -8,6 +8,7 @@ import Users from "./Users";
 import WritePost from "./WritePost";
 import Contacts from "./Contacts";
 import CreateAdmin from "./CreateAdmin";
+import Policy from "./Policy";
 export {
   Analytics,
   Contents,
@@ -19,4 +20,5 @@ export {
   Users,
   Contacts,
   CreateAdmin,
+  Policy,
 };
