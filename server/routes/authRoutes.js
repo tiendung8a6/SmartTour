@@ -5,7 +5,7 @@ import {
   register,
   forgotPassword,
   loginAdmin,
-  getContacts,
+  // getContacts,
   createAdmin,
 } from "../controllers/authController.js";
 import userAuth from "../middleware/authMiddleware.js";
@@ -19,10 +19,6 @@ router.post("/login-admin", loginAdmin);
 router.post("/forgot-password", forgotPassword);
 
 //--ADMIN--
-
 router.post("/create-admin", userAuth, createAdmin);
-
-//CONTACT
-router.post("/admin-contacts", getContacts);
 
 export default router;

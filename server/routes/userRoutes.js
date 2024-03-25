@@ -9,9 +9,10 @@ import {
   updateUserLock,
   deleteUser,
   createContact,
-  sendEmailResponse,
   updatePolicy,
   getPolicyContent,
+  getContactsContent,
+  sendReplyEmail,
 } from "../controllers/userController.js";
 import userAuth from "../middleware/authMiddleware.js";
 
@@ -32,7 +33,8 @@ router.delete("/delete-user/:id", userAuth, deleteUser);
 
 //contact
 router.post("/contact", createContact);
-router.post("/reply-email/:id", sendEmailResponse);
+router.patch("/contact/:id", userAuth, sendReplyEmail);
+router.post("/admin-contacts", userAuth, getContactsContent);
 
 //Policy
 router.patch("/policy/:id", userAuth, updatePolicy);

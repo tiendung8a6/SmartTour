@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export const sendEmailResponse = async (req, res) => {
+export const sendReplyEmail = async (req, res) => {
   const { id } = req.params;
   const { content } = req.body;
 
@@ -351,9 +351,42 @@ export const getPolicyContent = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Content Loaded successfully",
+      message: "Policy loaded successfully",
       totalPolicies,
       data: policies,
+      page,
+      numOfPages,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const getContactsContent = async (req, res, next) => {
+  try {
+    let queryResult = Contacts.find().sort({
+      _id: -1,
+    });
+
+    // Phân trang
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+
+    // Số lượng bản ghi
+    const totalContacts = await Contacts.countDocuments();
+    const numOfPages = Math.ceil(totalContacts / limit);
+
+    queryResult = queryResult.skip(skip).limit(limit);
+
+    const contacts = await queryResult;
+
+    res.status(200).json({
+      success: true,
+      message: "Contacts loaded successfully",
+      totalContacts,
+      data: contacts,
       page,
       numOfPages,
     });

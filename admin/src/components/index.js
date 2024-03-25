@@ -8,7 +8,7 @@ import LoginForm from "./LoginForm";
 import Logo from "./Logo";
 import Navbar from "./Navbar";
 import { PasswordStrength } from "./PasswordInput";
-
+import EditContact from "./EditContact";
 import Sidebar from "./Sidebar";
 import SignUpForm from "./SignUp";
 import { Stats } from "./Stats";
@@ -33,4 +33,5 @@ export {
   Stats,
   UpdateProfile,
   EditPolicy,
+  EditContact,
 };

@@ -5,6 +5,7 @@ const useCommentStore = create((set) => ({
   commentId: null,
   post: null,
   policy: null,
+  contact: null,
 
   setOpen: (val) =>
     set((state) => ({
@@ -14,6 +15,7 @@ const useCommentStore = create((set) => ({
   setCommentId: (val) => set((state) => ({ commentId: val })),
   setPost: (val) => set((state) => ({ post: val })),
   setPolicy: (val) => set((state) => ({ policy: val })),
+  setContact: (val) => set((state) => ({ contact: val })),
 }));
 
 export default useCommentStore;
