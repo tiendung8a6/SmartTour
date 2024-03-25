@@ -91,11 +91,11 @@ const Policy = () => {
               colorScheme === "dark" ? "text-white" : "text-vlack"
             } text-lg pb-1 font-semibold`}
         >
-          Contents ({" "}
+          Policy ({" "}
           <span className="text-sm">
             {data?.data?.length * data?.page +
               " of " +
-              data?.totalPolicy +
+              data?.totalPolicies +
               " records"}
           </span>
           )
@@ -103,9 +103,9 @@ const Policy = () => {
         <Table highlightOnHover withTableBorder>
           <Table.Thead>
             <Table.Tr>
-              <Table.Th>Policy Title</Table.Th>
-              <Table.Th>Category</Table.Th>
-              <Table.Th>updatedAt</Table.Th>
+              <Table.Th>Title</Table.Th>
+              <Table.Th>Content</Table.Th>
+              <Table.Th>Last updated</Table.Th>
               <Table.Th>Action</Table.Th>
             </Table.Tr>
           </Table.Thead>
@@ -118,10 +118,14 @@ const Policy = () => {
                   className={theme ? "text-gray-400" : `text-slate-600`}
                 >
                   <Table.Td className="flex gap-2 items-center">
-                    <p className="text-base">{el?.title}</p>
+                    {el?.title}
                   </Table.Td>
-                  <Table.Td>{el?.content}</Table.Td>
-                  <Table.Td>{moment(el?.updatedAt).fromNow()}</Table.Td>
+                  <Table.Td>
+                    <div dangerouslySetInnerHTML={{ __html: el?.content }} />
+                  </Table.Td>
+                  <Table.Td className="flex gap-2 items-center">
+                    {moment(el?.updatedAt).fromNow()}
+                  </Table.Td>
 
                   <Table.Td width={5}>
                     <Menu

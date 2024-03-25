@@ -1,4 +1,4 @@
-import { Button, Modal, useMantineColorScheme } from "@mantine/core";
+import { Button, Modal, useMantineColorScheme, TextInput } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { Link, RichTextEditor } from "@mantine/tiptap";
 import { IconColorPicker } from "@tabler/icons-react";
@@ -15,6 +15,7 @@ import StarterKit from "@tiptap/starter-kit";
 import { Toaster, toast } from "sonner";
 // import { useUpdatePost } from "../hooks/post-hook";
 import { useUpdatePolicy } from "../hooks/policy-hook";
+import React, { useState } from "react";
 
 import useCommentStore from "../store/comments";
 import useStore from "../store/store";
@@ -26,6 +27,7 @@ const EditPolicy = ({ opened, close }) => {
   const { user } = useStore();
   const { policy } = useCommentStore();
   const isMobile = useMediaQuery("(max-width: 50em)");
+  const [title, setTitle] = useState(policy.title); // Thêm state để lưu giá trị của TextInput
 
   const { isPending, mutate, isSuccess } = useUpdatePolicy(toast, user?.token);
 
@@ -34,7 +36,7 @@ const EditPolicy = ({ opened, close }) => {
   const options = {
     extensions: [
       StarterKit,
-      Placeholder.configure({ placeholder: "Write article here...." }),
+      Placeholder.configure({ placeholder: "Write your policy here...." }),
       Underline,
       Link,
       Superscript,
@@ -48,12 +50,18 @@ const EditPolicy = ({ opened, close }) => {
   console.log("}}}}}}}}}}}}}}}}}}}}", policy);
   let editor = useEditor({
     ...options,
+    title: title,
     content: policy.content,
   });
+
+  const handleTitleChange = (event) => {
+    setTitle(event.target.value); // Cập nhật giá trị của title khi người dùng nhập vào TextInput
+  };
 
   const handleSubmit = async () => {
     mutate({
       id: policy._id,
+      title: title, // Sửa đổi để gửi title mới
       content: editor.getHTML(),
     });
 
@@ -74,6 +82,17 @@ const EditPolicy = ({ opened, close }) => {
       title={"Edit policy"}
     >
       <div className="p-4">
+        <span className="text-base">Title</span>
+        <span className="text-rose-500 mr-[10px] ml-1">*</span>
+        <TextInput
+          placeholder="Title"
+          value={title}
+          onChange={handleTitleChange}
+          className="mb-4"
+        />
+
+        <span className="text-base">Content</span>
+        <span className="text-rose-500 mr-[10px] ml-1">*</span>
         <RichTextEditor editor={editor}>
           {editor && (
             <BubbleMenu editor={editor}>
@@ -165,7 +184,7 @@ const EditPolicy = ({ opened, close }) => {
           className={theme ? "bg-blue-600" : "bg-black"}
           onClick={() => handleSubmit()}
         >
-          Submit policy
+          Submit Policy
         </Button>
       </div>
 

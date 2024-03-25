@@ -32,11 +32,11 @@ export const useContent = (toast, token) => {
 
 export const useUpdatePolicy = (toast, token) => {
   return useMutation({
-    mutationFn: async ({ id, content }) => {
+    mutationFn: async ({ id, content, title }) => {
       console.log(token);
       const { data } = await axios.patch(
         `${API_URL}/users/policy/${id}`,
-        { content },
+        { content, title }, // Thêm title vào payload của request
         {
           headers: {
             Authorization: `Bearer ${token}`,
