@@ -9,7 +9,7 @@ import { useDisclosure } from "@mantine/hooks";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { AiOutlineEye, AiOutlineSetting } from "react-icons/ai";
-import { BiDotsVerticalRounded, BiSolidEdit } from "react-icons/bi";
+import { BiDotsVerticalRounded, BiMailSend } from "react-icons/bi";
 import { MdMessage, MdOutlineDeleteOutline } from "react-icons/md";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Toaster, toast } from "sonner";
@@ -98,7 +98,7 @@ const Contacts = () => {
         </p>
         <Table highlightOnHover withTableBorder>
           <Table.Thead>
-            <Table.Tr>
+            <Table.Tr className="bg-black text-white">
               <Table.Th>Name</Table.Th>
               <Table.Th>Email</Table.Th>
               <Table.Th>Phone</Table.Th>
@@ -159,7 +159,7 @@ const Contacts = () => {
 
                       <Menu.Dropdown>
                         <Menu.Item
-                          leftSection={<BiSolidEdit />}
+                          leftSection={<BiMailSend />}
                           onClick={() => handleEdit(el)}
                         >
                           Reply Contact

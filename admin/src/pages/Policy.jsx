@@ -102,7 +102,7 @@ const Policy = () => {
         </p>
         <Table highlightOnHover withTableBorder>
           <Table.Thead>
-            <Table.Tr>
+            <Table.Tr className="bg-black text-white">
               <Table.Th>Title</Table.Th>
               <Table.Th>Content</Table.Th>
               <Table.Th>Last updated</Table.Th>

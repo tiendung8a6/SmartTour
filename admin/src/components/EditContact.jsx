@@ -1,4 +1,10 @@
-import { Button, Modal, useMantineColorScheme } from "@mantine/core";
+import {
+  Button,
+  Modal,
+  useMantineColorScheme,
+  TextInput,
+  Textarea,
+} from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { Link, RichTextEditor } from "@mantine/tiptap";
 import { IconColorPicker } from "@tabler/icons-react";
@@ -73,6 +79,58 @@ const EditContact = ({ opened, close }) => {
       title={"Reply Contact"}
     >
       <div className="p-4">
+        <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
+          <TextInput
+            disabled
+            required
+            isRequired={true}
+            withAsterisk
+            value="engmadev2021@gmail.com"
+            label="From"
+            className="w-full flex-1"
+            placeholder="From"
+          />
+          <TextInput
+            disabled
+            required
+            isRequired={true}
+            withAsterisk
+            value={contact.email}
+            label="To"
+            className="w-full flex-1"
+            placeholder="To"
+          />
+        </div>
+
+        <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
+          <Textarea
+            disabled
+            required
+            isRequired={true}
+            withAsterisk
+            value={contact.message}
+            label="Information Received"
+            className="w-full flex-1"
+            placeholder="Information Received"
+            autosize
+            minRows={2}
+            maxRows={5}
+          />
+          {/* <TextInput
+            disabled
+            required
+            isRequired={true}
+            withAsterisk
+            value={contact.email}
+            label="To"
+            className="w-full flex-1"
+            placeholder="To"
+          /> */}
+        </div>
+
+        <span className="text-base">Response Content</span>
+        <span className="text-rose-500 mr-[10px] ml-1">*</span>
+
         <RichTextEditor editor={editor}>
           {editor && (
             <BubbleMenu editor={editor}>

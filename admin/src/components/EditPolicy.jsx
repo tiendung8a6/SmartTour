@@ -59,6 +59,11 @@ const EditPolicy = ({ opened, close }) => {
   };
 
   const handleSubmit = async () => {
+    if (!title) {
+      toast.error("Please fill in the Title field.");
+      return;
+    }
+
     mutate({
       id: policy._id,
       title: title, // Sửa đổi để gửi title mới
@@ -85,6 +90,7 @@ const EditPolicy = ({ opened, close }) => {
         <span className="text-base">Title</span>
         <span className="text-rose-500 mr-[10px] ml-1">*</span>
         <TextInput
+          required
           placeholder="Title"
           value={title}
           onChange={handleTitleChange}
