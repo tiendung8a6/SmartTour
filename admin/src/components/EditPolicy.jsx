@@ -63,6 +63,10 @@ const EditPolicy = ({ opened, close }) => {
       toast.error("Please fill in the Title field.");
       return;
     }
+    if (editor.getHTML().trim() === "<p></p>") {
+      toast.error("Please fill in the Content field.");
+      return;
+    }
 
     mutate({
       id: policy._id,

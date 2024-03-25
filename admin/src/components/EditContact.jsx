@@ -57,6 +57,10 @@ const EditContact = ({ opened, close }) => {
   });
 
   const handleSubmit = async () => {
+    if (editor.getHTML().trim() === "<p></p>") {
+      toast.error("Please enter content in the Response Content field.");
+      return;
+    }
     mutate({
       id: contact._id,
       content: editor.getHTML(),
@@ -116,16 +120,6 @@ const EditContact = ({ opened, close }) => {
             minRows={2}
             maxRows={5}
           />
-          {/* <TextInput
-            disabled
-            required
-            isRequired={true}
-            withAsterisk
-            value={contact.email}
-            label="To"
-            className="w-full flex-1"
-            placeholder="To"
-          /> */}
         </div>
 
         <span className="text-base">Response Content</span>

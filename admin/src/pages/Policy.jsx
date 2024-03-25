@@ -124,7 +124,7 @@ const Policy = () => {
                     <div dangerouslySetInnerHTML={{ __html: el?.content }} />
                   </Table.Td>
                   <Table.Td className="flex gap-2 items-center">
-                    {moment(el?.updatedAt).fromNow()}
+                    {moment(el?.updatedAt).format("DD-MM-YYYY HH:mm:ss")}
                   </Table.Td>
 
                   <Table.Td width={5}>
