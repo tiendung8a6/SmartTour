@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Alert } from "reactstrap";
 import { Toaster, toast } from "sonner"; // Import Toaster và toast từ thư viện sonner
 
 const Contact = () => {
