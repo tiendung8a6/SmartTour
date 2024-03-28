@@ -8,6 +8,7 @@ import Blog from "./Blog";
 import OTPVerification from "./OTPVerification";
 import ForgotPassword from "./ForgotPassword";
 import Contact from "./Contact";
+import NewPost from "./NewPost";
 export {
   BlogDetail,
   CategoryPage,
@@ -19,4 +20,5 @@ export {
   OTPVerification,
   ForgotPassword,
   Contact,
+  NewPost,
 };

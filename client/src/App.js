@@ -10,6 +10,7 @@ import {
   OTPVerification,
   ForgotPassword,
   Contact,
+  NewPost,
 } from "./pages";
 import { Footer, Loading, Navbar } from "./components";
 import useStore from "./store";
@@ -42,6 +43,7 @@ function App() {
             <Route path="/category" element={<CategoryPage />} />
             <Route path="/:slug/:id?" element={<BlogDetail />} />
             <Route path="/writer/:id" element={<WriterPage />} />
+            <Route path="/new-post" element={<NewPost />} />
           </Route>
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/sign-in" element={<SignIn />} />

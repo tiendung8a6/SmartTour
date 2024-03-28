@@ -154,7 +154,7 @@ const Contents = () => {
                       className="w-10 h-10 rounded-full object-conver"
                     />
 
-                    <p className="text-base">{el?.title}</p>
+                    <p className="text-base text-justify">{el?.title}</p>
                   </Table.Td>
                   <Table.Td>{el?.cat}</Table.Td>
                   <Table.Td>

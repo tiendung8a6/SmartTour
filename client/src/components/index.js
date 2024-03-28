@@ -14,7 +14,7 @@ import PopularWriters from "./PopularWriters";
 import ThemeSwitch from "./Switch";
 import { PasswordStrength } from "./PasswordInput";
 import SignUpForm from "./SignUp";
-
+import LoadingClient from "./LoadingClient";
 export {
   Banner,
   Button,
@@ -32,4 +32,5 @@ export {
   ThemeSwitch,
   PasswordStrength,
   SignUpForm,
+  LoadingClient,
 };

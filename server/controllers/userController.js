@@ -3,6 +3,7 @@ import Followers from "../models/followers.js";
 import Users from "../models/userModel.js";
 import Contact from "../models/contactModel.js";
 import Policy from "../models/policyModel.js";
+import Posts from "../models/postModel.js";
 import { compareString, createJWT, hashString } from "../utils/index.js";
 import { sendVerificationEmail } from "../utils/sendEmail.js";
 import Contacts from "../models/contactModel.js";
@@ -267,8 +268,11 @@ export const deleteUser = async (req, res, next) => {
   // Admin Only can delete post
   try {
     const { id } = req.params;
-
+    // Delete the user
     await Users.findOneAndDelete({ _id: id });
+
+    // Delete all posts by the user
+    await Posts.deleteMany({ user: id });
 
     res.status(200).json({
       success: true,
