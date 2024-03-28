@@ -59,11 +59,22 @@ const WritePost = () => {
   }, [file]);
 
   const handleSubmit = async () => {
-    if (!fileURL || !category || !title) {
-      toast.error("All fields are required.");
+    if (!title) {
+      toast.error("Title is required.");
       return;
     }
-
+    if (!category) {
+      toast.error("Category is required.");
+      return;
+    }
+    if (!fileURL) {
+      toast.error("Please upload an image.");
+      return;
+    }
+    if (editor.getHTML().trim() === "<p></p>") {
+      toast.error("Please enter content in the Content field.");
+      return;
+    }
     const slug = createSlug(title);
 
     mutate({
@@ -77,40 +88,59 @@ const WritePost = () => {
 
   return (
     <>
-      <RichTextEditor editor={editor}>
-        <div className='w-full flex flex-col md:flex-row flex-wrap gap-5 mb-8'>
-          <TextInput
-            withAsterisk
-            label='Post title'
-            className='w-full flex-1'
-            placeholder='Post title'
-            defaultValue={title}
-            onChange={(e) => setTitle(e.target.value)}
+      <p
+        className={`${
+          theme ? "text-white" : "text-slate-700"
+        } text-lg pb-1 font-semibold `}
+      >
+        Create a Post
+      </p>
+      <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
+        <TextInput
+          withAsterisk
+          label="Title"
+          className="w-full flex-1"
+          placeholder="Post title"
+          defaultValue={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <Select
+          withAsterisk
+          label="Category"
+          defaultValue={"NEWS"}
+          placeholder="Pick Category"
+          data={["NEWS", "SPORTS", "CODING", "EDUCATION", "FASHION"]}
+          onChange={(val) => setCategory(val)}
+        />
+      </div>
+      <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-4">
+        <label
+          className="flex items-center gap-1 text-sm font-medium cursor-pointer"
+          htmlFor="imgUpload"
+        >
+          <input
+            type="file"
+            onChange={(e) => setFile(e.target.files[0])}
+            className="hidden"
+            id="imgUpload"
+            data-max-size="5120"
+            accept=".jpg, .png, .jpeg"
           />
-          <Select
-            label='Category'
-            defaultValue={"NEWS"}
-            placeholder='Pick Category'
-            data={["NEWS", "SPORTS", "CODING", "EDUCATION", "FASHION"]}
-            onChange={(val) => setCategory(val)}
-          />
+          <BiImages />
+          <span>Post Image</span>
+          <span className="text-rose-500 mr-[10px]">*</span>
+          <div>
+            {fileURL && (
+              <img src={fileURL || file} alt="" className="w-20 h-20" />
+            )}
+          </div>
+        </label>
+      </div>
 
-          <label
-            className='flex items-center gap-1 text-base   cursor-pointer'
-            htmlFor='imgUpload'
-          >
-            <input
-              type='file'
-              onChange={(e) => setFile(e.target.files[0])}
-              className='hidden'
-              id='imgUpload'
-              data-max-size='5120'
-              accept='.jpg, .png, .jpeg'
-            />
-            <BiImages />
-            <span>Post Image</span>
-          </label>
-        </div>
+      <span className="font-medium text-sm">Content</span>
+      <span className="text-rose-500 mr-[10px] ml-1">*</span>
+
+      <RichTextEditor editor={editor}>
         {editor && (
           <BubbleMenu editor={editor}>
             <RichTextEditor.ControlsGroup>
@@ -141,13 +171,13 @@ const WritePost = () => {
           />
           <RichTextEditor.ControlsGroup>
             <RichTextEditor.Control interactive={true}>
-              <IconColorPicker size='1rem' stroke={1.5} />
+              <IconColorPicker size="1rem" stroke={1.5} />
             </RichTextEditor.Control>
-            <RichTextEditor.Color color='#F03E3E' />
-            <RichTextEditor.Color color='#7048E8' />
-            <RichTextEditor.Color color='#1098AD' />
-            <RichTextEditor.Color color='#37B24D' />
-            <RichTextEditor.Color color='#F59F00' />
+            <RichTextEditor.Color color="#F03E3E" />
+            <RichTextEditor.Color color="#7048E8" />
+            <RichTextEditor.Color color="#1098AD" />
+            <RichTextEditor.Color color="#37B24D" />
+            <RichTextEditor.Color color="#F59F00" />
           </RichTextEditor.ControlsGroup>
 
           <RichTextEditor.UnsetColor />
@@ -192,10 +222,10 @@ const WritePost = () => {
           </RichTextEditor.ControlsGroup>
         </RichTextEditor.Toolbar>
 
-        <RichTextEditor.Content className='py-8' />
+        <RichTextEditor.Content className="py-8" />
       </RichTextEditor>
 
-      <div className='w-full flex items-end justify-end mt-6'>
+      <div className="w-full flex items-end justify-end mt-6">
         <Button
           className={theme ? "bg-blue-600" : "bg-black"}
           onClick={() => handleSubmit()}

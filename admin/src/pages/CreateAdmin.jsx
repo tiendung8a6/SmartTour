@@ -131,7 +131,7 @@ const CreateAdmin = () => {
         </div>
         <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-8">
           <label
-            className="flex items-center gap-1 text-base   cursor-pointer"
+            className="flex items-center gap-1 text-base cursor-pointer"
             htmlFor="imgUpload"
           >
             <input
