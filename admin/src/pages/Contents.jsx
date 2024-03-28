@@ -127,7 +127,7 @@ const Contents = () => {
         </p>
         <Table highlightOnHover withTableBorder>
           <Table.Thead>
-            <Table.Tr>
+            <Table.Tr className="bg-black text-white">
               <Table.Th>Post Title</Table.Th>
               <Table.Th>Category</Table.Th>
               <Table.Th>Views</Table.Th>

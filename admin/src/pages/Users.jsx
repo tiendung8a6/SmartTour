@@ -139,7 +139,7 @@ const Users = () => {
                   </Table.Td>
 
                   <Table.Td className="text-justify">
-                    {moment(el?.createdAt).format("DD-MM-YYYY HH:mm:ss")}
+                    {moment(el?.createdAt).fromNow()}
                   </Table.Td>
                   <Table.Td>{moment(el?.updatedAt).fromNow()}</Table.Td>
                   <Table.Td className="text-justify">
