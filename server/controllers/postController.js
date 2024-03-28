@@ -274,6 +274,8 @@ export const deletePost = async (req, res, next) => {
 
     await Posts.findOneAndDelete({ _id: id });
 
+    // Delete comments
+    await Comments.deleteMany({ post: id });
     res.status(200).json({
       success: true,
       message: "Deleted successfully",
