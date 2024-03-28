@@ -269,17 +269,28 @@ export const deleteUser = async (req, res, next) => {
   // Admin Only can delete post
   try {
     const { id } = req.params;
-    // Delete user
+
+    // Find the followers with the given followerId
+    const followers = await Followers.find({ followerId: id });
+    const followerIds = followers.map((follower) => follower._id); // Extract the IDs of followers
+
+    // Delete the Users
     await Users.findOneAndDelete({ _id: id });
+
+    // Remove the user from followers array in Users table
+    await Users.updateMany(
+      { followers: { $in: followerIds } },
+      { $pull: { followers: { $in: followerIds } } }
+    );
+
+    // Delete followers
+    await Followers.deleteMany({ followerId: id });
 
     // Delete posts
     await Posts.deleteMany({ user: id });
 
     // Delete comments
     await Comments.deleteMany({ user: id });
-
-    // Delete followers
-    await Followers.deleteMany({ followerId: id });
 
     res.status(200).json({
       success: true,
