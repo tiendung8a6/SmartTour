@@ -17,13 +17,15 @@ import useStore from "./store";
 
 function Layout() {
   return (
-    <div className="w-full flex flex-col min-h-screen px-4 md:px-10 2xl:px-28">
-      <Navbar />
-      <div className="flex-1">
-        <Outlet />
+    <>
+      <div className="w-full flex flex-col min-h-screen px-4 md:px-10 2xl:px-28">
+        <Navbar />
+        <div className="flex-1">
+          <Outlet />
+        </div>
       </div>
       <Footer />
-    </div>
+    </>
   );
 }
 

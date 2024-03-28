@@ -15,6 +15,16 @@ import ThemeSwitch from "./Switch";
 import { PasswordStrength } from "./PasswordInput";
 import SignUpForm from "./SignUp";
 import LoadingClient from "./LoadingClient";
+import Hero from "./Home/Hero";
+import Stats from "./Home/Stats";
+import Accordion from "./Home/Accordion";
+import Blog from "./Home/Blog";
+import CTASections from "./Home/CTASections";
+import Feature from "./Home/Feature";
+import Feature2 from "./Home/Feature2";
+import Feature3 from "./Home/Feature3";
+import Testimonials from "./Home/Testimonials";
+import Contact from "./Home/Contact";
 export {
   Banner,
   Button,
@@ -33,4 +43,14 @@ export {
   PasswordStrength,
   SignUpForm,
   LoadingClient,
+  Hero,
+  Stats,
+  Accordion,
+  Blog,
+  CTASections,
+  Feature,
+  Feature2,
+  Feature3,
+  Testimonials,
+  Contact,
 };
