@@ -5,6 +5,7 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { app } from "./firebase";
+import { toast } from "sonner";
 
 export const API_URL = "http://localhost:8800";
 
@@ -38,7 +39,7 @@ export const uploadFile = (setFileURL, file) => {
     "state_changed",
     (snapshot) => {
       const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      console.log("Upload is " + progress + "% done");
+      toast.success("Upload is " + progress + "% done");
 
       switch (snapshot.state) {
         case "paused":
