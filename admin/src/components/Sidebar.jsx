@@ -40,16 +40,15 @@ function NavbarLink({ icon: Icon, label, active, onClick }) {
 }
 
 const mockdata = [
-  { icon: IconGauge, label: "Dashboard", to: "dashboard" },
-  { icon: IconDeviceDesktopAnalytics, label: "Analytics", to: "analytics" },
+  // { icon: IconGauge, label: "Dashboard", to: "dashboard" },
+  // { icon: IconDeviceDesktopAnalytics, label: "Analytics", to: "analytics" },
   { icon: IconUsers, label: "Users", to: "users" },
-  { icon: IconLicense, label: "Policy", to: "policy" },
-  { icon: IconClipboardText, label: "Contacts", to: "contacts" },
-  { icon: IconCalendarStats, label: "Content", to: "contents" },
-  { icon: IconUser, label: "Followers", to: "followers" },
-  { icon: BsPencilSquare, label: "Create Post", to: "write" },
   { icon: IconUserPlus, label: "Add Admin", to: "create-admin" },
-
+  { icon: IconCalendarStats, label: "Content", to: "contents" },
+  { icon: BsPencilSquare, label: "Create Post", to: "write" },
+  { icon: IconUser, label: "Followers", to: "followers" },
+  { icon: IconClipboardText, label: "Contacts", to: "contacts" },
+  { icon: IconLicense, label: "Policy", to: "policy" },
   { icon: IconSettings, label: "Settings" },
 ];
 
