@@ -31,7 +31,7 @@ const WritePost = () => {
   const { user } = useStore();
   const [visible, { toggle }] = useDisclosure(false);
   const { isPending, mutate } = useCreatePost(toast, user?.token);
-
+  console.log("}}}}}}}}}}}}}}}}}", user.token);
   const [category, setCategory] = useState("NEWS");
   const [file, setFile] = useState("");
   const [title, setTitle] = useState(null);

@@ -56,13 +56,19 @@ export const updatePostStatus = async (req, res, next) => {
 export const updatePost = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { desc } = req.body;
+    const { desc, title } = req.body;
 
-    const post = await Posts.findByIdAndUpdate(id, { desc }, { new: true });
+    const updatedFields = {};
+    if (desc) updatedFields.desc = desc;
+    if (title) updatedFields.title = title;
+
+    const post = await Posts.findByIdAndUpdate(id, updatedFields, {
+      new: true,
+    });
 
     res.status(200).json({
-      sucess: true,
-      message: "Action performed successfully",
+      success: true,
+      message: "Content updated successfully",
       data: post,
     });
   } catch (error) {

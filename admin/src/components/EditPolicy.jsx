@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { Button, Modal, useMantineColorScheme, TextInput } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { Link, RichTextEditor } from "@mantine/tiptap";
@@ -13,9 +14,7 @@ import Underline from "@tiptap/extension-underline";
 import { BubbleMenu, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { Toaster, toast } from "sonner";
-// import { useUpdatePost } from "../hooks/post-hook";
 import { useUpdatePolicy } from "../hooks/policy-hook";
-import React, { useState } from "react";
 
 import useCommentStore from "../store/comments";
 import useStore from "../store/store";
@@ -27,7 +26,7 @@ const EditPolicy = ({ opened, close }) => {
   const { user } = useStore();
   const { policy } = useCommentStore();
   const isMobile = useMediaQuery("(max-width: 50em)");
-  const [title, setTitle] = useState(policy.title); // Thêm state để lưu giá trị của TextInput
+  const [title, setTitle] = useState(policy.title);
 
   const { isPending, mutate, isSuccess } = useUpdatePolicy(toast, user?.token);
 
@@ -55,7 +54,7 @@ const EditPolicy = ({ opened, close }) => {
   });
 
   const handleTitleChange = (event) => {
-    setTitle(event.target.value); // Cập nhật giá trị của title khi người dùng nhập vào TextInput
+    setTitle(event.target.value);
   };
 
   const handleSubmit = async () => {

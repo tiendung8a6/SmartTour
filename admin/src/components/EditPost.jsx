@@ -1,4 +1,5 @@
-import { Button, Modal, useMantineColorScheme } from "@mantine/core";
+import React, { useState } from "react";
+import { Button, Modal, TextInput, useMantineColorScheme } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { Link, RichTextEditor } from "@mantine/tiptap";
 import { IconColorPicker } from "@tabler/icons-react";
@@ -25,6 +26,8 @@ const EditPost = ({ opened, close }) => {
   const { post } = useCommentStore();
   const isMobile = useMediaQuery("(max-width: 50em)");
 
+  const [title, setTitle] = useState(post.title);
+
   const { isPending, mutate, isSuccess } = useUpdatePost(toast, user?.token);
 
   const theme = colorScheme === "dark";
@@ -49,9 +52,22 @@ const EditPost = ({ opened, close }) => {
     content: post.desc,
   });
 
+  const handleTitleChange = (event) => {
+    setTitle(event.target.value);
+  };
+
   const handleSubmit = async () => {
+    if (!title) {
+      toast.error("Please fill in the Title field.");
+      return;
+    }
+    if (editor.getHTML().trim() === "<p></p>") {
+      toast.error("Please fill in the Content field.");
+      return;
+    }
     mutate({
       id: post._id,
+      title: title,
       desc: editor.getHTML(),
     });
 
@@ -64,14 +80,30 @@ const EditPost = ({ opened, close }) => {
     <Modal
       opened={opened}
       onClose={close}
-      size='lg'
+      size="lg"
       centered
       fullScreen // ={isMobile}
       radius={0}
       transitionProps={{ transition: "fade", duration: 200 }}
       title={"Edit Post"}
     >
-      <div className='p-4'>
+      <div className="p-4">
+        <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
+          <TextInput
+            required
+            isRequired={true}
+            withAsterisk
+            value={title}
+            onChange={handleTitleChange}
+            label="Title"
+            className="w-full flex-1"
+            placeholder="Title"
+          />
+        </div>
+
+        <span className="font-medium text-sm">Content</span>
+        <span className="text-rose-500 mr-[10px] ml-1">*</span>
+
         <RichTextEditor editor={editor}>
           {editor && (
             <BubbleMenu editor={editor}>
@@ -103,13 +135,13 @@ const EditPost = ({ opened, close }) => {
             />
             <RichTextEditor.ControlsGroup>
               <RichTextEditor.Control interactive={true}>
-                <IconColorPicker size='1rem' stroke={1.5} />
+                <IconColorPicker size="1rem" stroke={1.5} />
               </RichTextEditor.Control>
-              <RichTextEditor.Color color='#F03E3E' />
-              <RichTextEditor.Color color='#7048E8' />
-              <RichTextEditor.Color color='#1098AD' />
-              <RichTextEditor.Color color='#37B24D' />
-              <RichTextEditor.Color color='#F59F00' />
+              <RichTextEditor.Color color="#F03E3E" />
+              <RichTextEditor.Color color="#7048E8" />
+              <RichTextEditor.Color color="#1098AD" />
+              <RichTextEditor.Color color="#37B24D" />
+              <RichTextEditor.Color color="#F59F00" />
             </RichTextEditor.ControlsGroup>
 
             <RichTextEditor.UnsetColor />
@@ -154,11 +186,11 @@ const EditPost = ({ opened, close }) => {
             </RichTextEditor.ControlsGroup>
           </RichTextEditor.Toolbar>
 
-          <RichTextEditor.Content value={post.desc} className='py-8' />
+          <RichTextEditor.Content value={post.desc} className="py-8" />
         </RichTextEditor>
       </div>
 
-      <div className='w-full flex items-end justify-end mt-6'>
+      <div className="w-full flex items-end justify-end mt-6">
         <Button
           className={theme ? "bg-blue-600" : "bg-black"}
           onClick={() => handleSubmit()}

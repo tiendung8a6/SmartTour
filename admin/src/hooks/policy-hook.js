@@ -36,7 +36,7 @@ export const useUpdatePolicy = (toast, token) => {
       console.log(token);
       const { data } = await axios.patch(
         `${API_URL}/users/policy/${id}`,
-        { content, title }, // Thêm title vào payload của request
+        { content, title },
         {
           headers: {
             Authorization: `Bearer ${token}`,

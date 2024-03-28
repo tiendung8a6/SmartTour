@@ -133,11 +133,11 @@ export const useAction = (toast, token) => {
 
 export const useUpdatePost = (toast, token) => {
   return useMutation({
-    mutationFn: async ({ id, desc }) => {
+    mutationFn: async ({ id, title, desc }) => {
       console.log(token);
       const { data } = await axios.patch(
         `${API_URL}/posts/update/${id}`,
-        { desc },
+        { title, desc },
         {
           headers: {
             Authorization: `Bearer ${token}`,
