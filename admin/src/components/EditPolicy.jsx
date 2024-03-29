@@ -46,7 +46,6 @@ const EditPolicy = ({ opened, close }) => {
       TextAlign.configure({ types: ["heading", "paragraph"] }),
     ],
   };
-  console.log("}}}}}}}}}}}}}}}}}}}}", policy);
   let editor = useEditor({
     ...options,
     title: title,

@@ -15,6 +15,7 @@ import { Stats } from "./Stats";
 import { RecentFollowersTable, RecentPostTable } from "./Table";
 import UpdateProfile from "./UpdateProfile";
 import EditPolicy from "./EditPolicy";
+import Followers from "./Followers";
 export {
   Comments,
   ConfirmDialog,
@@ -34,4 +35,5 @@ export {
   UpdateProfile,
   EditPolicy,
   EditContact,
+  Followers,
 };

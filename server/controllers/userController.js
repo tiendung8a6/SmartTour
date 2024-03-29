@@ -44,7 +44,6 @@ export const sendReplyEmail = async (req, res) => {
       subject: "Response to SmartTour",
       html: `<p>${content}</p>`, // Lấy nội dung từ req.body.content
     };
-    console.log("Content===========:", content);
 
     await transporter.sendMail(mailOptions);
 

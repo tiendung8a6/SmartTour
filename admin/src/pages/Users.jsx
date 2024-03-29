@@ -10,14 +10,21 @@ import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { AiFillLock } from "react-icons/ai";
 import { BiDotsVerticalRounded } from "react-icons/bi";
-import { MdOutlineDeleteOutline } from "react-icons/md";
+import { MdOutlineDeleteOutline, MdMessage } from "react-icons/md";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Toaster, toast } from "sonner";
 
-import { Comments, ConfirmDialog, EditPost, Loading } from "../components";
+import {
+  Comments,
+  ConfirmDialog,
+  EditPost,
+  Loading,
+  Followers,
+} from "../components";
 import { useUserAction, useUsers, useDeleteUser } from "../hooks/user-hook";
 import useStore from "../store/store";
-import { updateURL } from "../utils";
+import { formatNumber, updateURL } from "../utils";
+import useCommentStore from "../store/comments";
 
 const Users = () => {
   const { colorScheme } = useMantineColorScheme();
@@ -25,6 +32,8 @@ const Users = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+
+  const { setOpen, commentId, setCommentId } = useCommentStore();
 
   const { user } = useStore();
   const [opened, { open, close }] = useDisclosure(false);
@@ -41,6 +50,13 @@ const Users = () => {
   const [page, setPage] = useState(searchParams.get("page") || 1);
 
   const theme = colorScheme === "dark";
+
+  const handleComment = (id, size) => {
+    if (size > 0) {
+      setCommentId(id);
+      setOpen(true);
+    }
+  };
 
   const handleActions = () => {
     switch (type) {
@@ -122,9 +138,21 @@ const Users = () => {
 
                   <Table.Td className="text-justify">{el?.email}</Table.Td>
                   <Table.Td className="text-justify">{el?.provider}</Table.Td>
+
+                  <Table.Td
+                    onClick={() =>
+                      handleComment(el?._id, el?.followers?.length)
+                    }
+                  >
+                    <div className="flex gap-1 items-center cursor-pointer">
+                      <MdMessage size={18} className="text-slate-500" />
+                      {formatNumber(el?.followers?.length)}
+                    </div>
+                  </Table.Td>
+                  {/* 
                   <Table.Td className="text-justify">
                     {el?.followers?.length}
-                  </Table.Td>
+                  </Table.Td> */}
                   <Table.Td className="text-justify">
                     <span
                       className={`${
@@ -255,6 +283,8 @@ const Users = () => {
       )}
 
       {editPost && <EditPost key={selected} opened={opened} close={close} />}
+
+      {commentId && <Followers />}
     </>
   );
 };

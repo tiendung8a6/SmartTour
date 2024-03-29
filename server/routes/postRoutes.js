@@ -13,6 +13,8 @@ import {
   stats,
   updatePost,
   updatePostStatus,
+  getOneFollower,
+  deleteFollower,
 } from "../controllers/postController.js";
 import userAuth from "../middleware/authMiddleware.js";
 
@@ -40,5 +42,8 @@ router.get("/comments/:postId", getComments);
 // DELETE POSTS ROUTES
 router.delete("/:id", userAuth, deletePost);
 router.delete("/comment/:id/:postId", userAuth, deleteComment);
+
+router.post("/follower/:id", getOneFollower);
+router.delete("/follower/:id/:writerId", userAuth, deleteFollower);
 
 export default router;

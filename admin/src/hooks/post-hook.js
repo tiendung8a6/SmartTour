@@ -187,7 +187,14 @@ export const useComments = () => {
     },
   });
 };
-
+export const useFollowers = () => {
+  return useMutation({
+    mutationFn: async (id) => {
+      const { data } = await axios.post(`${API_URL}/posts/follower/` + id);
+      return data;
+    },
+  });
+};
 export const useGetPost = () => {
   return useMutation({
     mutationFn: async (id) => {
@@ -203,6 +210,22 @@ export const useDeleteComment = (token) => {
     mutationFn: async ({ id, postId }) => {
       const { data } = await axios.delete(
         `${API_URL}/posts/comment/${id}/${postId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return data;
+    },
+  });
+};
+export const useDeleteFollower = (token) => {
+  return useMutation({
+    mutationFn: async ({ id, writerId }) => {
+      const { data } = await axios.delete(
+        `${API_URL}/posts/follower/${id}/${writerId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

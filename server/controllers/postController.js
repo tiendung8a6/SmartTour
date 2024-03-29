@@ -472,3 +472,56 @@ export const getPostContent = async (req, res, next) => {
     res.status(404).json({ message: error.message });
   }
 };
+
+export const getOneFollower = async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    const user = await Users.findById(id).populate({
+      path: "followers",
+      select: "followerId",
+      options: { sort: { _id: -1 } },
+      populate: {
+        path: "followerId",
+        select:
+          "name email image accountType followers updatedAt updatedAt -password",
+      },
+    });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const deleteFollower = async (req, res, next) => {
+  try {
+    const { id, writerId } = req.params;
+
+    // Xóa bản ghi trong bảng Followers dựa vào id
+    await Followers.findByIdAndDelete(id);
+
+    // Xóa followerId khỏi mảng followers trong bảng Users
+    const updatedUser = await Users.findByIdAndUpdate(
+      writerId,
+      {
+        $pull: { followers: id },
+      },
+      { new: true }
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "Follower deleted successfully",
+      updatedUser,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+};
