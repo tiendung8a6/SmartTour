@@ -93,6 +93,7 @@ const Users = () => {
               <Table.Th>Name</Table.Th>
               <Table.Th>Email</Table.Th>
               <Table.Th>Access Control</Table.Th>
+              <Table.Th>Followers</Table.Th>
               <Table.Th>Authentication</Table.Th>
               <Table.Th>Registration Date</Table.Th>
               <Table.Th>Last Modified</Table.Th>
@@ -121,7 +122,9 @@ const Users = () => {
 
                   <Table.Td className="text-justify">{el?.email}</Table.Td>
                   <Table.Td className="text-justify">{el?.provider}</Table.Td>
-
+                  <Table.Td className="text-justify">
+                    {el?.followers?.length}
+                  </Table.Td>
                   <Table.Td className="text-justify">
                     <span
                       className={`${
