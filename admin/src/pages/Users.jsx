@@ -10,7 +10,9 @@ import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { AiFillLock } from "react-icons/ai";
 import { BiDotsVerticalRounded } from "react-icons/bi";
-import { MdOutlineDeleteOutline, MdMessage } from "react-icons/md";
+import { MdOutlineDeleteOutline } from "react-icons/md";
+import { BiSolidLike } from "react-icons/bi";
+
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Toaster, toast } from "sonner";
 
@@ -145,7 +147,7 @@ const Users = () => {
                     }
                   >
                     <div className="flex gap-1 items-center cursor-pointer">
-                      <MdMessage size={18} className="text-slate-500" />
+                      <BiSolidLike size={18} className="text-slate-500" />
                       {formatNumber(el?.followers?.length)}
                     </div>
                   </Table.Td>

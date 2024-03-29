@@ -68,7 +68,7 @@ function UserMenu({ user, theme }) {
           Logout
         </Menu.Item>
 
-        <Menu.Divider />
+        {/* <Menu.Divider />
 
         <Menu.Label>Danger Zone</Menu.Label>
         <Menu.Item
@@ -79,7 +79,7 @@ function UserMenu({ user, theme }) {
           onClick={() => {}}
         >
           Delete account
-        </Menu.Item>
+        </Menu.Item> */}
       </Menu.Dropdown>
     </Menu>
   );

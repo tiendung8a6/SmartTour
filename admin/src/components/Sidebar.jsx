@@ -18,6 +18,7 @@ import {
   IconClipboardText,
   IconLicense,
   IconUserPlus,
+  IconThumbUp,
 } from "@tabler/icons-react";
 import { BsPencilSquare } from "react-icons/bs";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -46,7 +47,7 @@ const mockdata = [
   { icon: IconUserPlus, label: "Add Admin", to: "create-admin" },
   { icon: IconCalendarStats, label: "Content", to: "contents" },
   { icon: BsPencilSquare, label: "Create Post", to: "write" },
-  { icon: IconUser, label: "Followers", to: "followers" },
+  { icon: IconThumbUp, label: "Followers", to: "followers" },
   { icon: IconClipboardText, label: "Contacts", to: "contacts" },
   { icon: IconLicense, label: "Policy", to: "policy" },
   { icon: IconSettings, label: "Settings" },
@@ -80,7 +81,7 @@ const Sidebar = ({ close = () => {} }) => {
         "h-full flex flex-col gap-1 md:border-r border-slate-700 px-6 2xl:px-14"
       }
     >
-      <p className="py-2 pt-6 text-lg font-semibold ">MENU</p>
+      <p className="py-2 pt-6 text-lg font-semibold ">NAVIGATION</p>
       <div className={""}>
         <Stack justify="center" gap={10}>
           {links}

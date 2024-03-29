@@ -46,11 +46,11 @@ const Followers = () => {
 
       <Table highlightOnHover withTableBorder className="flex-1">
         <Table.Thead>
-          <Table.Tr>
+          <Table.Tr className="bg-black text-white">
             <Table.Th>Name</Table.Th>
             <Table.Th>Account</Table.Th>
             <Table.Th>Followers</Table.Th>
-            <Table.Th>Joined Date</Table.Th>
+            <Table.Th>Follow Date</Table.Th>
           </Table.Tr>
         </Table.Thead>
 
