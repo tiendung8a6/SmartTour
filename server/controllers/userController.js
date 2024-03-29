@@ -273,6 +273,8 @@ export const deleteUser = async (req, res, next) => {
     const followers = await Followers.find({ followerId: id });
     const followerIds = followers.map((follower) => follower._id); // Extract the IDs of followers
 
+    const userComments = await Comments.find({ user: id });
+
     // Delete the Users
     await Users.findOneAndDelete({ _id: id });
 
@@ -287,6 +289,13 @@ export const deleteUser = async (req, res, next) => {
 
     // Delete posts
     await Posts.deleteMany({ user: id });
+
+    for (let comment of userComments) {
+      await Posts.updateMany(
+        { comments: { $in: [comment._id] } },
+        { $pull: { comments: comment._id } }
+      );
+    }
 
     // Delete comments
     await Comments.deleteMany({ user: id });

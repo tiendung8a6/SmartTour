@@ -80,7 +80,6 @@ const Contents = () => {
     setEditPost(true);
     open();
   };
-
   const fetchData = () => {
     updateURL({ page, navigate, location });
     mutate(page);

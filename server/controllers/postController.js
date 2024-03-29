@@ -292,7 +292,7 @@ export const deleteComment = async (req, res, next) => {
 
     await Comments.findByIdAndDelete(id);
 
-    //removing commetn id from post
+    //removing comment id from post
     const result = await Posts.updateOne(
       { _id: postId },
       { $pull: { comments: id } }

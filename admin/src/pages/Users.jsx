@@ -39,7 +39,7 @@ const Users = () => {
   const [opened, { open, close }] = useDisclosure(false);
 
   const { data, isPending, mutate } = useUsers(toast, user?.token);
-  const useDelete = useDeleteUser(toast, user?.token);
+  const useDelete = useDeleteUser(toast, user?.token, mutate);
   const useActions = useUserAction(toast, user?.token);
 
   const [selected, setSelected] = useState("");

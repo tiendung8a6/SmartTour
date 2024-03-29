@@ -46,7 +46,7 @@ export const useUsers = (toast, token) => {
   });
 };
 
-export const useDeleteUser = (toast, token) => {
+export const useDeleteUser = (toast, token, mutate) => {
   return useMutation({
     mutationFn: async (id) => {
       const { data } = await axios.delete(
@@ -64,6 +64,7 @@ export const useDeleteUser = (toast, token) => {
     },
     onSuccess: (data) => {
       toast.success(data?.message);
+      mutate(); // Cập nhật dữ liệu sau khi xóa người dùng thành công
     },
   });
 };
