@@ -3,6 +3,7 @@ import {
   Menu,
   Pagination,
   Table,
+  TextInput,
   useMantineColorScheme,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
@@ -43,6 +44,7 @@ const Contacts = () => {
   const [type, setType] = useState(null);
   const [status, setStatus] = useState(null);
   const [page, setPage] = useState(searchParams.get("page") || 1);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const theme = colorScheme === "dark";
 
@@ -56,10 +58,13 @@ const Contacts = () => {
   const handleActions = () => {
     switch (type) {
       case "delete":
-      // useDelete.mutate(selected);
-
+        // useDelete.mutate(selected);
+        break;
       case "status":
-      // useActions.mutate({ id: selected, status: status });
+        // useActions.mutate({ id: selected, status: status });
+        break;
+      default:
+        break;
     }
     fetchData();
     close();
@@ -81,21 +86,65 @@ const Contacts = () => {
     fetchData();
   }, [page]);
 
+  //TÌM KIẾM BỎ QUA DẤU
+  // Function to remove diacritics from a string
+  const removeDiacritics = (str) => {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  };
+
+  // Function to check if a string contains another string (case-insensitive, diacritic-insensitive)
+  const containsString = (str, substr) => {
+    return removeDiacritics(str)
+      .toLowerCase()
+      .includes(removeDiacritics(substr).toLowerCase());
+  };
+
+  const filteredContacts = data?.data?.filter((contact) => {
+    return (
+      containsString(contact.name, searchTerm) ||
+      containsString(contact.email, searchTerm)
+    );
+  });
+
+  // TÌM KIẾM NHẬN DẠNG DẤU
+  // const filteredContacts = data?.data?.filter((contact) => {
+  //   return (
+  //     contact.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //     contact.email.toLowerCase().includes(searchTerm.toLowerCase())
+  //   );
+  // });
+
   return (
     <>
       <div className="w-full h-full flex flex-col">
-        <p
-          className={`
-            ${
-              colorScheme === "dark" ? "text-white" : "text-vlack"
-            } text-lg pb-1 font-semibold`}
-        >
-          Contact (
-          <span className="text-sm">
-            {"Total: " + data?.totalContacts + " records"}
-          </span>
-          )
-        </p>
+        <div className="flex justify-between items-center mb-4">
+          <p
+            className={`
+              ${
+                colorScheme === "dark" ? "text-white" : "text-black"
+              } text-lg pb-1 font-semibold`}
+          >
+            Contact (
+            <span className="text-sm">
+              {"Total: " + data?.totalContacts + " records"}
+            </span>
+            )
+          </p>
+          <div className="flex items-center">
+            <TextInput
+              placeholder="Search by Name or Email"
+              value={searchTerm}
+              onChange={(event) => setSearchTerm(event.target.value)}
+            />
+            <Button
+              className="ml-2"
+              onClick={() => setSearchTerm("")}
+              variant="light"
+            >
+              Clear
+            </Button>
+          </div>
+        </div>
         <Table highlightOnHover withTableBorder>
           <Table.Thead>
             <Table.Tr className="bg-black text-white">
@@ -110,8 +159,8 @@ const Contacts = () => {
           </Table.Thead>
 
           <Table.Tbody className="">
-            {data?.data?.length > 0 &&
-              data?.data?.map((el) => (
+            {filteredContacts?.length > 0 &&
+              filteredContacts?.map((el) => (
                 <Table.Tr
                   key={el?._id}
                   className={theme ? "text-gray-400" : `text-slate-600`}
@@ -171,7 +220,7 @@ const Contacts = () => {
               ))}
           </Table.Tbody>
 
-          {data?.data?.length < 1 && (
+          {filteredContacts?.length < 1 && (
             <Table.Caption>No Data Found.</Table.Caption>
           )}
         </Table>

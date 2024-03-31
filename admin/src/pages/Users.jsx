@@ -3,6 +3,7 @@ import {
   Menu,
   Pagination,
   Table,
+  TextInput,
   useMantineColorScheme,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
@@ -50,6 +51,7 @@ const Users = () => {
   const [type, setType] = useState(null);
   const [isLock, setIsLock] = useState(null);
   const [page, setPage] = useState(searchParams.get("page") || 1);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const theme = colorScheme === "dark";
 
@@ -64,9 +66,12 @@ const Users = () => {
     switch (type) {
       case "delete":
         useDelete.mutate(selected);
-
+        break;
       case "isLock":
         useActions.mutate({ id: selected, isLock: isLock });
+        break;
+      default:
+        break;
     }
     fetchData();
     close();
@@ -77,7 +82,6 @@ const Users = () => {
     setSelected(id);
     setType(val);
     setIsLock(isLock);
-
     open();
   };
 
@@ -90,21 +94,56 @@ const Users = () => {
     fetchData();
   }, [page]);
 
+  // Function to remove diacritics from a string
+  const removeDiacritics = (str) => {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  };
+
+  // Function to check if a string contains another string (case-insensitive, diacritic-insensitive)
+  const containsString = (str, substr) => {
+    return removeDiacritics(str)
+      .toLowerCase()
+      .includes(removeDiacritics(substr).toLowerCase());
+  };
+
+  const filteredUsers = data?.data?.filter((user) => {
+    return (
+      containsString(user.name, searchTerm) ||
+      containsString(user.email, searchTerm)
+    );
+  });
+
   return (
     <>
       <div className="w-full h-full flex flex-col">
-        <p
-          className={`
-            ${
-              colorScheme === "dark" ? "text-white" : "text-vlack"
-            } text-lg pb-1 font-semibold`}
-        >
-          Users ({" "}
-          <span className="text-sm">
-            {"Total: " + data?.totalUsers + " records "}
-          </span>
-          )
-        </p>
+        <div className="flex justify-between items-center mb-4">
+          <p
+            className={`
+              ${
+                colorScheme === "dark" ? "text-white" : "text-black"
+              } text-lg pb-1 font-semibold`}
+          >
+            Users ({" "}
+            <span className="text-sm">
+              {"Total: " + data?.totalUsers + " records "}
+            </span>
+            )
+          </p>
+          <div className="flex items-center">
+            <TextInput
+              placeholder="Search by Name or Email"
+              value={searchTerm}
+              onChange={(event) => setSearchTerm(event.target.value)}
+            />
+            <Button
+              className="ml-2"
+              onClick={() => setSearchTerm("")}
+              variant="light"
+            >
+              Clear
+            </Button>
+          </div>
+        </div>
         <Table highlightOnHover withTableBorder>
           <Table.Thead>
             <Table.Tr className="bg-black text-white">
@@ -122,8 +161,8 @@ const Users = () => {
           </Table.Thead>
 
           <Table.Tbody className="">
-            {data?.data?.length > 0 &&
-              data?.data?.map((el) => (
+            {filteredUsers?.length > 0 &&
+              filteredUsers?.map((el) => (
                 <Table.Tr
                   key={el?._id}
                   className={theme ? "text-gray-400" : `text-slate-600`}
@@ -134,13 +173,10 @@ const Users = () => {
                       alt={el?.name}
                       className="w-10 h-10 rounded-full object-cover"
                     />
-
                     <p className="text-base lg:ml-2">{el?.name}</p>
                   </Table.Td>
-
                   <Table.Td className="text-justify">{el?.email}</Table.Td>
                   <Table.Td className="text-justify">{el?.provider}</Table.Td>
-
                   <Table.Td
                     onClick={() =>
                       handleComment(el?._id, el?.followers?.length)
@@ -151,10 +187,6 @@ const Users = () => {
                       {formatNumber(el?.followers?.length)}
                     </div>
                   </Table.Td>
-                  {/* 
-                  <Table.Td className="text-justify">
-                    {el?.followers?.length}
-                  </Table.Td> */}
                   <Table.Td className="text-justify">
                     <span
                       className={`${
@@ -170,7 +202,6 @@ const Users = () => {
                       {el?.emailVerified === true ? "Verified" : "Unverified"}
                     </span>
                   </Table.Td>
-
                   <Table.Td className="text-justify">
                     {moment(el?.createdAt).fromNow()}
                   </Table.Td>
@@ -254,7 +285,7 @@ const Users = () => {
               ))}
           </Table.Tbody>
 
-          {data?.data?.length < 1 && (
+          {filteredUsers?.length < 1 && (
             <Table.Caption>No Data Found.</Table.Caption>
           )}
         </Table>

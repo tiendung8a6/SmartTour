@@ -3,6 +3,7 @@ import {
   Menu,
   Pagination,
   Table,
+  TextInput,
   useMantineColorScheme,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
@@ -43,6 +44,7 @@ const Contents = () => {
   const [type, setType] = useState(null);
   const [status, setStatus] = useState(null);
   const [page, setPage] = useState(searchParams.get("page") || 1);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const theme = colorScheme === "dark";
 
@@ -57,9 +59,12 @@ const Contents = () => {
     switch (type) {
       case "delete":
         useDelete.mutate(selected);
-
+        break;
       case "status":
         useActions.mutate({ id: selected, status: status });
+        break;
+      default:
+        break;
     }
     fetchData();
     close();
@@ -70,7 +75,6 @@ const Contents = () => {
     setSelected(id);
     setType(val);
     setStatus(status);
-
     open();
   };
 
@@ -80,6 +84,7 @@ const Contents = () => {
     setEditPost(true);
     open();
   };
+
   const fetchData = () => {
     updateURL({ page, navigate, location });
     mutate(page);
@@ -106,24 +111,57 @@ const Contents = () => {
     }
   }, [data]);
 
+  // Function to remove diacritics from a string
+  const removeDiacritics = (str) => {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  };
+
+  // Function to check if a string contains another string (case-insensitive, diacritic-insensitive)
+  const containsString = (str, substr) => {
+    return removeDiacritics(str)
+      .toLowerCase()
+      .includes(removeDiacritics(substr).toLowerCase());
+  };
+
+  // Filter content based on search term
+  const filteredContents = data?.data?.filter((el) => {
+    return containsString(el.title, searchTerm);
+  });
+
   return (
     <>
       <div className="w-full h-full flex flex-col">
-        <p
-          className={`
-            ${
-              colorScheme === "dark" ? "text-white" : "text-vlack"
-            } text-lg pb-1 font-semibold`}
-        >
-          Contents ({" "}
-          <span className="text-sm">
-            {data?.data?.length * data?.page +
-              " of " +
-              data?.totalPost +
-              " records"}
-          </span>
-          )
-        </p>
+        <div className="flex justify-between items-center mb-4">
+          <p
+            className={`
+              ${
+                colorScheme === "dark" ? "text-white" : "text-black"
+              } text-lg pb-1 font-semibold`}
+          >
+            Contents ({" "}
+            <span className="text-sm">
+              {data?.data?.length * data?.page +
+                " of " +
+                data?.totalPost +
+                " records"}
+            </span>
+            )
+          </p>
+          <div className="flex items-center">
+            <TextInput
+              placeholder="Search by Title"
+              value={searchTerm}
+              onChange={(event) => setSearchTerm(event.target.value)}
+            />
+            <Button
+              className="ml-2"
+              onClick={() => setSearchTerm("")}
+              variant="light"
+            >
+              Clear
+            </Button>
+          </div>
+        </div>
         <Table highlightOnHover withTableBorder>
           <Table.Thead>
             <Table.Tr className="bg-black text-white">
@@ -140,8 +178,8 @@ const Contents = () => {
           </Table.Thead>
 
           <Table.Tbody className="">
-            {data?.data?.length > 0 &&
-              data?.data?.map((el) => (
+            {filteredContents?.length > 0 &&
+              filteredContents?.map((el) => (
                 <Table.Tr
                   key={el?._id}
                   className={theme ? "text-gray-400" : `text-slate-600`}
@@ -245,7 +283,7 @@ const Contents = () => {
               ))}
           </Table.Tbody>
 
-          {data?.data?.length < 1 && (
+          {filteredContents?.length < 1 && (
             <Table.Caption>No Data Found.</Table.Caption>
           )}
         </Table>

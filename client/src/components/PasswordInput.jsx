@@ -11,7 +11,7 @@ import { Inputbox } from "../components";
 
 function PasswordRequirement({ meets, label }) {
   return (
-    <Text component="div" c={meets ? "teal" : "red"} mt={5} size="sm">
+    <Text component="div" c={meets ? "green" : "blue"} mt={5} size="sm">
       <Center inline>
         {meets ? (
           <IconCheck size="0.9rem" stroke={1.5} />
