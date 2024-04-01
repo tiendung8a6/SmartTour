@@ -5,7 +5,6 @@ import Followers from "./Followers";
 import OTPVerification from "./OTPVerification";
 import StartPage from "./StartPage";
 import Users from "./Users";
-import WritePost from "./WritePost";
 import Contacts from "./Contacts";
 import Policy from "./Policy";
 export {
@@ -15,7 +14,6 @@ export {
   Followers,
   OTPVerification,
   StartPage,
-  WritePost,
   Users,
   Contacts,
   Policy,

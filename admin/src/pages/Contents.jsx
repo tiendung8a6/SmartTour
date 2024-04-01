@@ -14,8 +14,14 @@ import { BiDotsVerticalRounded, BiSolidEdit } from "react-icons/bi";
 import { MdMessage, MdOutlineDeleteOutline } from "react-icons/md";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Toaster, toast } from "sonner";
-
-import { Comments, ConfirmDialog, EditPost, Loading } from "../components";
+import { IconPencilPlus } from "@tabler/icons-react";
+import {
+  Comments,
+  ConfirmDialog,
+  EditPost,
+  Loading,
+  WritePost,
+} from "../components";
 import { useAction, useContent, useDeletePost } from "../hooks/post-hook";
 import { getWriterInfo } from "../hooks/user-hook";
 import useCommentStore from "../store/comments";
@@ -39,6 +45,8 @@ const Contents = () => {
 
   const [selected, setSelected] = useState("");
   const [editPost, setEditPost] = useState(false);
+  const [createPost, setCreatePost] = useState(false);
+
   const [writerNames, setWriterNames] = useState({}); // State to store writer names
 
   const [type, setType] = useState(null);
@@ -53,6 +61,11 @@ const Contents = () => {
       setCommentId(id);
       setOpen(true);
     }
+  };
+
+  const handleSubmit = () => {
+    setCreatePost(true);
+    open();
   };
 
   const handleActions = () => {
@@ -161,6 +174,16 @@ const Contents = () => {
               Clear
             </Button>
           </div>
+        </div>
+        <div className="flex justify-end items-center mb-4 ">
+          <Button
+            leftSection={<IconPencilPlus size={15} />}
+            radius="xl"
+            className={theme ? "bg-blue-600" : "bg-black"}
+            onClick={() => handleSubmit()}
+          >
+            Create Post
+          </Button>
         </div>
         <Table highlightOnHover withTableBorder>
           <Table.Thead>
@@ -316,6 +339,8 @@ const Contents = () => {
       {editPost && <EditPost key={selected} opened={opened} close={close} />}
 
       {commentId && <Comments />}
+
+      {createPost && <WritePost opened={opened} close={close} />}
     </>
   );
 };

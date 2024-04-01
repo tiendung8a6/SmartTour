@@ -9,7 +9,7 @@ import {
   // OTPVerification,
   StartPage,
   Users,
-  WritePost,
+  // WritePost,
   Contacts,
   Policy,
 } from "./pages";
@@ -56,7 +56,6 @@ function App() {
           <Route path="/contents" element={<Contents />} />
           <Route path="/users" element={<Users />} />
           <Route path="/contacts" element={<Contacts />} />
-          <Route path="/write/:postId?" element={<WritePost />} />
         </Route>
 
         <Route path="/auth" element={<StartPage />} />

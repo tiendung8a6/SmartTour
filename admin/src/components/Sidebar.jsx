@@ -44,7 +44,6 @@ const mockdata = [
   // { icon: IconDeviceDesktopAnalytics, label: "Analytics", to: "analytics" },
   { icon: IconUsers, label: "Users", to: "users" },
   { icon: IconCalendarStats, label: "Content", to: "contents" },
-  { icon: BsPencilSquare, label: "Create Post", to: "write" },
   { icon: IconThumbUp, label: "Followers", to: "followers" },
   { icon: IconClipboardText, label: "Contacts", to: "contacts" },
   { icon: IconLicense, label: "Policy", to: "policy" },
