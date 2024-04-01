@@ -2,8 +2,9 @@ import {
   Button,
   TextInput,
   useMantineColorScheme,
-  Box,
+  Fieldset,
   PasswordInput,
+  Modal,
 } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { BiImages } from "react-icons/bi";
@@ -15,7 +16,7 @@ import { uploadFile } from "../utils";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@mantine/form";
 
-const CreateAdmin = () => {
+const CreateAdmin = ({ opened, close }) => {
   const form = useForm({
     initialValues: { name: "", email: "", age: 0 },
 
@@ -69,15 +70,24 @@ const CreateAdmin = () => {
   };
 
   return (
-    <>
-      <p
-        className={`${
-          theme ? "text-white" : "text-slate-700"
-        } text-lg pb-1 font-semibold `}
-      >
-        Create an admin account
-      </p>
-      <Box maw={500} mx="auto">
+    <Modal
+      opened={opened}
+      onClose={close}
+      size="lg"
+      centered
+      fullScreen // ={isMobile}
+      radius={0}
+      transitionProps={{ transition: "fade", duration: 200 }}
+      title={"Create an admin account"}
+    >
+      <Fieldset maw={500} mx="auto" className="pt-6 mt-10">
+        <p
+          className={`${
+            theme ? "text-white" : "text-slate-700"
+          } w-full flex-col md:flex-row gap-5 mb-5 text-lg pb-1 font-semibold text-center`}
+        >
+          Create an admin account
+        </p>
         <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-8">
           <TextInput
             required
@@ -164,11 +174,11 @@ const CreateAdmin = () => {
             Create Account
           </Button>
         </div>
-      </Box>
+      </Fieldset>
 
       <Loading visible={isPending} />
       <Toaster richColors />
-    </>
+    </Modal>
   );
 };
 

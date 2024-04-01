@@ -13,17 +13,11 @@ import { AiFillLock } from "react-icons/ai";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { BiSolidLike } from "react-icons/bi";
-
+import { IconSearch, IconUserPlus } from "@tabler/icons-react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Toaster, toast } from "sonner";
 
-import {
-  Comments,
-  ConfirmDialog,
-  EditPost,
-  Loading,
-  Followers,
-} from "../components";
+import { ConfirmDialog, Loading, Followers, CreateAdmin } from "../components";
 import { useUserAction, useUsers, useDeleteUser } from "../hooks/user-hook";
 import useStore from "../store/store";
 import { formatNumber, updateURL } from "../utils";
@@ -36,7 +30,7 @@ const Users = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
-  const { setOpen, commentId, setCommentId } = useCommentStore();
+  const { setOpen, commentId, setCommentId, setUser } = useCommentStore();
 
   const { user } = useStore();
   const [opened, { open, close }] = useDisclosure(false);
@@ -46,7 +40,7 @@ const Users = () => {
   const useActions = useUserAction(toast, user?.token);
 
   const [selected, setSelected] = useState("");
-  const [editPost, setEditPost] = useState(false);
+  const [editUser, setEditUser] = useState(false);
 
   const [type, setType] = useState(null);
   const [isLock, setIsLock] = useState(null);
@@ -60,6 +54,12 @@ const Users = () => {
       setCommentId(id);
       setOpen(true);
     }
+  };
+
+  const handleSubmit = () => {
+    setUser(true);
+    setEditUser(true);
+    open();
   };
 
   const handleActions = () => {
@@ -78,7 +78,7 @@ const Users = () => {
   };
 
   const handlePerformAction = (val, id, isLock) => {
-    setEditPost(false);
+    setEditUser(false);
     setSelected(id);
     setType(val);
     setIsLock(isLock);
@@ -131,6 +131,7 @@ const Users = () => {
           </p>
           <div className="flex items-center">
             <TextInput
+              leftSection={<IconSearch size={15} />}
               placeholder="Search by Name or Email"
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
@@ -144,6 +145,17 @@ const Users = () => {
             </Button>
           </div>
         </div>
+        <div className="flex justify-end items-center mb-4 ">
+          <Button
+            leftSection={<IconUserPlus size={15} />}
+            radius="xl"
+            className={theme ? "bg-blue-600" : "bg-black"}
+            onClick={() => handleSubmit()}
+          >
+            Create Account
+          </Button>
+        </div>
+
         <Table highlightOnHover withTableBorder>
           <Table.Thead>
             <Table.Tr className="bg-black text-white">
@@ -202,9 +214,7 @@ const Users = () => {
                       {el?.emailVerified === true ? "Verified" : "Unverified"}
                     </span>
                   </Table.Td>
-                  <Table.Td className="text-justify">
-                    {moment(el?.createdAt).fromNow()}
-                  </Table.Td>
+                  <Table.Td>{moment(el?.createdAt).fromNow()}</Table.Td>
                   <Table.Td>{moment(el?.updatedAt).fromNow()}</Table.Td>
                   <Table.Td className="text-justify">
                     <span
@@ -306,7 +316,7 @@ const Users = () => {
         <Toaster richColors />
       </div>
 
-      {!editPost && (
+      {!editUser && (
         <ConfirmDialog
           message="Are you sure you want to perform this action?"
           opened={opened}
@@ -315,7 +325,7 @@ const Users = () => {
         />
       )}
 
-      {editPost && <EditPost key={selected} opened={opened} close={close} />}
+      {editUser && <CreateAdmin key={selected} opened={opened} close={close} />}
 
       {commentId && <Followers />}
     </>

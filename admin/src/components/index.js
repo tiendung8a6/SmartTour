@@ -16,6 +16,7 @@ import { RecentFollowersTable, RecentPostTable } from "./Table";
 import UpdateProfile from "./UpdateProfile";
 import EditPolicy from "./EditPolicy";
 import Followers from "./Followers";
+import CreateAdmin from "./CreateAdmin";
 export {
   Comments,
   ConfirmDialog,
@@ -36,4 +37,5 @@ export {
   EditPolicy,
   EditContact,
   Followers,
+  CreateAdmin,
 };

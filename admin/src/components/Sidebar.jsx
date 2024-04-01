@@ -17,7 +17,6 @@ import {
   IconUsers,
   IconClipboardText,
   IconLicense,
-  IconUserPlus,
   IconThumbUp,
 } from "@tabler/icons-react";
 import { BsPencilSquare } from "react-icons/bs";
@@ -44,7 +43,6 @@ const mockdata = [
   // { icon: IconGauge, label: "Dashboard", to: "dashboard" },
   // { icon: IconDeviceDesktopAnalytics, label: "Analytics", to: "analytics" },
   { icon: IconUsers, label: "Users", to: "users" },
-  { icon: IconUserPlus, label: "Add Admin", to: "create-admin" },
   { icon: IconCalendarStats, label: "Content", to: "contents" },
   { icon: BsPencilSquare, label: "Create Post", to: "write" },
   { icon: IconThumbUp, label: "Followers", to: "followers" },
