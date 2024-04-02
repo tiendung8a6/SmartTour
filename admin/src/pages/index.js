@@ -7,6 +7,7 @@ import StartPage from "./StartPage";
 import Users from "./Users";
 import Contacts from "./Contacts";
 import Policy from "./Policy";
+import Categories from "./Categories";
 export {
   Analytics,
   Contents,
@@ -17,4 +18,5 @@ export {
   Users,
   Contacts,
   Policy,
+  Categories,
 };

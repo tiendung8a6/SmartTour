@@ -6,7 +6,7 @@ const postSchema = new mongoose.Schema(
     slug: { type: String, unique: true },
     desc: { type: String },
     img: { type: String },
-    cat: { type: String },
+    cat: { type: Schema.Types.ObjectId, ref: "Categories" },
     views: [{ type: Schema.Types.ObjectId, ref: "Views" }],
     user: { type: Schema.Types.ObjectId, ref: "Users" },
     comments: [{ type: Schema.Types.ObjectId, ref: "Comments" }],

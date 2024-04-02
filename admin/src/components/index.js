@@ -18,6 +18,7 @@ import EditPolicy from "./EditPolicy";
 import Followers from "./Followers";
 import CreateAdmin from "./CreateAdmin";
 import WritePost from "./WritePost";
+import CreateCategory from "./CreateCategory";
 export {
   Comments,
   ConfirmDialog,
@@ -40,4 +41,5 @@ export {
   Followers,
   CreateAdmin,
   WritePost,
+  CreateCategory,
 };
