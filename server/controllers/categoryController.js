@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import Categories from "../models/categoryModel.js";
+import Posts from "../models/postModel.js";
 
 export const createCategory = async (req, res, next) => {
   try {
@@ -51,6 +52,23 @@ export const getCategory = async (req, res, next) => {
       data: categories,
       page,
       numOfPage,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const deleteCategory = async (req, res, next) => {
+  // Admin Only can delete
+  try {
+    const { id } = req.params;
+
+    await Categories.findOneAndDelete({ _id: id });
+
+    res.status(200).json({
+      success: true,
+      message: "Deleted category successfully",
     });
   } catch (error) {
     console.log(error);

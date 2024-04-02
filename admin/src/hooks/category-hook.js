@@ -59,3 +59,46 @@ export const useCategory = (toast, token) => {
     },
   });
 };
+
+export const useDeletePost = (toast, token) => {
+  return useMutation({
+    mutationFn: async (id) => {
+      const { data } = await axios.delete(`${API_URL}/posts/` + id, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return data;
+    },
+    onError: (error) => {
+      toast.error(error?.response?.data?.message ?? error.message);
+    },
+    onSuccess: (data) => {
+      toast.success(data?.message);
+    },
+  });
+};
+
+export const useAction = (toast, token) => {
+  return useMutation({
+    mutationFn: async ({ id, status }) => {
+      const { data } = await axios.patch(
+        `${API_URL}/posts/update-status/${id}`,
+        { status: status },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return data;
+    },
+    onError: (error) => {
+      toast.error(error?.response?.data?.message ?? error.message);
+    },
+    onSuccess: (data) => {
+      toast.success(data?.message);
+    },
+  });
+};
