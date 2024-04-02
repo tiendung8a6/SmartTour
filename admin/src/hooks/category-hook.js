@@ -60,10 +60,10 @@ export const useCategory = (toast, token) => {
   });
 };
 
-export const useDeletePost = (toast, token) => {
+export const useDeleteCategory = (toast, token, mutate) => {
   return useMutation({
     mutationFn: async (id) => {
-      const { data } = await axios.delete(`${API_URL}/posts/` + id, {
+      const { data } = await axios.delete(`${API_URL}/categories/` + id, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -75,6 +75,7 @@ export const useDeletePost = (toast, token) => {
     },
     onSuccess: (data) => {
       toast.success(data?.message);
+      mutate();
     },
   });
 };

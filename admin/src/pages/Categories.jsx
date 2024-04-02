@@ -22,7 +22,11 @@ import {
   Loading,
   CreateCategory,
 } from "../components";
-import { useAction, useCategory, useDeletePost } from "../hooks/category-hook";
+import {
+  useAction,
+  useCategory,
+  useDeleteCategory,
+} from "../hooks/category-hook";
 import useCommentStore from "../store/comments";
 import useStore from "../store/store";
 import { formatNumber, updateURL } from "../utils";
@@ -39,7 +43,7 @@ const Categories = () => {
   const [opened, { open, close }] = useDisclosure(false);
 
   const { data, isPending, mutate } = useCategory(toast, user?.token);
-  const useDelete = useDeletePost(toast, user?.token);
+  const useDelete = useDeleteCategory(toast, user?.token, mutate);
   const useActions = useAction(toast, user?.token);
 
   const [selected, setSelected] = useState("");
