@@ -4,6 +4,7 @@ import Followers from "../models/followers.js";
 import Posts from "../models/postModel.js";
 import Users from "../models/userModel.js";
 import Views from "../models/viewsModel.js";
+import Categories from "../models/categoryModel.js";
 
 export const createPost = async (req, res, next) => {
   try {
@@ -16,17 +17,25 @@ export const createPost = async (req, res, next) => {
       );
     }
 
+    // Tìm id của category dựa trên tên category được cung cấp từ request body
+    const category = await Categories.findOne({ label: cat });
+
+    if (!category) {
+      return next("Category not found");
+    }
+
     const post = await Posts.create({
       user: userId,
       desc,
       img,
       title,
       slug,
-      cat,
+      // Sử dụng id của category để tạo post mới
+      cat: category._id,
     });
 
     res.status(200).json({
-      sucess: true,
+      success: true,
       message: "Post created successfully",
       data: post,
     });

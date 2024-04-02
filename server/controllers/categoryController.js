@@ -75,3 +75,19 @@ export const deleteCategory = async (req, res, next) => {
     res.status(404).json({ message: error.message });
   }
 };
+
+export const getCategories = async (req, res, next) => {
+  try {
+    // Truy vấn tất cả và sắp xếp theo thời gian tạo
+    const categories = await Categories.find().sort({ createdAt: -1 });
+
+    res.status(200).json({
+      success: true,
+      message: "Categories retrieved successfully",
+      data: categories,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+};

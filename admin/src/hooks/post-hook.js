@@ -1,7 +1,17 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { API_URL } from "../utils";
 
+export const useCategories = () => {
+  return useQuery({
+    queryKey: "categories",
+    queryFn: async () => {
+      const { data } = await axios.get(`${API_URL}/categories`);
+      console.log("aaaaaa", data);
+      return data;
+    },
+  });
+};
 export const useCreatePost = (toast, token) => {
   return useMutation({
     mutationFn: async (formData) => {

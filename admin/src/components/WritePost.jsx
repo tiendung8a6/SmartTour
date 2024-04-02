@@ -23,7 +23,7 @@ import { useEffect, useState } from "react";
 import { BiImages } from "react-icons/bi";
 import { Toaster, toast } from "sonner";
 import { Loading } from "../components";
-import { useCreatePost } from "../hooks/post-hook";
+import { useCreatePost, useCategories } from "../hooks/post-hook";
 import useStore from "../store/store";
 import { createSlug, uploadFile } from "../utils";
 
@@ -33,10 +33,11 @@ const WritePost = ({ opened, close }) => {
   const { user } = useStore();
   const [visible, { toggle }] = useDisclosure(false);
   const { isPending, mutate } = useCreatePost(toast, user?.token);
-  const [category, setCategory] = useState("NEWS");
+  const [category, setCategory] = useState("");
   const [file, setFile] = useState("");
   const [title, setTitle] = useState(null);
   const [fileURL, setFileURL] = useState(null);
+  const { data: categoriesData } = useCategories();
 
   const theme = colorScheme === "dark";
   let editor = useEditor({
@@ -118,9 +119,9 @@ const WritePost = ({ opened, close }) => {
           <Select
             withAsterisk
             label="Category"
-            defaultValue={"NEWS"}
+            defaultValue={""}
             placeholder="Pick Category"
-            data={["NEWS", "SPORTS", "CODING", "EDUCATION", "FASHION"]}
+            data={categoriesData?.data?.map((category) => category.label) || []}
             onChange={(val) => setCategory(val)}
           />
         </div>
