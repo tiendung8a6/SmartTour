@@ -13,6 +13,14 @@ export const createCategory = async (req, res, next) => {
       });
     }
 
+    const existingCategory = await Categories.findOne({ label });
+    if (existingCategory) {
+      return res.status(400).json({
+        success: false,
+        message: "Category already exists.",
+      });
+    }
+
     const category = await Categories.create({ label, color });
 
     res.status(200).json({
