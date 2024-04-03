@@ -72,6 +72,15 @@ export const deleteCategory = async (req, res, next) => {
   try {
     const { id } = req.params;
 
+    const postsWithCategory = await Posts.findOne({ cat: id });
+
+    if (postsWithCategory) {
+      return res.status(400).json({
+        success: false,
+        message: "Category is being used in posts",
+      });
+    }
+
     await Categories.findOneAndDelete({ _id: id });
 
     res.status(200).json({
