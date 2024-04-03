@@ -91,3 +91,24 @@ export const getCategories = async (req, res, next) => {
     res.status(500).json({ message: error.message });
   }
 };
+export const getPostsByCategory = async (req, res, next) => {
+  try {
+    const { catId } = req.params;
+
+    const posts = await Posts.find({ cat: catId })
+      .populate({
+        path: "user",
+        select: "name image -password",
+      })
+      .sort({ createdAt: -1 });
+
+    res.status(200).json({
+      success: true,
+      message: "Posts retrieved successfully by category ID",
+      data: posts,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+};

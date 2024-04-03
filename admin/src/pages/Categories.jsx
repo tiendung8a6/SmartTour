@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Menu,
@@ -8,7 +9,6 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import moment from "moment";
-import React, { useEffect, useState } from "react";
 import { AiOutlineEye, AiOutlineSetting } from "react-icons/ai";
 import { BiDotsVerticalRounded, BiSolidEdit } from "react-icons/bi";
 import { MdMessage, MdOutlineDeleteOutline } from "react-icons/md";
@@ -26,6 +26,7 @@ import {
   useAction,
   useCategory,
   useDeleteCategory,
+  getPostsByCategory,
 } from "../hooks/category-hook";
 import useCommentStore from "../store/comments";
 import useStore from "../store/store";
@@ -54,13 +55,36 @@ const Categories = () => {
   const [status, setStatus] = useState(null);
   const [page, setPage] = useState(searchParams.get("page") || 1);
   const [searchTerm, setSearchTerm] = useState("");
+  const [postCounts, setPostCounts] = useState({}); // State để lưu trữ số lượng bài post cho mỗi category
 
   const theme = colorScheme === "dark";
 
-  const handleComment = (id, size) => {
-    if (size > 0) {
-      setCommentId(id);
-      setOpen(true);
+  const handleComment = async (id) => {
+    const postCount = await getPostsCountByCategory(id);
+    setCommentId(id);
+    setOpen(true);
+  };
+
+  // Lấy số lượng bài post cho mỗi category khi dữ liệu category thay đổi
+  useEffect(() => {
+    const fetchPostCounts = async () => {
+      const counts = {};
+      for (const category of data?.data || []) {
+        const count = await getPostsCountByCategory(category._id);
+        counts[category._id] = count;
+      }
+      setPostCounts(counts);
+    };
+    fetchPostCounts();
+  }, [data]);
+
+  const getPostsCountByCategory = async (categoryId) => {
+    try {
+      const posts = await getPostsByCategory(categoryId);
+      return posts.length;
+    } catch (error) {
+      console.error("Error getting posts count for category:", error);
+      return 0;
     }
   };
 
@@ -170,6 +194,7 @@ const Categories = () => {
           <Table.Thead>
             <Table.Tr className="bg-black text-white">
               <Table.Th>label</Table.Th>
+              <Table.Th>Count post</Table.Th>
               <Table.Th>color</Table.Th>
               <Table.Th>Post Date</Table.Th>
               <Table.Th>Edit Date</Table.Th>
@@ -192,6 +217,14 @@ const Categories = () => {
                       {el?.label}
                     </p>
                   </Table.Td>
+
+                  <Table.Td onClick={() => handleComment(el?._id)}>
+                    <div className="flex gap-1 items-center cursor-pointer">
+                      <MdMessage size={18} className="text-slate-500" />
+                      {postCounts[el._id]?.toString()}
+                    </div>
+                  </Table.Td>
+
                   <Table.Td>{el?.color}</Table.Td>
                   <Table.Td>{moment(el?.createdAt).fromNow()}</Table.Td>
                   <Table.Td>{moment(el?.updatedAt).fromNow()}</Table.Td>
