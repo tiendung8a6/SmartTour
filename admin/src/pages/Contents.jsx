@@ -45,7 +45,6 @@ const Contents = () => {
 
   const [selected, setSelected] = useState("");
   const [editPost, setEditPost] = useState(false);
-  const [createPost, setCreatePost] = useState(false);
 
   const [writerNames, setWriterNames] = useState({}); // State to store writer names
 
@@ -64,7 +63,6 @@ const Contents = () => {
   };
 
   const handleSubmit = () => {
-    setCreatePost(true);
     open();
   };
 
@@ -340,7 +338,7 @@ const Contents = () => {
 
       {commentId && <Comments />}
 
-      {createPost && <WritePost opened={opened} close={close} />}
+      {<WritePost opened={opened} close={close} />}
     </>
   );
 };
