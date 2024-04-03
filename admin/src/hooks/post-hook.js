@@ -7,7 +7,6 @@ export const useCategories = () => {
     queryKey: "categories",
     queryFn: async () => {
       const { data } = await axios.get(`${API_URL}/categories`);
-      console.log("aaaaaa", data);
       return data;
     },
   });
