@@ -21,7 +21,7 @@ import { useEffect, useState } from "react";
 import { BiImages } from "react-icons/bi";
 import { Toaster, toast } from "sonner";
 import { LoadingClient } from "../components";
-import { useCreatePost } from "../hooks/post-client-hook";
+import { useCreatePost, useCategories } from "../hooks/post-client-hook";
 import useStore from "../store";
 import { createSlug, uploadFile } from "../utils";
 
@@ -35,6 +35,7 @@ const WritePost = () => {
   const [file, setFile] = useState("");
   const [title, setTitle] = useState(null);
   const [fileURL, setFileURL] = useState(null);
+  const { data: categoriesData } = useCategories();
 
   const theme = colorScheme === "dark";
   let editor = useEditor({
@@ -108,7 +109,7 @@ const WritePost = () => {
           label="Category"
           defaultValue={"NEWS"}
           placeholder="Pick Category"
-          data={["NEWS", "SPORTS", "CODING", "EDUCATION", "FASHION"]}
+          data={categoriesData?.data?.map((category) => category.label) || []}
           onChange={(val) => setCategory(val)}
         />
       </div>
