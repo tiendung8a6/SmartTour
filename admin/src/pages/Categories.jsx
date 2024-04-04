@@ -199,6 +199,7 @@ const Categories = () => {
               <Table.Th>color</Table.Th>
               <Table.Th>Post Date</Table.Th>
               <Table.Th>Edit Date</Table.Th>
+              <Table.Th>Status</Table.Th>
               <Table.Th>Action</Table.Th>
             </Table.Tr>
           </Table.Thead>
@@ -229,7 +230,21 @@ const Categories = () => {
                   <Table.Td>{el?.color}</Table.Td>
                   <Table.Td>{moment(el?.createdAt).fromNow()}</Table.Td>
                   <Table.Td>{moment(el?.updatedAt).fromNow()}</Table.Td>
-
+                  <Table.Td>
+                    <span
+                      className={`${
+                        el?.status
+                          ? "bg-green-700 text-white"
+                          : "bg-red-700 text-white"
+                      } ${
+                        colorScheme === "dark"
+                          ? "bg-opacity-30"
+                          : "bg-opacity-70"
+                      } rounded-full  font-semibold px-4 py-1.5`}
+                    >
+                      {el?.status === true ? "Active" : "Disabled"}
+                    </span>
+                  </Table.Td>
                   <Table.Td width={5}>
                     <Menu
                       transitionProps={{

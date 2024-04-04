@@ -84,7 +84,7 @@ export const useAction = (toast, token) => {
   return useMutation({
     mutationFn: async ({ id, status }) => {
       const { data } = await axios.patch(
-        `${API_URL}/posts/update-status/${id}`,
+        `${API_URL}/categories/update-status/${id}`,
         { status: status },
         {
           headers: {
