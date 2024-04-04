@@ -136,10 +136,15 @@ export const getPost = async (req, res, next) => {
   try {
     const { postId } = req.params;
 
-    const post = await Posts.findById(postId).populate({
-      path: "user",
-      select: "name image -password",
-    });
+    const post = await Posts.findById(postId)
+      .populate({
+        path: "user",
+        select: "name image -password",
+      })
+      .populate({
+        path: "cat",
+        select: "label color",
+      });
 
     const newView = await Views.create({
       user: post?.user,
