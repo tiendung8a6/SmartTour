@@ -6,6 +6,7 @@ import {
   getCategories,
   getPostsByCategory,
   updateCategory,
+  updateCategoryStatus,
 } from "../controllers/categoryController.js";
 import userAuth from "../middleware/authMiddleware.js";
 
@@ -22,5 +23,7 @@ router.get("/", getCategories);
 router.get("/:catId", getPostsByCategory);
 
 router.patch("/update/:id", userAuth, updateCategory);
+
+router.patch("/update-status/:id", userAuth, updateCategoryStatus);
 
 export default router;

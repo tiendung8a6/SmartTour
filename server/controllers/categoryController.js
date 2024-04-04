@@ -96,7 +96,9 @@ export const deleteCategory = async (req, res, next) => {
 export const getCategories = async (req, res, next) => {
   try {
     // Truy vấn tất cả và sắp xếp theo thời gian tạo
-    const categories = await Categories.find().sort({ createdAt: -1 });
+    const categories = await Categories.find({ status: true }).sort({
+      createdAt: -1,
+    });
 
     res.status(200).json({
       success: true,
@@ -153,6 +155,27 @@ export const updateCategory = async (req, res) => {
     res.status(200).json({
       success: true,
       message: "Category updated successfully",
+      data: category,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: error.message });
+  }
+};
+export const updateCategoryStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    const category = await Categories.findByIdAndUpdate(
+      id,
+      { status },
+      { new: true }
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "Category status updated successfully",
       data: category,
     });
   } catch (error) {
