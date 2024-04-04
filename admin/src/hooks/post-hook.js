@@ -97,7 +97,7 @@ export const useContent = (toast, token) => {
   });
 };
 
-export const useDeletePost = (toast, token) => {
+export const useDeletePost = (toast, token, mutate) => {
   return useMutation({
     mutationFn: async (id) => {
       const { data } = await axios.delete(`${API_URL}/posts/` + id, {
@@ -112,9 +112,7 @@ export const useDeletePost = (toast, token) => {
     },
     onSuccess: (data) => {
       toast.success(data?.message);
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
+      mutate();
     },
   });
 };

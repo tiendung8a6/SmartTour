@@ -56,7 +56,8 @@ const Categories = () => {
   const [status, setStatus] = useState(null);
   const [page, setPage] = useState(searchParams.get("page") || 1);
   const [searchTerm, setSearchTerm] = useState("");
-  const [postCounts, setPostCounts] = useState({}); // State để lưu trữ số lượng bài post cho mỗi category
+  const [postCounts, setPostCounts] = useState({});
+  const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
 
   const theme = colorScheme === "dark";
 
@@ -105,7 +106,7 @@ const Categories = () => {
         break;
     }
     fetchData();
-    close();
+    setIsConfirmDialogOpen(false);
   };
 
   const handlePerformAction = (val, id, status) => {
@@ -113,7 +114,7 @@ const Categories = () => {
     setSelected(id);
     setType(val);
     setStatus(status);
-    open();
+    setIsConfirmDialogOpen(true);
   };
 
   const handleEdit = (el) => {
@@ -306,17 +307,24 @@ const Categories = () => {
         <Toaster richColors />
       </div>
 
-      {!editPost && (
+      {!editPost && !opened && (
         <ConfirmDialog
           message="Are you sure you want to perform this action?"
-          opened={opened}
-          close={close}
+          opened={isConfirmDialogOpen}
+          close={() => setIsConfirmDialogOpen(false)}
           handleClick={handleActions}
         />
       )}
 
       {editPost && (
-        <EditCategory key={selected} opened={opened} close={close} />
+        <EditCategory
+          key={selected}
+          opened={opened}
+          close={() => {
+            close();
+            setEditPost(false);
+          }}
+        />
       )}
 
       {commentId && <PostCategory />}

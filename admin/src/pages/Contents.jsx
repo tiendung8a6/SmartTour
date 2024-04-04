@@ -38,10 +38,10 @@ const Contents = () => {
   const { user } = useStore();
   const { setOpen, commentId, setCommentId, setPost } = useCommentStore();
   const [opened, { open, close }] = useDisclosure(false);
-  const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false); // state mới để điều khiển việc mở ConfirmDialog
+  const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
 
   const { data, isPending, mutate } = useContent(toast, user?.token);
-  const useDelete = useDeletePost(toast, user?.token);
+  const useDelete = useDeletePost(toast, user?.token, mutate);
   const useActions = useAction(toast, user?.token);
 
   const [selected, setSelected] = useState("");
@@ -79,7 +79,7 @@ const Contents = () => {
         break;
     }
     fetchData();
-    setIsConfirmDialogOpen(false); // mở ConfirmDialog thay vì gọi open()
+    setIsConfirmDialogOpen(false); // tắt ConfirmDialog
   };
 
   const handlePerformAction = (val, id, status) => {
