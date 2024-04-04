@@ -21,6 +21,7 @@ import {
   EditPost,
   Loading,
   CreateCategory,
+  PostCategory,
 } from "../components";
 import {
   useAction,
@@ -49,7 +50,6 @@ const Categories = () => {
 
   const [selected, setSelected] = useState("");
   const [editPost, setEditPost] = useState(false);
-  const [createPost, setCreatePost] = useState(false);
 
   const [type, setType] = useState(null);
   const [status, setStatus] = useState(null);
@@ -89,7 +89,6 @@ const Categories = () => {
   };
 
   const handleSubmit = () => {
-    setCreatePost(true);
     open();
   };
 
@@ -317,9 +316,9 @@ const Categories = () => {
 
       {editPost && <EditPost key={selected} opened={opened} close={close} />}
 
-      {commentId && <Comments />}
+      {commentId && <PostCategory />}
 
-      {createPost && <CreateCategory opened={opened} close={close} />}
+      {<CreateCategory opened={opened} close={close} />}
     </>
   );
 };

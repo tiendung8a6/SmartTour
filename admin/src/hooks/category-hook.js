@@ -116,3 +116,29 @@ export const getPostsByCategory = async (id) => {
     return err;
   }
 };
+
+export const usePosts = () => {
+  return useMutation({
+    mutationFn: async (id) => {
+      const { data } = await axios.get(`${API_URL}/categories/` + id);
+      return data;
+    },
+  });
+};
+
+export const useDeleteComment = (token) => {
+  return useMutation({
+    mutationFn: async ({ id, postId }) => {
+      const { data } = await axios.delete(
+        `${API_URL}/posts/comment/${id}/${postId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return data;
+    },
+  });
+};
