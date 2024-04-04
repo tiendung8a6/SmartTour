@@ -20,6 +20,7 @@ import CreateAdmin from "./CreateAdmin";
 import WritePost from "./WritePost";
 import CreateCategory from "./CreateCategory";
 import PostCategory from "./PostCategory";
+import EditCategory from "./EditCategory";
 export {
   Comments,
   ConfirmDialog,
@@ -44,4 +45,5 @@ export {
   WritePost,
   CreateCategory,
   PostCategory,
+  EditCategory,
 };

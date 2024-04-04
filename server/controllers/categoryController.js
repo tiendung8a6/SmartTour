@@ -129,3 +129,34 @@ export const getPostsByCategory = async (req, res, next) => {
     res.status(500).json({ message: error.message });
   }
 };
+export const updateCategory = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { label, color } = req.body;
+
+    const existingCategory = await Categories.findOne({ label });
+    if (existingCategory && existingCategory._id.toString() !== id) {
+      return res.status(400).json({
+        success: false,
+        message: "Category with this label already exists.",
+      });
+    }
+
+    const updatedFields = {};
+    if (label) updatedFields.label = label;
+    if (color) updatedFields.color = color;
+
+    const category = await Categories.findByIdAndUpdate(id, updatedFields, {
+      new: true,
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Category updated successfully",
+      data: category,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: error.message });
+  }
+};

@@ -1,52 +1,79 @@
+import React, { useState, useEffect } from "react";
 import {
   Button,
-  TextInput,
-  useMantineColorScheme,
-  Fieldset,
   Modal,
+  TextInput,
+  Fieldset,
   ColorPicker,
   ColorSwatch,
+  useMantineColorScheme,
 } from "@mantine/core";
-import { useEffect, useState } from "react";
+import { useMediaQuery } from "@mantine/hooks";
+import { Link, RichTextEditor } from "@mantine/tiptap";
+import { IconColorPicker } from "@tabler/icons-react";
+import { Color } from "@tiptap/extension-color";
+import Highlight from "@tiptap/extension-highlight";
+import Placeholder from "@tiptap/extension-placeholder";
+import SubScript from "@tiptap/extension-subscript";
+import Superscript from "@tiptap/extension-superscript";
+import TextAlign from "@tiptap/extension-text-align";
+import TextStyle from "@tiptap/extension-text-style";
+import Underline from "@tiptap/extension-underline";
+import { BubbleMenu, useEditor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
 import { Toaster, toast } from "sonner";
-import { Loading } from "../components";
-import { useCreateCategory } from "../hooks/category-hook";
+import { useUpdateCategory } from "../hooks/category-hook";
+import useCommentStore from "../store/comments";
 import useStore from "../store/store";
-import { useDisclosure } from "@mantine/hooks";
+import Loading from "./Loading";
 
-const CreateCategory = ({ opened, close }) => {
+const EditCategory = ({ opened, close }) => {
   const { colorScheme } = useMantineColorScheme();
+
   const { user } = useStore();
-  const { isPending, mutate } = useCreateCategory(toast, user?.token);
+  const { post } = useCommentStore();
+  const isMobile = useMediaQuery("(max-width: 50em)");
+  const [selectedColor, setSelectedColor] = useState(post.color); // Thêm state để lưu màu sắc đã chọn
 
-  const [label, setLabel] = useState(null);
-  const [color, setColor] = useState(null);
-
-  const [selectedColor, setSelectedColor] = useState(null); // Thêm state để lưu màu sắc đã chọn
+  const [label, setLabel] = useState(post.label);
+  const [color, setColor] = useState(post.color);
+  const { isPending, mutate, isSuccess } = useUpdateCategory(
+    toast,
+    user?.token
+  );
 
   const theme = colorScheme === "dark";
 
   useEffect(() => {
     // Reset showColor khi Modal mở lại
     if (opened) {
-      setSelectedColor(false);
+      setSelectedColor(post.color);
     }
   }, [opened]);
 
+  const handleLabelChange = (event) => {
+    setLabel(event.target.value);
+  };
+
   const handleSubmit = async () => {
     if (!label) {
-      toast.error("Vui lòng nhập Tên danh mục.");
+      toast.error("Please fill in the label field.");
       return;
     }
     if (!color) {
-      toast.error("Vui lòng chọn màu sắc.");
+      toast.error("Please fill in the color field.");
       return;
     }
 
     mutate({
-      color,
-      label,
+      id: post._id,
+      label: label,
+      color: color,
     });
+
+    if (isSuccess) {
+      close();
+    }
   };
 
   return (
@@ -66,7 +93,7 @@ const CreateCategory = ({ opened, close }) => {
             theme ? "text-white" : "text-slate-700"
           } w-full flex-col md:flex-row gap-5 mb-5 text-lg pb-1 font-semibold text-center`}
         >
-          Tạo Danh Mục
+          Chỉnh sửa Danh Mục
         </p>
 
         <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-8">
@@ -74,10 +101,11 @@ const CreateCategory = ({ opened, close }) => {
             required
             isRequired={true}
             withAsterisk
-            label="Tên danh mục"
+            value={label}
+            onChange={handleLabelChange}
+            label="label"
             className="w-full flex-1"
-            placeholder="Tên danh mục"
-            onChange={(e) => setLabel(e.target.value)}
+            placeholder="label"
           />
         </div>
 
@@ -89,10 +117,7 @@ const CreateCategory = ({ opened, close }) => {
             required
             isRequired={true}
             className="w-full flex-1"
-            onChange={(color) => {
-              setColor(color);
-              setSelectedColor(color); // Lưu màu sắc đã chọn vào state
-            }}
+            value={post.color}
           />
         </div>
 
@@ -135,4 +160,4 @@ const CreateCategory = ({ opened, close }) => {
   );
 };
 
-export default CreateCategory;
+export default EditCategory;

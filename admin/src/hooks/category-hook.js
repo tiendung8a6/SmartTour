@@ -142,3 +142,30 @@ export const useDeleteComment = (token) => {
     },
   });
 };
+
+export const useUpdateCategory = (toast, token) => {
+  return useMutation({
+    mutationFn: async ({ id, label, color }) => {
+      console.log(token);
+      const { data } = await axios.patch(
+        `${API_URL}/categories/update/${id}`,
+        { label, color },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return data;
+    },
+    onError: (error) => {
+      toast.error(error?.response?.data?.message ?? error.message);
+    },
+    onSuccess: (data) => {
+      toast.success(data?.message);
+
+      window.location.reload();
+    },
+  });
+};

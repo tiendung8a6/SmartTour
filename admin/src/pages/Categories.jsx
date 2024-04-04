@@ -22,6 +22,7 @@ import {
   Loading,
   CreateCategory,
   PostCategory,
+  EditCategory,
 } from "../components";
 import {
   useAction,
@@ -314,7 +315,9 @@ const Categories = () => {
         />
       )}
 
-      {editPost && <EditPost key={selected} opened={opened} close={close} />}
+      {editPost && (
+        <EditCategory key={selected} opened={opened} close={close} />
+      )}
 
       {commentId && <PostCategory />}
 

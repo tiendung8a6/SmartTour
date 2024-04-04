@@ -5,6 +5,7 @@ import {
   deleteCategory,
   getCategories,
   getPostsByCategory,
+  updateCategory,
 } from "../controllers/categoryController.js";
 import userAuth from "../middleware/authMiddleware.js";
 
@@ -19,5 +20,7 @@ router.delete("/:id", userAuth, deleteCategory);
 router.get("/", getCategories);
 
 router.get("/:catId", getPostsByCategory);
+
+router.patch("/update/:id", userAuth, updateCategory);
 
 export default router;
