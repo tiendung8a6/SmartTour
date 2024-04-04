@@ -38,6 +38,7 @@ const Contents = () => {
   const { user } = useStore();
   const { setOpen, commentId, setCommentId, setPost } = useCommentStore();
   const [opened, { open, close }] = useDisclosure(false);
+  const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false); // state mới để điều khiển việc mở ConfirmDialog
 
   const { data, isPending, mutate } = useContent(toast, user?.token);
   const useDelete = useDeletePost(toast, user?.token);
@@ -78,7 +79,7 @@ const Contents = () => {
         break;
     }
     fetchData();
-    close();
+    setIsConfirmDialogOpen(false); // mở ConfirmDialog thay vì gọi open()
   };
 
   const handlePerformAction = (val, id, status) => {
@@ -86,7 +87,7 @@ const Contents = () => {
     setSelected(id);
     setType(val);
     setStatus(status);
-    open();
+    setIsConfirmDialogOpen(true); // mở ConfirmDialog thay vì gọi open()
   };
 
   const handleEdit = (el) => {
@@ -149,12 +150,9 @@ const Contents = () => {
                 colorScheme === "dark" ? "text-white" : "text-black"
               } text-lg pb-1 font-semibold`}
           >
-            Contents ({" "}
+            Contents (
             <span className="text-sm">
-              {data?.data?.length * data?.page +
-                " of " +
-                data?.totalPost +
-                " records"}
+              {"Total: " + data?.totalPost + " records "}
             </span>
             )
           </p>
@@ -325,16 +323,25 @@ const Contents = () => {
         <Toaster richColors />
       </div>
 
-      {!editPost && (
+      {!editPost && !opened && (
         <ConfirmDialog
           message="Are you sure you want to perform this action?"
-          opened={opened}
-          close={close}
+          opened={isConfirmDialogOpen} // sử dụng state mới
+          close={() => setIsConfirmDialogOpen(false)} // đóng ConfirmDialog khi cần
           handleClick={handleActions}
         />
       )}
 
-      {editPost && <EditPost key={selected} opened={opened} close={close} />}
+      {editPost && (
+        <EditPost
+          key={selected}
+          opened={opened}
+          close={() => {
+            close();
+            setEditPost(false);
+          }}
+        />
+      )}
 
       {commentId && <Comments />}
 

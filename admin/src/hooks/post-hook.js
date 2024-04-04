@@ -112,6 +112,9 @@ export const useDeletePost = (toast, token) => {
     },
     onSuccess: (data) => {
       toast.success(data?.message);
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     },
   });
 };
