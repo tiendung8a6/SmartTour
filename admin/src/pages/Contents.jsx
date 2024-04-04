@@ -345,7 +345,7 @@ const Contents = () => {
 
       {commentId && <Comments />}
 
-      {<WritePost opened={opened} close={close} />}
+      {!editPost && <WritePost opened={opened} close={close} />}
     </>
   );
 };
