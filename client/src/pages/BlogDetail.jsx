@@ -51,7 +51,7 @@ const BlogDetail = () => {
 
           <div className="w-full flex items-center ">
             <span className="flex-1 text-sky-600 font-semibold">
-              {post?.cat}
+              {post?.cat?.label}
             </span>
 
             <span className="flex flex-1 items-baseline text-2xl font-medium text-slate-700 dark:text-gray-400">
