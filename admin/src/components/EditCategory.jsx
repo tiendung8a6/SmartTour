@@ -9,18 +9,6 @@ import {
   useMantineColorScheme,
 } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
-import { Link, RichTextEditor } from "@mantine/tiptap";
-import { IconColorPicker } from "@tabler/icons-react";
-import { Color } from "@tiptap/extension-color";
-import Highlight from "@tiptap/extension-highlight";
-import Placeholder from "@tiptap/extension-placeholder";
-import SubScript from "@tiptap/extension-subscript";
-import Superscript from "@tiptap/extension-superscript";
-import TextAlign from "@tiptap/extension-text-align";
-import TextStyle from "@tiptap/extension-text-style";
-import Underline from "@tiptap/extension-underline";
-import { BubbleMenu, useEditor } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
 import { Toaster, toast } from "sonner";
 import { useUpdateCategory } from "../hooks/category-hook";
 import useCommentStore from "../store/comments";
@@ -29,23 +17,20 @@ import Loading from "./Loading";
 
 const EditCategory = ({ opened, close }) => {
   const { colorScheme } = useMantineColorScheme();
-
   const { user } = useStore();
   const { post } = useCommentStore();
   const isMobile = useMediaQuery("(max-width: 50em)");
-  const [selectedColor, setSelectedColor] = useState(post.color); // Thêm state để lưu màu sắc đã chọn
-
   const [label, setLabel] = useState(post.label);
   const [color, setColor] = useState(post.color);
+  const [selectedColor, setSelectedColor] = useState(post.color); // Lưu màu đã chọn
+
   const { isPending, mutate, isSuccess } = useUpdateCategory(
     toast,
     user?.token
   );
-
   const theme = colorScheme === "dark";
 
   useEffect(() => {
-    // Reset showColor khi Modal mở lại
     if (opened) {
       setSelectedColor(post.color);
     }
@@ -53,6 +38,11 @@ const EditCategory = ({ opened, close }) => {
 
   const handleLabelChange = (event) => {
     setLabel(event.target.value);
+  };
+
+  const handleColorChange = (color) => {
+    setColor(color);
+    setSelectedColor(color); // Cập nhật màu đã chọn
   };
 
   const handleSubmit = async () => {
@@ -100,7 +90,6 @@ const EditCategory = ({ opened, close }) => {
           <TextInput
             required
             isRequired={true}
-            withAsterisk
             value={label}
             onChange={handleLabelChange}
             label="label"
@@ -117,19 +106,10 @@ const EditCategory = ({ opened, close }) => {
             required
             isRequired={true}
             className="w-full flex-1"
-            value={post.color}
+            value={color} // Sử dụng color thay vì post.color
+            onChange={handleColorChange} // Thêm onChange cho ColorPicker
           />
         </div>
-
-        <span className="text-sm font-medium justify-start">Màu Chữ</span>
-        <span className="text-rose-500 mr-[10px] ml-1">*</span>
-        <span className="w-full flex flex-col md:flex-row flex-wrap gap-1 mb-8 mt-1">
-          <ColorSwatch
-            style={{ cursor: "not-allowed" }}
-            color="#FFFFFF"
-            editable={false}
-          />
-        </span>
 
         {/* Hiển thị màu sắc đã chọn */}
         {selectedColor && (
@@ -147,9 +127,9 @@ const EditCategory = ({ opened, close }) => {
         <div className="w-full flex items-end justify-end mt-6">
           <Button
             className={theme ? "bg-blue-600" : "bg-black"}
-            onClick={() => handleSubmit()}
+            onClick={handleSubmit}
           >
-            Tạo Danh Mục
+            Chỉnh sửa Danh Mục
           </Button>
         </div>
       </Fieldset>
