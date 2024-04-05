@@ -8,6 +8,7 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import moment from "moment";
+import "moment/locale/vi";
 import React, { useEffect, useState } from "react";
 import { AiOutlineEye, AiOutlineSetting } from "react-icons/ai";
 import { BiDotsVerticalRounded, BiMailSend } from "react-icons/bi";
@@ -25,6 +26,26 @@ import useStore from "../store/store";
 import { formatNumber, updateURL } from "../utils";
 
 const Contacts = () => {
+  moment.updateLocale("vi", {
+    relativeTime: {
+      future: "trong %s",
+      past: "%s trước",
+      s: "vài giây",
+      ss: "%d giây",
+      m: "1 phút",
+      mm: "%d phút",
+      h: "1 giờ",
+      hh: "%d giờ",
+      d: "1 ngày",
+      dd: "%d ngày",
+      M: "1 tháng",
+      MM: "%d tháng",
+      y: "1 năm",
+      yy: "%d năm",
+    },
+  });
+  moment.locale("vi");
+
   const { colorScheme } = useMantineColorScheme();
 
   const location = useLocation();

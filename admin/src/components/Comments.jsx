@@ -5,10 +5,31 @@ import useCommentStore from "../store/comments";
 import useStore from "../store/store";
 import Profile from "../assets/profile.png";
 import moment from "moment";
+import "moment/locale/vi";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 
 import { ConfirmDialog, Loading } from "../components";
 const Comments = () => {
+  moment.updateLocale("vi", {
+    relativeTime: {
+      future: "trong %s",
+      past: "%s trước",
+      s: "vài giây",
+      ss: "%d giây",
+      m: "1 phút",
+      mm: "%d phút",
+      h: "1 giờ",
+      hh: "%d giờ",
+      d: "1 ngày",
+      dd: "%d ngày",
+      M: "1 tháng",
+      MM: "%d tháng",
+      y: "1 năm",
+      yy: "%d năm",
+    },
+  });
+  moment.locale("vi");
+
   const { openComment, commentId, setOpen } = useCommentStore();
   const { user } = useStore();
   const useDelete = useDeleteComment(user?.token);

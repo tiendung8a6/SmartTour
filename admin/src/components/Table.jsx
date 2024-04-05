@@ -1,8 +1,28 @@
 import { Table } from "@mantine/core";
 import moment from "moment";
+import "moment/locale/vi";
 import { formatNumber, getInitials } from "../utils";
 
 export const RecentPostTable = ({ data, theme }) => {
+  moment.updateLocale("vi", {
+    relativeTime: {
+      future: "trong %s",
+      past: "%s trước",
+      s: "vài giây",
+      ss: "%d giây",
+      m: "1 phút",
+      mm: "%d phút",
+      h: "1 giờ",
+      hh: "%d giờ",
+      d: "1 ngày",
+      dd: "%d ngày",
+      M: "1 tháng",
+      MM: "%d tháng",
+      y: "1 năm",
+      yy: "%d năm",
+    },
+  });
+  moment.locale("vi");
   const tableData = data?.map((el) => (
     <Table.Tr
       key={el?._id}

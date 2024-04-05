@@ -10,8 +10,29 @@ import {
 } from "../utils/apiCalls";
 import Button from "./Button";
 import moment from "moment";
+import "moment/locale/vi";
 
 const PostComments = ({ postId }) => {
+  moment.updateLocale("vi", {
+    relativeTime: {
+      future: "trong %s",
+      past: "%s trước",
+      s: "vài giây",
+      ss: "%d giây",
+      m: "1 phút",
+      mm: "%d phút",
+      h: "1 giờ",
+      hh: "%d giờ",
+      d: "1 ngày",
+      dd: "%d ngày",
+      M: "1 tháng",
+      MM: "%d tháng",
+      y: "1 năm",
+      yy: "%d năm",
+    },
+  });
+  moment.locale("vi");
+
   const { user } = useStore();
   const [comments, setComments] = useState([]);
   const [desc, setDesc] = useState("");

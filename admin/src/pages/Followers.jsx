@@ -1,5 +1,6 @@
 import { Pagination, Table, useMantineColorScheme } from "@mantine/core";
 import moment from "moment";
+import "moment/locale/vi";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Toaster, toast } from "sonner";
@@ -9,6 +10,26 @@ import useStore from "../store/store";
 import { formatNumber, getInitials, updateURL } from "../utils";
 
 const Followers = () => {
+  moment.updateLocale("vi", {
+    relativeTime: {
+      future: "trong %s",
+      past: "%s trước",
+      s: "vài giây",
+      ss: "%d giây",
+      m: "1 phút",
+      mm: "%d phút",
+      h: "1 giờ",
+      hh: "%d giờ",
+      d: "1 ngày",
+      dd: "%d ngày",
+      M: "1 tháng",
+      MM: "%d tháng",
+      y: "1 năm",
+      yy: "%d năm",
+    },
+  });
+  moment.locale("vi");
+
   const { colorScheme } = useMantineColorScheme();
 
   const { user } = useStore();

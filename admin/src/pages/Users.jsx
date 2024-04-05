@@ -8,6 +8,7 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import moment from "moment";
+import "moment/locale/vi";
 import React, { useEffect, useState } from "react";
 import { AiFillLock } from "react-icons/ai";
 import { BiDotsVerticalRounded } from "react-icons/bi";
@@ -24,6 +25,25 @@ import { formatNumber, updateURL } from "../utils";
 import useCommentStore from "../store/comments";
 
 const Users = () => {
+  moment.updateLocale("vi", {
+    relativeTime: {
+      future: "trong %s",
+      past: "%s trước",
+      s: "vài giây",
+      ss: "%d giây",
+      m: "1 phút",
+      mm: "%d phút",
+      h: "1 giờ",
+      hh: "%d giờ",
+      d: "1 ngày",
+      dd: "%d ngày",
+      M: "1 tháng",
+      MM: "%d tháng",
+      y: "1 năm",
+      yy: "%d năm",
+    },
+  });
+  moment.locale("vi");
   const { colorScheme } = useMantineColorScheme();
 
   const location = useLocation();
@@ -167,7 +187,7 @@ const Users = () => {
               <Table.Th>Người Theo Dõi</Table.Th>
               <Table.Th>Xác Thực OTP</Table.Th>
               <Table.Th>Ngày Tạo</Table.Th>
-              <Table.Th>Chỉnh Sửa</Table.Th>
+              {/* <Table.Th>Chỉnh Sửa</Table.Th> */}
               <Table.Th>Trạng Thái</Table.Th>
               <Table.Th>Vai Trò</Table.Th>
               <Table.Th>Hành Động</Table.Th>
@@ -219,7 +239,7 @@ const Users = () => {
                     </span>
                   </Table.Td>
                   <Table.Td>{moment(el?.createdAt).fromNow()}</Table.Td>
-                  <Table.Td>{moment(el?.updatedAt).fromNow()}</Table.Td>
+                  {/* <Table.Td>{moment(el?.updatedAt).fromNow()}</Table.Td> */}
                   <Table.Td className="text-justify whitespace-nowrap">
                     <span
                       className={`${
