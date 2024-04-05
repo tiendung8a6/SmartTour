@@ -153,7 +153,7 @@ const Contact = () => {
                 <form onSubmit={handleSubmit}>
                   <div className="mb-6">
                     <input
-                      className="w-full rounded border border-stroke px-[14px] py-3 text-base text-body-color outline-none focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
+                      className="w-full rounded border border-stroke px-[14px] py-3 text-base text-body-color outline-none focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6 focus:border-blue-600  focus:ring-blue-600"
                       type="text"
                       id="name"
                       name="name"
@@ -165,7 +165,7 @@ const Contact = () => {
                   </div>
                   <div className="mb-6">
                     <input
-                      className="w-full rounded border border-stroke px-[14px] py-3 text-base text-body-color outline-none focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
+                      className="w-full rounded border border-stroke px-[14px] py-3 text-base text-body-color outline-none focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6 focus:border-blue-600  focus:ring-blue-600"
                       type="email"
                       id="email"
                       name="email"
@@ -177,7 +177,7 @@ const Contact = () => {
                   </div>
                   <div className="mb-6">
                     <input
-                      className="w-full rounded border border-stroke px-[14px] py-3 text-base text-body-color outline-none focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
+                      className="w-full rounded border border-stroke px-[14px] py-3 text-base text-body-color outline-none focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6 focus:border-blue-600  focus:ring-blue-600"
                       type="number"
                       id="phone"
                       name="phone"
@@ -190,7 +190,7 @@ const Contact = () => {
 
                   <div className="mb-6">
                     <textarea
-                      className="w-full resize-none rounded border border-stroke px-[14px] py-3 text-base text-body-color outline-none focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"
+                      className="w-full resize-none rounded border border-stroke px-[14px] py-3 text-base text-body-color outline-none focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6 focus:border-blue-600  focus:ring-blue-600"
                       type="textarea"
                       id="message"
                       name="message"
@@ -205,7 +205,7 @@ const Contact = () => {
                   <div>
                     <button
                       type="submit"
-                      className="w-full rounded border border-primary bg-primary p-3 text-white bg-sky-500 transition hover:bg-opacity-90"
+                      className="w-full rounded border border-primary bg-primary p-3 text-white bg-sky-500 transition hover:bg-opacity-90 focus:border-blue-600  focus:ring-blue-600"
                     >
                       Send Message
                     </button>
