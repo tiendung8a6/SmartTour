@@ -97,7 +97,7 @@ const WritePost = ({ opened, close }) => {
       fullScreen // ={isMobile}
       radius={0}
       transitionProps={{ transition: "fade", duration: 200 }}
-      title={"Create a Post"}
+      title={"Quản lý bài viết"}
     >
       <Fieldset mx="auto" className="pt-6 mt-4">
         <p
@@ -105,12 +105,12 @@ const WritePost = ({ opened, close }) => {
             theme ? "text-white" : "text-slate-700"
           } text-lg pb-1 font-semibold text-center`}
         >
-          Create a Post
+          Tạo bài viết mới
         </p>
         <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
           <TextInput
             withAsterisk
-            label="Title"
+            label="Tiêu Đề"
             className="w-full flex-1"
             placeholder="Post title"
             defaultValue={title}
@@ -118,9 +118,9 @@ const WritePost = ({ opened, close }) => {
           />
           <Select
             withAsterisk
-            label="Category"
+            label="Danh Mục"
             defaultValue={""}
-            placeholder="Pick Category"
+            placeholder="Chọn danh mục"
             data={categoriesData?.data?.map((category) => category.label) || []}
             onChange={(val) => setCategory(val)}
           />
@@ -139,7 +139,7 @@ const WritePost = ({ opened, close }) => {
               accept=".jpg, .png, .jpeg"
             />
             <BiImages />
-            <span>Post Image</span>
+            <span>Ảnh Bài Viết</span>
             <span className="text-rose-500 mr-[10px]">*</span>
             <div>
               {fileURL && (
@@ -149,7 +149,7 @@ const WritePost = ({ opened, close }) => {
           </label>
         </div>
 
-        <span className="font-medium text-sm">Content</span>
+        <span className="font-medium text-sm">Nội Dung</span>
         <span className="text-rose-500 mr-[10px] ml-1">*</span>
 
         <RichTextEditor editor={editor}>
@@ -242,7 +242,7 @@ const WritePost = ({ opened, close }) => {
             className={theme ? "bg-blue-600" : "bg-black"}
             onClick={() => handleSubmit()}
           >
-            Submit Post
+            Đăng Bài
           </Button>
         </div>
       </Fieldset>

@@ -52,7 +52,8 @@ const StartPage = () => {
                 : "border-gray-300 text-gray-600"
             )}
           >
-            Explore Beyond Boundaries: Your Journey, Our Expertise!{" "}
+            Khám phá vượt ra ngoài ranh giới: Hành trình của bạn, chuyên môn của
+            chúng tôi!
             <Link
               onClick={open}
               className={clsx(
@@ -60,7 +61,7 @@ const StartPage = () => {
                 theme ? "text-white" : "text-slate-700"
               )}
             >
-              Join Now
+              Đăng nhập
               <MdArrowForward />
             </Link>
           </span>
@@ -70,7 +71,7 @@ const StartPage = () => {
               theme ? "text-gray-400" : "text-slate-700"
             )}
           >
-            Welcome to the administration page!
+            Chào mừng đến với trang quản trị!
           </h1>
 
           <span
@@ -79,7 +80,7 @@ const StartPage = () => {
               theme ? "text-gray-500" : "text-slate-600"
             )}
           >
-            Wishing you a good experience with the site
+            Chúc bạn có trải nghiệm tuyệt vời!
           </span>
 
           <div className="flex gap-6 items-center mt-6">
@@ -89,7 +90,7 @@ const StartPage = () => {
                 theme ? "bg-blue-600" : "bg-black"
               } text-white rounded h-10 text-sm `}
             >
-              Login
+              Đăng nhập
               <MdArrowForward />
             </Button>
             {/* <Link to="#" className="flex gap-2 items-center font-semibold">
@@ -103,7 +104,7 @@ const StartPage = () => {
       <Modal
         opened={opened || signInModal}
         onClose={formClose ? () => {} : handleCloseModal}
-        title="Login Admin"
+        title="Đăng nhập quản trị"
         centered
       >
         {isSignin ? (

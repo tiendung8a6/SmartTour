@@ -61,13 +61,13 @@ const PostCategory = () => {
       <Modal
         opened={openComment}
         onClose={handleClose}
-        title={`Posts (${data?.data?.length})`}
+        title={`Bài viết (${data?.data?.length})`}
         centered
         size="75%"
       >
         <div className="w-full h-full pb-6">
           {data?.data?.length === 0 ? (
-            <p className="text-sm text-gray-700">No Posts Found</p>
+            <p className="text-sm text-gray-700">Không Có Bài Viết</p>
           ) : (
             <div className="w-full h-full flex flex-col gap-6 px-2">
               {data?.data?.map(
@@ -135,7 +135,7 @@ const PostCategory = () => {
           opened={confirmDelete}
           close={() => setConfirmDelete(false)}
           handleClick={handleDelete}
-          message="Are you sure you want to perform this action?"
+          message="Bạn có chắc muốn thực hiện hành động này?"
         ></ConfirmDialog>
       )}
     </>

@@ -75,7 +75,7 @@ const EditCategory = ({ opened, close }) => {
       fullScreen // ={isMobile}
       radius={0}
       transitionProps={{ transition: "fade", duration: 200 }}
-      title={"Danh Mục"}
+      title={"Quản lý danh mục"}
     >
       <Fieldset maw={500} mx="auto" className="pt-4 mt-8">
         <p
@@ -83,7 +83,7 @@ const EditCategory = ({ opened, close }) => {
             theme ? "text-white" : "text-slate-700"
           } w-full flex-col md:flex-row gap-5 mb-5 text-lg pb-1 font-semibold text-center`}
         >
-          Chỉnh sửa Danh Mục
+          Chỉnh Sửa Danh Mục
         </p>
 
         <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-8">
@@ -92,9 +92,9 @@ const EditCategory = ({ opened, close }) => {
             isRequired={true}
             value={label}
             onChange={handleLabelChange}
-            label="label"
+            label="Tên Danh Mục"
             className="w-full flex-1"
-            placeholder="label"
+            placeholder="Tên Danh Mục"
           />
         </div>
 
@@ -129,7 +129,7 @@ const EditCategory = ({ opened, close }) => {
             className={theme ? "bg-blue-600" : "bg-black"}
             onClick={handleSubmit}
           >
-            Chỉnh sửa Danh Mục
+            Cập Nhật
           </Button>
         </div>
       </Fieldset>

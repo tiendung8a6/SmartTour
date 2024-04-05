@@ -40,13 +40,13 @@ const Comments = () => {
       <Modal
         opened={openComment}
         onClose={handleClose}
-        title={`Comments (${data?.data?.length})`}
+        title={`Bình luận (${data?.data?.length})`}
         centered
         size="lg"
       >
         <div className="w-full h-full pb-6">
           {data?.data?.length === 0 ? (
-            <p className="text-sm text-gray-700">No Comments Found</p>
+            <p className="text-sm text-gray-700">Không Có Bình Luận</p>
           ) : (
             <div className="w-full h-full flex flex-col gap-6 px-2">
               {data?.data?.map(({ _id, user, desc, post, createdAt }) => (
@@ -77,7 +77,7 @@ const Comments = () => {
                           className="text-sm text-red-600 cursor-pointer"
                           onClick={() => handleDeleteConfirmation(_id)}
                         >
-                          Delete
+                          Xóa
                         </span>
                       </div>
                     </div>
@@ -99,7 +99,7 @@ const Comments = () => {
           opened={confirmDelete}
           close={() => setConfirmDelete(false)}
           handleClick={handleDelete}
-          message="Are you sure you want to perform this action?"
+          message="Bạn có chắc muốn thực hiện hành động này?"
         ></ConfirmDialog>
       )}
     </>

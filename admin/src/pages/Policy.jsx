@@ -91,22 +91,19 @@ const Policy = () => {
               colorScheme === "dark" ? "text-white" : "text-vlack"
             } text-lg pb-1 font-semibold`}
         >
-          Policy ({" "}
+          Chính sách (
           <span className="text-sm">
-            {data?.data?.length * data?.page +
-              " of " +
-              data?.totalPolicies +
-              " records"}
+            {"Số lượng: " + data?.totalPolicies + " chính sách"}
           </span>
           )
         </p>
         <Table highlightOnHover withTableBorder>
           <Table.Thead>
             <Table.Tr className="bg-black text-white">
-              <Table.Th>Title</Table.Th>
-              <Table.Th>Content</Table.Th>
-              <Table.Th>Last updated</Table.Th>
-              <Table.Th>Action</Table.Th>
+              <Table.Th>Tiêu Đề</Table.Th>
+              <Table.Th>Nội Dung</Table.Th>
+              <Table.Th>Chỉnh Sửa Gần Đây</Table.Th>
+              <Table.Th>Hành Động</Table.Th>
             </Table.Tr>
           </Table.Thead>
 
@@ -163,7 +160,7 @@ const Policy = () => {
           </Table.Tbody>
 
           {data?.data?.length < 1 && (
-            <Table.Caption>No Data Found.</Table.Caption>
+            <Table.Caption>Không tìm thấy dữ liệu nào.</Table.Caption>
           )}
         </Table>
 
@@ -173,7 +170,7 @@ const Policy = () => {
 
       {!editPolicy && (
         <ConfirmDialog
-          message="Are you sure you want to perform this action?"
+          message="Bạn có chắc muốn thực hiện hành động này?"
           opened={opened}
           close={close}
           handleClick={handleActions}

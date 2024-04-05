@@ -78,24 +78,24 @@ const CreateAdmin = ({ opened, close }) => {
       fullScreen // ={isMobile}
       radius={0}
       transitionProps={{ transition: "fade", duration: 200 }}
-      title={"Create an admin account"}
+      title={"Quản lý người dùng"}
     >
       <Fieldset maw={500} mx="auto" className="pt-6 mt-10">
         <p
           className={`${
             theme ? "text-white" : "text-slate-700"
-          } w-full flex-col md:flex-row gap-5 mb-5 text-lg pb-1 font-semibold text-center`}
+          } w-full flex-col md:flex-row gap-5 mb-5 text-lg pb-1 font-semibold text-center `}
         >
-          Create an admin account
+          Tọa tài khoản người dùng
         </p>
         <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-8">
           <TextInput
             required
             isRequired={true}
             withAsterisk
-            label="First Name"
+            label="Tên"
             className="w-full flex-1"
-            placeholder="First Name"
+            placeholder="Tên"
             visible={visible}
             onVisibilityChange={toggle}
             onChange={(e) => setFirstName(e.target.value)}
@@ -105,9 +105,9 @@ const CreateAdmin = ({ opened, close }) => {
             required
             isRequired={true}
             withAsterisk
-            label="Last Name"
+            label="Họ"
             className="w-full flex-1"
-            placeholder="Last Name"
+            placeholder="Họ"
             visible={visible}
             onVisibilityChange={toggle}
             onChange={(e) => setLastName(e.target.value)}
@@ -121,7 +121,7 @@ const CreateAdmin = ({ opened, close }) => {
             withAsterisk
             label="Email"
             className="w-full flex-1"
-            placeholder="your@email.com"
+            placeholder="Email"
             visible={visible}
             onVisibilityChange={toggle}
             onChange={(e) => setEmail(e.target.value)}
@@ -131,9 +131,9 @@ const CreateAdmin = ({ opened, close }) => {
           <PasswordInput
             required
             withAsterisk
-            label="Password"
+            label="Mật khẩu"
             className="w-full flex-1"
-            placeholder="Password"
+            placeholder="Mật Khẩu"
             onChange={(e) => setPassword(e.target.value)}
             visible={visible}
             onVisibilityChange={toggle}
@@ -153,7 +153,7 @@ const CreateAdmin = ({ opened, close }) => {
               accept=".jpg, .png, .jpeg"
             />
             <BiImages />
-            <span>Avatar</span>
+            <span className="font-medium text-sm">Ảnh đại diện</span>
             <span className="text-rose-500 mr-[10px]">*</span>
             <div>
               {fileURL && (
@@ -171,7 +171,7 @@ const CreateAdmin = ({ opened, close }) => {
             className={theme ? "bg-blue-600" : "bg-black"}
             onClick={() => handleSubmit()}
           >
-            Create Account
+            Tạo tài khoản
           </Button>
         </div>
       </Fieldset>

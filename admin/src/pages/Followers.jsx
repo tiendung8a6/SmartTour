@@ -37,20 +37,18 @@ const Followers = () => {
           theme ? "text-white" : "text-slate-700"
         } text-lg pb-1 font-semibold `}
       >
-        Followers (
-        <span className="text-sm">
-          {data?.data?.length * data?.page + " of " + data?.total + " records"}
-        </span>
+        Người theo dõi (
+        <span className="text-sm">{"Số lượng: " + data?.total + " người"}</span>
         )
       </p>
 
       <Table highlightOnHover withTableBorder className="flex-1">
         <Table.Thead>
           <Table.Tr className="bg-black text-white">
-            <Table.Th>Name</Table.Th>
-            <Table.Th>Account</Table.Th>
-            <Table.Th>Followers</Table.Th>
-            <Table.Th>Follow Date</Table.Th>
+            <Table.Th>Tên</Table.Th>
+            <Table.Th>Email</Table.Th>
+            <Table.Th>Người Theo Dõi</Table.Th>
+            <Table.Th>Ngày Theo Dõi</Table.Th>
           </Table.Tr>
         </Table.Thead>
 
@@ -77,13 +75,13 @@ const Followers = () => {
               </Table.Td>
               <Table.Td>
                 <p
-                  className={`${
-                    followerId?.accountType === "User"
-                      ? "bg-sky-800 text-sky-800"
-                      : "bg-blue-800 text-blue-800"
-                  }  bg-opacity-30 font-semibold px-4 py-1 rounded-full w-fit`}
+                // className={`${
+                //   followerId?.accountType === "User"
+                //     ? "bg-sky-800 text-sky-800"
+                //     : "bg-blue-800 text-blue-800"
+                // }  bg-opacity-30 font-semibold px-4 py-1 rounded-full w-fit`}
                 >
-                  {followerId?.accountType}
+                  {followerId?.email}
                 </p>
               </Table.Td>
 
@@ -99,7 +97,7 @@ const Followers = () => {
         </Table.Tbody>
 
         {data?.data?.length < 1 && (
-          <Table.Caption>No Data Found.</Table.Caption>
+          <Table.Caption>Không tìm thấy dữ liệu nào.</Table.Caption>
         )}
       </Table>
 

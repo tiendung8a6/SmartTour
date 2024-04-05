@@ -13,7 +13,7 @@ import { AiFillLock } from "react-icons/ai";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { BiSolidLike } from "react-icons/bi";
-import { IconSearch, IconUserPlus } from "@tabler/icons-react";
+import { IconSearch, IconUserPlus, IconEraser } from "@tabler/icons-react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Toaster, toast } from "sonner";
 
@@ -123,25 +123,27 @@ const Users = () => {
                 colorScheme === "dark" ? "text-white" : "text-black"
               } text-lg pb-1 font-semibold`}
           >
-            Users ({" "}
+            Người dùng ({" "}
             <span className="text-sm">
-              {"Total: " + data?.totalUsers + " records "}
+              {"Số lượng: " + data?.totalUsers + " người dùng "}
             </span>
             )
           </p>
           <div className="flex items-center">
             <TextInput
+              className="w-60"
               leftSection={<IconSearch size={15} />}
-              placeholder="Search by Name or Email"
+              placeholder="Tìm kiếm theo Tên hoặc Email"
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
             />
             <Button
-              className="ml-2"
+              leftSection={<IconEraser size={15} />}
+              // className="ml-2"
               onClick={() => setSearchTerm("")}
               variant="light"
             >
-              Clear
+              Xóa
             </Button>
           </div>
         </div>
@@ -152,23 +154,23 @@ const Users = () => {
             className={theme ? "bg-blue-600" : "bg-black"}
             onClick={() => handleSubmit()}
           >
-            Create Account
+            Tạo Tài Khoản
           </Button>
         </div>
 
         <Table highlightOnHover withTableBorder>
           <Table.Thead>
             <Table.Tr className="bg-black text-white">
-              <Table.Th>Name</Table.Th>
+              <Table.Th>Tên</Table.Th>
               <Table.Th>Email</Table.Th>
-              <Table.Th>Access Control</Table.Th>
-              <Table.Th>Followers</Table.Th>
-              <Table.Th>Authentication</Table.Th>
-              <Table.Th>Registration Date</Table.Th>
-              <Table.Th>Last Modified</Table.Th>
-              <Table.Th>Status</Table.Th>
-              <Table.Th>Role</Table.Th>
-              <Table.Th>Action</Table.Th>
+              <Table.Th>Hình Thức</Table.Th>
+              <Table.Th>Người Theo Dõi</Table.Th>
+              <Table.Th>Xác Thực OTP</Table.Th>
+              <Table.Th>Ngày Tạo</Table.Th>
+              <Table.Th>Chỉnh Sửa</Table.Th>
+              <Table.Th>Trạng Thái</Table.Th>
+              <Table.Th>Vai Trò</Table.Th>
+              <Table.Th>Hành Động</Table.Th>
             </Table.Tr>
           </Table.Thead>
 
@@ -199,7 +201,7 @@ const Users = () => {
                       {formatNumber(el?.followers?.length)}
                     </div>
                   </Table.Td>
-                  <Table.Td className="text-justify">
+                  <Table.Td className="text-justify whitespace-nowrap">
                     <span
                       className={`${
                         el?.emailVerified
@@ -211,12 +213,14 @@ const Users = () => {
                           : "bg-opacity-70"
                       } rounded-full  font-semibold px-4 py-1.5`}
                     >
-                      {el?.emailVerified === true ? "Verified" : "Unverified"}
+                      {el?.emailVerified === true
+                        ? "Xác Thực"
+                        : "Chưa Xác Thực"}
                     </span>
                   </Table.Td>
                   <Table.Td>{moment(el?.createdAt).fromNow()}</Table.Td>
                   <Table.Td>{moment(el?.updatedAt).fromNow()}</Table.Td>
-                  <Table.Td className="text-justify">
+                  <Table.Td className="text-justify whitespace-nowrap">
                     <span
                       className={`${
                         el?.isLock
@@ -228,10 +232,10 @@ const Users = () => {
                           : "bg-opacity-70"
                       } rounded-full  font-semibold px-4 py-1.5`}
                     >
-                      {el?.isLock === true ? "Locked" : "Unlocked"}
+                      {el?.isLock === true ? "Đã Khóa" : "Chưa Khóa"}
                     </span>
                   </Table.Td>
-                  <Table.Td className="text-justify">
+                  <Table.Td className="text-justify whitespace-nowrap">
                     <span
                       className={`${
                         el?.isAdmin
@@ -243,7 +247,7 @@ const Users = () => {
                           : "bg-opacity-70"
                       } rounded-full  font-semibold px-4 py-1.5`}
                     >
-                      {el?.isAdmin === true ? "Admin" : "User"}
+                      {el?.isAdmin === true ? "Quản Trị" : "Người Dùng"}
                     </span>
                   </Table.Td>
                   <Table.Td width={5}>
@@ -274,19 +278,19 @@ const Users = () => {
                             handlePerformAction("isLock", el?._id, !el?.isLock)
                           }
                         >
-                          {el?.isLock ? "Unlock" : "Lock"}
+                          {el?.isLock ? "Mở Khóa" : "Khóa"}
                         </Menu.Item>
 
                         <Menu.Divider />
 
-                        <Menu.Label>Danger zone</Menu.Label>
+                        <Menu.Label>Thao tác nguy hiểm</Menu.Label>
 
                         <Menu.Item
                           color="red"
                           leftSection={<MdOutlineDeleteOutline />}
                           onClick={() => handlePerformAction("delete", el?._id)}
                         >
-                          Delete User
+                          Xóa Người Dùng
                         </Menu.Item>
                       </Menu.Dropdown>
                     </Menu>
@@ -296,7 +300,7 @@ const Users = () => {
           </Table.Tbody>
 
           {filteredUsers?.length < 1 && (
-            <Table.Caption>No Data Found.</Table.Caption>
+            <Table.Caption>Không tìm thấy dữ liệu nào.</Table.Caption>
           )}
         </Table>
 
@@ -318,7 +322,7 @@ const Users = () => {
 
       {!editUser && (
         <ConfirmDialog
-          message="Are you sure you want to perform this action?"
+          message="Bạn có chắc muốn thực hiện hành động này?"
           opened={opened}
           close={close}
           handleClick={handleActions}

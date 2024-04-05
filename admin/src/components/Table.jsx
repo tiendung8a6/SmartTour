@@ -35,7 +35,9 @@ export const RecentPostTable = ({ data, theme }) => {
           <Table.Th>Post Date</Table.Th>
         </Table.Tr>
       </Table.Thead>
-      {data?.length === 0 && <Table.Caption>No Data Found.</Table.Caption>}
+      {data?.length === 0 && (
+        <Table.Caption>Không tìm thấy dữ liệu nào.</Table.Caption>
+      )}
       <Table.Tbody>{tableData}</Table.Tbody>
     </Table>
   );
@@ -80,7 +82,9 @@ export const RecentFollowersTable = ({ data, theme }) => {
           <Table.Th>Join Date</Table.Th>
         </Table.Tr>
       </Table.Thead>
-      {data?.length === 0 && <Table.Caption>No Data Found.</Table.Caption>}
+      {data?.length === 0 && (
+        <Table.Caption>Không tìm thấy dữ liệu nào.</Table.Caption>
+      )}
       <Table.Tbody>{tableData}</Table.Tbody>
     </Table>
   );

@@ -14,7 +14,8 @@ import { BiDotsVerticalRounded, BiSolidEdit } from "react-icons/bi";
 import { MdMessage, MdOutlineDeleteOutline } from "react-icons/md";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Toaster, toast } from "sonner";
-import { IconPencilPlus } from "@tabler/icons-react";
+import { IconSearch, IconPencilPlus, IconEraser } from "@tabler/icons-react";
+
 import {
   Comments,
   ConfirmDialog,
@@ -111,7 +112,7 @@ const Contents = () => {
     const names = {};
     for (const id of ids) {
       const writerInfo = await getWriterInfo(id);
-      names[id] = writerInfo?.name || "Unknown";
+      names[id] = writerInfo?.name || "Không xác định";
     }
     setWriterNames(names);
   };
@@ -150,24 +151,26 @@ const Contents = () => {
                 colorScheme === "dark" ? "text-white" : "text-black"
               } text-lg pb-1 font-semibold`}
           >
-            Contents (
+            Bài viết (
             <span className="text-sm">
-              {"Total: " + data?.totalPost + " records "}
+              {"Số lượng: " + data?.totalPost + " bài viết "}
             </span>
             )
           </p>
           <div className="flex items-center">
             <TextInput
-              placeholder="Search by Title"
+              leftSection={<IconSearch size={15} />}
+              placeholder="Tìm kiếm theo Tiêu đề"
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
             />
             <Button
-              className="ml-2"
+              leftSection={<IconEraser size={15} />}
+              // className="ml-2"
               onClick={() => setSearchTerm("")}
               variant="light"
             >
-              Clear
+              Xóa
             </Button>
           </div>
         </div>
@@ -178,21 +181,21 @@ const Contents = () => {
             className={theme ? "bg-blue-600" : "bg-black"}
             onClick={() => handleSubmit()}
           >
-            Create Post
+            Đăng Bài
           </Button>
         </div>
         <Table highlightOnHover withTableBorder>
           <Table.Thead>
             <Table.Tr className="bg-black text-white">
-              <Table.Th>Post Title</Table.Th>
-              <Table.Th>Category</Table.Th>
-              <Table.Th>Views</Table.Th>
-              <Table.Th>Comments</Table.Th>
-              <Table.Th>Post Date</Table.Th>
-              <Table.Th>Edit Date</Table.Th>
-              <Table.Th>Writer</Table.Th>
-              <Table.Th>Status</Table.Th>
-              <Table.Th>Action</Table.Th>
+              <Table.Th>Tiêu Đề</Table.Th>
+              <Table.Th>Danh Mục</Table.Th>
+              <Table.Th>Lượt Xem</Table.Th>
+              <Table.Th>Bình Luận</Table.Th>
+              <Table.Th>Ngày Đăng</Table.Th>
+              <Table.Th>Ngày Chỉnh Sửa</Table.Th>
+              <Table.Th>Người Viết</Table.Th>
+              <Table.Th>Trạng Thái</Table.Th>
+              <Table.Th>Hành Động</Table.Th>
             </Table.Tr>
           </Table.Thead>
 
@@ -231,7 +234,7 @@ const Contents = () => {
                   <Table.Td>{moment(el?.updatedAt).fromNow()}</Table.Td>
 
                   <Table.Td>{writerNames[el?.user]}</Table.Td>
-                  <Table.Td>
+                  <Table.Td className="text-justify whitespace-nowrap">
                     <span
                       className={`${
                         el?.status
@@ -243,7 +246,7 @@ const Contents = () => {
                           : "bg-opacity-70"
                       } rounded-full  font-semibold px-4 py-1.5`}
                     >
-                      {el?.status === true ? "Active" : "Disabled"}
+                      {el?.status === true ? "Công Khai" : "Đã Ẩn"}
                     </span>
                   </Table.Td>
                   <Table.Td width={5}>
@@ -272,7 +275,7 @@ const Contents = () => {
                           leftSection={<BiSolidEdit />}
                           onClick={() => handleEdit(el)}
                         >
-                          Edit Post
+                          Chỉnh Sửa
                         </Menu.Item>
 
                         <Menu.Item
@@ -281,19 +284,19 @@ const Contents = () => {
                             handlePerformAction("status", el?._id, !el?.status)
                           }
                         >
-                          {el?.status ? "Disable" : "Enable"}
+                          {el?.status ? "Ẩn Bài Đăng" : "Công Khai"}
                         </Menu.Item>
 
                         <Menu.Divider />
 
-                        <Menu.Label>Danger zone</Menu.Label>
+                        <Menu.Label>Thao tác nguy hiểm</Menu.Label>
 
                         <Menu.Item
                           color="red"
                           leftSection={<MdOutlineDeleteOutline />}
                           onClick={() => handlePerformAction("delete", el?._id)}
                         >
-                          Delete Post
+                          Xóa Bài Đăng
                         </Menu.Item>
                       </Menu.Dropdown>
                     </Menu>
@@ -303,7 +306,7 @@ const Contents = () => {
           </Table.Tbody>
 
           {filteredContents?.length < 1 && (
-            <Table.Caption>No Data Found.</Table.Caption>
+            <Table.Caption>Không tìm thấy dữ liệu nào.</Table.Caption>
           )}
         </Table>
 
@@ -325,7 +328,7 @@ const Contents = () => {
 
       {!editPost && !opened && (
         <ConfirmDialog
-          message="Are you sure you want to perform this action?"
+          message="Bạn có chắc muốn thực hiện hành động này?"
           opened={isConfirmDialogOpen} // sử dụng state mới
           close={() => setIsConfirmDialogOpen(false)} // đóng ConfirmDialog khi cần
           handleClick={handleActions}

@@ -53,8 +53,8 @@ const LoginForm = ({ toast, isSignin, setIsSignin, setFormClose, toggle }) => {
         required
         type="email"
         withAsterisk
-        label="Email Address"
-        placeholder="your@email.com"
+        label="Email"
+        placeholder="Email"
         {...form.getInputProps("email")}
       />
 
@@ -76,7 +76,7 @@ const LoginForm = ({ toast, isSignin, setIsSignin, setFormClose, toggle }) => {
           type="submit"
           className={clsx(theme ? "bg-blue-600" : "bg-black")}
         >
-          Login
+          Đăng nhập
         </Button>
       </Group>
       {/* <p className='text-sm'>

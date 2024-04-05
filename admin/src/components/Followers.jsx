@@ -39,13 +39,13 @@ const Followers = () => {
       <Modal
         opened={openComment}
         onClose={handleClose}
-        title={`Followers (${data?.followers?.length})`}
+        title={`Người theo dõi (${data?.followers?.length})`}
         centered
         size="lg"
       >
         <div className="w-full h-full pb-6">
           {data?.followers?.length === 0 ? (
-            <p className="text-sm text-gray-700">No Comments Found</p>
+            <p className="text-sm text-gray-700">Không Có Người Theo Dõi</p>
           ) : (
             <div className="w-full h-full flex flex-col gap-6 px-2">
               {data?.followers?.map(({ _id, followerId }) => (
@@ -76,7 +76,7 @@ const Followers = () => {
                           className="text-sm text-red-600 cursor-pointer"
                           onClick={() => handleDeleteConfirmation(_id)}
                         >
-                          Delete
+                          Xóa
                         </span>
                       </div>
                     </div>
@@ -98,7 +98,7 @@ const Followers = () => {
           opened={confirmDelete}
           close={() => setConfirmDelete(false)}
           handleClick={handleDelete}
-          message="Are you sure you want to perform this action?"
+          message="Bạn có chắc muốn thực hiện hành động này?"
         ></ConfirmDialog>
       )}
     </>

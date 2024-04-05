@@ -14,6 +14,7 @@ import { BiDotsVerticalRounded, BiMailSend } from "react-icons/bi";
 import { MdMessage, MdOutlineDeleteOutline } from "react-icons/md";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Toaster, toast } from "sonner";
+import { IconSearch, IconEraser } from "@tabler/icons-react";
 
 import { Comments, ConfirmDialog, EditContact, Loading } from "../components";
 // import { useAction, useContent, useDeletePost } from "../hooks/post-hook";
@@ -124,37 +125,40 @@ const Contacts = () => {
                 colorScheme === "dark" ? "text-white" : "text-black"
               } text-lg pb-1 font-semibold`}
           >
-            Contact (
+            Liên hệ (
             <span className="text-sm">
-              {"Total: " + data?.totalContacts + " records"}
+              {"Số lượng: " + data?.totalContacts + " liên hệ"}
             </span>
             )
           </p>
           <div className="flex items-center">
             <TextInput
-              placeholder="Search by Name or Email"
+              className="w-60"
+              leftSection={<IconSearch size={15} />}
+              placeholder="Tìm kiếm theo Tên hoặc Email"
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
             />
             <Button
-              className="ml-2"
+              leftSection={<IconEraser size={15} />}
+              // className="ml-2"
               onClick={() => setSearchTerm("")}
               variant="light"
             >
-              Clear
+              Xóa
             </Button>
           </div>
         </div>
         <Table highlightOnHover withTableBorder>
           <Table.Thead>
             <Table.Tr className="bg-black text-white">
-              <Table.Th>Name</Table.Th>
+              <Table.Th>Tên</Table.Th>
               <Table.Th>Email</Table.Th>
-              <Table.Th>Phone</Table.Th>
-              <Table.Th>Message</Table.Th>
-              <Table.Th>Received date</Table.Th>
-              <Table.Th>Status</Table.Th>
-              <Table.Th>Action</Table.Th>
+              <Table.Th>Số Điện Thoại</Table.Th>
+              <Table.Th>Nội Dung</Table.Th>
+              <Table.Th>Ngày Nhận</Table.Th>
+              <Table.Th>Trạng Thái</Table.Th>
+              <Table.Th>Hành Động</Table.Th>
             </Table.Tr>
           </Table.Thead>
 
@@ -170,7 +174,7 @@ const Contacts = () => {
                   <Table.Td>{el?.phone}</Table.Td>
                   <Table.Td className="text-justify">{el?.message}</Table.Td>
                   <Table.Td>{moment(el?.createdAt).fromNow()}</Table.Td>
-                  <Table.Td>
+                  <Table.Td className="text-justify whitespace-nowrap">
                     <span
                       className={`${
                         el?.isReply
@@ -182,7 +186,7 @@ const Contacts = () => {
                           : "bg-opacity-70"
                       } rounded-full  font-semibold px-4 py-1.5`}
                     >
-                      {el?.isReply === true ? "Replied" : "New"}
+                      {el?.isReply === true ? "Đã Trả Lời" : "Mới"}
                     </span>
                   </Table.Td>
                   <Table.Td width={5}>
@@ -211,7 +215,7 @@ const Contacts = () => {
                           leftSection={<BiMailSend />}
                           onClick={() => handleEdit(el)}
                         >
-                          Reply Contact
+                          Trả Lời
                         </Menu.Item>
                       </Menu.Dropdown>
                     </Menu>
@@ -221,7 +225,7 @@ const Contacts = () => {
           </Table.Tbody>
 
           {filteredContacts?.length < 1 && (
-            <Table.Caption>No Data Found.</Table.Caption>
+            <Table.Caption>Không tìm thấy dữ liệu nào.</Table.Caption>
           )}
         </Table>
 
@@ -243,7 +247,7 @@ const Contacts = () => {
 
       {!editContact && (
         <ConfirmDialog
-          message="Are you sure you want to perform this action?"
+          message="Bạn có chắc muốn thực hiện hành động này?"
           opened={opened}
           close={close}
           handleClick={handleActions}

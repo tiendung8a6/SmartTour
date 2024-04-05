@@ -58,7 +58,7 @@ const CreateCategory = ({ opened, close }) => {
       fullScreen // ={isMobile}
       radius={0}
       transitionProps={{ transition: "fade", duration: 200 }}
-      title={"Danh Mục"}
+      title={"Quản lý danh mục"}
     >
       <Fieldset maw={500} mx="auto" className="pt-4 mt-8">
         <p
@@ -74,7 +74,7 @@ const CreateCategory = ({ opened, close }) => {
             required
             isRequired={true}
             withAsterisk
-            label="Tên danh mục"
+            label="Tên Danh Mục"
             className="w-full flex-1"
             placeholder="Tên danh mục"
             onChange={(e) => setLabel(e.target.value)}

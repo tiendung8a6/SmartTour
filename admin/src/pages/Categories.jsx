@@ -14,7 +14,8 @@ import { BiDotsVerticalRounded, BiSolidEdit } from "react-icons/bi";
 import { MdMessage, MdOutlineDeleteOutline } from "react-icons/md";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Toaster, toast } from "sonner";
-import { IconPencilPlus } from "@tabler/icons-react";
+import { IconSearch, IconSquarePlus, IconEraser } from "@tabler/icons-react";
+
 import {
   Comments,
   ConfirmDialog,
@@ -160,47 +161,49 @@ const Categories = () => {
                 colorScheme === "dark" ? "text-white" : "text-black"
               } text-lg pb-1 font-semibold`}
           >
-            Categories (
+            Danh mục (
             <span className="text-sm">
-              {"Total: " + data?.totalCategories + " records "}
+              {"Số lượng: " + data?.totalCategories + " danh mục "}
             </span>
             )
           </p>
           <div className="flex items-center">
             <TextInput
-              placeholder="Search by Title"
+              leftSection={<IconSearch size={15} />}
+              placeholder="Tìm kiếm theo Tên"
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
             />
             <Button
-              className="ml-2"
+              leftSection={<IconEraser size={15} />}
+              // className="ml-2"
               onClick={() => setSearchTerm("")}
               variant="light"
             >
-              Clear
+              Xóa
             </Button>
           </div>
         </div>
         <div className="flex justify-end items-center mb-4 ">
           <Button
-            leftSection={<IconPencilPlus size={15} />}
+            leftSection={<IconSquarePlus size={15} />}
             radius="xl"
             className={theme ? "bg-blue-600" : "bg-black"}
             onClick={() => handleSubmit()}
           >
-            Create Category
+            Tạo Danh Mục
           </Button>
         </div>
         <Table highlightOnHover withTableBorder>
           <Table.Thead>
             <Table.Tr className="bg-black text-white">
-              <Table.Th>label</Table.Th>
-              <Table.Th>Count post</Table.Th>
-              <Table.Th>color</Table.Th>
-              <Table.Th>Post Date</Table.Th>
-              <Table.Th>Edit Date</Table.Th>
-              <Table.Th>Status</Table.Th>
-              <Table.Th>Action</Table.Th>
+              <Table.Th>Tên</Table.Th>
+              <Table.Th>Số Bài Viết</Table.Th>
+              <Table.Th>Màu Sắc</Table.Th>
+              <Table.Th>Ngày Tạo</Table.Th>
+              <Table.Th>Ngày Chỉnh Sửa</Table.Th>
+              <Table.Th>Trạng Thái</Table.Th>
+              <Table.Th>Hành Động</Table.Th>
             </Table.Tr>
           </Table.Thead>
 
@@ -230,7 +233,7 @@ const Categories = () => {
                   <Table.Td>{el?.color}</Table.Td>
                   <Table.Td>{moment(el?.createdAt).fromNow()}</Table.Td>
                   <Table.Td>{moment(el?.updatedAt).fromNow()}</Table.Td>
-                  <Table.Td>
+                  <Table.Td className="text-justify whitespace-nowrap">
                     <span
                       className={`${
                         el?.status
@@ -240,9 +243,9 @@ const Categories = () => {
                         colorScheme === "dark"
                           ? "bg-opacity-30"
                           : "bg-opacity-70"
-                      } rounded-full  font-semibold px-4 py-1.5`}
+                      } rounded-full font-semibold px-4 py-1.5`}
                     >
-                      {el?.status === true ? "Active" : "Disabled"}
+                      {el?.status === true ? "Công Khai" : "Đã Ẩn"}
                     </span>
                   </Table.Td>
                   <Table.Td width={5}>
@@ -271,7 +274,7 @@ const Categories = () => {
                           leftSection={<BiSolidEdit />}
                           onClick={() => handleEdit(el)}
                         >
-                          Edit Post
+                          Chỉnh Sửa
                         </Menu.Item>
 
                         <Menu.Item
@@ -280,7 +283,7 @@ const Categories = () => {
                             handlePerformAction("status", el?._id, !el?.status)
                           }
                         >
-                          {el?.status ? "Disable" : "Enable"}
+                          {el?.status ? "Ẩn Danh Mục " : "Hiện Danh Mục"}
                         </Menu.Item>
 
                         <Menu.Divider />
@@ -292,7 +295,7 @@ const Categories = () => {
                           leftSection={<MdOutlineDeleteOutline />}
                           onClick={() => handlePerformAction("delete", el?._id)}
                         >
-                          Delete Category
+                          Xóa Danh Mục
                         </Menu.Item>
                       </Menu.Dropdown>
                     </Menu>
@@ -302,7 +305,7 @@ const Categories = () => {
           </Table.Tbody>
 
           {filteredCategories?.length < 1 && (
-            <Table.Caption>No Data Found.</Table.Caption>
+            <Table.Caption>Không tìm thấy dữ liệu nào.</Table.Caption>
           )}
         </Table>
 
@@ -324,7 +327,7 @@ const Categories = () => {
 
       {!editPost && !opened && (
         <ConfirmDialog
-          message="Are you sure you want to perform this action?"
+          message="Bạn có chắc muốn thực hiện hành động này?"
           opened={isConfirmDialogOpen}
           close={() => setIsConfirmDialogOpen(false)}
           handleClick={handleActions}

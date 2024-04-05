@@ -18,6 +18,7 @@ import {
   IconClipboardText,
   IconLicense,
   IconThumbUp,
+  IconCategory,
 } from "@tabler/icons-react";
 import { BsPencilSquare } from "react-icons/bs";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -42,13 +43,13 @@ function NavbarLink({ icon: Icon, label, active, onClick }) {
 const mockdata = [
   // { icon: IconGauge, label: "Dashboard", to: "dashboard" },
   // { icon: IconDeviceDesktopAnalytics, label: "Analytics", to: "analytics" },
-  { icon: IconUsers, label: "Users", to: "users" },
-  { icon: IconCalendarStats, label: "Content", to: "contents" },
-  { icon: IconCalendarStats, label: "Category", to: "categories" },
-  { icon: IconThumbUp, label: "Followers", to: "followers" },
-  { icon: IconClipboardText, label: "Contacts", to: "contacts" },
-  { icon: IconLicense, label: "Policy", to: "policy" },
-  { icon: IconSettings, label: "Settings" },
+  { icon: IconUsers, label: "Người dùng", to: "users" },
+  { icon: IconCalendarStats, label: "Bài viết", to: "contents" },
+  { icon: IconCategory, label: "Danh mục", to: "categories" },
+  { icon: IconThumbUp, label: "Người theo dõi", to: "followers" },
+  { icon: IconClipboardText, label: "Liên hệ", to: "contacts" },
+  { icon: IconLicense, label: "Chính sách", to: "policy" },
+  { icon: IconSettings, label: "Cài đặt" },
 ];
 
 const Sidebar = ({ close = () => {} }) => {
@@ -79,7 +80,7 @@ const Sidebar = ({ close = () => {} }) => {
         "h-full flex flex-col gap-1 md:border-r border-slate-700 px-6 2xl:px-14"
       }
     >
-      <p className="py-2 pt-6 text-lg font-semibold ">NAVIGATION</p>
+      <p className="py-2 pt-6 text-lg font-semibold ">Quản lý</p>
       <div className={""}>
         <Stack justify="center" gap={10}>
           {links}

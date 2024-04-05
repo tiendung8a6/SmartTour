@@ -144,7 +144,7 @@ const Navbar = () => {
                 theme ? "text-white" : "text-black"
               )}
             >
-              <span> Log in</span>
+              <span>Đăng nhập</span>
               <MdArrowForward />
             </Link>
           )}
