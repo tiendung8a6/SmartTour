@@ -103,6 +103,10 @@ export const getPosts = async (req, res, next) => {
         path: "user",
         select: "name image -password",
       })
+      .populate({
+        path: "cat",
+        select: "label color",
+      })
       .sort({ _id: -1 });
 
     // pagination
