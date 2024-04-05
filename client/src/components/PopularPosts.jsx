@@ -35,9 +35,9 @@ const PopularPosts = ({ posts }) => {
           </span>
           <Link
             to={`/${post?.slug}/${post?._id}`}
-            className="text-black dark:text-white"
+            className="text-black dark:text-white text-justify"
           >
-            {post?.title}
+            {post?.title.slice(0, 80) + "..."}
           </Link>
           <div className="flex gap-2 text-sm">
             <span className="font-medium">{post?.user?.name}</span>
