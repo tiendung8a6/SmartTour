@@ -42,11 +42,12 @@ const Blog = () => {
           <div className="w-full flex flex-wrap py-10 gap-8">
             {CATEGORIES.map((cat) => (
               <Link
-                to={`/category?cat=${cat?.label}`}
+                to={`/category?cat=${cat?._id}`}
                 className={`flex items-center justify-center gap-3 border border-gray-400 dark:border-gray-600 rounded-full text-gray-700 dark:text-white font-semibold text-base px-4 py-2 cursor-pointer`}
-                key={cat.label}
+                // style={{ backgroundColor: `${cat?.color}` }}
+                // className={` w-fit flex items-center justify-center gap-3 border border-gray-200 text-white dark:border-gray-600 rounded-full dark:text-white font-semibold text-base px-4 py-2 cursor-pointer`}
+                key={cat._id}
               >
-                {cat?.icon}
                 <span>{cat.label}</span>
               </Link>
             ))}
