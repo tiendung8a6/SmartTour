@@ -127,7 +127,7 @@ const Contacts = () => {
           >
             Liên hệ (
             <span className="text-sm">
-              {"Số lượng: " + data?.totalContacts + " liên hệ"}
+              {"Danh sách: " + data?.totalContacts + " liên hệ"}
             </span>
             )
           </p>

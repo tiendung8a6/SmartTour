@@ -153,7 +153,7 @@ const Contents = () => {
           >
             Bài viết (
             <span className="text-sm">
-              {"Số lượng: " + data?.totalPost + " bài viết "}
+              {"Danh sách: " + data?.totalPost + " bài viết "}
             </span>
             )
           </p>

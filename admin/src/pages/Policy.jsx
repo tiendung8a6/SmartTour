@@ -93,7 +93,7 @@ const Policy = () => {
         >
           Chính sách (
           <span className="text-sm">
-            {"Số lượng: " + data?.totalPolicies + " chính sách"}
+            {"Danh sách: " + data?.totalPolicies + " chính sách"}
           </span>
           )
         </p>

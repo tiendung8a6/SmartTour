@@ -163,7 +163,7 @@ const Categories = () => {
           >
             Danh mục (
             <span className="text-sm">
-              {"Số lượng: " + data?.totalCategories + " danh mục "}
+              {"Danh sách: " + data?.totalCategories + " danh mục "}
             </span>
             )
           </p>

@@ -38,7 +38,9 @@ const Followers = () => {
         } text-lg pb-1 font-semibold `}
       >
         Người theo dõi (
-        <span className="text-sm">{"Số lượng: " + data?.total + " người"}</span>
+        <span className="text-sm">
+          {"Danh sách: " + data?.total + " người"}
+        </span>
         )
       </p>
 

@@ -125,7 +125,7 @@ const Users = () => {
           >
             Người dùng ({" "}
             <span className="text-sm">
-              {"Số lượng: " + data?.totalUsers + " người dùng "}
+              {"Danh sách: " + data?.totalUsers + " người dùng "}
             </span>
             )
           </p>
