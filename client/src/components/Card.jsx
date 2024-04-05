@@ -28,18 +28,21 @@ const Card = ({ post, index }) => {
           <span className="text-sm text-gray-600">
             {new Date(post?.createdAt).toDateString()}
           </span>
-          <span className="text-sm text-sky-600 font-semibold">
-            {post?.cat}
+          <span
+            style={{ backgroundColor: `${post?.cat?.color}` }}
+            className="w-fit rounded-full px-2 py-0 text-white text-[12px] 2xl:text-sm"
+          >
+            {post?.cat?.label}
           </span>
         </div>
 
-        <h6 className="text-xl 2xl:text-3xl font-semibold text-black dark:text-white">
-          {post?.title}
+        <h6 className="text-xl 2xl:text-3xl font-semibold text-black dark:text-white text-justify">
+          {post?.title.slice(0, 60) + "..."}
         </h6>
 
         <div className="flex-1 overflow-hidden text-gray-600 dark:text-slate-500 text-sm text-justify">
           <Markdown options={{ wrapper: "article" }}>
-            {post?.desc?.slice(0, 250) + "..."}
+            {post?.desc?.slice(0, 200) + "..."}
           </Markdown>
         </div>
 
