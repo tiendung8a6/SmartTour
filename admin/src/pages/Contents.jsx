@@ -236,7 +236,7 @@ const Contents = () => {
 
                     <p className="text-base text-justify">{el?.title}</p>
                   </Table.Td>
-                  <Table.Td>{el?.cat}</Table.Td>
+                  <Table.Td>{el?.cat?.label}</Table.Td>
                   <Table.Td>
                     <div className="flex gap-1 items-center">
                       <AiOutlineEye size={18} />

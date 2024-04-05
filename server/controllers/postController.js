@@ -460,9 +460,14 @@ export const getFollowers = async (req, res, next) => {
 
 export const getPostContent = async (req, res, next) => {
   try {
-    let queryResult = Posts.find().sort({
-      _id: -1,
-    });
+    let queryResult = Posts.find()
+      .sort({
+        _id: -1,
+      })
+      .populate({
+        path: "cat",
+        select: "label color",
+      });
 
     // pagination
     const page = Number(req.query.page) || 1;
