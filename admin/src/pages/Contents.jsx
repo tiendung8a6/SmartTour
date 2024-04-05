@@ -233,7 +233,7 @@ const Contents = () => {
                   <Table.Td>{moment(el?.createdAt).fromNow()}</Table.Td>
                   <Table.Td>{moment(el?.updatedAt).fromNow()}</Table.Td>
 
-                  <Table.Td>{writerNames[el?.user]}</Table.Td>
+                  <Table.Td>{writerNames[el?.user] || "Đang tải..."}</Table.Td>
                   <Table.Td className="text-justify whitespace-nowrap">
                     <span
                       className={`${

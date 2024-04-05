@@ -14,7 +14,12 @@ import { BiDotsVerticalRounded, BiSolidEdit } from "react-icons/bi";
 import { MdMessage, MdOutlineDeleteOutline } from "react-icons/md";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Toaster, toast } from "sonner";
-import { IconSearch, IconSquarePlus, IconEraser } from "@tabler/icons-react";
+import {
+  IconSearch,
+  IconSquarePlus,
+  IconEraser,
+  IconBlockquote,
+} from "@tabler/icons-react";
 
 import {
   Comments,
@@ -198,7 +203,7 @@ const Categories = () => {
           <Table.Thead>
             <Table.Tr className="bg-black text-white">
               <Table.Th>Tên</Table.Th>
-              <Table.Th>Số Bài Viết</Table.Th>
+              <Table.Th>Bài Viết</Table.Th>
               <Table.Th>Màu Sắc</Table.Th>
               <Table.Th>Ngày Tạo</Table.Th>
               <Table.Th>Ngày Chỉnh Sửa</Table.Th>
@@ -225,8 +230,8 @@ const Categories = () => {
 
                   <Table.Td onClick={() => handleComment(el?._id)}>
                     <div className="flex gap-1 items-center cursor-pointer">
-                      <MdMessage size={18} className="text-slate-500" />
-                      {postCounts[el._id]?.toString()}
+                      <IconBlockquote size={18} className="text-slate-500" />
+                      {postCounts[el._id]?.toString() || "Đang tải..."}
                     </div>
                   </Table.Td>
 
@@ -288,7 +293,7 @@ const Categories = () => {
 
                         <Menu.Divider />
 
-                        <Menu.Label>Danger zone</Menu.Label>
+                        <Menu.Label>Thao tác nguy hiểm</Menu.Label>
 
                         <Menu.Item
                           color="red"
