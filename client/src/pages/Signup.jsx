@@ -73,14 +73,13 @@ function SignUp() {
   return (
     <div className="flex w-full h-[100vh]">
       {/* LEFT */}
-      <div className="hidden md:flex flex-col gap-y-4 w-1/3 h-full bg-black items-center justify-center">
-        {/* {fileURL && (
-          <img
-            src={fileURL || file}
-            alt=""
-            className="w-16 h-16 rounded-full"
-          />
-        )} */}
+      <div
+        className="hidden md:flex flex-col gap-y-4 w-1/3 h-ful items-center justify-center bg-cover"
+        style={{
+          backgroundImage:
+            'linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url("https://ik.imagekit.io/tvlk/blog/2023/07/nyBBvwZY-canh-dep-thien-nhien-Viet-Nam-12.jpg")',
+        }}
+      >
         <Logo type="sigin" />
         <span className="text-xl font-semibold text-white">Welcome!</span>
       </div>

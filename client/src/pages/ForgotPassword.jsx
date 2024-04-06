@@ -42,7 +42,13 @@ function ForgotPassword() {
 
   return (
     <div className="flex w-full  h-[100vh]">
-      <div className="hidden md:flex flex-col gap-y-4 w-1/3 min-h-screen bg-black items-center justify-center">
+      <div
+        className="hidden md:flex flex-col gap-y-4 w-1/3 min-h-screen bg-black items-center justify-center bg-cover"
+        style={{
+          backgroundImage:
+            'linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url("https://doanhnhanplus.vn/wp-content/uploads/2017/12/DN-Trien-lam-anh-Viet-Nam-o-Phu-Quoc-BaiDN-251217-40.jpg")',
+        }}
+      >
         <Logo type="sigin" />
         <span className="text-xl font-semibold text-white">Hello !</span>
       </div>

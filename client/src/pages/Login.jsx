@@ -59,7 +59,13 @@ function SignIn() {
 
   return (
     <div className="flex w-full  h-[100vh]">
-      <div className="hidden md:flex flex-col gap-y-4 w-1/3 min-h-screen bg-black items-center justify-center">
+      <div
+        className="hidden md:flex flex-col gap-y-4 w-1/3 min-h-screen items-center justify-center bg-cover bg-local"
+        style={{
+          backgroundImage:
+            'linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url("https://dulichtoday.vn/wp-content/uploads/2017/04/vinh-Ha-Long.jpg")',
+        }}
+      >
         <Logo type="sigin" />
         <span className="text-xl font-semibold text-white">Welcome, back!</span>
       </div>
