@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 const Stats = () => {
@@ -7,11 +7,11 @@ const Stats = () => {
       <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
         <div className="max-w-2xl mx-auto text-center">
           <h3 className="text-gray-800 text-3xl font-semibold sm:text-4xl">
-            Our customers are always happy
+            Khách hàng của chúng tôi luôn hài lòng
           </h3>
           <p className="mt-3">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-            venenatis sollicitudin quam ut tincidunt.
+            SmartTour luôn đặt sự hài lòng của khách hàng lên hàng đầu, điều này
+            được thể hiện qua sự tin tưởng và phản hồi tích cực từ phía họ.
           </p>
         </div>
 
@@ -33,12 +33,12 @@ const Stats = () => {
               </svg>
             </div>
             <h6 className="text-4xl font-bold text-deep-purple-accent-400">
-              819
+              765
             </h6>
-            <p className="mb-2 font-bold text-md">Downloads</p>
+            <p className="mb-2 font-bold text-md">Lượt truy cập</p>
             <p className="text-gray-700">
-              It’s something that’s many of the wisest people in history have
-              kept in mind.
+              SmartTour mang lại cho người dùng những trải nghiệm tuyệt vời nhất
+              với số lượng truy cập đáng kinh ngạc.
             </p>
           </div>
           <div className="text-center">
@@ -58,12 +58,12 @@ const Stats = () => {
               </svg>
             </div>
             <h6 className="text-4xl font-bold text-deep-purple-accent-400">
-              1.3K
+              300
             </h6>
-            <p className="mb-2 font-bold text-md">Users</p>
+            <p className="mb-2 font-bold text-md">Người dùng</p>
             <p className="text-gray-700">
-              For many men, the acquisition of wealth does not end their
-              troubles, it only changes them.
+              SmartTour thu hút một lượng lớn người dùng với giao diện thân
+              thiện và dễ sử dụng.
             </p>
           </div>
           <div className="text-center">
@@ -85,10 +85,10 @@ const Stats = () => {
             <h6 className="text-4xl font-bold text-deep-purple-accent-400">
               91
             </h6>
-            <p className="mb-2 font-bold text-md">Subscribers</p>
+            <p className="mb-2 font-bold text-md">Bài viết</p>
             <p className="text-gray-700">
-              It's a helluva start, being able to recognize what makes you happy
-              today, in this moment.
+              SmartTour ngày càng thu hút nhiều bài viết từ người dùng cho những
+              chia sẻ hữu ích đến những trải nghiệm độc đáo và đầy cảm xúc.
             </p>
           </div>
           <div className="text-center">
@@ -110,10 +110,10 @@ const Stats = () => {
             <h6 className="text-4xl font-bold text-deep-purple-accent-400">
               52
             </h6>
-            <p className="mb-2 font-bold text-md">Products</p>
+            <p className="mb-2 font-bold text-md">Điểm đến </p>
             <p className="text-gray-700">
-              Happiness is when what you think, what you say, and what you do
-              are in harmony.
+              SmartTour cung cấp cho người dùng một loạt các địa điểm du lịch đa
+              dạng và phong phú
             </p>
           </div>
         </div>

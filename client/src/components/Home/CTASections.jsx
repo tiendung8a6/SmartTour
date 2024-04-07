@@ -1,37 +1,36 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
-const CTASections = () => {
+const BlogSections = () => {
   return (
     <section className="py-14">
       <div className="max-w-screen-xl mx-auto md:px-8">
         <div className="items-center gap-x-12 sm:px-4 md:px-0 lg:flex">
           <div className="flex-1 sm:hidden lg:block">
             <img
-              src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+              src="https://www.shutterstock.com/image-photo/blog-blogging-homepage-social-media-600nw-381746308.jpg"
               className="md:max-w-lg sm:rounded-lg"
               alt=""
             />
           </div>
           <div className="max-w-xl px-4 space-y-3 mt-6 sm:px-0 md:mt-0 lg:max-w-2xl">
             <h3 className="text-indigo-600 font-semibold">
-              Professional services
+              Chia Sẻ Trải Nghiệm
             </h3>
             <p className="text-gray-800 text-3xl font-semibold sm:text-4xl">
-              Build your SaaS solution with help from our experts
+              Chia sẻ những kinh nghiệm đáng giá từ cộng đồng của chúng tôi
             </p>
             <p className="mt-3 text-gray-600">
-              Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-              cupidatat non proident, sunt in culpa qui officia deserunt mollit
-              anim id est laborum, sed ut perspiciatis unde omnis iste natus
-              error sit voluptatem accusantium doloremque laudantium
+              Chúng tôi tạo ra nơi cho bạn để chia sẻ và khám phá những câu
+              chuyện thú vị từ cộng đồng. Hãy cùng nhau tìm hiểu về những trải
+              nghiệm đặc biệt, những địa điểm mới, và những lời khuyên hữu ích
+              khi du lịch.
             </p>
-            <a
-              href="javascript:void(0)"
+            <Link
+              to="/blog"
               className="inline-flex gap-x-1 items-center text-indigo-600 hover:text-indigo-500 duration-150 font-medium"
             >
-              Learn more
+              Khám Phá
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
@@ -44,7 +43,7 @@ const CTASections = () => {
                   clipRule="evenodd"
                 />
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -52,4 +51,4 @@ const CTASections = () => {
   );
 };
 
-export default CTASections;
+export default BlogSections;

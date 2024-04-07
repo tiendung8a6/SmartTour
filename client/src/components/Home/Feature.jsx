@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
-const Feature = () => {
-  const features = [
+const TínhNăng = () => {
+  const tínhNăng = [
     {
       icon: (
         <svg
@@ -20,8 +20,8 @@ const Feature = () => {
           />
         </svg>
       ),
-      title: "Fast Refresh",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue, nisl eget molestie varius, enim ex faucibus purus.",
+      title: "Trải trang nhanh chóng",
+      desc: "Tận hưởng trải nghiệm du lịch mượt mà và không gián đoạn, để bạn tập trung hoàn toàn vào việc khám phá.",
     },
     {
       icon: (
@@ -40,8 +40,8 @@ const Feature = () => {
           />
         </svg>
       ),
-      title: "Analytics",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue, nisl eget molestie varius, enim ex faucibus purus.",
+      title: "Phân tích",
+      desc: "Nhận thông tin phân tích chi tiết về các điểm đến và hoạt động du lịch.",
     },
     {
       icon: (
@@ -60,8 +60,8 @@ const Feature = () => {
           />
         </svg>
       ),
-      title: "Datacenter security",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue, nisl eget molestie varius, enim ex faucibus purus.",
+      title: "Bảo mật Trung tâm dữ liệu",
+      desc: "Yên tâm với việc bảo vệ thông tin cá nhân và dữ liệu quan trọng trong suốt chuyến đi của bạn.",
     },
     {
       icon: (
@@ -80,8 +80,8 @@ const Feature = () => {
           />
         </svg>
       ),
-      title: "Build on your terms",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue, nisl eget molestie varius, enim ex faucibus purus.",
+      title: "Lập kế hoạch theo ý muốn",
+      desc: "Tạo ra hành trình du lịch của riêng bạn dựa trên sở thích và mong muốn cá nhân.",
     },
     {
       icon: (
@@ -100,8 +100,8 @@ const Feature = () => {
           />
         </svg>
       ),
-      title: "Safe to use",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue, nisl eget molestie varius, enim ex faucibus purus.",
+      title: "An toàn khi sử dụng",
+      desc: "Đảm bảo mọi khía cạnh của chuyến đi của bạn được quản lý một cách an toàn và hiệu quả.",
     },
     {
       icon: (
@@ -120,8 +120,8 @@ const Feature = () => {
           />
         </svg>
       ),
-      title: "Flexible",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue, nisl eget molestie varius, enim ex faucibus purus.",
+      title: "Linh động",
+      desc: "Khám phá và trải nghiệm các điểm đến một cách linh hoạt, không bị giới hạn bởi bất kỳ ràng buộc nào.",
     },
   ];
   return (
@@ -129,16 +129,16 @@ const Feature = () => {
       <div className="max-w-screen-xl mx-auto px-4 text-center text-gray-600 md:px-8">
         <div className="max-w-2xl mx-auto">
           <h3 className="text-gray-800 text-3xl font-semibold sm:text-4xl">
-            The fastest way to launch a product
+            Cách nhanh nhất để khám phá thế giới
           </h3>
           <p className="mt-3">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-            congue, nisl eget molestie varius, enim ex faucibus purus.
+            Khám phá thế giới một cách dễ dàng và linh hoạt, để bạn có những
+            trải nghiệm du lịch đáng nhớ nhất.
           </p>
         </div>
         <div className="mt-12">
           <ul className="grid gap-y-8 gap-x-12 sm:grid-cols-2 lg:grid-cols-3">
-            {features.map((item, idx) => (
+            {tínhNăng.map((item, idx) => (
               <li key={idx} className="space-y-3">
                 <div className="w-12 h-12 mx-auto bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center">
                   {item.icon}
@@ -156,4 +156,4 @@ const Feature = () => {
   );
 };
 
-export default Feature;
+export default TínhNăng;

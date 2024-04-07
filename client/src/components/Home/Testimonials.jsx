@@ -5,24 +5,23 @@ const Testimonials = () => {
   const testimonials = [
     {
       avatar: "https://api.uifaces.co/our-content/donated/xZ4wg2Xj.jpg",
-      name: "Martin escobar",
-      title: "Founder of meta",
+      name: "Hồng Sơn",
+      title: "Khách du lịch",
       quote:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc et est hendrerit, porta nunc vitae.",
+        "Thật ấn tượng, tôi đã có một trải nghiệm tuyệt vời khi lập kế hoạch nhờ vào SmartTour.",
     },
     {
       avatar: "https://randomuser.me/api/portraits/men/46.jpg",
-      name: "Simon andrew",
-      title: "Software engineer",
+      name: "Nguyễn hà",
+      title: "Khách du lịch",
       quote:
-        "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.",
+        "Tôi cảm thấy hài lòng với dịch vụ của SmartTour, mọi thứ đều rất tốt.",
     },
     {
       avatar: "https://randomuser.me/api/portraits/men/86.jpg",
-      name: "Micheal worin",
-      title: "Product designer",
-      quote:
-        "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain.",
+      name: "Quốc Cường",
+      title: "Khách du lịch",
+      quote: "Dịch vụ rất tuyệt vời, tôi sẽ quay lại lần sau khi có cơ hội.",
     },
   ];
 
@@ -31,12 +30,15 @@ const Testimonials = () => {
       <div className="relative z-10 max-w-screen-xl mx-auto px-4 md:px-8">
         <div className="max-w-xl sm:text-center md:mx-auto">
           <h3 className="text-gray-800 text-3xl font-semibold sm:text-4xl">
-            Hear from our customers
+            Phản hồi từ khách hàng
           </h3>
           <p className="mt-3 text-gray-600">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc et est
-            hendrerit, porta nunc vitae, gravida justo. Nunc fermentum magna
-            lorem, euismod volutpat arcu volutpat et.
+            Đây là những lời đánh giá, phản hồi, và cảm nhận từ phía các Khách
+            hàng đã trải nghiệm dịch vụ của chúng tôi. Chúng tôi luôn đánh giá
+            cao mọi ý kiến đóng góp của quý vị để không ngừng cải thiện chất
+            lượng dịch vụ. Hãy cùng khám phá những câu chuyện thú vị và những
+            trải nghiệm tuyệt vời từ những người đã trải qua hành trình cùng
+            chúng tôi.
           </p>
         </div>
         <div className="mt-12">

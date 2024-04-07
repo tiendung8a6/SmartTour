@@ -66,24 +66,24 @@ const Accordion = ({ question, answer }) => {
 export default () => {
   const faqsList = [
     {
-      q: "What are some random questions to ask?",
-      a: "That's exactly the reason we created this random question generator. There are hundreds of random questions to choose from so you're able to find the perfect random question.",
+      q: "SmartTour là gì?",
+      a: "SmartTour là một trang web cung cấp thông tin về điểm đến và lập kế hoạch du lịch.",
     },
     {
-      q: "Do you include common questions?",
-      a: "This generator doesn't include most common questions. The thought is that you can come up with common questions on your own so most of the questions in this generator.",
+      q: "Làm thế nào để liên hệ với SmartTour khi cần hỗ trợ?",
+      a: "Bạn có thể liên hệ với chúng tôi thông qua trang web ở phần liên hệ hoặc qua các thông tin liên lạc được cung cấp để nhận được sự hỗ trợ sớm nhất.",
     },
     {
-      q: "Can I use this for 21 questions?",
-      a: "Yes! there are two ways that you can use this question generator depending on what you're after. You can indicate that you want 21 questions generated.",
+      q: "Website du lịch SmartTour có biện pháp bảo mật thông tin cá nhân của người dùng như thế nào?",
+      a: "SmartTour cam kết bảo mật thông tin cá nhân của người dùng theo các tiêu chuẩn cao nhất. Chúng tôi sử dụng các biện pháp bảo vệ dữ liệu như mã hóa SSL để đảm bảo rằng mọi thông tin cá nhân của người dùng được bảo vệ an toàn khi truyền tải trên mạng. Ngoài ra, chúng tôi không bao giờ chia sẻ thông tin cá nhân của khách hàng với bất kỳ bên thứ ba nào mà không có sự đồng ý.",
     },
     {
-      q: "Are these questions for girls or for boys?",
-      a: "The questions in this generator are gender neutral and can be used to ask either male of females (or any other gender the person identifies with).",
+      q: "Làm thế nào để viết một bài blog chia sẻ trải nghiệm du lịch trên SmartTour?",
+      a: "Để viết blog chia sẻ trải nghiệm du lịch trên SmartTour, bạn có thể đăng nhập vào tài khoản của mình và truy cập vào phần Trang cá nhân trên trang web. Tại đây, bạn sẽ tìm thấy nút Đăng bài để bắt đầu viết bài của mình.",
     },
     {
-      q: "What do you wish you had more talent doing?",
-      a: "If you've been searching for a way to get random questions, you've landed on the correct webpage. We created the Random Question Generator to ask you as many random questions as your heart desires.",
+      q: "Làm thế nào để tìm thông tin về các điểm đến du lịch trên SmartTour?",
+      a: "Để tìm thông tin về các điểm đến du lịch trên SmartTour, bạn có thể truy cập vào trang chủ hoặc sử dụng chức năng tìm kiếm trên trang web. Tại đây, bạn có thể nhập tên địa điểm bạn quan tâm.",
     },
   ];
 
@@ -91,11 +91,11 @@ export default () => {
     <section className="leading-relaxed max-w-screen-xl mt-12 mx-auto px-4 md:px-8">
       <div className="space-y-3 text-center">
         <h1 className="text-3xl text-gray-800 font-semibold">
-          Frequently Asked Questions
+          Câu Hỏi Thường Gặp
         </h1>
         <p className="text-gray-600 max-w-lg mx-auto text-lg">
-          Answered all frequently asked questions, Still confused? feel free to
-          contact us.
+          Đã trả lời tất cả các câu hỏi thường gặp, Vẫn còn băn khoăn? Hãy liên
+          hệ với chúng tôi.
         </p>
       </div>
       <div className="mt-14 max-w-2xl mx-auto">

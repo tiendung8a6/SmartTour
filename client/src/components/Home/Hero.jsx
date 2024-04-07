@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 const Hero = () => {
@@ -10,21 +10,22 @@ const Hero = () => {
             <div className="max-w-xl mb-6">
               <div>
                 <p className="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-400">
-                  New Colaboration
+                  Xin chào
                 </p>
               </div>
               <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none">
-                The quick, brown fox
+                Cùng SmartTour,
                 <br className="hidden md:block" />
-                jumps over{" "}
+                khám phá thế giới
                 <span className="inline-block text-deep-purple-accent-400">
-                  a lazy dog
+                  một cách thông minh
                 </span>
               </h2>
               <p className="text-base text-gray-700 md:text-lg">
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-                quae. explicabo.
+                Lên kế hoạch và tổ chức lịch trình du lịch không còn là vấn đề
+                mất thời gian với SmartTour. Hệ thống tối ưu hóa và đề xuất lịch
+                trình du lịch hiệu quả, giúp dễ dàng tạo và tùy chỉnh các lịch
+                trình du lịch cá nhân hoặc nhóm một cách thông minh và tiện lợi.
               </p>
             </div>
             <div className="flex flex-col items-center md:flex-row">
@@ -32,14 +33,14 @@ const Hero = () => {
                 href="/"
                 className="inline-flex items-center justify-center w-full h-12 px-6 mb-3 font-medium tracking-wide text-white bg-sky-500	 transition duration-200 rounded shadow-md md:w-auto md:mr-4 md:mb-0 bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
               >
-                Apply Now
+                Tham gia ngay
               </a>
               <a
                 href="/"
                 aria-label=""
                 className="inline-flex items-center font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-700"
               >
-                Learn more
+                Tìm hiểu thêm
               </a>
             </div>
           </div>

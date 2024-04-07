@@ -7,41 +7,52 @@ const Feature2 = () => {
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          fill="none"
+          width={24}
+          height={24}
           viewBox="0 0 24 24"
-          strokeWidth={1.5}
+          fill="none"
           stroke="currentColor"
-          className="w-6 h-6"
+          strokeWidth={2}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="icon icon-tabler icons-tabler-outline icon-tabler-arrows-shuffle"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"
-          />
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M18 4l3 3l-3 3" />
+          <path d="M18 20l3 -3l-3 -3" />
+          <path d="M3 7h3a5 5 0 0 1 5 5a5 5 0 0 0 5 5h5" />
+          <path d="M21 7h-5a4.978 4.978 0 0 0 -3 1m-4 8a4.984 4.984 0 0 1 -3 1h-3" />
         </svg>
       ),
-      title: "Analytics",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue, nisl eget molestie varius, enim ex faucibus purus.",
+      title: "Chi Tiết và Linh Hoạt",
+      desc: "Tổ chức mọi thứ một cách cẩn thận và linh hoạt, từ việc lựa chọn hoạt động phù hợp cho đến các lời khuyên về thời gian thích hợp và những điều cần biết khi đi du lịch.",
     },
     {
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          fill="none"
+          width={24}
+          height={24}
           viewBox="0 0 24 24"
-          strokeWidth={1.5}
+          fill="none"
           stroke="currentColor"
-          className="w-6 h-6"
+          strokeWidth={2}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="icon icon-tabler icons-tabler-outline icon-tabler-binary-tree-2"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
-          />
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M14 6a2 2 0 1 0 -4 0a2 2 0 0 0 4 0z" />
+          <path d="M7 14a2 2 0 1 0 -4 0a2 2 0 0 0 4 0z" />
+          <path d="M21 14a2 2 0 1 0 -4 0a2 2 0 0 0 4 0z" />
+          <path d="M14 18a2 2 0 1 0 -4 0a2 2 0 0 0 4 0z" />
+          <path d="M12 8v8" />
+          <path d="M6.316 12.496l4.368 -4.992" />
+          <path d="M17.684 12.496l-4.366 -4.99" />
         </svg>
       ),
-      title: "Datacenter security",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue, nisl eget molestie varius, enim ex faucibus purus.",
+      title: "Thông Tin Đa Dạng",
+      desc: "Nguồn thông tin đa dạng và phong phú. Từ những địa điểm tham quan lịch sử đến những quán ăn địa phương ngon miệng, từ cửa hàng mua sắm độc đáo đến những lời khuyên hữu ích.",
     },
   ];
 
@@ -50,14 +61,39 @@ const Feature2 = () => {
       <div className="max-w-screen-xl mx-auto px-4 text-gray-600 gap-16 justify-between md:px-8 lg:flex">
         <div>
           <div className="max-w-xl space-y-3">
-            <h3 className="text-indigo-600 font-semibold">Features</h3>
+            <h3 className="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-400">
+              Tính năng
+            </h3>
             <p className="text-gray-800 text-3xl font-semibold sm:text-4xl">
-              Simple solutions for complex issues
+              Lập Kế Hoạch Thông Minh với Trợ Lý Ảo
             </p>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-              congue, nisl eget molestie varius, enim ex faucibus purus
+              Tính năng Lập Kế Hoạch với Trợ Lý Ảo giúp tận hưởng hành trình một
+              cách suôn sẻ và không bao giờ bỏ lỡ những điều thú vị dọc đường.
+              Hãy để Trợ Lý Ảo dẫn đường và tạo ra kế hoạch tuyệt vời cho bạn.
             </p>
+          </div>
+          <div className="pt-4">
+            <a
+              className="group px-4 py-2 text-indigo-600 font-medium bg-indigo-50 rounded-full inline-flex items-center"
+              href="/travel-guide"
+            >
+              Khám phá ngay
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 ml-1 duration-150 group-hover:translate-x-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"
+                />
+              </svg>
+            </a>
           </div>
           <div className="mt-12 max-w-lg lg:max-w-none">
             <ul className="space-y-8">
@@ -79,7 +115,8 @@ const Feature2 = () => {
         </div>
         <div className="mt-12 lg:mt-0">
           <img
-            src="https://raw.githubusercontent.com/sidiDev/remote-assets/main/Safari%20(Big%20Sur)%20-%20Light.png"
+            // src="https://raw.githubusercontent.com/sidiDev/remote-assets/main/Safari%20(Big%20Sur)%20-%20Light.png"
+            src="https://firebasestorage.googleapis.com/v0/b/smarttour-mern.appspot.com/o/999.png?alt=media&token=02ac9c5f-e4d0-4175-b4bc-13d75aae5844"
             className="w-full shadow-lg rounded-lg border"
           />
         </div>
