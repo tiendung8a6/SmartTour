@@ -24,7 +24,7 @@ function Layout() {
   return user?.token ? (
     <div className="w-full h-screen">
       <Navbar />
-      <div className="w-full h-full flex border-t pt-16 ">
+      <div className="w-full h-full flex border-t pt-[76px]">
         <div className="hidden lg:flex ">
           <Sidebar />
         </div>
