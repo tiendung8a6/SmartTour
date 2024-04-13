@@ -173,6 +173,8 @@ export const updateCategoryStatus = async (req, res) => {
       { new: true }
     );
 
+    await Posts.updateMany({ cat: id }, { status });
+
     res.status(200).json({
       success: true,
       message: "Category status updated successfully",
