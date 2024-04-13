@@ -5,7 +5,6 @@ import {
   Fieldset,
   Modal,
   ColorPicker,
-  ColorSwatch,
 } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { Toaster, toast } from "sonner";
@@ -95,16 +94,6 @@ const CreateCategory = ({ opened, close }) => {
             }}
           />
         </div>
-
-        <span className="text-sm font-medium justify-start">Màu Chữ</span>
-        <span className="text-rose-500 mr-[10px] ml-1">*</span>
-        <span className="w-full flex flex-col md:flex-row flex-wrap gap-1 mb-8 mt-1">
-          <ColorSwatch
-            style={{ cursor: "not-allowed" }}
-            color="#FFFFFF"
-            editable={false}
-          />
-        </span>
 
         {/* Hiển thị màu sắc đã chọn */}
         {selectedColor && (
