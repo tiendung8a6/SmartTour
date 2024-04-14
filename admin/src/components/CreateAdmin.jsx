@@ -81,7 +81,7 @@ const CreateAdmin = ({ opened, close }) => {
       transitionProps={{ transition: "fade", duration: 200 }}
       title={"Quản lý người dùng"}
     >
-      <Box maw={500} mx="auto" className="pt-6 my-2">
+      <Box maw={500} mx="auto" className="pt-5 my-2">
         <p
           className={`${
             theme ? "text-white" : "text-slate-700"

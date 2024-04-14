@@ -2,7 +2,7 @@ import {
   Button,
   TextInput,
   useMantineColorScheme,
-  Fieldset,
+  Box,
   Modal,
   ColorPicker,
 } from "@mantine/core";
@@ -54,16 +54,16 @@ const CreateCategory = ({ opened, close }) => {
       onClose={close}
       size="lg"
       centered
-      fullScreen // ={isMobile}
+      // fullScreen // ={isMobile}
       radius={0}
       transitionProps={{ transition: "fade", duration: 200 }}
       title={"Quản lý danh mục"}
     >
-      <Fieldset maw={500} mx="auto" className="pt-4 mt-8">
+      <Box maw={500} mx="auto" className="pt-6 my-2">
         <p
           className={`${
             theme ? "text-white" : "text-slate-700"
-          } w-full flex-col md:flex-row gap-5 mb-5 text-lg pb-1 font-semibold text-center`}
+          } w-full flex-col md:flex-row gap-5 mb-5 text-lg pb-1 font-semibold text-center mt-[-10px]`}
         >
           Tạo Danh Mục
         </p>
@@ -116,7 +116,7 @@ const CreateCategory = ({ opened, close }) => {
             Tạo Danh Mục
           </Button>
         </div>
-      </Fieldset>
+      </Box>
 
       <Loading visible={isPending} />
       <Toaster richColors />

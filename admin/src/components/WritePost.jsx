@@ -3,7 +3,7 @@ import {
   Select,
   TextInput,
   Modal,
-  Fieldset,
+  Box,
   useMantineColorScheme,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
@@ -92,22 +92,22 @@ const WritePost = ({ opened, close }) => {
     <Modal
       opened={opened}
       onClose={close}
-      size="lg"
+      size="90%"
       centered
-      fullScreen // ={isMobile}
+      // fullScreen // ={isMobile}
       radius={0}
       transitionProps={{ transition: "fade", duration: 200 }}
       title={"Quản lý bài viết"}
     >
-      <Fieldset mx="auto" className="pt-6 mt-4">
+      <Box mx="auto" className="pt-6 my-2">
         <p
           className={`${
             theme ? "text-white" : "text-slate-700"
-          } text-lg pb-1 font-semibold text-center`}
+          } text-lg pb-1 font-semibold text-center mt-[-10px]`}
         >
           Tạo bài viết mới
         </p>
-        <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
+        <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 ">
           <TextInput
             withAsterisk
             label="Tiêu Đề"
@@ -245,7 +245,7 @@ const WritePost = ({ opened, close }) => {
             Đăng Bài
           </Button>
         </div>
-      </Fieldset>
+      </Box>
 
       <Loading visible={isPending} />
       <Toaster richColors />
