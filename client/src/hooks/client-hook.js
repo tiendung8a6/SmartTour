@@ -41,3 +41,30 @@ export const useCreatePost = (toast, token) => {
     },
   });
 };
+
+export const useCreateTrip = (toast, token) => {
+  return useMutation({
+    mutationFn: async (formData) => {
+      const { data } = await axios.post(`${API_URL}/trips/create`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log("DTAAAA", data);
+      return data;
+    },
+
+    onError: async (error) => {
+      toast.error(error?.response?.data?.message ?? error.message);
+    },
+
+    onSuccess: async (data) => {
+      console.log("data", data);
+      toast.success(data?.message);
+
+      setTimeout(() => {
+        window.location.replace(`/trip/${data.data._id}`);
+      }, 1500);
+    },
+  });
+};

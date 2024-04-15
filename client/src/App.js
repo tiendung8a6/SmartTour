@@ -11,7 +11,10 @@ import {
   ForgotPassword,
   Contact,
   NewPost,
+  Trip,
   TravelGuide,
+  TripDetail,
+  NewTrip,
 } from "./pages";
 import { Footer, Loading, Navbar } from "./components";
 import useStore from "./store";
@@ -48,6 +51,9 @@ function App() {
             <Route path="/writer/:id" element={<WriterPage />} />
             <Route path="/travel-guide" element={<TravelGuide />} />
             <Route path="/new-post" element={<NewPost />} />
+            <Route path="/trip" element={<Trip />} />
+            <Route path="/trip/:id" element={<TripDetail />} />
+            <Route path="/trip/create" element={<NewTrip />} />
           </Route>
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/sign-in" element={<SignIn />} />

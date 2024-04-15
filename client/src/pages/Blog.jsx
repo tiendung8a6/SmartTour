@@ -62,7 +62,7 @@ const Blog = () => {
               <Card key={post?._id} post={post} index={index} />
             ))}
 
-            <div className="w-full flex items-cemter justify-center">
+            <div className="w-full flex items-center justify-center">
               <Pagination
                 totalPages={numOfPages}
                 onPageChange={handlePageChange}

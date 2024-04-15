@@ -10,6 +10,9 @@ import ForgotPassword from "./ForgotPassword";
 import Contact from "./Contact";
 import NewPost from "./NewPost";
 import TravelGuide from "./TravelGuide";
+import Trip from "./Trip";
+import TripDetail from "./TripDetail";
+import NewTrip from "./NewTrip";
 export {
   BlogDetail,
   CategoryPage,
@@ -23,4 +26,7 @@ export {
   Contact,
   NewPost,
   TravelGuide,
+  Trip,
+  TripDetail,
+  NewTrip,
 };

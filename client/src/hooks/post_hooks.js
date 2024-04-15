@@ -30,6 +30,7 @@ export const usePopularPost = () => {
 };
 
 export const usePosts = ({ writerId }) => {
+  console.log("writerId", writerId);
   const { setIsLoading } = useStore();
 
   const location = useLocation();

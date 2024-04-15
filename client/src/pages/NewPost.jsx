@@ -21,7 +21,7 @@ import { useEffect, useState } from "react";
 import { BiImages } from "react-icons/bi";
 import { Toaster, toast } from "sonner";
 import { LoadingClient } from "../components";
-import { useCreatePost, useCategories } from "../hooks/post-client-hook";
+import { useCreatePost, useCategories } from "../hooks/client-hook";
 import useStore from "../store";
 import { createSlug, uploadFile } from "../utils";
 

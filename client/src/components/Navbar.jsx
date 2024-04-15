@@ -125,6 +125,7 @@ const Navbar = () => {
       <div className="hidden md:flex gap-14 items-center">
         <ul className="flex gap-8 text-base text-black dark:text-white">
           <Link to="/">Home</Link>
+          <Link to="/trip">Trip</Link>
           <Link to="/contact">Contact</Link>
           <Link to="/travel-guide">Travel Guide</Link>
           <Link to="/blog">Blog</Link>

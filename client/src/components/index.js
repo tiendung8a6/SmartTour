@@ -25,6 +25,7 @@ import Feature2 from "./Home/Feature2";
 import Feature3 from "./Home/Feature3";
 import Testimonials from "./Home/Testimonials";
 import Contact from "./Home/Contact";
+import TripCard from "./TripCard";
 export {
   Banner,
   Button,
@@ -53,4 +54,5 @@ export {
   Feature3,
   Testimonials,
   Contact,
+  TripCard,
 };

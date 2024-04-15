@@ -189,3 +189,16 @@ export const forgotpassword = async (data) => {
     return err;
   }
 };
+
+export const getSingleTrip = async (id) => {
+  try {
+    const { data } = await axios.get(`${API_URI}trips/${id}`);
+
+    return data?.data;
+  } catch (error) {
+    const err = error?.response?.data || error?.response;
+    console.log(error);
+
+    return err;
+  }
+};
