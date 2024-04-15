@@ -7,8 +7,9 @@ const tripSchema = new mongoose.Schema(
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: true },
     image: { type: String },
-    plans: [{ type: Schema.Types.ObjectId, ref: "Plans" }],
+    plans: [{ type: Schema.Types.ObjectId, ref: "Plans", required: false }],
     user: { type: Schema.Types.ObjectId, ref: "Users" },
+    status: { type: Boolean, default: true },
   },
   { timestamps: true }
 );
