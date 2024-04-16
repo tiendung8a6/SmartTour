@@ -25,7 +25,7 @@ export const useTrips = () => {
       try {
         const token = user?.token; // Lấy token từ user nếu tồn tại
 
-        const { data } = await axios.get(`${API_URI}trips`, {
+        const { data } = await axios.get(`${API_URI}trips?page=${page}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
