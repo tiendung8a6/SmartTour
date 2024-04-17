@@ -115,7 +115,8 @@ export const useUpdateUser = (toast, token) => {
           },
         }
       );
-      localStorage.setItem("user", JSON.stringify(data));
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      console.log("userInfoAPi", data);
 
       return data;
     },

@@ -28,7 +28,7 @@ const Profile = () => {
     initialValues: {
       email: user?.user.email,
       firstName: name[0],
-      lastName: name[1],
+      lastName: name.slice(1).join(" "), // Setting last name to the rest of the name
     },
     validate: {
       firstName: (value) =>
@@ -105,7 +105,7 @@ const Profile = () => {
         <TextInput
           withAsterisk
           className="w-full"
-          label="Email Address"
+          label="Email"
           placeholder="your@email.com"
           disabled
           readOnly
@@ -115,15 +115,15 @@ const Profile = () => {
         <TextInput
           className="w-full"
           withAsterisk
-          label="First Name"
-          placeholder="First Name"
+          label="Họ"
+          placeholder="Họ"
           {...form.getInputProps("firstName")}
         />
         <TextInput
           className="w-full"
           withAsterisk
-          label="Last Name"
-          placeholder="Last Name"
+          label="Tên"
+          placeholder="Tên"
           {...form.getInputProps("lastName")}
         />
 
@@ -131,7 +131,7 @@ const Profile = () => {
           type="submit"
           className={clsx(theme ? "bg-blue-600" : "bg-black", "w-full mt-2")}
         >
-          Update
+          Cập nhật
         </Button>
       </form>
 
