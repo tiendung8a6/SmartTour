@@ -12,6 +12,33 @@ export const useCategories = () => {
   });
 };
 
+export const useUpdateUser = (toast, token) => {
+  return useMutation({
+    mutationFn: async (formData) => {
+      const { data } = await axios.put(
+        `${API_URL}/users/update-user/`,
+        formData,
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      return data;
+    },
+    onError: (error, data) => {
+      toast.error(error?.response?.data?.message ?? error.message);
+    },
+    onSuccess: (data) => {
+      toast.success(data?.message);
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    },
+  });
+};
 export const useCreatePost = (toast, token) => {
   return useMutation({
     mutationFn: async (formData) => {
@@ -50,7 +77,6 @@ export const useCreateTrip = (toast, token) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log("DTAAAA", data);
       return data;
     },
 
@@ -59,7 +85,6 @@ export const useCreateTrip = (toast, token) => {
     },
 
     onSuccess: async (data) => {
-      console.log("data", data);
       toast.success(data?.message);
 
       setTimeout(() => {

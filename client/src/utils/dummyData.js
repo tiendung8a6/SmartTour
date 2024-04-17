@@ -11,7 +11,6 @@ axios
         label: category.label,
         color: `${category.color}`,
       }));
-      console.log("CATEGORIES", CATEGORIES);
     }
   })
   .catch((error) => {

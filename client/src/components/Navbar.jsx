@@ -159,7 +159,9 @@ const Navbar = () => {
 
               {showProfile && (
                 <div className="absolute bg-white dark:bg-[#2f2d30] py-6 px-6 flex flex-col shadow-2xl z-50 right-0 gap-3 rounded">
-                  <span className="dark:text-white">Profile</span>{" "}
+                  <Link to="/profile" className="dark:text-white">
+                    Profile
+                  </Link>
                   <Link to="/new-post">New Post</Link>
                   <span
                     className="border-t border-slate-300 text-sky-700"

@@ -13,6 +13,7 @@ import TravelGuide from "./TravelGuide";
 import Trip from "./Trip";
 import TripDetail from "./TripDetail";
 import NewTrip from "./NewTrip";
+import Profile from "./Profile";
 export {
   BlogDetail,
   CategoryPage,
@@ -29,4 +30,5 @@ export {
   Trip,
   TripDetail,
   NewTrip,
+  Profile,
 };
