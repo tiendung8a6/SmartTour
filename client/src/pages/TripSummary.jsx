@@ -4,7 +4,7 @@ import { Button } from "@mantine/core";
 import useStore from "../store";
 import { getSingleTrip } from "../utils/apiCalls";
 
-const TripDetail = () => {
+const TripSummary = () => {
   const { setIsLoading } = useStore();
   const { id } = useParams();
   const [trip, setTrip] = useState(null);
@@ -58,22 +58,6 @@ const TripDetail = () => {
               {diffDays === 0 ? "1 ngày" : `${diffDays} ngày`})
             </span>
           </div>
-
-          <Link to={`/trip/${trip?._id}`} className="flex gap-3">
-            <img
-              src={trip?.user?.image}
-              alt={trip?.user?.name}
-              className="object-cover w-12 h-12  rounded-full"
-            />
-            <div className="">
-              <p className="text-slate-800 dark:text-white font-medium">
-                {trip?.user?.name}
-              </p>
-              <span className="text-slate-600">
-                {new Date(trip?.createdAt).toDateString()}
-              </span>
-            </div>
-          </Link>
         </div>
         <img
           src={trip?.image}
@@ -95,4 +79,4 @@ const TripDetail = () => {
   );
 };
 
-export default TripDetail;
+export default TripSummary;

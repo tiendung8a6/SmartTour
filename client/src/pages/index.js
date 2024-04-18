@@ -11,10 +11,11 @@ import Contact from "./Contact";
 import NewPost from "./NewPost";
 import TravelGuide from "./TravelGuide";
 import Trip from "./Trip";
-import TripDetail from "./TripDetail";
+import TripSummary from "./TripSummary";
 import NewTrip from "./NewTrip";
 import Profile from "./Profile";
 import MyPosts from "./MyPosts";
+import PlansCreate from "./PlansCreate";
 export {
   BlogDetail,
   CategoryPage,
@@ -29,8 +30,9 @@ export {
   NewPost,
   TravelGuide,
   Trip,
-  TripDetail,
+  TripSummary,
   NewTrip,
   Profile,
   MyPosts,
+  PlansCreate,
 };

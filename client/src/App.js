@@ -13,10 +13,11 @@ import {
   NewPost,
   Trip,
   TravelGuide,
-  TripDetail,
+  TripSummary,
   NewTrip,
   Profile,
   MyPosts,
+  PlansCreate,
 } from "./pages";
 import { Footer, Loading, Navbar } from "./components";
 import useStore from "./store";
@@ -55,9 +56,9 @@ function App() {
             <Route path="/new-post" element={<NewPost />} />
             <Route path="/my-posts" element={<MyPosts />} />
             <Route path="/trip" element={<Trip />} />
-            <Route path="/trip/:id" element={<TripDetail />} />
+            <Route path="/trip/:id" element={<TripSummary />} />
             <Route path="/trip/create" element={<NewTrip />} />
-            <Route path="/trip/:id/plans/create" element={<TravelGuide />} />
+            <Route path="/trip/:id/plans/create" element={<PlansCreate />} />
             <Route path="/profile" element={<Profile />} />
           </Route>
           <Route path="/sign-up" element={<SignUp />} />
