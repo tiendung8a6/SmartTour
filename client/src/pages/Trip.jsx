@@ -61,7 +61,6 @@ const Trip = () => {
                     className={`flex items-center justify-center gap-3  dark:border-gray-600  text-[#0782c5] dark:text-white font-semibold text-base  mt-[-10px] cursor-pointer`}
                   >
                     <span className="border rounded-full border-[#0782c5]">
-                      {" "}
                       <IconPlus stroke={2} />
                     </span>
                     Thêm chuyến đi

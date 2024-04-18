@@ -64,10 +64,18 @@ const PlansCreate = () => {
         <div className="w-full flex items-end justify-start mt-6">
           <span>Phổ biến nhất</span>
           <Link
-            to={`/trip/${trip._id}/plans/create`}
+            to={`/trip/${trip._id}/activity/create`}
             className="w-full h-auto md:h-64 md:w-2/4 "
           >
             <Button>Hoạt động</Button>
+          </Link>
+        </div>
+        <div className="w-full flex items-end justify-start mt-6">
+          <Link
+            to={`/trip/${trip._id}/flights/create`}
+            className="w-full h-auto md:h-64 md:w-2/4 "
+          >
+            <Button>Máy bay</Button>
           </Link>
         </div>
       </div>

@@ -8,11 +8,11 @@ import {
   IconCirclesRelation,
   IconPencil,
   IconDots,
-  IconSettings,
+  IconPrinter,
   IconChevronDown,
   IconSearch,
   IconPhoto,
-  IconMessageCircle,
+  IconDownload,
   IconTrash,
   IconArrowsLeftRight,
 } from "@tabler/icons-react";
@@ -32,10 +32,12 @@ const TripCard = ({ trip, index }) => {
     >
       <div className="w-full md:w-full flex flex-col gap-3 py-[5px] px-[20px]  ">
         <h6 className=" text-[1.5rem] font-semibold text-[#0782c5] dark:text-white text-justify">
-          {trip?.tripName.slice(0, 60) + "..."}
+          <span>
+            <Link to={`/trip/${trip._id}`}>{trip?.tripName.slice(0, 60)}</Link>
+          </span>
         </h6>
         <div className=" flex gap-2 flex-col mt[-10px]">
-          <span>{trip?.city?.slice(0, 60) + "..."}</span>
+          <span>{trip?.city?.slice(0, 60)}</span>
 
           <span className="text-sm text-gray-600">
             {new Date(trip?.startDate).toLocaleDateString("vi-VN")} -
@@ -47,66 +49,54 @@ const TripCard = ({ trip, index }) => {
             <span className="bg-[#0782c5] border-[#0782c5] border rounded-full w-[24px] h-[24px] p-[2px]    ">
               <IconCirclesRelation
                 stroke={2}
-                className="text-[white] mt-[1px] h-[17px] w-[17px] "
+                className="text-[white] m-[1px] h-[17px] w-[17px] "
               />
             </span>
             <span className="ml-[10px]">
-              <Link className="text-[#0782c5]">Chia sẻ </Link>
+              <Link className="text-[#0782c5] font-medium text-sm">
+                Chia sẻ
+              </Link>
             </span>
           </span>
         </div>
-
-        {/* <div className="flex-1 overflow-hidden text-gray-600 dark:text-slate-500 text-[1rem] text-justify">
-          <Markdown options={{ wrapper: "article" }}>
-
-
-          </Markdown>
-        </div> */}
-
-        {/* <div className="flex gap-2">
-
-
-        </div> */}
-
-        {/* <Link
-          to={`/trip/${trip._id}`}
-          className="flex items-center gap-2 text-black dark:text-white"
-        >
-          <span className="underline">Chỉnh sửa chuyến đi</span>
-          <AiOutlineArrowRight />
-        </Link> */}
         <Grid>
-          <Grid.Col span={{ base: 12, md: 6, lg: 4 }}>
-            <span className="flex">
+          <Grid.Col
+            span={{ base: 12, md: 6, lg: 3 }}
+            className="flex items-center"
+          >
+            <span className="flex items-center">
               <span className="bg-transparent border-[#0782c5] border rounded-full w-[24px] h-[24px] p-[2px]    ">
                 <IconPencil
                   stroke={2}
-                  className="text-[#0782c5] mt-[1px] h-[17px] w-[17px] "
+                  className="text-[#0782c5] m-[1px] h-[17px] w-[17px] "
                 />
               </span>
-              <span className="ml-[10px]">
-                <Link to={`/trip/${trip._id}`} className="text-[#0782c5]">
+              <span className="ml-[10px] ">
+                <Link
+                  to={`/trip/${trip._id}`}
+                  className="text-[#0782c5] flex items-center font-medium text-sm"
+                >
                   Chỉnh sửa chuyến đi
                 </Link>
               </span>
             </span>
           </Grid.Col>
-          <Grid.Col span={{ base: 12, md: 6, lg: 4 }}>
+          <Grid.Col span={{ base: 12, md: 6, lg: 3 }}>
             <Menu shadow="md" width={200}>
               <Menu.Target>
                 <Button className="flex bg-transparent hover:bg-transparent">
                   <span className="bg-transparent border-[#0782c5] border rounded-full w-[24px] h-[24px] p-[2px]    ">
                     <IconDots
                       stroke={2}
-                      className="text-[#0782c5] mt-[1px] h-[17px] w-[17px] "
+                      className="text-[#0782c5] mt-[1px] ml-[0.5px]  h-[17px] w-[17px] "
                     />
                   </span>
                   <span className="ml-[10px]">
-                    <div className="text-[#0782c5] flex items-center">
-                      Chỉnh sửa chuyến đi{" "}
+                    <div className="text-[#0782c5] flex items-center font-medium text-sm">
+                      Lựa chọn khác
                       <IconChevronDown
                         stroke={2}
-                        className="text-[#0782c5] ml-1   mt-[1px] h-[17px] w-[17px] "
+                        className="text-[#0782c5] ml-1 mt-[1px] h-[17px] w-[17px] "
                       />
                     </div>
                   </span>
@@ -114,62 +104,34 @@ const TripCard = ({ trip, index }) => {
               </Menu.Target>
 
               <Menu.Dropdown>
-                <Menu.Label>Application</Menu.Label>
+                <Menu.Label>Chức năng</Menu.Label>
                 <Menu.Item
                   leftSection={
-                    <IconSettings style={{ width: rem(14), height: rem(14) }} />
+                    <IconPrinter style={{ width: rem(14), height: rem(14) }} />
                   }
+                  className="text-[#0782c5] flex items-center"
                 >
-                  Settings
+                  In chuyến đi
                 </Menu.Item>
                 <Menu.Item
                   leftSection={
-                    <IconMessageCircle
-                      style={{ width: rem(14), height: rem(14) }}
-                    />
+                    <IconDownload style={{ width: rem(14), height: rem(14) }} />
                   }
+                  className="text-[#0782c5] flex items-center"
                 >
-                  Messages
-                </Menu.Item>
-                <Menu.Item
-                  leftSection={
-                    <IconPhoto style={{ width: rem(14), height: rem(14) }} />
-                  }
-                >
-                  Gallery
-                </Menu.Item>
-                <Menu.Item
-                  leftSection={
-                    <IconSearch style={{ width: rem(14), height: rem(14) }} />
-                  }
-                  rightSection={
-                    <Text size="xs" c="dimmed">
-                      ⌘K
-                    </Text>
-                  }
-                >
-                  Search
+                  Tải chuyến đi
                 </Menu.Item>
 
                 <Menu.Divider />
 
-                <Menu.Label>Danger zone</Menu.Label>
-                <Menu.Item
-                  leftSection={
-                    <IconArrowsLeftRight
-                      style={{ width: rem(14), height: rem(14) }}
-                    />
-                  }
-                >
-                  Transfer my data
-                </Menu.Item>
+                <Menu.Label>Cẩn trọng</Menu.Label>
                 <Menu.Item
                   color="red"
                   leftSection={
                     <IconTrash style={{ width: rem(14), height: rem(14) }} />
                   }
                 >
-                  Delete my account
+                  Xóa chuyến đi
                 </Menu.Item>
               </Menu.Dropdown>
             </Menu>

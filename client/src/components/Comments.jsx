@@ -39,7 +39,6 @@ const PostComments = ({ postId }) => {
 
   const fetchCommetns = async () => {
     const res = await getPostComments(postId);
-
     setComments(res);
   };
 

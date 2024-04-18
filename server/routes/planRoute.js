@@ -5,6 +5,6 @@ import { createPlan } from "../controllers/planController.js";
 const router = express.Router();
 
 //ROUTES
-router.post("/create", userAuth, createPlan);
+router.post("/create/:id", userAuth, createPlan);
 
 export default router;

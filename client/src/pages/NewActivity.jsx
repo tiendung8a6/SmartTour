@@ -1,51 +1,49 @@
-import {
-  Button,
-  Select,
-  TextInput,
-  useMantineColorScheme,
-  Grid,
-  Switch,
-} from "@mantine/core";
+import { Button, TextInput, useMantineColorScheme, Grid } from "@mantine/core";
 import { IconCalendarEvent } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
 import { useEffect, useState } from "react";
-import { BiImages } from "react-icons/bi";
 import { Toaster, toast } from "sonner";
 import { LoadingClient } from "../components";
-import { useCreateTrip } from "../hooks/client-hook";
+import { useCreatePlant } from "../hooks/client-hook";
 import useStore from "../store";
 import { uploadFile } from "../utils";
 import { DateInput } from "@mantine/dates";
-import dayjs from "dayjs";
 import { Link } from "react-router-dom";
+import { useRef } from "react";
+import { ActionIcon, rem } from "@mantine/core";
+import { TimeInput } from "@mantine/dates";
+import { IconClock } from "@tabler/icons-react";
+import React from "react";
+import { useParams } from "react-router-dom";
 
-const NewTrip = () => {
+const NewActivity = () => {
   const { colorScheme } = useMantineColorScheme();
-
+  const { id } = useParams();
   const { user } = useStore();
   const [visible, { toggle }] = useDisclosure(false);
-  const { isPending, mutate } = useCreateTrip(toast, user?.token);
-  const [file, setFile] = useState("");
-  const [tripName, setTripName] = useState(null);
-  const [city, setCity] = useState(null);
+  const { isPending, mutate } = useCreatePlant(id, toast, user?.token);
+  const [planName, setPlanName] = useState(null);
+  const [address, setAddress] = useState(null);
+  const [info, setInfo] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-
-  const [fileURL, setFileURL] = useState(null);
-
+  const [startTime, setStartTime] = useState(null);
+  const [endTime, setEndTime] = useState(null);
+  const startTimeRef = useRef(null);
+  const endTimeRef = useRef(null);
   const theme = colorScheme === "dark";
 
-  useEffect(() => {
-    file && uploadFile(setFileURL, file);
-  }, [file]);
-
   const handleSubmit = async () => {
-    if (!tripName) {
-      toast.error("tripName is required.");
+    if (!planName) {
+      toast.error("planName is required.");
       return;
     }
-    if (!city) {
-      toast.error("city is required.");
+    if (!address) {
+      toast.error("address is required.");
+      return;
+    }
+    if (!info) {
+      toast.error("info is required.");
       return;
     }
     if (!startDate) {
@@ -56,59 +54,41 @@ const NewTrip = () => {
       toast.error("endDate is required.");
       return;
     }
-    if (!fileURL) {
-      toast.error("Please upload an image.");
-      return;
-    }
-
     mutate({
-      tripName,
-      image: fileURL,
-      city,
+      planName,
       startDate,
+      startTime,
       endDate,
+      endTime,
+      address,
+      info,
     });
   };
 
   return (
     <div className="px-[100px] ">
+      <Link to="/trip"> --- Quay Lại</Link>
       <p
         className={`${
           theme ? "text-white" : "text-slate-700"
         } text-lg pb-1 font-semibold `}
       >
-        Thêm Chuyến Đi
+        Thêm hoạt động
       </p>
       <br />
 
       <Grid className="">
         <Grid.Col span={{ base: 12, md: 7, lg: 7 }}>
-          <p>
-            Lập kế hoạch chuyến đi là bước đầu tiên để khám phá những điều mới
-            mẻ và tạo ra những kỷ niệm đáng nhớ.
-          </p>
-
           <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
             <TextInput
               withAsterisk
-              label="Tên Chuyến Đi"
+              label="Tên Sự Kiện"
               className="w-full flex-1"
-              placeholder="Tên Chuyến Đi"
-              defaultValue={tripName}
-              onChange={(e) => setTripName(e.target.value)}
+              placeholder="Tên Sự Kiện"
+              onChange={(e) => setPlanName(e.target.value)}
             />
           </div>
 
-          <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
-            <TextInput
-              withAsterisk
-              label="Thành Phố"
-              className="w-full flex-1"
-              placeholder="Thành Phố"
-              defaultValue={city}
-              onChange={(e) => setCity(e.target.value)}
-            />
-          </div>
           <Grid className="mt-6">
             <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
               <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
@@ -130,6 +110,20 @@ const NewTrip = () => {
             </Grid.Col>
             <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
               <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
+                <TimeInput
+                  ref={startTimeRef}
+                  label="Thời Gian Bắt Đầu"
+                  withAsterisk
+                  // description="Input description"
+                  placeholder="Thời Gian Bắt Đầu"
+                  onChange={(e) => setStartTime(e.target.value)}
+                />
+              </div>
+            </Grid.Col>
+          </Grid>
+          <Grid className="mt-6">
+            <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
+              <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
                 <DateInput
                   leftSection={
                     <IconCalendarEvent className="text-[#107ac5]" size={24} />
@@ -146,39 +140,42 @@ const NewTrip = () => {
                 />
               </div>
             </Grid.Col>
+            <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
+              <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
+                <TimeInput
+                  ref={endTimeRef}
+                  label="Thời Gian Kết Thúc"
+                  withAsterisk
+                  // description="Input description"
+                  placeholder="Thời Gian Kết Thúc"
+                  onChange={(e) => setEndTime(e.target.value)}
+                />
+              </div>
+            </Grid.Col>
           </Grid>
-        </Grid.Col>
-
-        <Grid.Col span={{ base: 12, md: 3, lg: 3 }} offset={0.5}>
-          <div className="w-full  flex-col md:flex-row flex-wrap gap-5 mb-4">
-            <div>
-              {fileURL && (
-                <img src={fileURL || file} alt="" className="w-fit h-[250px]" />
-              )}
-            </div>
-            <label
-              className="flex  gap-1 text-sm font-medium cursor-pointer mt-6 "
-              htmlFor="imgUpload"
-            >
-              <input
-                type="file"
-                onChange={(e) => setFile(e.target.files[0])}
-                className="hidden"
-                id="imgUpload"
-                data-max-size="5120"
-                accept=".jpg, .png, .jpeg"
-              />
-              <BiImages />
-              <span>Image</span>
-              <span className="text-rose-500 mr-[10px]">*</span>
-            </label>
+          <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
+            <TextInput
+              withAsterisk
+              label="address"
+              className="w-full flex-1"
+              placeholder="address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
+          </div>
+          <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
+            <TextInput
+              withAsterisk
+              label="info"
+              className="w-full flex-1"
+              placeholder="info"
+              value={info}
+              onChange={(e) => setInfo(e.target.value)}
+            />
           </div>
         </Grid.Col>
       </Grid>
 
-      <div className="w-full flex items-end justify-start mt-6">
-        <Switch color="indigo" label="Công Khai chuyển đi" />
-      </div>
       <div className="flex justify-start gap-3">
         <div className=" flex items-end justify-start mt-6">
           <Button
@@ -193,7 +190,7 @@ const NewTrip = () => {
         </div>
 
         <div className=" flex items-end justify-start mt-6">
-          <Link to="/trip">
+          <Link to="/trip/">
             <Button variant="outline" color="Red" size="md" radius="md">
               Hủy
             </Button>
@@ -207,4 +204,4 @@ const NewTrip = () => {
   );
 };
 
-export default NewTrip;
+export default NewActivity;

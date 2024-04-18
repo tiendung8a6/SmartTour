@@ -18,6 +18,7 @@ import {
   Profile,
   MyPosts,
   PlansCreate,
+  NewActivity,
 } from "./pages";
 import { Footer, Loading, Navbar } from "./components";
 import useStore from "./store";
@@ -58,6 +59,7 @@ function App() {
             <Route path="/trip" element={<Trip />} />
             <Route path="/trip/:id" element={<TripSummary />} />
             <Route path="/trip/create" element={<NewTrip />} />
+            <Route path="/trip/:id/activity/create" element={<NewActivity />} />
             <Route path="/trip/:id/plans/create" element={<PlansCreate />} />
             <Route path="/profile" element={<Profile />} />
           </Route>

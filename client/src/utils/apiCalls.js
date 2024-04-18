@@ -109,6 +109,7 @@ export const getPostComments = async (id) => {
 };
 
 export const postComments = async (id, token, data) => {
+  console.log("aaaawdwdwIIIOOO", id);
   try {
     const result = await axios.post(`${API_URI}posts/comment/${id}`, data, {
       headers: {

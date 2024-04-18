@@ -6,6 +6,7 @@ export const createPlan = async (req, res, next) => {
   try {
     const { planName, startDate, startTime, endDate, endTime, address, info } =
       req.body;
+    const { id } = req.params;
 
     if (
       !planName ||
@@ -22,7 +23,6 @@ export const createPlan = async (req, res, next) => {
       });
     }
 
-    // Tạo plan mới
     const plan = await Plans.create({
       planName,
       startDate,
@@ -33,10 +33,20 @@ export const createPlan = async (req, res, next) => {
       info,
     });
 
-    // Trả về kết quả thành công
+    const trip = await Trips.findById(id);
+    if (!trip) {
+      return res.status(404).json({
+        success: false,
+        message: "Trip not found",
+      });
+    }
+
+    trip.plans.push(plan._id);
+    await trip.save();
+
     res.status(201).json({
       success: true,
-      message: "Plan created successfully",
+      message: "Plan created successfully and added to trip",
       data: plan,
     });
   } catch (error) {

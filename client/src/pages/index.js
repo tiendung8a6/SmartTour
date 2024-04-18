@@ -16,6 +16,7 @@ import NewTrip from "./NewTrip";
 import Profile from "./Profile";
 import MyPosts from "./MyPosts";
 import PlansCreate from "./PlansCreate";
+import NewActivity from "./NewActivity";
 export {
   BlogDetail,
   CategoryPage,
@@ -35,4 +36,5 @@ export {
   Profile,
   MyPosts,
   PlansCreate,
+  NewActivity,
 };
