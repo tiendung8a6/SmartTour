@@ -14,6 +14,7 @@ import Trip from "./Trip";
 import TripDetail from "./TripDetail";
 import NewTrip from "./NewTrip";
 import Profile from "./Profile";
+import MyPosts from "./MyPosts";
 export {
   BlogDetail,
   CategoryPage,
@@ -31,4 +32,5 @@ export {
   TripDetail,
   NewTrip,
   Profile,
+  MyPosts,
 };

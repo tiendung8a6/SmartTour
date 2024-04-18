@@ -26,6 +26,8 @@ import Feature3 from "./Home/Feature3";
 import Testimonials from "./Home/Testimonials";
 import Contact from "./Home/Contact";
 import TripCard from "./TripCard";
+import ConfirmDialog from "./ConfirmDialog";
+import EditPost from "./EditPost";
 export {
   Banner,
   Button,
@@ -55,4 +57,6 @@ export {
   Testimonials,
   Contact,
   TripCard,
+  EditPost,
+  ConfirmDialog,
 };

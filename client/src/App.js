@@ -16,6 +16,7 @@ import {
   TripDetail,
   NewTrip,
   Profile,
+  MyPosts,
 } from "./pages";
 import { Footer, Loading, Navbar } from "./components";
 import useStore from "./store";
@@ -52,6 +53,7 @@ function App() {
             <Route path="/writer/:id" element={<WriterPage />} />
             <Route path="/travel-guide" element={<TravelGuide />} />
             <Route path="/new-post" element={<NewPost />} />
+            <Route path="/my-posts" element={<MyPosts />} />
             <Route path="/trip" element={<Trip />} />
             <Route path="/trip/:id" element={<TripDetail />} />
             <Route path="/trip/create" element={<NewTrip />} />

@@ -93,3 +93,77 @@ export const useCreateTrip = (toast, token) => {
     },
   });
 };
+export const useContent = (toast, token) => {
+  return useMutation({
+    mutationFn: async (page) => {
+      const { data } = await axios.post(
+        `${API_URL}/posts/client-content?page=${page}`,
+        null,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return data;
+    },
+    onError: (error) => {
+      const errMsg = error?.response?.data?.message;
+      toast.error(errMsg ?? error.message);
+      if (errMsg === "Authentication failed") {
+        localStorage.removeItem("userInfo");
+      }
+    },
+    onSuccess: (data) => {
+      toast.success(data?.message);
+    },
+  });
+};
+
+export const useDeletePost = (toast, token, mutate) => {
+  return useMutation({
+    mutationFn: async (id) => {
+      const { data } = await axios.delete(`${API_URL}/posts/` + id, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return data;
+    },
+    onError: (error) => {
+      toast.error(error?.response?.data?.message ?? error.message);
+    },
+    onSuccess: (data) => {
+      toast.success(data?.message);
+      mutate();
+    },
+  });
+};
+
+export const useUpdatePost = (toast, token) => {
+  return useMutation({
+    mutationFn: async ({ id, title, desc }) => {
+      console.log(token);
+      const { data } = await axios.patch(
+        `${API_URL}/posts/update/${id}`,
+        { title, desc },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return data;
+    },
+    onError: (error) => {
+      toast.error(error?.response?.data?.message ?? error.message);
+    },
+    onSuccess: (data) => {
+      toast.success(data?.message);
+
+      window.location.reload();
+    },
+  });
+};

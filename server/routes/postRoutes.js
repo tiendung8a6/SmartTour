@@ -15,6 +15,7 @@ import {
   updatePostStatus,
   getOneFollower,
   deleteFollower,
+  getMyPost,
 } from "../controllers/postController.js";
 import userAuth from "../middleware/authMiddleware.js";
 
@@ -24,6 +25,8 @@ const router = express.Router();
 router.post("/admin-analytics", userAuth, stats);
 router.post("/admin-followers", userAuth, getFollowers);
 router.post("/admin-content", userAuth, getPostContent);
+router.post("/client-content", userAuth, getMyPost);
+
 router.post("/create-post", userAuth, createPost);
 
 // LIKE & COMMENT ON POST
