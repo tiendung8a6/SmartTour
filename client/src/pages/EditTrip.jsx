@@ -12,32 +12,62 @@ import { useEffect, useState } from "react";
 import { BiImages } from "react-icons/bi";
 import { Toaster, toast } from "sonner";
 import { LoadingClient } from "../components";
-import { useCreateTrip } from "../hooks/client-hook";
+import { useUpdateTrip } from "../hooks/client-hook";
 import useStore from "../store";
 import { uploadFile } from "../utils";
 import { DateInput } from "@mantine/dates";
 import dayjs from "dayjs";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { getSingleTrip } from "../utils/apiCalls";
 
 const NewTrip = () => {
-  const { colorScheme } = useMantineColorScheme();
+  const { id } = useParams();
+  const [trip, setTrip] = useState(null);
 
+  const { colorScheme } = useMantineColorScheme();
   const { user } = useStore();
+  console.log("sssss", trip?.tripName);
   const [visible, { toggle }] = useDisclosure(false);
-  const { isPending, mutate } = useCreateTrip(toast, user?.token);
   const [file, setFile] = useState("");
-  const [tripName, setTripName] = useState(null);
-  const [city, setCity] = useState(null);
+  const [tripName, setTripName] = useState(trip?.tripName);
+  const [city, setCity] = useState(trip?.city);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
   const [fileURL, setFileURL] = useState(null);
+  const { isPending, mutate } = useUpdateTrip(toast, user?.token);
 
   const theme = colorScheme === "dark";
 
   useEffect(() => {
     file && uploadFile(setFileURL, file);
   }, [file]);
+
+  const fetchTrip = async () => {
+    try {
+      const data = await getSingleTrip(id);
+
+      setTrip(data || []);
+      setTripName(data?.tripName);
+      setCity(data?.city); // Cập nhật giá trị
+    } catch (error) {
+      console.error("Error fetching trip or popular content:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (id) {
+      fetchTrip();
+    }
+  }, [id]);
+
+  const handTripNameChange = (event) => {
+    setTripName(event.target.value);
+  };
+
+  const handCityChange = (event) => {
+    setCity(event.target.value);
+  };
 
   const handleSubmit = async () => {
     if (!tripName) {
@@ -62,6 +92,7 @@ const NewTrip = () => {
     }
 
     mutate({
+      id: trip?._id,
       tripName,
       image: fileURL,
       city,
@@ -77,7 +108,7 @@ const NewTrip = () => {
           theme ? "text-white" : "text-slate-700"
         } text-lg pb-1 font-semibold `}
       >
-        Thêm Chuyến Đi
+        Chỉnh Sửa Chuyến Đi
       </p>
       <br />
 
@@ -94,8 +125,8 @@ const NewTrip = () => {
               label="Tên Chuyến Đi"
               className="w-full flex-1"
               placeholder="Tên Chuyến Đi"
-              defaultValue={tripName}
-              onChange={(e) => setTripName(e.target.value)}
+              value={tripName}
+              onChange={handTripNameChange}
             />
           </div>
 
@@ -105,8 +136,8 @@ const NewTrip = () => {
               label="Thành Phố"
               className="w-full flex-1"
               placeholder="Thành Phố"
-              defaultValue={city}
-              onChange={(e) => setCity(e.target.value)}
+              value={city}
+              onChange={handCityChange}
             />
           </div>
           <Grid className="mt-6">
@@ -181,16 +212,8 @@ const NewTrip = () => {
       </div>
       <div className="flex justify-start gap-3">
         <div className=" flex items-end justify-start mt-6">
-          <Link to="/trip">
-            <Button variant="outline" color="Red" size="md" radius="md">
-              Hủy
-            </Button>
-          </Link>
-        </div>
-
-        <div className=" flex items-end justify-start mt-6">
           <Button
-            variant="filled"
+            variant="light"
             color="indigo"
             size="md"
             radius="md"
@@ -198,6 +221,14 @@ const NewTrip = () => {
           >
             Lưu
           </Button>
+        </div>
+
+        <div className=" flex items-end justify-start mt-6">
+          <Link to="/trip">
+            <Button variant="outline" color="Red" size="md" radius="md">
+              Hủy
+            </Button>
+          </Link>
         </div>
       </div>
 

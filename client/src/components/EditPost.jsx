@@ -79,9 +79,9 @@ const EditPost = ({ opened, close }) => {
     <Modal
       opened={opened}
       onClose={close}
-      size="lg"
+      size="90%"
       centered
-      fullScreen // ={isMobile}
+      // fullScreen // ={isMobile}
       radius={0}
       transitionProps={{ transition: "fade", duration: 200 }}
       title={"Quản lý bài viết"}

@@ -123,3 +123,30 @@ export const getTrip = async (req, res, next) => {
     res.status(404).json({ message: error.message });
   }
 };
+
+export const updateTrip = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { tripName, city, startDate, endDate, image } = req.body;
+
+    const updatedFields = {};
+    if (tripName) updatedFields.tripName = tripName;
+    if (city) updatedFields.city = city;
+    if (startDate) updatedFields.startDate = startDate;
+    if (endDate) updatedFields.endDate = endDate;
+    if (image) updatedFields.image = image;
+
+    const trip = await Trips.findByIdAndUpdate(id, updatedFields, {
+      new: true,
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Trip updated successfully",
+      data: trip,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: error.message });
+  }
+};

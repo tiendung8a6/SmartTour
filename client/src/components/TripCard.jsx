@@ -73,7 +73,7 @@ const TripCard = ({ trip, index }) => {
               </span>
               <span className="ml-[10px] ">
                 <Link
-                  to={`/trip/${trip._id}`}
+                  to={`/trip/${trip._id}/edit`}
                   className="text-[#0782c5] flex items-center font-medium text-sm"
                 >
                   Chỉnh sửa chuyến đi

@@ -142,7 +142,10 @@ const Navbar = () => {
 
   const handleSignOut = () => {
     localStorage.removeItem("userInfo");
+    localStorage.removeItem("user");
     signOut();
+    window.location.reload();
+    window.location.href = "/";
   };
   const userEmail = user?.user?.email;
   const username1 = userEmail ? userEmail.split("@")[0] : "";
@@ -211,14 +214,14 @@ const Navbar = () => {
                     Trang cá nhân{" "}
                   </Link>{" "}
                   <hr />
-                  <Link className="text-gray-500 text-sm" to="/new-post">
-                    Viết blog
+                  <Link className="text-gray-500 text-sm" to="/profile">
+                    Viết blog1
                   </Link>
                   <Link className="text-gray-500 text-sm" to="/new-post">
                     Bài viết của tôi
                   </Link>
                   <hr />
-                  <Link className="text-gray-500 text-sm" to="/new-post">
+                  <Link className="text-gray-500 text-sm" to="/my-post">
                     Bài viết đã lưu
                   </Link>
                   <hr />

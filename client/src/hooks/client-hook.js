@@ -196,3 +196,30 @@ export const useCreatePlant = (id, toast, token) => {
     },
   });
 };
+
+export const useUpdateTrip = (toast, token) => {
+  return useMutation({
+    mutationFn: async ({ id, tripName, city, startDate, endDate, image }) => {
+      console.log(token);
+      const { data } = await axios.patch(
+        `${API_URL}/trips/update/${id}`,
+        { tripName, city, startDate, endDate, image },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return data;
+    },
+    onError: (error) => {
+      toast.error(error?.response?.data?.message ?? error.message);
+    },
+    onSuccess: (data) => {
+      toast.success(data?.message);
+
+      window.location.reload();
+    },
+  });
+};

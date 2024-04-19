@@ -126,118 +126,144 @@ const MyPosts = () => {
   const filteredContents = data?.data?.filter((el) => {
     return containsString(el.title, searchTerm);
   });
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <>
       <div className="w-full h-full flex flex-col">
-        <div className="flex justify-between items-center mb-4">
-          <p
-            className={`
+        <Grid className="flex justify-between items-center mb-4">
+          <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
+            <p
+              className={`
               ${
                 colorScheme === "dark" ? "text-white" : "text-black"
               } text-lg pb-1 font-semibold`}
+            >
+              Bài viết (
+              <span className="text-sm">
+                {"Danh sách: " + data?.totalPost + " bài viết "}
+              </span>
+              )
+            </p>
+          </Grid.Col>
+          <Grid.Col
+            span={{ base: 12, md: 6, lg: 6 }}
+            className={`flex ${
+              window.innerWidth < 985 ? "justify-start" : "justify-end"
+            }`}
           >
-            Bài viết (
-            <span className="text-sm">
-              {"Danh sách: " + data?.totalPost + " bài viết "}
-            </span>
-            )
-          </p>
-          <div className="flex items-center">
-            <TextInput
-              leftSection={<IconSearch size={15} />}
-              placeholder="Tìm kiếm theo Tiêu đề"
-              value={searchTerm}
-              onChange={(event) => setSearchTerm(event.target.value)}
-            />
-          </div>
-        </div>
+            <div className="flex items-center">
+              <TextInput
+                leftSection={<IconSearch size={15} />}
+                placeholder="Tìm kiếm theo Tiêu đề"
+                value={searchTerm}
+                onChange={(event) => setSearchTerm(event.target.value)}
+              />
+            </div>
+          </Grid.Col>
+        </Grid>
 
-        <div className="w-[80%] mx-auto drop-shadow-lg ">
+        <div className="w-[90%]  drop-shadow-lg ">
           {filteredContents?.length > 0 &&
             filteredContents?.map((el) => (
-              <Grid className=" shadow-2xl m-6" key={el?._id}>
-                <Grid.Col
-                  span={{ base: 12, md: 12, lg: 4 }}
-                  className=" flex justify-center items-center"
+              <>
+                <Grid
+                  className=" mt-10 border shadow-xl  mx-auto rounded-xl"
+                  key={el?._id}
                 >
-                  <img
-                    src={el?.img}
-                    alt={el?.title}
-                    className="min-w-[228px]  h-[128px] bg-black rounded-md"
-                  />
-                </Grid.Col>
-
-                <Grid.Col
-                  span={{ base: 12, md: 12, lg: 7 }}
-                  className="text-wrap"
-                >
-                  <span className="text-lg font-medium">
-                    {el?.title.slice(0, 30) + "..."}
-                  </span>{" "}
-                  <br></br>
-                  <span className="font-medium text-gray-400 text-sm">
-                    {el?.cat?.label}
-                  </span>{" "}
-                  <br></br>
-                  <span
-                    className="break-words"
-                    dangerouslySetInnerHTML={{
-                      __html: el?.desc.slice(0, 50) + "...",
-                    }}
-                  ></span>
-                  <div className="flex ">
-                    <div className="flex gap-1 items-center">
-                      <AiOutlineEye size={18} />
-                      {formatNumber(el?.views?.length)}
-                    </div>
-                    <div className="flex gap-1 items-center ml-2">
-                      <MdMessage size={18} />
-                      {formatNumber(el?.comments?.length)}
-                    </div>
-                  </div>
-                  {moment(el?.updatedAt).fromNow()}
-                </Grid.Col>
-
-                <Grid.Col
-                  span={{ base: 12, md: 12, lg: 1 }}
-                  className="text-wrap flex justify-end"
-                >
-                  <Menu
-                    transitionProps={{
-                      transition: "rotate-right",
-                      duration: 150,
-                    }}
-                    shadow="lg"
-                    width={200}
+                  <Grid.Col
+                    span={{ base: 12, md: 12, lg: 4 }}
+                    className=" flex justify-center items-center"
                   >
-                    <Menu.Target>
-                      <IconDots className=" m-2" />
-                    </Menu.Target>
+                    <img
+                      src={el?.img}
+                      alt={el?.title}
+                      className="min-w-[228px]  h-[128px] bg-black rounded-md"
+                    />
+                  </Grid.Col>
 
-                    <Menu.Dropdown>
-                      <Menu.Item
-                        leftSection={<BiSolidEdit />}
-                        onClick={() => handleEdit(el)}
-                      >
-                        Chỉnh Sửa
-                      </Menu.Item>
+                  <Grid.Col
+                    span={{ base: 12, md: 12, lg: 7 }}
+                    className="text-wrap"
+                  >
+                    <span className="text-lg font-medium">
+                      {el?.title.slice(0, 30) + "..."}
+                    </span>{" "}
+                    <br></br>
+                    <span className="font-medium text-gray-400 text-sm">
+                      {el?.cat?.label}
+                    </span>{" "}
+                    <br></br>
+                    <span
+                      className="break-words"
+                      dangerouslySetInnerHTML={{
+                        __html: el?.desc.slice(0, 50) + "...",
+                      }}
+                    ></span>
+                    <div className="flex ">
+                      <div className="flex gap-1 items-center">
+                        <AiOutlineEye size={18} />
+                        {formatNumber(el?.views?.length)}
+                      </div>
+                      <div className="flex gap-1 items-center ml-2">
+                        <MdMessage size={18} />
+                        {formatNumber(el?.comments?.length)}
+                      </div>
+                    </div>
+                    {moment(el?.updatedAt).fromNow()}
+                  </Grid.Col>
 
-                      <Menu.Divider />
+                  <Grid.Col
+                    span={{ base: 12, md: 12, lg: 1 }}
+                    className="text-wrap flex justify-end"
+                  >
+                    <Menu
+                      transitionProps={{
+                        transition: "rotate-right",
+                        duration: 150,
+                      }}
+                      shadow="lg"
+                      width={200}
+                    >
+                      <Menu.Target>
+                        <IconDots className=" m-2" />
+                      </Menu.Target>
 
-                      <Menu.Label>Thao tác nguy hiểm</Menu.Label>
+                      <Menu.Dropdown>
+                        <Menu.Item
+                          leftSection={<BiSolidEdit />}
+                          onClick={() => handleEdit(el)}
+                        >
+                          Chỉnh Sửa
+                        </Menu.Item>
 
-                      <Menu.Item
-                        color="red"
-                        leftSection={<MdOutlineDeleteOutline />}
-                        onClick={() => handlePerformAction("delete", el?._id)}
-                      >
-                        Xóa Bài Đăng
-                      </Menu.Item>
-                    </Menu.Dropdown>
-                  </Menu>
-                </Grid.Col>
-              </Grid>
+                        <Menu.Divider />
+
+                        <Menu.Label>Thao tác nguy hiểm</Menu.Label>
+
+                        <Menu.Item
+                          color="red"
+                          leftSection={<MdOutlineDeleteOutline />}
+                          onClick={() => handlePerformAction("delete", el?._id)}
+                        >
+                          Xóa Bài Đăng
+                        </Menu.Item>
+                      </Menu.Dropdown>
+                    </Menu>
+                  </Grid.Col>
+                </Grid>
+              </>
             ))}
         </div>
 

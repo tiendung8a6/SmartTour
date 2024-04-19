@@ -103,7 +103,7 @@ const Profile = () => {
         orientation="vertical"
         classNames={classes}
       >
-        <Tabs.List grow className="w-[300px] h-[400px] shadow-2xl">
+        <Tabs.List grow className="w-[300px] h-[400px] shadow-2xl sm:w-100">
           <div className="m-[10px] ">
             <Grid className="">
               <Grid.Col span={4} className="">
@@ -284,7 +284,7 @@ const Profile = () => {
                     className=" flex-col   px-5 pb-5 "
                   >
                     <Grid className="">
-                      <Grid.Col span={2} className="">
+                      <Grid.Col span={{ base: 12, md: 6, lg: 2 }} className="">
                         <div className="relative w-[100px] h-[100px] m-10 ">
                           <img
                             src={fileURL}
@@ -311,7 +311,10 @@ const Profile = () => {
                         </div>
                       </Grid.Col>
 
-                      <Grid.Col span={5} className="my-auto items-center ">
+                      <Grid.Col
+                        span={{ base: 12, md: 6, lg: 5 }}
+                        className="my-auto items-center "
+                      >
                         <div className="font-medium text-[40px]">
                           {user?.user?.name?.split(" .").map((name, index) => (
                             <span key={index}>{name}</span>
