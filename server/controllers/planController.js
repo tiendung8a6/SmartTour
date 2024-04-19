@@ -8,21 +8,6 @@ export const createPlan = async (req, res, next) => {
       req.body;
     const { id } = req.params;
 
-    if (
-      !planName ||
-      !startDate ||
-      !startTime ||
-      !endDate ||
-      !endTime ||
-      !address
-    ) {
-      return res.status(400).json({
-        success: false,
-        message:
-          "planName, startDate, startTime, endDate, endTime, and address are required fields.",
-      });
-    }
-
     const plan = await Plans.create({
       planName,
       startDate,

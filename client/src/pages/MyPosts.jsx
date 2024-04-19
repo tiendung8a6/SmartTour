@@ -5,6 +5,7 @@ import {
   Table,
   TextInput,
   useMantineColorScheme,
+  Container,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import moment from "moment";
@@ -15,7 +16,12 @@ import { BiDotsVerticalRounded, BiSolidEdit } from "react-icons/bi";
 import { MdMessage, MdOutlineDeleteOutline } from "react-icons/md";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Toaster, toast } from "sonner";
-import { IconSearch, IconPencilPlus, IconEraser } from "@tabler/icons-react";
+import {
+  IconSearch,
+  IconPencilPlus,
+  IconEraser,
+  IconDots,
+} from "@tabler/icons-react";
 import {
   ConfirmDialog,
   EditPost,
@@ -26,7 +32,7 @@ import { useContent, useDeletePost } from "../hooks/client-hook";
 import useCommentStore from "../store/comments";
 import useStore from "../store";
 import { formatNumber, updateURL } from "../utils";
-
+import { Grid } from "@mantine/core";
 const MyPosts = () => {
   moment.updateLocale("vi", {
     relativeTime: {
@@ -80,14 +86,14 @@ const MyPosts = () => {
         break;
     }
     fetchData();
-    setIsConfirmDialogOpen(false); // tắt ConfirmDialog
+    setIsConfirmDialogOpen(false);
   };
 
   const handlePerformAction = (val, id, status) => {
     setEditPost(false);
     setSelected(id);
     setType(val);
-    setIsConfirmDialogOpen(true); // mở ConfirmDialog thay vì gọi open()
+    setIsConfirmDialogOpen(true);
   };
 
   const handleEdit = (el) => {
@@ -106,12 +112,10 @@ const MyPosts = () => {
     fetchData();
   }, [page]);
 
-  //Function to remove diacritics from a string
   const removeDiacritics = (str) => {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   };
 
-  // Function to check if a string contains another string (case-insensitive, diacritic-insensitive)
   const containsString = (str, substr) => {
     return removeDiacritics(str)
       .toLowerCase()
@@ -148,101 +152,94 @@ const MyPosts = () => {
             />
           </div>
         </div>
-        <Table highlightOnHover withTableBorder>
-          <Table.Thead>
-            <Table.Tr className="bg-black text-white">
-              <Table.Th>Tiêu Đề</Table.Th>
-              <Table.Th>Danh Mục</Table.Th>
-              <Table.Th>Lượt Xem</Table.Th>
-              <Table.Th>Bình Luận</Table.Th>
-              <Table.Th>Ngày Đăng</Table.Th>
-              <Table.Th>Ngày Chỉnh Sửa</Table.Th>
-              <Table.Th>Hành Động</Table.Th>
-            </Table.Tr>
-          </Table.Thead>
 
-          <Table.Tbody className="">
-            {filteredContents?.length > 0 &&
-              filteredContents?.map((el) => (
-                <Table.Tr
-                  key={el?._id}
-                  className={theme ? "text-gray-400" : `text-slate-600`}
+        <div className="w-[80%] mx-auto drop-shadow-lg ">
+          {filteredContents?.length > 0 &&
+            filteredContents?.map((el) => (
+              <Grid className=" shadow-2xl m-6" key={el?._id}>
+                <Grid.Col
+                  span={{ base: 12, md: 12, lg: 4 }}
+                  className=" flex justify-center items-center"
                 >
-                  <Table.Td className="flex gap-2 items-center">
-                    <img
-                      src={el?.img}
-                      alt={el?.title}
-                      className="w-10 h-10 rounded-full object-conver"
-                    />
+                  <img
+                    src={el?.img}
+                    alt={el?.title}
+                    className="min-w-[228px]  h-[128px] bg-black rounded-md"
+                  />
+                </Grid.Col>
 
-                    <p className="text-base text-justify">{el?.title}</p>
-                  </Table.Td>
-                  <Table.Td>{el?.cat?.label}</Table.Td>
-                  <Table.Td>
+                <Grid.Col
+                  span={{ base: 12, md: 12, lg: 7 }}
+                  className="text-wrap"
+                >
+                  <span className="text-lg font-medium">
+                    {el?.title.slice(0, 30) + "..."}
+                  </span>{" "}
+                  <br></br>
+                  <span className="font-medium text-gray-400 text-sm">
+                    {el?.cat?.label}
+                  </span>{" "}
+                  <br></br>
+                  <span
+                    className="break-words"
+                    dangerouslySetInnerHTML={{
+                      __html: el?.desc.slice(0, 50) + "...",
+                    }}
+                  ></span>
+                  <div className="flex ">
                     <div className="flex gap-1 items-center">
                       <AiOutlineEye size={18} />
                       {formatNumber(el?.views?.length)}
                     </div>
-                  </Table.Td>
-                  <Table.Td>
-                    <div className="flex gap-1 items-center">
+                    <div className="flex gap-1 items-center ml-2">
                       <MdMessage size={18} />
                       {formatNumber(el?.comments?.length)}
                     </div>
-                  </Table.Td>
-                  <Table.Td>{moment(el?.createdAt).fromNow()}</Table.Td>
-                  <Table.Td>{moment(el?.updatedAt).fromNow()}</Table.Td>
-                  <Table.Td width={5}>
-                    <Menu
-                      transitionProps={{
-                        transition: "rotate-right",
-                        duration: 150,
-                      }}
-                      shadow="lg"
-                      width={200}
-                    >
-                      <Menu.Target>
-                        <Button>
-                          <BiDotsVerticalRounded
-                            className={
-                              colorScheme === "dark"
-                                ? "text-white text-lg"
-                                : "text-slate-900 text-lg"
-                            }
-                          />
-                        </Button>
-                      </Menu.Target>
+                  </div>
+                  {moment(el?.updatedAt).fromNow()}
+                </Grid.Col>
 
-                      <Menu.Dropdown>
-                        <Menu.Item
-                          leftSection={<BiSolidEdit />}
-                          onClick={() => handleEdit(el)}
-                        >
-                          Chỉnh Sửa
-                        </Menu.Item>
+                <Grid.Col
+                  span={{ base: 12, md: 12, lg: 1 }}
+                  className="text-wrap flex justify-end"
+                >
+                  <Menu
+                    transitionProps={{
+                      transition: "rotate-right",
+                      duration: 150,
+                    }}
+                    shadow="lg"
+                    width={200}
+                  >
+                    <Menu.Target>
+                      <IconDots className=" m-2" />
+                    </Menu.Target>
 
-                        <Menu.Divider />
+                    <Menu.Dropdown>
+                      <Menu.Item
+                        leftSection={<BiSolidEdit />}
+                        onClick={() => handleEdit(el)}
+                      >
+                        Chỉnh Sửa
+                      </Menu.Item>
 
-                        <Menu.Label>Thao tác nguy hiểm</Menu.Label>
+                      <Menu.Divider />
 
-                        <Menu.Item
-                          color="red"
-                          leftSection={<MdOutlineDeleteOutline />}
-                          onClick={() => handlePerformAction("delete", el?._id)}
-                        >
-                          Xóa Bài Đăng
-                        </Menu.Item>
-                      </Menu.Dropdown>
-                    </Menu>
-                  </Table.Td>
-                </Table.Tr>
-              ))}
-          </Table.Tbody>
+                      <Menu.Label>Thao tác nguy hiểm</Menu.Label>
 
-          {filteredContents?.length < 1 && (
-            <Table.Caption>Không tìm thấy dữ liệu nào.</Table.Caption>
-          )}
-        </Table>
+                      <Menu.Item
+                        color="red"
+                        leftSection={<MdOutlineDeleteOutline />}
+                        onClick={() => handlePerformAction("delete", el?._id)}
+                      >
+                        Xóa Bài Đăng
+                      </Menu.Item>
+                    </Menu.Dropdown>
+                  </Menu>
+                </Grid.Col>
+              </Grid>
+            ))}
+        </div>
 
         <div className="w-full mt-5 flex items-center justify-center">
           <Pagination
@@ -263,8 +260,8 @@ const MyPosts = () => {
       {!editPost && !opened && (
         <ConfirmDialog
           message="Bạn có chắc muốn thực hiện hành động này?"
-          opened={isConfirmDialogOpen} // sử dụng state mới
-          close={() => setIsConfirmDialogOpen(false)} // đóng ConfirmDialog khi cần
+          opened={isConfirmDialogOpen}
+          close={() => setIsConfirmDialogOpen(false)}
           handleClick={handleActions}
         />
       )}
@@ -279,8 +276,6 @@ const MyPosts = () => {
           }}
         />
       )}
-
-      {/* {!editPost && <WritePost opened={opened} close={close} />} */}
     </>
   );
 };

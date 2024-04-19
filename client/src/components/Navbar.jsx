@@ -5,7 +5,10 @@ import useStore from "../store";
 import Button from "./Button";
 import Logo from "./Logo";
 import ThemeSwitch from "./Switch";
+import { Grid } from "@mantine/core";
 
+import { useDisclosure } from "@mantine/hooks";
+import { Drawer, Button1 } from "@mantine/core";
 function getInitials(fullName) {
   const names = fullName.split(" ");
 
@@ -18,10 +21,12 @@ function getInitials(fullName) {
 
 const MobileMenu = ({ user, signOut }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const [opened, { open, close }] = useDisclosure(false);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+  const userEmail = user?.user?.email;
+  const username1 = userEmail ? userEmail.split("@")[0] : "";
 
   return (
     <div className="flex ">
@@ -61,23 +66,44 @@ const MobileMenu = ({ user, signOut }) => {
           <div className="flex gap-2 items-center">
             {user?.token ? (
               <div className="w-full flex  flex-col items-center justify-center ">
-                <div className="flex gap-1 items-center mb-5">
-                  {user?.user.image ? (
+                <Grid>
+                  <Grid.Col span={4} className="my-auto">
                     <img
                       src={user?.user.image}
                       alt="Profile"
-                      className="w-8 h-8 rounded-full"
+                      className="w-10 h-10 rounded-full"
                     />
-                  ) : (
-                    <span className="text-white w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center">
-                      {getInitials(user?.user.name)}
-                    </span>
-                  )}
-                  <span className="font-medium text-black dark:text-gray-500">
-                    {user?.user.name}
-                  </span>
-                </div>
+                  </Grid.Col>
 
+                  <Grid.Col span={4}>
+                    <div className="font-medium te">
+                      {user?.user?.name?.split(" ")[0]}
+                    </div>
+                    <div className="text-gray-500 text-sm">@{username1}</div>
+                  </Grid.Col>
+                </Grid>
+                <hr />
+                <Link
+                  to="/profile"
+                  className="dark:text-white text-gray-500 text-sm"
+                >
+                  Trang cá nhân{" "}
+                </Link>{" "}
+                <hr />
+                <Link className="text-gray-500 text-sm" to="/new-post">
+                  Viết blog
+                </Link>
+                <Link className="text-gray-500 text-sm" to="/new-post">
+                  Bài viết của tôi
+                </Link>
+                <hr />
+                <Link className="text-gray-500 text-sm" to="/new-post">
+                  Bài viết đã lưu
+                </Link>
+                <hr />
+                <Link className="text-gray-500 text-sm" to="/new-post">
+                  Cài đặt
+                </Link>
                 <button
                   className="bg-black dark:bg-sky-600 text-white dark:text-white px-8 py-1.5 rounded-full text-center outline-none"
                   onClick={() => signOut()}
@@ -118,6 +144,8 @@ const Navbar = () => {
     localStorage.removeItem("userInfo");
     signOut();
   };
+  const userEmail = user?.user?.email;
+  const username1 = userEmail ? userEmail.split("@")[0] : "";
 
   return (
     <nav className="flex flex-col md:flex-row w-full py-5  items-center justify-between gap-4 md:gap-0">
@@ -158,13 +186,47 @@ const Navbar = () => {
               </div>
 
               {showProfile && (
-                <div className="absolute bg-white dark:bg-[#2f2d30] py-6 px-6 flex flex-col shadow-2xl z-50 right-0 gap-3 rounded">
-                  <Link to="/profile" className="dark:text-white">
-                    Profile
+                <div className="border-[2px] border-transparent mt-1  w-[210px] absolute bg-white dark:bg-[#2f2d30] py-6 px-6 flex flex-col shadow-2xl z-50 right-0 gap-3 rounded">
+                  <Grid>
+                    <Grid.Col span={4} className="my-auto">
+                      <img
+                        src={user?.user.image}
+                        alt="Profile"
+                        className="w-10 h-10 rounded-full"
+                      />
+                    </Grid.Col>
+
+                    <Grid.Col span={4}>
+                      <div className="font-medium">
+                        {user?.user?.name?.split(" ")[0]}
+                      </div>
+                      <div className="text-gray-500 text-sm">@{username1}</div>
+                    </Grid.Col>
+                  </Grid>
+                  <hr />
+                  <Link
+                    to="/profile"
+                    className="dark:text-white text-gray-500 text-sm"
+                  >
+                    Trang cá nhân{" "}
+                  </Link>{" "}
+                  <hr />
+                  <Link className="text-gray-500 text-sm" to="/new-post">
+                    Viết blog
                   </Link>
-                  <Link to="/new-post">New Post</Link>
+                  <Link className="text-gray-500 text-sm" to="/new-post">
+                    Bài viết của tôi
+                  </Link>
+                  <hr />
+                  <Link className="text-gray-500 text-sm" to="/new-post">
+                    Bài viết đã lưu
+                  </Link>
+                  <hr />
+                  <Link className="text-gray-500 text-sm" to="/new-post">
+                    Cài đặt
+                  </Link>
                   <span
-                    className="border-t border-slate-300 text-sky-700"
+                    className="text-gray-500 text-sm"
                     onClick={handleSignOut}
                   >
                     Logout

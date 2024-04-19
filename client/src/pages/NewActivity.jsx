@@ -6,7 +6,6 @@ import { Toaster, toast } from "sonner";
 import { LoadingClient } from "../components";
 import { useCreatePlant } from "../hooks/client-hook";
 import useStore from "../store";
-import { uploadFile } from "../utils";
 import { DateInput } from "@mantine/dates";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
@@ -15,7 +14,7 @@ import { TimeInput } from "@mantine/dates";
 import { IconClock } from "@tabler/icons-react";
 import React from "react";
 import { useParams } from "react-router-dom";
-
+import { getSingleTrip } from "../utils/apiCalls";
 const NewActivity = () => {
   const { colorScheme } = useMantineColorScheme();
   const { id } = useParams();
@@ -33,17 +32,23 @@ const NewActivity = () => {
   const endTimeRef = useRef(null);
   const theme = colorScheme === "dark";
 
+  const { setIsLoading } = useStore();
+  const [trip, setTrip] = useState(null);
+
+  const pickerControl = (
+    <ActionIcon
+      className="text-[#107ac5]"
+      size={30}
+      variant="subtle"
+      color="gray"
+      onClick={() => startTimeRef.current?.showPicker()}
+    >
+      <IconClock style={{ width: rem(16), height: rem(16) }} stroke={3} />
+    </ActionIcon>
+  );
   const handleSubmit = async () => {
     if (!planName) {
       toast.error("planName is required.");
-      return;
-    }
-    if (!address) {
-      toast.error("address is required.");
-      return;
-    }
-    if (!info) {
-      toast.error("info is required.");
       return;
     }
     if (!startDate) {
@@ -54,6 +59,7 @@ const NewActivity = () => {
       toast.error("endDate is required.");
       return;
     }
+
     mutate({
       planName,
       startDate,
@@ -65,6 +71,24 @@ const NewActivity = () => {
     });
   };
 
+  const fetchTrip = async () => {
+    try {
+      const data = await getSingleTrip(id);
+
+      setTrip(data || []);
+    } catch (error) {
+      console.error("Error fetching trip or popular content:", error);
+    } finally {
+    }
+  };
+
+  useEffect(() => {
+    if (id) {
+      fetchTrip();
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }
+  }, [id]);
+  console.log("TRIP", trip);
   return (
     <div className="px-[100px] ">
       <Link to="/trip"> --- Quay Lại</Link>
@@ -101,7 +125,8 @@ const NewActivity = () => {
                   label="Ngày Bắt Đầu"
                   className="w-full flex-1"
                   placeholder="Ngày Bắt Đầu"
-                  minDate={new Date()}
+                  minDate={new Date(trip?.startDate)}
+                  maxDate={new Date(trip?.endDate)}
                   valueFormat="DD/MM/YYYY"
                   value={startDate}
                   onChange={(date) => setStartDate(date)}
@@ -113,7 +138,8 @@ const NewActivity = () => {
                 <TimeInput
                   ref={startTimeRef}
                   label="Thời Gian Bắt Đầu"
-                  withAsterisk
+                  leftSection={pickerControl}
+                  // withAsterisk
                   // description="Input description"
                   placeholder="Thời Gian Bắt Đầu"
                   onChange={(e) => setStartTime(e.target.value)}
@@ -134,7 +160,8 @@ const NewActivity = () => {
                   className="w-full flex-1"
                   placeholder="Ngày Kết Thúc"
                   valueFormat="DD/MM/YYYY"
-                  minDate={startDate}
+                  minDate={new Date(trip?.startDate)}
+                  maxDate={new Date(trip?.endDate)}
                   value={endDate}
                   onChange={(date) => setEndDate(date)}
                 />
@@ -145,7 +172,8 @@ const NewActivity = () => {
                 <TimeInput
                   ref={endTimeRef}
                   label="Thời Gian Kết Thúc"
-                  withAsterisk
+                  leftSection={pickerControl}
+                  // withAsterisk
                   // description="Input description"
                   placeholder="Thời Gian Kết Thúc"
                   onChange={(e) => setEndTime(e.target.value)}
@@ -155,7 +183,7 @@ const NewActivity = () => {
           </Grid>
           <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
             <TextInput
-              withAsterisk
+              // withAsterisk
               label="address"
               className="w-full flex-1"
               placeholder="address"
@@ -165,7 +193,7 @@ const NewActivity = () => {
           </div>
           <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
             <TextInput
-              withAsterisk
+              // withAsterisk
               label="info"
               className="w-full flex-1"
               placeholder="info"
