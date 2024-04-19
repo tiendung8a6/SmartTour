@@ -172,7 +172,7 @@ export const useCreatePlant = (id, toast, token) => {
   return useMutation({
     mutationFn: async (formData) => {
       const { data } = await axios.post(
-        `${API_URL}/plans/create/${id}`,
+        `${API_URL}/plans/create/activity/${id}`,
         formData,
         {
           headers: {
@@ -192,7 +192,7 @@ export const useCreatePlant = (id, toast, token) => {
 
       setTimeout(() => {
         window.location.replace(`/trip/${data.data._id}`);
-      }, 1500);
+      }, 1000);
     },
   });
 };

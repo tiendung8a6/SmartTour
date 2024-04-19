@@ -1,10 +1,14 @@
 import express from "express";
 import userAuth from "../middleware/authMiddleware.js";
-import { createPlan } from "../controllers/planController.js";
+import {
+  createPlanActivity,
+  createPlanAlodging,
+} from "../controllers/planController.js";
 
 const router = express.Router();
 
 //ROUTES
-router.post("/create/:id", userAuth, createPlan);
+router.post("/create/activity/:id", userAuth, createPlanActivity); //activity
+router.post("/create/lodging/:id", userAuth, createPlanAlodging); //lodging
 
 export default router;

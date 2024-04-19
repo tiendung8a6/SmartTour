@@ -26,15 +26,14 @@ const NewTrip = () => {
 
   const { colorScheme } = useMantineColorScheme();
   const { user } = useStore();
-  console.log("sssss", trip?.tripName);
   const [visible, { toggle }] = useDisclosure(false);
   const [file, setFile] = useState("");
   const [tripName, setTripName] = useState(trip?.tripName);
   const [city, setCity] = useState(trip?.city);
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+  const [startDate, setStartDate] = useState(trip?.startDate);
+  const [endDate, setEndDate] = useState(trip?.startDate);
 
-  const [fileURL, setFileURL] = useState(null);
+  const [fileURL, setFileURL] = useState(trip?.image);
   const { isPending, mutate } = useUpdateTrip(toast, user?.token);
 
   const theme = colorScheme === "dark";
@@ -50,6 +49,11 @@ const NewTrip = () => {
       setTrip(data || []);
       setTripName(data?.tripName);
       setCity(data?.city); // Cập nhật giá trị
+      let startDateObject = new Date(data?.startDate);
+      setStartDate(startDateObject);
+      let setEndDateObject = new Date(data?.endDate);
+      setEndDate(setEndDateObject);
+      setFileURL(data?.image);
     } catch (error) {
       console.error("Error fetching trip or popular content:", error);
     }
@@ -92,7 +96,7 @@ const NewTrip = () => {
     }
 
     mutate({
-      id: trip?._id,
+      id: trip._id,
       tripName,
       image: fileURL,
       city,
@@ -155,6 +159,7 @@ const NewTrip = () => {
                   minDate={new Date()}
                   valueFormat="DD/MM/YYYY"
                   value={startDate}
+                  defaultValue={startDate}
                   onChange={(date) => setStartDate(date)}
                 />
               </div>
@@ -212,8 +217,16 @@ const NewTrip = () => {
       </div>
       <div className="flex justify-start gap-3">
         <div className=" flex items-end justify-start mt-6">
+          <Link to="/trip">
+            <Button variant="outline" color="Red" size="md" radius="md">
+              Hủy
+            </Button>
+          </Link>
+        </div>
+
+        <div className=" flex items-end justify-start mt-6">
           <Button
-            variant="light"
+            variant="filled"
             color="indigo"
             size="md"
             radius="md"
@@ -221,14 +234,6 @@ const NewTrip = () => {
           >
             Lưu
           </Button>
-        </div>
-
-        <div className=" flex items-end justify-start mt-6">
-          <Link to="/trip">
-            <Button variant="outline" color="Red" size="md" radius="md">
-              Hủy
-            </Button>
-          </Link>
         </div>
       </div>
 

@@ -11,7 +11,7 @@ const router = express.Router();
 
 //ROUTES
 router.post("/create", userAuth, createTrip);
-router.get("/", userAuth, getTrips);
+router.get("/", userAuth, getTrips); //Lấy danh sách Trips theo token user
 router.get("/:tripId", getTrip);
 router.patch("/update/:id", userAuth, updateTrip);
 

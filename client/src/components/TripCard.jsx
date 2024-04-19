@@ -81,17 +81,17 @@ const TripCard = ({ trip, index }) => {
               </span>
             </span>
           </Grid.Col>
-          <Grid.Col span={{ base: 12, md: 6, lg: 3 }}>
+          <Grid.Col span={{ base: 12, md: 6, lg: 3 }} className="ml-[-19px]">
             <Menu shadow="md" width={200}>
               <Menu.Target>
-                <Button className="flex bg-transparent hover:bg-transparent">
+                <Button className="flex bg-transparent hover:bg-transparent ">
                   <span className="bg-transparent border-[#0782c5] border rounded-full w-[24px] h-[24px] p-[2px]    ">
                     <IconDots
                       stroke={2}
                       className="text-[#0782c5] mt-[1px] ml-[0.5px]  h-[17px] w-[17px] "
                     />
                   </span>
-                  <span className="ml-[10px]">
+                  <span className="ml-[10px] ">
                     <div className="text-[#0782c5] flex items-center font-medium text-sm">
                       Lựa chọn khác
                       <IconChevronDown

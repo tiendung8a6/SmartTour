@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Button } from "@mantine/core";
+import { Button, Container } from "@mantine/core";
 import useStore from "../store";
 import { getSingleTrip } from "../utils/apiCalls";
 import { Timeline, Text } from "@mantine/core";
+import { Grid, Menu, rem } from "@mantine/core";
+import { IconArrowLeft, IconCirclePlus } from "@tabler/icons-react";
 import {
   IconGitBranch,
   IconGitPullRequest,
@@ -11,6 +13,18 @@ import {
   IconMessageDots,
 } from "@tabler/icons-react";
 
+import {
+  IconCirclesRelation,
+  IconPencil,
+  IconDots,
+  IconPrinter,
+  IconChevronDown,
+  IconSearch,
+  IconPhoto,
+  IconDownload,
+  IconTrash,
+  IconArrowsLeftRight,
+} from "@tabler/icons-react";
 const TripSummary = () => {
   const { setIsLoading } = useStore();
   const { id } = useParams();
@@ -47,98 +61,156 @@ const TripSummary = () => {
     );
 
   return (
-    <div className="w-full  px-0 md:px-10 py-8 2xl:px-20">
-      <div className="w-full flex flex-col-reverse md:flex-row gap-2 gap-y-5 items-center">
-        <div className="w-full md:w-1/2 flex flex-col gap-8">
-          <h1 className="text-3xl md:text-5xl font-bold text-slate-800 dark:text-white">
-            {trip?.tripName}
-          </h1>
-
-          <div className="w-full flex items-center ">
-            <span className="flex-1 text-sky-600 font-semibold">
-              {trip?.city}
+    <div className="m-[50px] h-fit">
+      <Link to="/trip">
+        <Button
+          className="border-none hover:text-[#0782c5] hover:bg-transparent  "
+          leftSection={<IconArrowLeft className="text-[#0782c5]" size={30} />}
+          variant="default"
+          color="#0782c5"
+          size="md"
+        >
+          <span className="text-[#0782c5]">Trở Lại danh sách chuyến đi</span>
+        </Button>
+      </Link>
+      <div
+        className={`w-full flex flex-col gap-8 items-center rounded md:flex-row  `}
+      >
+        <div className="w-full md:w-full flex flex-col gap-3 py-[5px] px-[20px]  ">
+          <h6 className=" text-[1.5rem] font-semibold dark:text-white text-justify">
+            <span>
+              <Link to={`/trip/${trip._id}`}>
+                {trip?.tripName.slice(0, 60)}
+              </Link>
             </span>
+          </h6>
+          <div className=" flex gap-2 flex-col mt[-10px]">
+            <span>{trip?.city?.slice(0, 60)}</span>
 
-            <span className="flex flex-1 items-baseline text-2xl font-medium text-slate-700 dark:text-gray-400">
+            <span className="text-sm text-gray-600">
               {new Date(trip?.startDate).toLocaleDateString("vi-VN")} -
               {new Date(trip?.endDate).toLocaleDateString("vi-VN")} (
               {diffDays === 0 ? "1 ngày" : `${diffDays} ngày`})
             </span>
+
+            <span className="flex">
+              <span className="bg-[#0782c5] border-[#0782c5] border rounded-full w-[24px] h-[24px] p-[2px]    ">
+                <IconCirclesRelation
+                  stroke={2}
+                  className="text-[white] m-[1px] h-[17px] w-[17px] "
+                />
+              </span>
+              <span className="ml-[10px]">
+                <Link className="text-[#0782c5] font-medium text-sm">
+                  Chia sẻ
+                </Link>
+              </span>
+            </span>
           </div>
+          <Grid>
+            <Grid.Col
+              span={{ base: 12, md: 6, lg: 3 }}
+              className="flex items-center"
+            >
+              <span className="flex items-center">
+                <span className="bg-transparent border-[#0782c5] border rounded-full w-[24px] h-[24px] p-[2px]    ">
+                  <IconPencil
+                    stroke={2}
+                    className="text-[#0782c5] m-[1px] h-[17px] w-[17px] "
+                  />
+                </span>
+                <span className="ml-[10px] ">
+                  <Link
+                    to={`/trip/${trip._id}/edit`}
+                    className="text-[#0782c5] flex items-center font-medium text-sm"
+                  >
+                    Chỉnh sửa chuyến đi
+                  </Link>
+                </span>
+              </span>
+            </Grid.Col>
+            <Grid.Col span={{ base: 12, md: 6, lg: 3 }} className="ml-[-19px]">
+              <Menu shadow="md" width={200}>
+                <Menu.Target>
+                  <Button className="flex bg-transparent hover:bg-transparent ">
+                    <span className="bg-transparent border-[#0782c5] border rounded-full w-[24px] h-[24px] p-[2px]    ">
+                      <IconDots
+                        stroke={2}
+                        className="text-[#0782c5] mt-[1px] ml-[0.5px]  h-[17px] w-[17px] "
+                      />
+                    </span>
+                    <span className="ml-[10px] ">
+                      <div className="text-[#0782c5] flex items-center font-medium text-sm">
+                        Lựa chọn khác
+                        <IconChevronDown
+                          stroke={2}
+                          className="text-[#0782c5] ml-1 mt-[1px] h-[17px] w-[17px] "
+                        />
+                      </div>
+                    </span>
+                  </Button>
+                </Menu.Target>
+
+                <Menu.Dropdown>
+                  <Menu.Label>Chức năng</Menu.Label>
+                  <Menu.Item
+                    leftSection={
+                      <IconPrinter
+                        style={{ width: rem(14), height: rem(14) }}
+                      />
+                    }
+                    className="text-[#0782c5] flex items-center"
+                  >
+                    In chuyến đi
+                  </Menu.Item>
+                  <Menu.Item
+                    leftSection={
+                      <IconDownload
+                        style={{ width: rem(14), height: rem(14) }}
+                      />
+                    }
+                    className="text-[#0782c5] flex items-center"
+                  >
+                    Tải chuyến đi
+                  </Menu.Item>
+
+                  <Menu.Divider />
+
+                  <Menu.Label>Cẩn trọng</Menu.Label>
+                  <Menu.Item
+                    color="red"
+                    leftSection={
+                      <IconTrash style={{ width: rem(14), height: rem(14) }} />
+                    }
+                  >
+                    Xóa chuyến đi
+                  </Menu.Item>
+                </Menu.Dropdown>
+              </Menu>
+            </Grid.Col>
+          </Grid>
         </div>
-        <img
-          src={trip?.image}
-          alt={trip?.tripName}
-          className="w-full md:w-1/2 h-auto md:h-[360px] 2xl:h-[460px] rounded object-contain"
-        />
-      </div>
-      <div>
-        <div className="w-full flex items-end justify-start mt-6">
-          <Link
-            to={`/trip/${trip._id}/plans/create`}
-            className="w-full h-auto md:h-64 md:w-2/4 "
-          >
-            <Button className={""}>Add a Plant</Button>
-          </Link>
-        </div>
-      </div>
-      <Timeline active={1} bulletSize={24} lineWidth={2}>
-        <Timeline.Item bullet={<IconGitBranch size={12} />} title="New branch">
-          <Text c="dimmed" size="sm">
-            You&apos;ve created new branch{" "}
-            <Text variant="link" component="span" inherit>
-              fix-notifications
-            </Text>{" "}
-            from master
-          </Text>
-          <Text size="xs" mt={4}>
-            2 hours ago
-          </Text>
-        </Timeline.Item>
 
-        <Timeline.Item bullet={<IconGitCommit size={12} />} title="Commits">
-          <Text c="dimmed" size="sm">
-            You&apos;ve pushed 23 commits to
-            <Text variant="link" component="span" inherit>
-              fix-notifications branch
-            </Text>
-          </Text>
-          <Text size="xs" mt={4}>
-            52 minutes ago
-          </Text>
-        </Timeline.Item>
-
-        <Timeline.Item
-          title="Pull request"
-          bullet={<IconGitPullRequest size={12} />}
-          lineVariant="dashed"
+        <Link
+          to={`/trip/${trip._id}`}
+          className="w-full h-auto md:h-64 md:w-1/4 lg:w-[380px] hidden md:block "
         >
-          <Text c="dimmed" size="sm">
-            You&apos;ve submitted a pull request
-            <Text variant="link" component="span" inherit>
-              Fix incorrect notification message (#187)
-            </Text>
-          </Text>
-          <Text size="xs" mt={4}>
-            34 minutes ago
-          </Text>
-        </Timeline.Item>
-
-        <Timeline.Item
-          title="Code review"
-          bullet={<IconMessageDots size={12} />}
-        >
-          <Text c="dimmed" size="sm">
-            <Text variant="link" component="span" inherit>
-              Robert Gluesticker
-            </Text>{" "}
-            left a code review on your pull request
-          </Text>
-          <Text size="xs" mt={4}>
-            12 minutes ago
-          </Text>
-        </Timeline.Item>
-      </Timeline>
+          <img
+            src={trip?.image}
+            alt={trip?.tripName}
+            className="object-cover w-full md:h-[100%] rounded"
+          />
+        </Link>
+      </div>
+      <Link
+        to={`/trip/${trip._id}/plans/create`}
+        className="flex mx-auto h-[50px] w-fit p-4 shadow-xl border rounded-full  text-[#0782c5]"
+      >
+        <span className="flex justify-center mt-[-3px]">
+          <IconCirclePlus stroke={2} className="mr-1" />
+          Thêm chuyến đi
+        </span>
+      </Link>
     </div>
   );
 };

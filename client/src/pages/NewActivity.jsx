@@ -1,4 +1,10 @@
-import { Button, TextInput, useMantineColorScheme, Grid } from "@mantine/core";
+import {
+  Button,
+  TextInput,
+  useMantineColorScheme,
+  Grid,
+  Textarea,
+} from "@mantine/core";
 import { IconCalendarEvent } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
 import { useEffect, useState } from "react";
@@ -35,13 +41,13 @@ const NewActivity = () => {
   const { setIsLoading } = useStore();
   const [trip, setTrip] = useState(null);
 
-  const pickerControl = (
+  const pickerControl = (ref) => (
     <ActionIcon
       className="text-[#107ac5]"
       size={30}
       variant="subtle"
       color="gray"
-      onClick={() => startTimeRef.current?.showPicker()}
+      onClick={() => ref.current?.showPicker()}
     >
       <IconClock style={{ width: rem(16), height: rem(16) }} stroke={3} />
     </ActionIcon>
@@ -138,7 +144,7 @@ const NewActivity = () => {
                 <TimeInput
                   ref={startTimeRef}
                   label="Thời Gian Bắt Đầu"
-                  leftSection={pickerControl}
+                  leftSection={pickerControl(startTimeRef)}
                   // withAsterisk
                   // description="Input description"
                   placeholder="Thời Gian Bắt Đầu"
@@ -172,7 +178,7 @@ const NewActivity = () => {
                 <TimeInput
                   ref={endTimeRef}
                   label="Thời Gian Kết Thúc"
-                  leftSection={pickerControl}
+                  leftSection={pickerControl(endTimeRef)}
                   // withAsterisk
                   // description="Input description"
                   placeholder="Thời Gian Kết Thúc"
@@ -184,19 +190,22 @@ const NewActivity = () => {
           <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
             <TextInput
               // withAsterisk
-              label="address"
+              label="Địa Chỉ"
               className="w-full flex-1"
-              placeholder="address"
+              placeholder="Địa Chỉ"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
             />
           </div>
           <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
-            <TextInput
+            <Textarea
               // withAsterisk
-              label="info"
+              label="Thông Tin"
               className="w-full flex-1"
-              placeholder="info"
+              placeholder="Thông Tin"
+              autosize
+              minRows={2}
+              maxRows={5}
               value={info}
               onChange={(e) => setInfo(e.target.value)}
             />
@@ -205,6 +214,14 @@ const NewActivity = () => {
       </Grid>
 
       <div className="flex justify-start gap-3">
+        <div className=" flex items-end justify-start mt-6">
+          <Link to="/trip/">
+            <Button variant="outline" color="Red" size="md" radius="md">
+              Hủy
+            </Button>
+          </Link>
+        </div>
+
         <div className=" flex items-end justify-start mt-6">
           <Button
             variant="light"
@@ -215,14 +232,6 @@ const NewActivity = () => {
           >
             Lưu
           </Button>
-        </div>
-
-        <div className=" flex items-end justify-start mt-6">
-          <Link to="/trip/">
-            <Button variant="outline" color="Red" size="md" radius="md">
-              Hủy
-            </Button>
-          </Link>
         </div>
       </div>
 

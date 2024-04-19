@@ -1,9 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Button } from "@mantine/core";
+import { Button, Container, Grid } from "@mantine/core";
 import useStore from "../store";
 import { getSingleTrip } from "../utils/apiCalls";
-
+import {
+  IconArrowLeft,
+  IconPlaneInflight,
+  IconSoup,
+  IconCar,
+  IconBuildingSkyscraper,
+  IconCalendarStats,
+  IconTrain,
+  IconParkingCircle,
+  IconFlag,
+  IconWalk,
+} from "@tabler/icons-react";
 const PlansCreate = () => {
   const { setIsLoading } = useStore();
   const { id } = useParams();
@@ -40,45 +51,148 @@ const PlansCreate = () => {
     );
 
   return (
-    <div className="w-full  px-0 md:px-10 py-8 2xl:px-20">
-      <div className="w-full flex flex-col-reverse md:flex-row gap-2 gap-y-5 items-center">
-        <div className="w-full md:w-1/2 flex flex-col gap-8">
-          <h1 className="text-3xl md:text-5xl font-bold text-slate-800 dark:text-white">
-            {trip?.tripName}
-          </h1>
-
-          <div className="w-full flex items-center ">
-            <span className="flex-1 text-sky-600 font-semibold">
-              {trip?.city}
-            </span>
-
-            <span className="flex flex-1 items-baseline text-2xl font-medium text-slate-700 dark:text-gray-400">
-              {new Date(trip?.startDate).toLocaleDateString("vi-VN")} -
-              {new Date(trip?.endDate).toLocaleDateString("vi-VN")} (
-              {diffDays === 0 ? "1 ngày" : `${diffDays} ngày`})
-            </span>
-          </div>
-        </div>
+    <div className="mx-10 mt-5">
+      <Link to="/trip">
+        <Button
+          className="border-none hover:text-[#0782c5] hover:bg-transparent flex justify-start ml-[-20px] "
+          leftSection={<IconArrowLeft className="text-[#0782c5]" size={30} />}
+          variant="default"
+          color="#0782c5"
+          size="md"
+        >
+          <span className="text-[#0782c5]">Trở Lại danh sách chuyến đi</span>
+        </Button>
+      </Link>
+      <div className="text-xl font-medium mt-5">
+        {" "}
+        Lập kế hoạch cho {trip?.tripName} vào ngày{" "}
+        {new Date(trip?.startDate).toLocaleDateString("vi-VN")}
+        {/* {new Date(trip?.endDate).toLocaleDateString("vi-VN")} (
+        {diffDays === 0 ? "1 ngày" : `${diffDays} ngày`}) */}
       </div>
-      <div>
-        <div className="w-full flex items-end justify-start mt-6">
-          <span>Phổ biến nhất</span>
+      <h4 className="mt-8 text-lg font-medium ">Phổ biến nhất</h4>
+      <Grid className="mt-5">
+        <Grid.Col span={{ base: 12, md: 4, lg: 2 }}>
           <Link
             to={`/trip/${trip._id}/activity/create`}
-            className="w-full h-auto md:h-64 md:w-2/4 "
+            className="p-4 border rounded-full flex bg-gray-50"
           >
-            <Button>Hoạt động</Button>
+            <IconWalk stroke={2} className="ml-[10px] text-[#41b7cb] " />
+            <span className="ml-[10px] text-[#0782c5] font-semibold ">
+              {" "}
+              Hoạt động
+            </span>
           </Link>
-        </div>
-        <div className="w-full flex items-end justify-start mt-6">
+        </Grid.Col>
+
+        <Grid.Col span={{ base: 12, md: 4, lg: 2 }}>
           <Link
-            to={`/trip/${trip._id}/flights/create`}
-            className="w-full h-auto md:h-64 md:w-2/4 "
+            to={`/trip/${trip._id}/activity/create`}
+            className="p-4 border rounded-full flex bg-gray-50"
           >
-            <Button>Máy bay</Button>
+            <IconPlaneInflight
+              stroke={2}
+              className="ml-[10px] text-[#41b7cb] "
+            />
+            <span className="ml-[10px] text-[#0782c5] font-semibold ">
+              {" "}
+              Chuyến bay
+            </span>
           </Link>
-        </div>
-      </div>
+        </Grid.Col>
+
+        <Grid.Col span={{ base: 12, md: 4, lg: 2 }}>
+          <Link
+            to={`/trip/${trip._id}/activity/create`}
+            className="p-4 border rounded-full flex bg-gray-50"
+          >
+            <IconBuildingSkyscraper
+              stroke={2}
+              className="ml-[10px] text-[#41b7cb] "
+            />
+            <span className="ml-[10px] text-[#0782c5] font-semibold ">
+              {" "}
+              Khách sạn{" "}
+            </span>
+          </Link>
+        </Grid.Col>
+      </Grid>
+
+      <h4 className="mt-8 text-lg font-medium ">Kế hoạch khác</h4>
+
+      <Grid>
+        <Grid.Col span={{ base: 12, md: 6, lg: 2 }} className="mt-5">
+          <Link
+            to={`/trip/${trip._id}/activity/create`}
+            className="p-4 border rounded-full flex bg-gray-50"
+          >
+            <IconWalk stroke={2} className="ml-[10px] text-[#41b7cb] " />
+            <span className="ml-[10px] text-[#0782c5] font-semibold ">
+              {" "}
+              Hoạt động
+            </span>
+          </Link>{" "}
+          <br />
+          <Link
+            to={`/trip/${trip._id}/activity/create`}
+            className="p-4 border rounded-full flex bg-gray-50"
+          >
+            <IconWalk stroke={2} className="ml-[10px] text-[#41b7cb] " />
+            <span className="ml-[10px] text-[#0782c5] font-semibold ">
+              {" "}
+              Hoạt động
+            </span>
+          </Link>{" "}
+          <br />
+          <Link
+            to={`/trip/${trip._id}/activity/create`}
+            className="p-4 border rounded-full flex bg-gray-50"
+          >
+            <IconWalk stroke={2} className="ml-[10px] text-[#41b7cb] " />
+            <span className="ml-[10px] text-[#0782c5] font-semibold ">
+              {" "}
+              Hoạt động
+            </span>
+          </Link>{" "}
+          <br />
+        </Grid.Col>
+
+        <Grid.Col span={{ base: 12, md: 6, lg: 2 }} className="mt-5">
+          <Link
+            to={`/trip/${trip._id}/activity/create`}
+            className="p-4 border rounded-full flex bg-gray-50"
+          >
+            <IconWalk stroke={2} className="ml-[10px] text-[#41b7cb] " />
+            <span className="ml-[10px] text-[#0782c5] font-semibold ">
+              {" "}
+              Hoạt động
+            </span>
+          </Link>{" "}
+          <br />
+          <Link
+            to={`/trip/${trip._id}/activity/create`}
+            className="p-4 border rounded-full flex bg-gray-50"
+          >
+            <IconWalk stroke={2} className="ml-[10px] text-[#41b7cb] " />
+            <span className="ml-[10px] text-[#0782c5] font-semibold ">
+              {" "}
+              Hoạt động
+            </span>
+          </Link>{" "}
+          <br />
+          <Link
+            to={`/trip/${trip._id}/activity/create`}
+            className="p-4 border rounded-full flex bg-gray-50"
+          >
+            <IconWalk stroke={2} className="ml-[10px] text-[#41b7cb] " />
+            <span className="ml-[10px] text-[#0782c5] font-semibold ">
+              {" "}
+              Hoạt động
+            </span>
+          </Link>{" "}
+          <br />
+        </Grid.Col>
+      </Grid>
     </div>
   );
 };
