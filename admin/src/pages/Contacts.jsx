@@ -10,20 +10,16 @@ import { useDisclosure } from "@mantine/hooks";
 import moment from "moment";
 import "moment/locale/vi";
 import React, { useEffect, useState } from "react";
-import { AiOutlineEye, AiOutlineSetting } from "react-icons/ai";
 import { BiDotsVerticalRounded, BiMailSend } from "react-icons/bi";
-import { MdMessage, MdOutlineDeleteOutline } from "react-icons/md";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Toaster, toast } from "sonner";
-import { IconSearch, IconEraser } from "@tabler/icons-react";
-
+import { IconSearch } from "@tabler/icons-react";
 import { Comments, ConfirmDialog, EditContact, Loading } from "../components";
-// import { useAction, useContent, useDeletePost } from "../hooks/post-hook";
 import { useContent } from "../hooks/contacts_hook";
 
 import useCommentStore from "../store/comments";
 import useStore from "../store/store";
-import { formatNumber, updateURL } from "../utils";
+import { updateURL } from "../utils";
 
 const Contacts = () => {
   moment.updateLocale("vi", {
@@ -160,12 +156,7 @@ const Contacts = () => {
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
             />
-            <Button
-              leftSection={<IconEraser size={15} />}
-              // className="ml-2"
-              onClick={() => setSearchTerm("")}
-              variant="light"
-            >
+            <Button onClick={() => setSearchTerm("")} variant="light">
               Xóa
             </Button>
           </div>

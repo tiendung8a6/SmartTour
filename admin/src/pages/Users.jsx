@@ -14,7 +14,7 @@ import { AiFillLock } from "react-icons/ai";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { BiSolidLike } from "react-icons/bi";
-import { IconSearch, IconUserPlus, IconEraser } from "@tabler/icons-react";
+import { IconSearch, IconUserPlus } from "@tabler/icons-react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Toaster, toast } from "sonner";
 
@@ -157,12 +157,7 @@ const Users = () => {
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
             />
-            <Button
-              leftSection={<IconEraser size={15} />}
-              // className="ml-2"
-              onClick={() => setSearchTerm("")}
-              variant="light"
-            >
+            <Button onClick={() => setSearchTerm("")} variant="light">
               Xóa
             </Button>
           </div>

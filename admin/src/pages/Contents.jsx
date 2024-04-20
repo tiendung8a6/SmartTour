@@ -15,7 +15,7 @@ import { BiDotsVerticalRounded, BiSolidEdit } from "react-icons/bi";
 import { MdMessage, MdOutlineDeleteOutline } from "react-icons/md";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Toaster, toast } from "sonner";
-import { IconSearch, IconPencilPlus, IconEraser } from "@tabler/icons-react";
+import { IconSearch, IconPencilPlus } from "@tabler/icons-react";
 
 import {
   Comments,
@@ -185,12 +185,7 @@ const Contents = () => {
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
             />
-            <Button
-              leftSection={<IconEraser size={15} />}
-              // className="ml-2"
-              onClick={() => setSearchTerm("")}
-              variant="light"
-            >
+            <Button onClick={() => setSearchTerm("")} variant="light">
               Xóa
             </Button>
           </div>

@@ -1,10 +1,4 @@
-import {
-  Button,
-  TextInput,
-  useMantineColorScheme,
-  Grid,
-  Textarea,
-} from "@mantine/core";
+import { Button, TextInput, useMantineColorScheme, Grid } from "@mantine/core";
 import { IconCalendarEvent } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
 import { useEffect, useState } from "react";
@@ -17,7 +11,7 @@ import { Link } from "react-router-dom";
 import { useRef } from "react";
 import { ActionIcon, rem } from "@mantine/core";
 import { TimeInput } from "@mantine/dates";
-import { IconClock } from "@tabler/icons-react";
+import { IconClock, IconArrowLeft } from "@tabler/icons-react";
 import React from "react";
 import { useParams } from "react-router-dom";
 import { getSingleTrip } from "../utils/apiCalls";
@@ -41,13 +35,13 @@ const NewActivity = () => {
   const { setIsLoading } = useStore();
   const [trip, setTrip] = useState(null);
 
-  const pickerControl = (ref) => (
+  const pickerControl = (
     <ActionIcon
       className="text-[#107ac5]"
       size={30}
       variant="subtle"
       color="gray"
-      onClick={() => ref.current?.showPicker()}
+      onClick={() => startTimeRef.current?.showPicker()}
     >
       <IconClock style={{ width: rem(16), height: rem(16) }} stroke={3} />
     </ActionIcon>
@@ -94,14 +88,23 @@ const NewActivity = () => {
       window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     }
   }, [id]);
-  console.log("TRIP", trip);
   return (
-    <div className="px-[100px] ">
-      <Link to="/trip"> --- Quay Lại</Link>
+    <div className="px-[100px] mb-10">
+      <Link to="/trip">
+        <Button
+          className="border-none hover:text-[#0782c5] hover:bg-transparent flex justify-start ml-[-20px] "
+          leftSection={<IconArrowLeft className="text-[#0782c5]" size={30} />}
+          variant="default"
+          color="#0782c5"
+          size="md"
+        >
+          <span className="text-[#0782c5]">Quay Lại</span>
+        </Button>
+      </Link>
       <p
         className={`${
           theme ? "text-white" : "text-slate-700"
-        } text-lg pb-1 font-semibold `}
+        } text-lg font-semibold mt-4`}
       >
         Thêm hoạt động
       </p>
@@ -109,7 +112,7 @@ const NewActivity = () => {
 
       <Grid className="">
         <Grid.Col span={{ base: 12, md: 7, lg: 7 }}>
-          <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
+          <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-[20px] mt-[-5px]">
             <TextInput
               withAsterisk
               label="Tên Sự Kiện"
@@ -119,7 +122,7 @@ const NewActivity = () => {
             />
           </div>
 
-          <Grid className="mt-6">
+          <Grid className="mt-[24px]">
             <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
               <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
                 <DateInput
@@ -140,11 +143,11 @@ const NewActivity = () => {
               </div>
             </Grid.Col>
             <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
-              <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
+              <div className="w-full ">
                 <TimeInput
                   ref={startTimeRef}
                   label="Thời Gian Bắt Đầu"
-                  leftSection={pickerControl(startTimeRef)}
+                  leftSection={pickerControl}
                   // withAsterisk
                   // description="Input description"
                   placeholder="Thời Gian Bắt Đầu"
@@ -153,7 +156,8 @@ const NewActivity = () => {
               </div>
             </Grid.Col>
           </Grid>
-          <Grid className="mt-6">
+
+          <Grid className="mt-[5px]">
             <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
               <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
                 <DateInput
@@ -174,11 +178,11 @@ const NewActivity = () => {
               </div>
             </Grid.Col>
             <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
-              <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
+              <div className="w-full ">
                 <TimeInput
                   ref={endTimeRef}
                   label="Thời Gian Kết Thúc"
-                  leftSection={pickerControl(endTimeRef)}
+                  leftSection={pickerControl}
                   // withAsterisk
                   // description="Input description"
                   placeholder="Thời Gian Kết Thúc"
@@ -187,25 +191,24 @@ const NewActivity = () => {
               </div>
             </Grid.Col>
           </Grid>
-          <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
+
+          <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[5px]">
             <TextInput
               // withAsterisk
-              label="Địa Chỉ"
+              label="Địa chỉ"
               className="w-full flex-1"
-              placeholder="Địa Chỉ"
+              placeholder="Địa chỉ"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
             />
           </div>
-          <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
-            <Textarea
+
+          <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[24px]">
+            <TextInput
               // withAsterisk
-              label="Thông Tin"
+              label="Thông tin liên hệ"
               className="w-full flex-1"
-              placeholder="Thông Tin"
-              autosize
-              minRows={2}
-              maxRows={5}
+              placeholder="Thông tin liên hệ"
               value={info}
               onChange={(e) => setInfo(e.target.value)}
             />
@@ -214,14 +217,6 @@ const NewActivity = () => {
       </Grid>
 
       <div className="flex justify-start gap-3">
-        <div className=" flex items-end justify-start mt-6">
-          <Link to="/trip/">
-            <Button variant="outline" color="Red" size="md" radius="md">
-              Hủy
-            </Button>
-          </Link>
-        </div>
-
         <div className=" flex items-end justify-start mt-6">
           <Button
             variant="light"
@@ -232,6 +227,14 @@ const NewActivity = () => {
           >
             Lưu
           </Button>
+        </div>
+
+        <div className=" flex items-end justify-start mt-6">
+          <Link to="/trip/">
+            <Button variant="outline" color="Red" size="md" radius="md">
+              Hủy
+            </Button>
+          </Link>
         </div>
       </div>
 

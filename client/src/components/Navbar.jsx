@@ -215,7 +215,7 @@ const Navbar = () => {
                   </Link>{" "}
                   <hr />
                   <Link className="text-gray-500 text-sm" to="/profile">
-                    Viết blog1
+                    Viết blog
                   </Link>
                   <Link className="text-gray-500 text-sm" to="/new-post">
                     Bài viết của tôi

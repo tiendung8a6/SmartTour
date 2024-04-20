@@ -9,7 +9,6 @@ import {
   IconPlus,
   IconSearch,
   IconPlaneTilt,
-  ChevronDown,
   IconBed,
   IconCar,
   IconSoup,
@@ -19,6 +18,8 @@ import {
   IconWalk,
   IconParkingCircle,
   IconTrain,
+  IconLuggage,
+  IconAirBalloon,
 } from "@tabler/icons-react";
 import {} from "@tabler/icons-react";
 const Trip = () => {
@@ -40,15 +41,24 @@ const Trip = () => {
   return (
     <div className="py-10 2xl:py-5">
       <div className="px-0 lg:pl-20 2xl:px-20 ">
-        {/* <p className="text-2xl font-semibold text-gray-600 dark:text-white">
-          Lập kế hoạch chuyến đi
-        </p> */}
         <Tabs color="teal" background="red" defaultValue="first">
           <Tabs.List>
-            <Tabs.Tab value="first">Chuyến đi sắp tới</Tabs.Tab>
-            <Tabs.Tab value="second" color="blue">
-              {" "}
-              Chuyến đi trước đây{" "}
+            <Tabs.Tab
+              value="first"
+              leftSection={
+                <IconLuggage style={{ width: rem(15), height: rem(15) }} />
+              }
+            >
+              Chuyến đi của tôi
+            </Tabs.Tab>
+            <Tabs.Tab
+              value="second"
+              color="blue"
+              leftSection={
+                <IconAirBalloon style={{ width: rem(15), height: rem(15) }} />
+              }
+            >
+              Chuyến đi công khai
             </Tabs.Tab>
           </Tabs.List>
 
@@ -858,7 +868,7 @@ const Trip = () => {
                     <br />
                     <span className="flex justify-center">
                       <Button className="flex justify-center" variant="filled">
-                        Add Trip
+                        Thêm chuyến đi
                       </Button>
                     </span>
                     <br />

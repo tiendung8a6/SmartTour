@@ -18,7 +18,6 @@ import { Toaster, toast } from "sonner";
 import {
   IconSearch,
   IconSquarePlus,
-  IconEraser,
   IconBlockquote,
 } from "@tabler/icons-react";
 
@@ -200,12 +199,7 @@ const Categories = () => {
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
             />
-            <Button
-              leftSection={<IconEraser size={15} />}
-              // className="ml-2"
-              onClick={() => setSearchTerm("")}
-              variant="light"
-            >
+            <Button onClick={() => setSearchTerm("")} variant="light">
               Xóa
             </Button>
           </div>

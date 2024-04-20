@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Button, Container, Grid } from "@mantine/core";
+import { Button, Grid } from "@mantine/core";
 import useStore from "../store";
 import { getSingleTrip } from "../utils/apiCalls";
 import {
   IconArrowLeft,
   IconPlaneInflight,
-  IconSoup,
   IconCar,
   IconBuildingSkyscraper,
-  IconCalendarStats,
   IconTrain,
   IconParkingCircle,
-  IconFlag,
   IconWalk,
+  IconNote,
+  IconBrandZoom,
+  IconMusic,
+  IconToolsKitchen2,
+  IconMasksTheater,
 } from "@tabler/icons-react";
 const PlansCreate = () => {
   const { setIsLoading } = useStore();
@@ -126,10 +128,10 @@ const PlansCreate = () => {
             to={`/trip/${trip._id}/activity/create`}
             className="p-4 border rounded-full flex bg-gray-50"
           >
-            <IconWalk stroke={2} className="ml-[10px] text-[#41b7cb] " />
+            <IconCar stroke={2} className="ml-[10px] text-[#41b7cb] " />
             <span className="ml-[10px] text-[#0782c5] font-semibold ">
               {" "}
-              Hoạt động
+              Thuê ô tô
             </span>
           </Link>{" "}
           <br />
@@ -137,10 +139,13 @@ const PlansCreate = () => {
             to={`/trip/${trip._id}/activity/create`}
             className="p-4 border rounded-full flex bg-gray-50"
           >
-            <IconWalk stroke={2} className="ml-[10px] text-[#41b7cb] " />
+            <IconMasksTheater
+              stroke={2}
+              className="ml-[10px] text-[#41b7cb] "
+            />
             <span className="ml-[10px] text-[#0782c5] font-semibold ">
               {" "}
-              Hoạt động
+              Hát kịch
             </span>
           </Link>{" "}
           <br />
@@ -148,10 +153,21 @@ const PlansCreate = () => {
             to={`/trip/${trip._id}/activity/create`}
             className="p-4 border rounded-full flex bg-gray-50"
           >
-            <IconWalk stroke={2} className="ml-[10px] text-[#41b7cb] " />
+            <IconBrandZoom stroke={2} className="ml-[10px] text-[#41b7cb] " />
             <span className="ml-[10px] text-[#0782c5] font-semibold ">
               {" "}
-              Hoạt động
+              Cuộc họp
+            </span>
+          </Link>{" "}
+          <br />
+          <Link
+            to={`/trip/${trip._id}/activity/create`}
+            className="p-4 border rounded-full flex bg-gray-50"
+          >
+            <IconMusic stroke={2} className="ml-[10px] text-[#41b7cb] " />
+            <span className="ml-[10px] text-[#0782c5] font-semibold ">
+              {" "}
+              Hòa nhạc
             </span>
           </Link>{" "}
           <br />
@@ -162,10 +178,10 @@ const PlansCreate = () => {
             to={`/trip/${trip._id}/activity/create`}
             className="p-4 border rounded-full flex bg-gray-50"
           >
-            <IconWalk stroke={2} className="ml-[10px] text-[#41b7cb] " />
+            <IconNote stroke={2} className="ml-[10px] text-[#41b7cb] " />
             <span className="ml-[10px] text-[#0782c5] font-semibold ">
               {" "}
-              Hoạt động
+              Ghi chú
             </span>
           </Link>{" "}
           <br />
@@ -173,10 +189,13 @@ const PlansCreate = () => {
             to={`/trip/${trip._id}/activity/create`}
             className="p-4 border rounded-full flex bg-gray-50"
           >
-            <IconWalk stroke={2} className="ml-[10px] text-[#41b7cb] " />
+            <IconParkingCircle
+              stroke={2}
+              className="ml-[10px] text-[#41b7cb] "
+            />
             <span className="ml-[10px] text-[#0782c5] font-semibold ">
               {" "}
-              Hoạt động
+              Bãi đậu xe
             </span>
           </Link>{" "}
           <br />
@@ -184,10 +203,24 @@ const PlansCreate = () => {
             to={`/trip/${trip._id}/activity/create`}
             className="p-4 border rounded-full flex bg-gray-50"
           >
-            <IconWalk stroke={2} className="ml-[10px] text-[#41b7cb] " />
+            <IconTrain stroke={2} className="ml-[10px] text-[#41b7cb] " />
             <span className="ml-[10px] text-[#0782c5] font-semibold ">
               {" "}
-              Hoạt động
+              Đường sắt
+            </span>
+          </Link>{" "}
+          <br />
+          <Link
+            to={`/trip/${trip._id}/activity/create`}
+            className="p-4 border rounded-full flex bg-gray-50"
+          >
+            <IconToolsKitchen2
+              stroke={2}
+              className="ml-[10px] text-[#41b7cb] "
+            />
+            <span className="ml-[10px] text-[#0782c5] font-semibold ">
+              {" "}
+              Nhà hàng
             </span>
           </Link>{" "}
           <br />
