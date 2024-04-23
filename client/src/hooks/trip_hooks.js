@@ -7,7 +7,7 @@ import { updateURL } from "../utils";
 import { API_URI } from "../utils/apiCalls";
 
 export const useTrips = () => {
-  const { setIsLoading, user } = useStore();
+  const { setIsLoading, user, signOut } = useStore();
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -34,10 +34,13 @@ export const useTrips = () => {
         setTrips(data?.data || []);
         setNumOfPages(data?.numOfPage || 0);
       } catch (error) {
-        toast.error("Something went wrong.");
-
-        const err = error?.response?.data || error?.response;
-        console.log(error);
+        if (error.response.status === 401) {
+          signOut();
+          navigate("/sign-in");
+        } else {
+          toast.error("Something went wrong.");
+          console.log(error);
+        }
       } finally {
         setIsLoading(false);
       }
