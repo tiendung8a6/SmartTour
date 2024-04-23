@@ -79,7 +79,7 @@ const TripSummary = () => {
         <div className="w-full md:w-full flex flex-col gap-3 py-[5px] px-[20px]  ">
           <h6 className=" text-[1.5rem] font-semibold dark:text-white text-justify">
             <span>
-              <Link to={`/trip/${trip._id}`}>{trip?.tripName}</Link>
+              <div to={`/trip/${trip._id}`}>{trip?.tripName}</div>
             </span>
           </h6>
           <div className=" flex gap-2 flex-col mt[-10px]">
