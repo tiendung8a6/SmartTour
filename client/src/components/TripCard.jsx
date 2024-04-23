@@ -1,20 +1,16 @@
-import Markdown from "markdown-to-jsx";
 import React from "react";
-// import { AiOutlineArrowRight } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { Grid, Menu, Button, Text, rem } from "@mantine/core";
-// icon tabler
+import { Grid, Menu, Button, rem } from "@mantine/core";
 import {
   IconCirclesRelation,
   IconPencil,
   IconDots,
   IconPrinter,
   IconChevronDown,
-  IconSearch,
-  IconPhoto,
   IconDownload,
   IconTrash,
-  IconArrowsLeftRight,
+  IconBrandFacebook,
+  IconBrandTwitter,
 } from "@tabler/icons-react";
 const TripCard = ({ trip, index }) => {
   const startDate = new Date(trip?.startDate);
@@ -45,19 +41,54 @@ const TripCard = ({ trip, index }) => {
             {diffDays === 0 ? "1 ngày" : `${diffDays} ngày`})
           </span>
 
-          <span className="flex">
-            <span className="bg-[#0782c5] border-[#0782c5] border rounded-full w-[24px] h-[24px] p-[2px]    ">
-              <IconCirclesRelation
-                stroke={2}
-                className="text-[white] m-[1px] h-[17px] w-[17px] "
-              />
-            </span>
-            <span className="ml-[10px]">
-              <Link className="text-[#0782c5] font-medium text-sm">
-                Chia sẻ
-              </Link>
-            </span>
-          </span>
+          <Grid>
+            <Grid.Col span={{ base: 12, md: 6, lg: 3 }} className="ml-[-19px]">
+              <Menu shadow="md" width={210}>
+                <Menu.Target>
+                  <Button className="flex bg-transparent hover:bg-transparent ">
+                    <span className="bg-[#0782c5] border-[#0782c5] border rounded-full w-[24px] h-[24px] p-[2px]    ">
+                      <IconCirclesRelation
+                        stroke={2}
+                        className="text-[white] m-[1px] h-[17px] w-[17px] "
+                      />
+                    </span>
+                    <span className="ml-[10px] ">
+                      <div className="text-[#0782c5] flex items-center font-medium text-sm">
+                        Chia sẻ
+                        <IconChevronDown
+                          stroke={2}
+                          className="text-[#0782c5] ml-1 mt-[1px] h-[17px] w-[17px] "
+                        />
+                      </div>
+                    </span>
+                  </Button>
+                </Menu.Target>
+
+                <Menu.Dropdown>
+                  <Menu.Item
+                    leftSection={
+                      <IconBrandFacebook
+                        style={{ width: rem(14), height: rem(14) }}
+                      />
+                    }
+                    className="text-[#0782c5] flex items-center"
+                  >
+                    Chia sẻ lên Facebook
+                  </Menu.Item>
+                  <Menu.Item
+                    leftSection={
+                      <IconBrandTwitter
+                        style={{ width: rem(14), height: rem(14) }}
+                      />
+                    }
+                    className="text-[#0782c5] flex items-center"
+                  >
+                    Chia sẻ lên Twitter
+                  </Menu.Item>
+                </Menu.Dropdown>
+              </Menu>
+            </Grid.Col>
+          </Grid>
         </div>
         <Grid>
           <Grid.Col

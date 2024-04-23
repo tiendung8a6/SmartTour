@@ -23,13 +23,13 @@ const UpdateProfile = () => {
   const [file, setFile] = useState("");
   const [fileURL, setFileURL] = useState(user?.user?.image || ""); // Initialize with current image URL
 
-  const name = user?.user.name.split(" ");
+  const name = user?.user?.name.split(" ");
 
   const form = useForm({
     initialValues: {
-      email: user?.user.email,
-      firstName: name[0],
-      lastName: name[1],
+      email: user?.user?.email,
+      firstName: name?.[0],
+      lastName: name?.[1],
     },
     validate: {
       firstName: (value) =>

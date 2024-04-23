@@ -44,12 +44,12 @@ const Profile = () => {
   const [file, setFile] = useState("");
   const [fileURL, setFileURL] = useState(user?.user?.image || "");
 
-  const name = user?.user.name.split(" ");
+  const name = user?.user?.name.split(" ");
   const form = useForm({
     initialValues: {
-      email: user?.user.email,
-      firstName: name[0],
-      lastName: name.slice(1).join(" "),
+      email: user?.user?.email,
+      firstName: name?.[0],
+      lastName: name?.slice(1)?.join(" "),
     },
     validate: {
       firstName: (value) =>
@@ -108,7 +108,7 @@ const Profile = () => {
             <Grid className="">
               <Grid.Col span={4} className="">
                 <img
-                  src={user?.user.image}
+                  src={user?.user?.image}
                   alt="Profile"
                   className="w-[50px] mx-auto h-[50px]  sm:w-[40px]  sm:h-[40px] rounded-full"
                 />
@@ -185,7 +185,7 @@ const Profile = () => {
             <div>
               <div className="mt-[-100px] flex justify-start m-[64px] ">
                 <img
-                  src={user?.user.image}
+                  src={user?.user?.image}
                   alt="Profile"
                   className="w-[150px]  h-[150px] rounded-full"
                 />

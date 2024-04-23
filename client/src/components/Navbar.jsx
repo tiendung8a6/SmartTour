@@ -10,11 +10,11 @@ import { Grid } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { Drawer, Button1 } from "@mantine/core";
 function getInitials(fullName) {
-  const names = fullName.split(" ");
+  const names = fullName?.split(" ");
 
-  const initials = names.slice(0, 2).map((name) => name[0].toUpperCase());
+  const initials = names?.slice(0, 2)?.map((name) => name[0]?.toUpperCase());
 
-  const initialsStr = initials.join("");
+  const initialsStr = initials?.join("");
 
   return initialsStr;
 }
@@ -26,7 +26,7 @@ const MobileMenu = ({ user, signOut }) => {
     setIsMenuOpen(!isMenuOpen);
   };
   const userEmail = user?.user?.email;
-  const username1 = userEmail ? userEmail.split("@")[0] : "";
+  const username1 = userEmail ? userEmail?.split("@")[0] : "";
 
   return (
     <div className="flex ">
@@ -69,7 +69,7 @@ const MobileMenu = ({ user, signOut }) => {
                 <Grid>
                   <Grid.Col span={4} className="my-auto">
                     <img
-                      src={user?.user.image}
+                      src={user?.user?.image}
                       alt="Profile"
                       className="w-10 h-10 rounded-full"
                     />
@@ -142,13 +142,11 @@ const Navbar = () => {
 
   const handleSignOut = () => {
     localStorage.removeItem("userInfo");
-    localStorage.removeItem("user");
+    // localStorage.removeItem("user");
     signOut();
-    window.location.reload();
-    window.location.href = "/";
   };
   const userEmail = user?.user?.email;
-  const username1 = userEmail ? userEmail.split("@")[0] : "";
+  const username1 = userEmail ? userEmail?.split("@")[0] : "";
 
   return (
     <nav className="flex flex-col md:flex-row w-full py-5  items-center justify-between gap-4 md:gap-0">
@@ -172,15 +170,15 @@ const Navbar = () => {
               onClick={() => setShowProfile((prev) => !prev)}
             >
               <div className="flex gap-1 items-center cursor-pointer">
-                {user?.user.image ? (
+                {user?.user?.image ? (
                   <img
-                    src={user?.user.image}
+                    src={user?.user?.image}
                     alt="Profile"
                     className="w-8 h-8 rounded-full"
                   />
                 ) : (
                   <span className="text-white w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center">
-                    {getInitials(user?.user.name)}
+                    {getInitials(user?.user?.name)}
                   </span>
                 )}
                 <span className="font-medium text-black dark:text-gray-500">
@@ -193,7 +191,7 @@ const Navbar = () => {
                   <Grid>
                     <Grid.Col span={4} className="my-auto">
                       <img
-                        src={user?.user.image}
+                        src={user?.user?.image}
                         alt="Profile"
                         className="w-10 h-10 rounded-full"
                       />
