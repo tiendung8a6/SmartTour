@@ -32,8 +32,9 @@ export const createPlanActivity = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      message: "Plan created successfully and added to trip",
+      message: "Plan activity created successfully and added to trip",
       data: plan,
+      tripId: trip._id,
     });
   } catch (error) {
     console.error(error);
@@ -88,8 +89,9 @@ export const createPlanAlodging = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      message: "Plan created successfully and added to trip",
+      message: "Plan lodging created successfully and added to trip",
       data: plan,
+      tripId: trip._id,
     });
   } catch (error) {
     console.error(error);

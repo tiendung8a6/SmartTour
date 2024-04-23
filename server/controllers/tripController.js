@@ -108,7 +108,8 @@ export const getTrip = async (req, res, next) => {
       })
       .populate({
         path: "plans",
-        select: "planName startDate startTime endDate endTime address info",
+        select:
+          "planName type startDate startTime endDate endTime address info phone web email number describe",
       });
 
     await Trips.findByIdAndUpdate(tripId, trip);

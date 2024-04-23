@@ -79,9 +79,7 @@ const TripSummary = () => {
         <div className="w-full md:w-full flex flex-col gap-3 py-[5px] px-[20px]  ">
           <h6 className=" text-[1.5rem] font-semibold dark:text-white text-justify">
             <span>
-              <Link to={`/trip/${trip._id}`}>
-                {trip?.tripName.slice(0, 60)}
-              </Link>
+              <Link to={`/trip/${trip._id}`}>{trip?.tripName}</Link>
             </span>
           </h6>
           <div className=" flex gap-2 flex-col mt[-10px]">
@@ -208,7 +206,7 @@ const TripSummary = () => {
       >
         <span className="flex justify-center mt-[-3px]">
           <IconCirclePlus stroke={2} className="mr-1" />
-          Thêm chuyến đi
+          Thêm kế hoạch
         </span>
       </Link>
     </div>

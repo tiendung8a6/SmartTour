@@ -4,7 +4,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { useEffect, useState } from "react";
 import { Toaster, toast } from "sonner";
 import { LoadingClient } from "../components";
-import { useCreateActivityPlant } from "../hooks/client-hook";
+import { useCreateLodgingPlant } from "../hooks/client-hook";
 import useStore from "../store";
 import { DateInput } from "@mantine/dates";
 import { Link } from "react-router-dom";
@@ -15,15 +15,20 @@ import { IconClock, IconArrowLeft } from "@tabler/icons-react";
 import React from "react";
 import { useParams } from "react-router-dom";
 import { getSingleTrip } from "../utils/apiCalls";
-const NewActivity = () => {
+const NewLodging = () => {
   const { colorScheme } = useMantineColorScheme();
   const { id } = useParams();
   const { user } = useStore();
   const [visible, { toggle }] = useDisclosure(false);
-  const { isPending, mutate } = useCreateActivityPlant(id, toast, user?.token);
+  const { isPending, mutate } = useCreateLodgingPlant(id, toast, user?.token);
   const [planName, setPlanName] = useState(null);
   const [address, setAddress] = useState(null);
   const [info, setInfo] = useState(null);
+  const [phone, setPhone] = useState(null);
+  const [web, setWeb] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [number, setNumber] = useState(null);
+  const [describe, setDescribe] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [startTime, setStartTime] = useState(null);
@@ -57,7 +62,6 @@ const NewActivity = () => {
       <IconClock style={{ width: rem(16), height: rem(16) }} stroke={3} />
     </ActionIcon>
   );
-
   const handleSubmit = async () => {
     if (!planName) {
       toast.error("planName is required.");
@@ -80,6 +84,11 @@ const NewActivity = () => {
       endTime,
       address,
       info,
+      phone,
+      web,
+      email,
+      number,
+      describe,
     });
   };
 
@@ -116,9 +125,9 @@ const NewActivity = () => {
       <p
         className={`${
           theme ? "text-white" : "text-slate-700"
-        } text-lg font-semibold mt-4`}
+        } text-2xl font-semibold mt-4`}
       >
-        Thêm hoạt động
+        Thêm chỗ ở
       </p>
       <br />
 
@@ -127,9 +136,9 @@ const NewActivity = () => {
           <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-[20px] mt-[-5px]">
             <TextInput
               withAsterisk
-              label="Tên Sự Kiện"
+              label="Tên chỗ ở"
               className="w-full flex-1"
-              placeholder="Tên Sự Kiện"
+              placeholder="Nhập tên chỗ ở"
               onChange={(e) => setPlanName(e.target.value)}
             />
           </div>
@@ -143,9 +152,9 @@ const NewActivity = () => {
                   }
                   clearable
                   withAsterisk
-                  label="Ngày Bắt Đầu"
+                  label="Ngày nhận phòng"
                   className="w-full flex-1"
-                  placeholder="Ngày Bắt Đầu"
+                  placeholder="Chọn ngày nhận phòng"
                   minDate={new Date(trip?.startDate)}
                   maxDate={new Date(trip?.endDate)}
                   valueFormat="DD/MM/YYYY"
@@ -158,11 +167,11 @@ const NewActivity = () => {
               <div className="w-full ">
                 <TimeInput
                   ref={startTimeRef}
-                  label="Thời Gian Bắt Đầu"
+                  label="Giờ nhận phòng"
                   leftSection={pickerStartTimeControl}
                   // withAsterisk
                   // description="Input description"
-                  placeholder="Thời Gian Bắt Đầu"
+                  placeholder="Chọn giờ nhận phòng"
                   onChange={(e) => setStartTime(e.target.value)}
                 />
               </div>
@@ -178,9 +187,9 @@ const NewActivity = () => {
                   }
                   clearable
                   withAsterisk
-                  label="Ngày Kết Thúc"
+                  label="Ngày trả phòng"
                   className="w-full flex-1"
-                  placeholder="Ngày Kết Thúc"
+                  placeholder="Chọn ngày trả phòng"
                   valueFormat="DD/MM/YYYY"
                   minDate={new Date(trip?.startDate)}
                   maxDate={new Date(trip?.endDate)}
@@ -193,11 +202,11 @@ const NewActivity = () => {
               <div className="w-full ">
                 <TimeInput
                   ref={endTimeRef}
-                  label="Thời Gian Kết Thúc"
+                  label="Giờ trả phòng"
                   leftSection={pickerEndTimeControl}
                   // withAsterisk
                   // description="Input description"
-                  placeholder="Thời Gian Kết Thúc"
+                  placeholder="Chọn giờ trả phòng"
                   onChange={(e) => setEndTime(e.target.value)}
                 />
               </div>
@@ -218,12 +227,74 @@ const NewActivity = () => {
           <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[24px]">
             <TextInput
               // withAsterisk
-              label="Thông tin liên hệ"
+              label="Điện thoại"
               className="w-full flex-1"
-              placeholder="Thông tin liên hệ"
+              placeholder="Nhập điện thoại"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </div>
+
+          <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[24px]">
+            <TextInput
+              // withAsterisk
+              label="Trang Web "
+              className="w-full flex-1"
+              placeholder="Nhập trang web"
+              value={web}
+              onChange={(e) => setWeb(e.target.value)}
+            />
+          </div>
+
+          <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[24px]">
+            <TextInput
+              // withAsterisk
+              label="Email"
+              className="w-full flex-1"
+              placeholder="Nhập email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+
+          <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[24px]">
+            <TextInput
+              // withAsterisk
+              label="Thông tin thêm"
+              className="w-full flex-1"
+              placeholder="Nhập thông tin "
               value={info}
               onChange={(e) => setInfo(e.target.value)}
             />
+          </div>
+          <div className="mt-[25px] text-lg	text-black	">
+            <p
+              className={`${
+                theme ? "text-white" : "text-slate-700"
+              } text-base	 font-semibold`}
+            >
+              Thông Tin Phòng
+            </p>
+            <div className="w-[50%] flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[15px]">
+              <TextInput
+                // withAsterisk
+                label="Số phòng"
+                className="w-full flex-1"
+                placeholder="Nhập số phòng"
+                value={number}
+                onChange={(e) => setNumber(e.target.value)}
+              />
+            </div>
+            <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[24px]">
+              <TextInput
+                // withAsterisk
+                label="Mô tả phòng"
+                className="w-full flex-1"
+                placeholder="Nhập mô tả phòng"
+                value={describe}
+                onChange={(e) => setDescribe(e.target.value)}
+              />
+            </div>
           </div>
         </Grid.Col>
       </Grid>
@@ -256,4 +327,4 @@ const NewActivity = () => {
   );
 };
 
-export default NewActivity;
+export default NewLodging;

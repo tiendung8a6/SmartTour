@@ -105,7 +105,7 @@ const PlansCreate = () => {
 
         <Grid.Col span={{ base: 12, md: 4, lg: 2 }}>
           <Link
-            to={`/trip/${trip._id}/activity/create`}
+            to={`/trip/${trip._id}/lodging/create`}
             className="p-4 border rounded-full flex bg-gray-50"
           >
             <IconBuildingSkyscraper

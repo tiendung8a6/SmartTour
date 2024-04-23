@@ -168,7 +168,7 @@ export const useUpdatePost = (toast, token) => {
   });
 };
 
-export const useCreatePlant = (id, toast, token) => {
+export const useCreateActivityPlant = (id, toast, token) => {
   return useMutation({
     mutationFn: async (formData) => {
       const { data } = await axios.post(
@@ -191,12 +191,38 @@ export const useCreatePlant = (id, toast, token) => {
       toast.success(data?.message);
 
       setTimeout(() => {
-        window.location.replace(`/trip/${data.data._id}`);
+        window.location.replace(`/trip/${data?.tripId}`);
       }, 1000);
     },
   });
 };
+export const useCreateLodgingPlant = (id, toast, token) => {
+  return useMutation({
+    mutationFn: async (formData) => {
+      const { data } = await axios.post(
+        `${API_URL}/plans/create/lodging/${id}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return data;
+    },
 
+    onError: async (error) => {
+      toast.error(error?.response?.data?.message ?? error.message);
+    },
+
+    onSuccess: async (data) => {
+      toast.success(data?.message);
+      setTimeout(() => {
+        window.location.replace(`/trip/${data?.tripId}`);
+      }, 1000);
+    },
+  });
+};
 export const useUpdateTrip = (toast, token) => {
   return useMutation({
     mutationFn: async ({ id, tripName, city, startDate, endDate, image }) => {
