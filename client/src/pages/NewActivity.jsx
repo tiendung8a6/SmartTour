@@ -60,18 +60,34 @@ const NewActivity = () => {
 
   const handleSubmit = async () => {
     if (!planName) {
-      toast.error("planName is required.");
+      toast.error("Vui lòng nhập tên sự kiện.");
       return;
     }
     if (!startDate) {
-      toast.error("startDate is required.");
+      toast.error("Vui lòng chọn ngày bắt đầu.");
       return;
     }
     if (!endDate) {
-      toast.error("endDate is required.");
+      toast.error("Vui lòng chọn ngày kết thúc.");
+      return;
+    }
+    if (endDate < startDate) {
+      toast.error("Ngày kết thúc phải sau ngày bắt đầu.");
       return;
     }
 
+    if (endDate.getTime() === startDate.getTime()) {
+      if (!startTime || !endTime) {
+        toast.error("Thời gian bắt đầu và kết thúc là bắt buộc.");
+        return;
+      }
+      if (endTime <= startTime) {
+        toast.error(
+          "Thời gian kết thúc phải sau thời gian bắt đầu nếu cùng một ngày."
+        );
+        return;
+      }
+    }
     mutate({
       planName,
       startDate,
@@ -102,7 +118,7 @@ const NewActivity = () => {
   }, [id]);
   return (
     <div className="px-[100px] mb-10">
-      <Link to="/trip">
+      <Link to={`/trip/${trip?._id}/plans/create`}>
         <Button
           className="border-none hover:text-[#0782c5] hover:bg-transparent flex justify-start ml-[-20px] "
           leftSection={<IconArrowLeft className="text-[#0782c5]" size={30} />}
@@ -160,7 +176,7 @@ const NewActivity = () => {
                   ref={startTimeRef}
                   label="Thời Gian Bắt Đầu"
                   leftSection={pickerStartTimeControl}
-                  // withAsterisk
+                  withAsterisk
                   // description="Input description"
                   placeholder="Thời Gian Bắt Đầu"
                   onChange={(e) => setStartTime(e.target.value)}
@@ -195,7 +211,7 @@ const NewActivity = () => {
                   ref={endTimeRef}
                   label="Thời Gian Kết Thúc"
                   leftSection={pickerEndTimeControl}
-                  // withAsterisk
+                  withAsterisk
                   // description="Input description"
                   placeholder="Thời Gian Kết Thúc"
                   onChange={(e) => setEndTime(e.target.value)}

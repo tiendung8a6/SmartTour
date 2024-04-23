@@ -64,16 +64,33 @@ const NewLodging = () => {
   );
   const handleSubmit = async () => {
     if (!planName) {
-      toast.error("planName is required.");
+      toast.error("Vui lòng nhập tên chỗ ở.");
       return;
     }
     if (!startDate) {
-      toast.error("startDate is required.");
+      toast.error("Vui lòng chọn ngày nhận phòng.");
       return;
     }
     if (!endDate) {
-      toast.error("endDate is required.");
+      toast.error("Vui lòng chọn ngày trả nhận phòng.");
       return;
+    }
+    if (endDate < startDate) {
+      toast.error("Ngày trả phòng phải sau ngày nhận phòng.");
+      return;
+    }
+
+    if (endDate.getTime() === startDate.getTime()) {
+      if (!startTime || !endTime) {
+        toast.error("Thời gian nhận phòng và trả phòng là bắt buộc.");
+        return;
+      }
+      if (endTime <= startTime) {
+        toast.error(
+          "Thời gian trả phòng phải sau thời gian nhận phòng nếu trong cùng một ngày."
+        );
+        return;
+      }
     }
 
     mutate({
@@ -111,7 +128,7 @@ const NewLodging = () => {
   }, [id]);
   return (
     <div className="px-[100px] mb-10">
-      <Link to="/trip">
+      <Link to={`/trip/${trip?._id}/plans/create`}>
         <Button
           className="border-none hover:text-[#0782c5] hover:bg-transparent flex justify-start ml-[-20px] "
           leftSection={<IconArrowLeft className="text-[#0782c5]" size={30} />}
@@ -169,7 +186,7 @@ const NewLodging = () => {
                   ref={startTimeRef}
                   label="Giờ nhận phòng"
                   leftSection={pickerStartTimeControl}
-                  // withAsterisk
+                  withAsterisk
                   // description="Input description"
                   placeholder="Chọn giờ nhận phòng"
                   onChange={(e) => setStartTime(e.target.value)}
@@ -204,7 +221,7 @@ const NewLodging = () => {
                   ref={endTimeRef}
                   label="Giờ trả phòng"
                   leftSection={pickerEndTimeControl}
-                  // withAsterisk
+                  withAsterisk
                   // description="Input description"
                   placeholder="Chọn giờ trả phòng"
                   onChange={(e) => setEndTime(e.target.value)}

@@ -54,7 +54,7 @@ const PlansCreate = () => {
 
   return (
     <div className="mx-10 mt-5">
-      <Link to="/trip">
+      <Link to={`/trip/${trip._id}`}>
         <Button
           className="border-none hover:text-[#0782c5] hover:bg-transparent flex justify-start ml-[-20px] "
           leftSection={<IconArrowLeft className="text-[#0782c5]" size={30} />}
@@ -62,7 +62,7 @@ const PlansCreate = () => {
           color="#0782c5"
           size="md"
         >
-          <span className="text-[#0782c5]">Trở Lại danh sách chuyến đi</span>
+          <span className="text-[#0782c5]">Trở Lại Tóm tắt chuyến đi</span>
         </Button>
       </Link>
       <div className="text-xl font-medium mt-5">
