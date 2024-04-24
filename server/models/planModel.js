@@ -15,9 +15,10 @@ const planSchema = new mongoose.Schema(
     email: { type: String, required: false }, //              lodging (email nhà cung cấp),  flights(email Sân bay)
     number: { type: String, required: false }, //             lodging (Số phòng),           flights(Chỗ ngồi)
     describe: { type: String, required: false }, //           lodging (mô tả),              flights(Bữa ăn Sân bay)
+    ticket: { type: String, required: false }, //                                           flights(hạng vé/Giá vé)
+    departureGate: { type: String, required: false }, //                                    flights(cổng khởi hành)
     destination: { type: String, required: false }, //                                      flights(điểm đến)
     arrivalGate: { type: String, required: false }, //                                      flights(cổng đến)
-    departureGate: { type: String, required: false }, //                                    flights(cổng khởi hành)
   },
   { timestamps: true }
 );
