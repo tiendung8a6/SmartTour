@@ -19,6 +19,7 @@ import PlansCreate from "./PlansCreate";
 import NewActivity from "./NewActivity";
 import EditTrip from "./EditTrip";
 import NewLodging from "./NewLodging";
+import NewFlights from "./NewFlights";
 export {
   BlogDetail,
   CategoryPage,
@@ -41,4 +42,5 @@ export {
   NewActivity,
   EditTrip,
   NewLodging,
+  NewFlights,
 };
