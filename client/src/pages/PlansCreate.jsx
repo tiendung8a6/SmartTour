@@ -66,8 +66,7 @@ const PlansCreate = () => {
         </Button>
       </Link>
       <div className="text-xl font-medium mt-5">
-        {" "}
-        Lập kế hoạch cho {trip?.tripName} vào ngày{" "}
+        Lập kế hoạch cho {trip?.tripName} vào ngày
         {new Date(trip?.startDate).toLocaleDateString("vi-VN")}
         {/* {new Date(trip?.endDate).toLocaleDateString("vi-VN")} (
         {diffDays === 0 ? "1 ngày" : `${diffDays} ngày`}) */}
@@ -81,7 +80,6 @@ const PlansCreate = () => {
           >
             <IconWalk stroke={2} className="ml-[10px] text-[#41b7cb] " />
             <span className="ml-[10px] text-[#0782c5] font-semibold ">
-              {" "}
               Hoạt động
             </span>
           </Link>
@@ -89,7 +87,7 @@ const PlansCreate = () => {
 
         <Grid.Col span={{ base: 12, md: 4, lg: 2 }}>
           <Link
-            to={`/trip/${trip._id}/activity/create`}
+            to={`/trip/${trip._id}/flights/create`}
             className="p-4 border rounded-full flex bg-gray-50"
           >
             <IconPlaneInflight
@@ -97,7 +95,6 @@ const PlansCreate = () => {
               className="ml-[10px] text-[#41b7cb] "
             />
             <span className="ml-[10px] text-[#0782c5] font-semibold ">
-              {" "}
               Chuyến bay
             </span>
           </Link>

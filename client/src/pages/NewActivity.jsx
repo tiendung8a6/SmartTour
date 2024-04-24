@@ -143,9 +143,9 @@ const NewActivity = () => {
           <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-[20px] mt-[-5px]">
             <TextInput
               withAsterisk
-              label="Tên Sự Kiện"
+              label="Tên sự kiện"
               className="w-full flex-1"
-              placeholder="Tên Sự Kiện"
+              placeholder="Nhập tên sự kiện"
               onChange={(e) => setPlanName(e.target.value)}
             />
           </div>
@@ -159,9 +159,9 @@ const NewActivity = () => {
                   }
                   clearable
                   withAsterisk
-                  label="Ngày Bắt Đầu"
+                  label="Ngày bắt đầu"
                   className="w-full flex-1"
-                  placeholder="Ngày Bắt Đầu"
+                  placeholder="Chọn ngày bắt đầu"
                   minDate={new Date(trip?.startDate)}
                   maxDate={new Date(trip?.endDate)}
                   valueFormat="DD/MM/YYYY"
@@ -174,11 +174,11 @@ const NewActivity = () => {
               <div className="w-full ">
                 <TimeInput
                   ref={startTimeRef}
-                  label="Thời Gian Bắt Đầu"
+                  label="Thời gian bắt đầu"
                   leftSection={pickerStartTimeControl}
                   withAsterisk
                   // description="Input description"
-                  placeholder="Thời Gian Bắt Đầu"
+                  placeholder="Chọn thời gian bắt đầu"
                   onChange={(e) => setStartTime(e.target.value)}
                 />
               </div>
@@ -194,9 +194,9 @@ const NewActivity = () => {
                   }
                   clearable
                   withAsterisk
-                  label="Ngày Kết Thúc"
+                  label="Ngày kết thúc"
                   className="w-full flex-1"
-                  placeholder="Ngày Kết Thúc"
+                  placeholder="Chọn ngày kết thúc"
                   valueFormat="DD/MM/YYYY"
                   minDate={new Date(trip?.startDate)}
                   maxDate={new Date(trip?.endDate)}
@@ -209,11 +209,11 @@ const NewActivity = () => {
               <div className="w-full ">
                 <TimeInput
                   ref={endTimeRef}
-                  label="Thời Gian Kết Thúc"
+                  label="Thời gian kết thúc"
                   leftSection={pickerEndTimeControl}
                   withAsterisk
                   // description="Input description"
-                  placeholder="Thời Gian Kết Thúc"
+                  placeholder="Chọn thời gian kết thúc"
                   onChange={(e) => setEndTime(e.target.value)}
                 />
               </div>
@@ -225,7 +225,7 @@ const NewActivity = () => {
               // withAsterisk
               label="Địa chỉ"
               className="w-full flex-1"
-              placeholder="Địa chỉ"
+              placeholder="Nhập địa chỉ"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
             />
@@ -236,7 +236,7 @@ const NewActivity = () => {
               // withAsterisk
               label="Thông tin liên hệ"
               className="w-full flex-1"
-              placeholder="Thông tin liên hệ"
+              placeholder="Nhập thông tin liên hệ"
               value={info}
               onChange={(e) => setInfo(e.target.value)}
             />

@@ -184,11 +184,11 @@ const NewLodging = () => {
               <div className="w-full ">
                 <TimeInput
                   ref={startTimeRef}
-                  label="Giờ nhận phòng"
+                  label="Thời gian nhận phòng"
                   leftSection={pickerStartTimeControl}
                   withAsterisk
                   // description="Input description"
-                  placeholder="Chọn giờ nhận phòng"
+                  placeholder="Chọn thời gian nhận phòng"
                   onChange={(e) => setStartTime(e.target.value)}
                 />
               </div>
@@ -219,11 +219,11 @@ const NewLodging = () => {
               <div className="w-full ">
                 <TimeInput
                   ref={endTimeRef}
-                  label="Giờ trả phòng"
+                  label="Thời gian trả phòng"
                   leftSection={pickerEndTimeControl}
                   withAsterisk
                   // description="Input description"
-                  placeholder="Chọn giờ trả phòng"
+                  placeholder="Chọn thời gian trả phòng"
                   onChange={(e) => setEndTime(e.target.value)}
                 />
               </div>
@@ -235,7 +235,7 @@ const NewLodging = () => {
               // withAsterisk
               label="Địa chỉ"
               className="w-full flex-1"
-              placeholder="Địa chỉ"
+              placeholder="Nhập địa chỉ"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
             />

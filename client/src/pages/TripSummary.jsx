@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button, Container } from "@mantine/core";
 import useStore from "../store";
-import { getSingleTrip } from "../utils/apiCalls";
 import { Timeline, Text } from "@mantine/core";
 import { Grid, Menu, rem } from "@mantine/core";
 import { IconArrowLeft, IconCirclePlus } from "@tabler/icons-react";
+import { getSingleTrip } from "../utils/apiCalls";
+
 import {
   IconGitBranch,
   IconGitPullRequest,
