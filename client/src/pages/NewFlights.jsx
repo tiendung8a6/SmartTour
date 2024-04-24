@@ -28,7 +28,7 @@ const NewFlights = () => {
   const [email, setEmail] = useState(null);
   const [number, setNumber] = useState(null);
   const [describe, setDescribe] = useState(null);
-  const [ticket, setTicket] = useState(null);
+  const [type, setType] = useState(null);
   const [price, setPrice] = useState(null);
   const [destination, setDestination] = useState(null);
   const [arrivalGate, setArrivalGate] = useState(null);
@@ -243,8 +243,8 @@ const NewFlights = () => {
                   label="Loại vé"
                   className="w-full flex-1"
                   placeholder="Nhập loại vé"
-                  value={ticket}
-                  onChange={(e) => setTicket(e.target.value)}
+                  value={type}
+                  onChange={(e) => setType(e.target.value)}
                 />
               </div>
             </Grid.Col>
