@@ -29,6 +29,7 @@ const NewFlights = () => {
   const [number, setNumber] = useState(null);
   const [describe, setDescribe] = useState(null);
   const [ticket, setTicket] = useState(null);
+  const [price, setPrice] = useState(null);
   const [destination, setDestination] = useState(null);
   const [arrivalGate, setArrivalGate] = useState(null);
   const [departureGate, setDepartureGate] = useState(null);
@@ -67,30 +68,30 @@ const NewFlights = () => {
   );
   const handleSubmit = async () => {
     if (!planName) {
-      toast.error("Vui lòng nhập tên chỗ ở.");
+      toast.error("Vui lòng nhập hãng hàng không.");
       return;
     }
     if (!startDate) {
-      toast.error("Vui lòng chọn ngày nhận phòng.");
+      toast.error("Vui lòng chọn ngày khởi hành.");
       return;
     }
     if (!endDate) {
-      toast.error("Vui lòng chọn ngày trả nhận phòng.");
+      toast.error("Vui lòng chọn ngày đến.");
       return;
     }
     if (endDate < startDate) {
-      toast.error("Ngày trả phòng phải sau ngày nhận phòng.");
+      toast.error("Ngày đến phải sau ngày khởi hành.");
       return;
     }
 
     if (endDate.getTime() === startDate.getTime()) {
       if (!startTime || !endTime) {
-        toast.error("Thời gian nhận phòng và trả phòng là bắt buộc.");
+        toast.error("Thời gian khởi hành và đến là bắt buộc.");
         return;
       }
       if (endTime <= startTime) {
         toast.error(
-          "Thời gian trả phòng phải sau thời gian nhận phòng nếu trong cùng một ngày."
+          "Thời gian khởi hành phải sau thời gian đến nếu trong cùng một ngày."
         );
         return;
       }
@@ -239,11 +240,11 @@ const NewFlights = () => {
               <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
                 <TextInput
                   // withAsterisk
-                  label="Cổng"
+                  label="Loại vé"
                   className="w-full flex-1"
-                  placeholder="Nhập cổng"
-                  value={departureGate}
-                  onChange={(e) => setDepartureGate(e.target.value)}
+                  placeholder="Nhập loại vé"
+                  value={ticket}
+                  onChange={(e) => setTicket(e.target.value)}
                 />
               </div>
             </Grid.Col>
@@ -251,11 +252,23 @@ const NewFlights = () => {
               <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
                 <TextInput
                   // withAsterisk
-                  label="Hạng / giá vé"
+                  label="Giá vé"
                   className="w-full flex-1"
-                  placeholder="Nhập hạng vé / giá vé"
-                  value={ticket}
-                  onChange={(e) => setTicket(e.target.value)}
+                  placeholder="Nhập giá vé"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                />
+              </div>
+            </Grid.Col>
+            <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
+              <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
+                <TextInput
+                  // withAsterisk
+                  label="Cổng"
+                  className="w-full flex-1"
+                  placeholder="Nhập cổng"
+                  value={departureGate}
+                  onChange={(e) => setDepartureGate(e.target.value)}
                 />
               </div>
             </Grid.Col>

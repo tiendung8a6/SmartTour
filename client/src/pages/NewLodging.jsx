@@ -72,7 +72,7 @@ const NewLodging = () => {
       return;
     }
     if (!endDate) {
-      toast.error("Vui lòng chọn ngày trả nhận phòng.");
+      toast.error("Vui lòng chọn ngày trả phòng.");
       return;
     }
     if (endDate < startDate) {
