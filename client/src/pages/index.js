@@ -20,6 +20,7 @@ import NewActivity from "./NewActivity";
 import EditTrip from "./EditTrip";
 import NewLodging from "./NewLodging";
 import NewFlights from "./NewFlights";
+import NewCar from "./NewCar";
 export {
   BlogDetail,
   CategoryPage,
@@ -43,4 +44,5 @@ export {
   EditTrip,
   NewLodging,
   NewFlights,
+  NewCar,
 };

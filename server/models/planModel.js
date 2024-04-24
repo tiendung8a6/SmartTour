@@ -2,23 +2,23 @@ import mongoose, { Schema } from "mongoose";
 
 const planSchema = new mongoose.Schema(
   {
-    type: { type: String, required: true }, //[activity,lodging,flights]
-    planName: { type: String, required: true }, //activity,   lodging(tên chỗ ở),           flights(Hãng hàng không)
-    startDate: { type: Date, required: true }, //activity,    lodging (Ngày nhận phòng),    flights(Ngày khởi hành)
-    endDate: { type: Date, required: true }, //activity,      lodging ((Ngày trả phòng),    flights(Ngày tới)
-    startTime: { type: String, required: false }, //activity, lodging (Giờ nhận phòng),     flights(Giờ khởi hành)
-    endTime: { type: String, required: false }, //activity,   lodging (Giờ trả phòng),      flights(Giờ tới)
-    address: { type: String, required: false }, //activity,   lodging (Địa chỉ),            flights(sân bay)
-    info: { type: String, required: false }, //activity,      lodging (Liên hệ nhà cung cấp), flights(Số chuyến bay)
-    phone: { type: String, required: false }, //              lodging (Điện thoại nhà cung cấp), flights(ĐT Sân bay)
-    web: { type: String, required: false }, //                lodging (Web nhà cung cấp),      flights(Web Sân bay)
-    email: { type: String, required: false }, //              lodging (email nhà cung cấp),  flights(email Sân bay)
-    number: { type: String, required: false }, //             lodging (Số phòng),           flights(Chỗ ngồi)
-    describe: { type: String, required: false }, //           lodging (mô tả),              flights(Bữa ăn Sân bay)
-    ticket: { type: String, required: false }, //                                           flights(Loại vé)
-    price: { type: String, required: false }, //                                           flights(Giá vé)
-    departureGate: { type: String, required: false }, //                                    flights(cổng khởi hành)
+    type: { type: String, required: true }, //[activity,lodging,flights,car]
+    planName: { type: String, required: true }, //activity,   lodging(tên chỗ ở),           flights(Hãng hàng không)  ,car(Tên đại lý)
+    startDate: { type: Date, required: true }, //activity,    lodging (Ngày nhận phòng),    flights(Ngày khởi hành)   ,car(ngày đón)
+    endDate: { type: Date, required: true }, //activity,      lodging ((Ngày trả phòng),    flights(Ngày tới)         ,car(thời gian đón)
+    startTime: { type: String, required: false }, //activity, lodging (Giờ nhận phòng),     flights(Giờ khởi hành)    ,car(ngày trả)
+    endTime: { type: String, required: false }, //activity,   lodging (Giờ trả phòng),      flights(Giờ tới)          ,car(thời gian trả)
+    address: { type: String, required: false }, //activity,   lodging (Địa chỉ),            flights(sân bay)          ,car(Địa chỉ)
+    info: { type: String, required: false }, //activity,      lodging (Liên hệ nhà cung cấp), flights(Số chuyến bay),
+    phone: { type: String, required: false }, //              lodging (Điện thoại nhà cung cấp), flights(ĐT Sân bay)          ,car(SĐT đai lý)
+    web: { type: String, required: false }, //                lodging (Web nhà cung cấp),      flights(Web Sân bay)          ,car(web đại lý)
+    email: { type: String, required: false }, //              lodging (email nhà cung cấp),  flights(email Sân bay)          ,car(email đại lý)
+    number: { type: String, required: false }, //             lodging (Số phòng),           flights(Chỗ ngồi)                ,car(Số lượng)
+    describe: { type: String, required: false }, //           lodging (mô tả),              flights(Bữa ăn Sân bay)   ,car(Chi tiết xe)
+    form: { type: String, required: false }, //                                           flights(Loại vé)             ,car(loại xe)
+    price: { type: String, required: false }, //                                           flights(Giá vé)              ,car(Chi phí)
     destination: { type: String, required: false }, //                                      flights(điểm đến)
+    departureGate: { type: String, required: false }, //                                    flights(cổng khởi hành)
     arrivalGate: { type: String, required: false }, //                                      flights(cổng đến)
   },
   { timestamps: true }

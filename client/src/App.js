@@ -22,6 +22,7 @@ import {
   EditTrip,
   NewLodging,
   NewFlights,
+  NewCar,
 } from "./pages";
 import { Footer, Loading, Navbar } from "./components";
 import useStore from "./store";
@@ -67,6 +68,8 @@ function App() {
             <Route path="/trip/:id/activity/create" element={<NewActivity />} />
             <Route path="/trip/:id/lodging/create" element={<NewLodging />} />
             <Route path="/trip/:id/flights/create" element={<NewFlights />} />
+            <Route path="/trip/:id/car/create" element={<NewCar />} />
+
             <Route path="/profile" element={<Profile />} />
           </Route>
           <Route path="/sign-up" element={<SignUp />} />

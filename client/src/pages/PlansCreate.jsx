@@ -110,8 +110,7 @@ const PlansCreate = () => {
               className="ml-[10px] text-[#41b7cb] "
             />
             <span className="ml-[10px] text-[#0782c5] font-semibold ">
-              {" "}
-              Khách sạn{" "}
+              Khách sạn
             </span>
           </Link>
         </Grid.Col>
@@ -122,15 +121,14 @@ const PlansCreate = () => {
       <Grid>
         <Grid.Col span={{ base: 12, md: 6, lg: 2 }} className="mt-5">
           <Link
-            to={`/trip/${trip._id}/activity/create`}
+            to={`/trip/${trip._id}/car/create`}
             className="p-4 border rounded-full flex bg-gray-50"
           >
             <IconCar stroke={2} className="ml-[10px] text-[#41b7cb] " />
             <span className="ml-[10px] text-[#0782c5] font-semibold ">
-              {" "}
-              Thuê ô tô
+              Thuê xe
             </span>
-          </Link>{" "}
+          </Link>
           <br />
           <Link
             to={`/trip/${trip._id}/activity/create`}
