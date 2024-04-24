@@ -89,7 +89,7 @@ export const useCreateTrip = (toast, token) => {
 
       setTimeout(() => {
         window.location.replace(`/trip/${data.data._id}`);
-      }, 1500);
+      }, 500);
     },
   });
 };
@@ -144,7 +144,6 @@ export const useDeletePost = (toast, token, mutate) => {
 export const useUpdatePost = (toast, token) => {
   return useMutation({
     mutationFn: async ({ id, title, desc }) => {
-      console.log(token);
       const { data } = await axios.patch(
         `${API_URL}/posts/update/${id}`,
         { title, desc },
@@ -254,7 +253,6 @@ export const useCreateFlightsPlant = (id, toast, token) => {
 export const useUpdateTrip = (toast, token) => {
   return useMutation({
     mutationFn: async ({ id, tripName, city, startDate, endDate, image }) => {
-      console.log(token);
       const { data } = await axios.patch(
         `${API_URL}/trips/update/${id}`,
         { tripName, city, startDate, endDate, image },
@@ -270,10 +268,11 @@ export const useUpdateTrip = (toast, token) => {
     onError: (error) => {
       toast.error(error?.response?.data?.message ?? error.message);
     },
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
       toast.success(data?.message);
-
-      window.location.reload();
+      setTimeout(() => {
+        window.location.replace(`/trip/${data?.data?._id}`);
+      }, 1000);
     },
   });
 };
