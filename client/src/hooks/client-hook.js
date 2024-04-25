@@ -167,7 +167,7 @@ export const useUpdatePost = (toast, token) => {
   });
 };
 
-export const useCreateActivityPlant = (id, toast, token) => {
+export const useCreateActivityPlan = (id, toast, token) => {
   return useMutation({
     mutationFn: async (formData) => {
       const { data } = await axios.post(
@@ -195,7 +195,7 @@ export const useCreateActivityPlant = (id, toast, token) => {
     },
   });
 };
-export const useCreateLodgingPlant = (id, toast, token) => {
+export const useCreateLodgingPlan = (id, toast, token) => {
   return useMutation({
     mutationFn: async (formData) => {
       const { data } = await axios.post(
@@ -223,7 +223,7 @@ export const useCreateLodgingPlant = (id, toast, token) => {
   });
 };
 
-export const useCreateFlightsPlant = (id, toast, token) => {
+export const useCreateFlightsPlan = (id, toast, token) => {
   return useMutation({
     mutationFn: async (formData) => {
       const { data } = await axios.post(
@@ -250,7 +250,7 @@ export const useCreateFlightsPlant = (id, toast, token) => {
     },
   });
 };
-export const useCreateCarPlant = (id, toast, token) => {
+export const useCreateCarPlan = (id, toast, token) => {
   return useMutation({
     mutationFn: async (formData) => {
       const { data } = await axios.post(
@@ -277,6 +277,35 @@ export const useCreateCarPlant = (id, toast, token) => {
     },
   });
 };
+export const useCreateConcertPlan = (id, toast, token) => {
+  return useMutation({
+    mutationFn: async (formData) => {
+      const { data } = await axios.post(
+        `${API_URL}/plans/create/concert/${id}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return data;
+    },
+
+    onError: async (error) => {
+      toast.error(error?.response?.data?.message ?? error.message);
+    },
+
+    onSuccess: async (data) => {
+      toast.success(data?.message);
+
+      setTimeout(() => {
+        window.location.replace(`/trip/${data?.tripId}`);
+      }, 1000);
+    },
+  });
+};
+
 export const useUpdateTrip = (toast, token) => {
   return useMutation({
     mutationFn: async ({ id, tripName, city, startDate, endDate, image }) => {

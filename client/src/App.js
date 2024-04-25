@@ -23,6 +23,7 @@ import {
   NewLodging,
   NewFlights,
   NewCar,
+  NewConcert,
 } from "./pages";
 import { Footer, Loading, Navbar } from "./components";
 import useStore from "./store";
@@ -69,6 +70,7 @@ function App() {
             <Route path="/trip/:id/lodging/create" element={<NewLodging />} />
             <Route path="/trip/:id/flights/create" element={<NewFlights />} />
             <Route path="/trip/:id/car/create" element={<NewCar />} />
+            <Route path="/trip/:id/concert/create" element={<NewConcert />} />
 
             <Route path="/profile" element={<Profile />} />
           </Route>
