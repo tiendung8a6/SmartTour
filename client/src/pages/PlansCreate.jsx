@@ -134,7 +134,7 @@ const PlansCreate = () => {
           </Link>
           <br />
           <Link
-            to={`/trip/${trip._id}/activity/create`}
+            to={`/trip/${trip._id}/theater/create`}
             className="p-4 border rounded-full flex bg-gray-50"
           >
             <IconMasksTheater
@@ -142,10 +142,9 @@ const PlansCreate = () => {
               className="ml-[10px] text-[#41b7cb] "
             />
             <span className="ml-[10px] text-[#0782c5] font-semibold ">
-              {" "}
               Xem phim
             </span>
-          </Link>{" "}
+          </Link>
           <br />
           <Link
             to={`/trip/${trip._id}/concert/create`}
