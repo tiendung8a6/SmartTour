@@ -12,14 +12,14 @@ import { TimeInput } from "@mantine/dates";
 import { IconClock, IconArrowLeft } from "@tabler/icons-react";
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useCreateFlightsPlant } from "../hooks/client-hook";
+import { useCreateFlightsPlan } from "../hooks/client-hook";
 import { getSingleTrip } from "../utils/apiCalls";
 
 const NewFlights = () => {
   const { colorScheme } = useMantineColorScheme();
   const { id } = useParams();
   const { user } = useStore();
-  const { isPending, mutate } = useCreateFlightsPlant(id, toast, user?.token);
+  const { isPending, mutate } = useCreateFlightsPlan(id, toast, user?.token);
   const [planName, setPlanName] = useState(null);
   const [address, setAddress] = useState(null);
   const [info, setInfo] = useState(null);
@@ -242,9 +242,9 @@ const NewFlights = () => {
               <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
                 <TextInput
                   // withAsterisk
-                  label="Loại vé"
+                  label="Hạng vé"
                   className="w-full flex-1"
-                  placeholder="Nhập loại vé"
+                  placeholder="Nhập hạng vé"
                   value={form}
                   onChange={(e) => setForm(e.target.value)}
                 />

@@ -12,14 +12,14 @@ import { TimeInput } from "@mantine/dates";
 import { IconClock, IconArrowLeft } from "@tabler/icons-react";
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useCreateCarPlant } from "../hooks/client-hook";
+import { useCreateCarPlan } from "../hooks/client-hook";
 import { getSingleTrip } from "../utils/apiCalls";
 
 const NewCar = () => {
   const { colorScheme } = useMantineColorScheme();
   const { id } = useParams();
   const { user } = useStore();
-  const { isPending, mutate } = useCreateCarPlant(id, toast, user?.token);
+  const { isPending, mutate } = useCreateCarPlan(id, toast, user?.token);
   const [planName, setPlanName] = useState(null);
   const [address, setAddress] = useState(null);
   const [phone, setPhone] = useState(null);

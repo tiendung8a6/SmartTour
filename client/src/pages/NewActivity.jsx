@@ -4,7 +4,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { useEffect, useState } from "react";
 import { Toaster, toast } from "sonner";
 import { LoadingClient } from "../components";
-import { useCreateActivityPlant } from "../hooks/client-hook";
+import { useCreateActivityPlan } from "../hooks/client-hook";
 import useStore from "../store";
 import { DateInput } from "@mantine/dates";
 import { Link } from "react-router-dom";
@@ -20,7 +20,7 @@ const NewActivity = () => {
   const { id } = useParams();
   const { user } = useStore();
   const [visible, { toggle }] = useDisclosure(false);
-  const { isPending, mutate } = useCreateActivityPlant(id, toast, user?.token);
+  const { isPending, mutate } = useCreateActivityPlan(id, toast, user?.token);
   const [planName, setPlanName] = useState(null);
   const [address, setAddress] = useState(null);
   const [info, setInfo] = useState(null);
