@@ -67,7 +67,10 @@ const PlansCreate = () => {
       </Link>
       <div className="text-xl font-medium mt-5">
         Lập kế hoạch cho {trip?.tripName} vào ngày
-        {new Date(trip?.startDate).toLocaleDateString("vi-VN")}
+        <span> </span>
+        {new Date(trip?.startDate).toLocaleDateString("vi-VN")} đến ngày
+        <span> </span>
+        {new Date(trip?.endDate).toLocaleDateString("vi-VN")}
         {/* {new Date(trip?.endDate).toLocaleDateString("vi-VN")} (
         {diffDays === 0 ? "1 ngày" : `${diffDays} ngày`}) */}
       </div>
@@ -140,9 +143,19 @@ const PlansCreate = () => {
             />
             <span className="ml-[10px] text-[#0782c5] font-semibold ">
               {" "}
-              Hát kịch
+              Xem phim
             </span>
           </Link>{" "}
+          <br />
+          <Link
+            to={`/trip/${trip._id}/concert/create`}
+            className="p-4 border rounded-full flex bg-gray-50"
+          >
+            <IconMusic stroke={2} className="ml-[10px] text-[#41b7cb] " />
+            <span className="ml-[10px] text-[#0782c5] font-semibold ">
+              Hòa nhạc
+            </span>
+          </Link>
           <br />
           <Link
             to={`/trip/${trip._id}/activity/create`}
@@ -152,17 +165,6 @@ const PlansCreate = () => {
             <span className="ml-[10px] text-[#0782c5] font-semibold ">
               {" "}
               Cuộc họp
-            </span>
-          </Link>{" "}
-          <br />
-          <Link
-            to={`/trip/${trip._id}/activity/create`}
-            className="p-4 border rounded-full flex bg-gray-50"
-          >
-            <IconMusic stroke={2} className="ml-[10px] text-[#41b7cb] " />
-            <span className="ml-[10px] text-[#0782c5] font-semibold ">
-              {" "}
-              Hòa nhạc
             </span>
           </Link>{" "}
           <br />

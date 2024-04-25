@@ -857,20 +857,29 @@ const Trip = () => {
                     <br />
 
                     <span className="flex justify-center ">
-                      Bạn đã đặt chuyến bay hoặc khách sạn chưa? Chuyển tiếp
-                      email xác nhận của bạn tới:{" "}
-                      <span className="text-blue">plan@tripit.com.</span>
+                      Bạn đã lập chuyến đi cho kì nghĩ sắp tới chưa? Nếu có vấn
+                      đề trong việc lập kế hoạch hãy liên hệ với chúng tôi:
+                      <Link to={`/contact`}>
+                        <span className="text-blue pl-1 text-sky-500">
+                          tiendung8a6@gmail.com.
+                        </span>
+                      </Link>
                     </span>
 
-                    <span className="flex justify-center">
+                    <span className="flex justify-center pt-3">
                       Bạn cũng có thể tự tạo chuyến đi cho riêng minh.
                     </span>
                     <br />
-                    <span className="flex justify-center">
-                      <Button className="flex justify-center" variant="filled">
-                        Thêm chuyến đi
-                      </Button>
-                    </span>
+                    <Link to={`/trip/create`}>
+                      <span className="flex justify-center">
+                        <Button
+                          className="flex justify-center"
+                          variant="filled"
+                        >
+                          Thêm chuyến đi
+                        </Button>
+                      </span>
+                    </Link>
                     <br />
 
                     <br />
@@ -901,7 +910,7 @@ const Trip = () => {
                                 className="text-[white] m-[3px] h-[30px] w-[30px] "
                               />
                             </span>
-                            <span>Khách sạn, Airbnb, Nhà nghỉ</span>
+                            <span>Khách sạn, Nhà nghỉ</span>
                           </div>
 
                           <div className="flex  items-center gap-5 mt-[20px]">
