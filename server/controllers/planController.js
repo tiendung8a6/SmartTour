@@ -282,7 +282,7 @@ export const createPlanConcert = async (req, res, next) => {
     res.status(201).json({
       success: true,
       message:
-        "Lập kế hoạch cho hoạt động thành công và đã được thêm vào chuyến đi",
+        "Lập kế hoạch cho buổi hòa nhạc thành công và đã được thêm vào chuyến đi",
       data: plan,
       tripId: trip._id,
     });
@@ -345,7 +345,7 @@ export const createPlanTheater = async (req, res, next) => {
     res.status(201).json({
       success: true,
       message:
-        "Lập kế hoạch cho hoạt động thành công và đã được thêm vào chuyến đi",
+        "Lập kế hoạch cho xem phim thành công và đã được thêm vào chuyến đi",
       data: plan,
       tripId: trip._id,
     });

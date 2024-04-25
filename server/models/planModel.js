@@ -15,7 +15,7 @@ const planSchema = new mongoose.Schema(
     email: { type: String, required: false }, //              lodging (email nhà cung cấp),  flights(email Sân bay)          ,car(email đại lý) concert&theater(email)
     number: { type: String, required: false }, //             lodging (Số phòng),           flights(Chỗ ngồi)                ,car(Số lượng)     concert&theater(Chỗ ngồi)
     describe: { type: String, required: false }, //           lodging (mô tả),              flights(Bữa ăn Sân bay)   ,car(Chi tiết xe)         concert&theater(Địa chỉ)
-    form: { type: String, required: false }, //                                           flights(Loại vé)             ,car(loại xe)            concert&theater(Loại vé)
+    form: { type: String, required: false }, //                                           flights(Hạng vé)             ,car(loại xe)            concert&theater(Hạng vé)
     price: { type: String, required: false }, //                                           flights(Giá vé)              ,car(Chi phí)           concert&theater(Giá vé)
     destination: { type: String, required: false }, //                                      flights(điểm đến)
     departureGate: { type: String, required: false }, //                                    flights(cổng khởi hành)                             concert&theater(Cổng vào)
