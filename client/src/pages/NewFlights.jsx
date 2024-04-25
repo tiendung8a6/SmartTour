@@ -357,7 +357,7 @@ const NewFlights = () => {
             >
               Liên Hệ Và Dịch Vụ
             </p>
-            <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[24px]">
+            <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[5px]">
               <TextInput
                 // withAsterisk
                 label="Bữa ăn"

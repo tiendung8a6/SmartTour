@@ -248,9 +248,9 @@ const NewCar = () => {
             >
               Thông Tin Cho Thuê
             </p>
-            <Grid className="mt-[5px]">
+            <Grid>
               <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
-                <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
+                <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-[20px] mt-[5px]">
                   <TextInput
                     // withAsterisk
                     label="Loại xe"
@@ -295,15 +295,15 @@ const NewCar = () => {
               />
             </div>
           </div>
-          <div className="mt-[25px] text-lg	text-black	">
+          <div className="mt-[40px] text-lg	text-black	">
             <p
               className={`${
                 theme ? "text-white" : "text-slate-700"
-              } text-base	 font-semibold`}
+              } text-base	 font-semibold `}
             >
               Thông Tin Liên Hệ
             </p>
-            <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[5px]">
+            <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[10px]">
               <TextInput
                 // withAsterisk
                 label="Điện thoại"
