@@ -16,6 +16,7 @@ export const useTrips = () => {
   // const [category, setCategory] = useState(searchParams.get("cat") || "");
   const [trips, setTrips] = useState([]);
   const [numOfPages, setNumOfPages] = useState(1);
+  const [errorOccurred, setErrorOccurred] = useState(false); // NEW
 
   useEffect(() => {
     const fetchTrips = async () => {
@@ -33,14 +34,10 @@ export const useTrips = () => {
 
         setTrips(data?.data || []);
         setNumOfPages(data?.numOfPage || 0);
+        setErrorOccurred(false); // NEW
       } catch (error) {
-        if (error.response.status === 401) {
-          signOut();
-          navigate("/sign-in");
-        } else {
-          toast.error("Something went wrong.");
-          console.log(error);
-        }
+        setErrorOccurred(true); // NEW
+        console.log(error); // NEW
       } finally {
         setIsLoading(false);
       }
@@ -49,6 +46,15 @@ export const useTrips = () => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     fetchTrips();
   }, [page, user]);
+
+  // NEW
+  useEffect(() => {
+    if (errorOccurred) {
+      signOut();
+      navigate("/sign-in");
+      toast.error("Something went wrong.");
+    }
+  }, [errorOccurred, navigate, signOut]);
 
   return {
     trips,
