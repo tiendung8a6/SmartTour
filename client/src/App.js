@@ -20,6 +20,7 @@ import {
   PlansCreate,
   NewActivity,
   EditTrip,
+  PrintTrip,
   NewLodging,
   NewFlights,
   NewCar,
@@ -66,6 +67,7 @@ function App() {
             <Route path="/trip/:id" element={<TripSummary />} />
             <Route path="/trip/create" element={<NewTrip />} />
             <Route path="/trip/:id/edit" element={<EditTrip />} />
+            <Route path="/trip/:id/print" element={<PrintTrip />} />
             <Route path="/trip/:id/plans/create" element={<PlansCreate />} />
             <Route path="/trip/:id/activity/create" element={<NewActivity />} />
             <Route path="/trip/:id/lodging/create" element={<NewLodging />} />
