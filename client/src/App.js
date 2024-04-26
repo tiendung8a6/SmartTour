@@ -27,6 +27,7 @@ import {
   NewConcert,
   NewTheater,
   NewCamp,
+  NewParking,
 } from "./pages";
 import { Footer, Loading, Navbar } from "./components";
 import useStore from "./store";
@@ -77,6 +78,7 @@ function App() {
             <Route path="/trip/:id/concert/create" element={<NewConcert />} />
             <Route path="/trip/:id/theater/create" element={<NewTheater />} />
             <Route path="/trip/:id/camp/create" element={<NewCamp />} />
+            <Route path="/trip/:id/parking/create" element={<NewParking />} />
 
             <Route path="/profile" element={<Profile />} />
           </Route>

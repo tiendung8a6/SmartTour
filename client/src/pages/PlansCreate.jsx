@@ -181,7 +181,7 @@ const PlansCreate = () => {
           </Link>
           <br />
           <Link
-            to={`/trip/${trip._id}/activity/create`}
+            to={`/trip/${trip._id}/parking/create`}
             className="p-4 border rounded-full flex bg-gray-50"
           >
             <IconParkingCircle
@@ -189,10 +189,9 @@ const PlansCreate = () => {
               className="ml-[10px] text-[#41b7cb] "
             />
             <span className="ml-[10px] text-[#0782c5] font-semibold ">
-              {" "}
-              Bãi đậu xe
+              Giữ xe
             </span>
-          </Link>{" "}
+          </Link>
           <br />
           <Link
             to={`/trip/${trip._id}/activity/create`}
