@@ -153,10 +153,10 @@ const Navbar = () => {
       <Logo />
       <div className="hidden md:flex gap-14 items-center">
         <ul className="flex gap-8 text-base text-black dark:text-white">
-          <Link to="/">Home</Link>
-          <Link to="/trip">Trip</Link>
-          <Link to="/contact">Contact</Link>
-          <Link to="/travel-guide">Travel Guide</Link>
+          <Link to="/">Trang Chủ</Link>
+          <Link to="/trip">Chuyến Đi</Link>
+          <Link to="/contact">Liên Hệ</Link>
+          <Link to="/travel-guide">Hướng Dẫn Viên AI</Link>
           <Link to="/blog">Blog</Link>
         </ul>
 
