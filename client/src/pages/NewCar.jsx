@@ -25,7 +25,7 @@ const NewCar = () => {
   const [phone, setPhone] = useState(null);
   const [web, setWeb] = useState(null);
   const [email, setEmail] = useState(null);
-  const [number, setNumber] = useState(null);
+  const [total, setTotal] = useState(null);
   const [describe, setDescribe] = useState(null);
   const [form, setForm] = useState(null);
   const [price, setPrice] = useState(null);
@@ -80,12 +80,15 @@ const NewCar = () => {
       toast.error("Ngày trả phải sau ngày nhận.");
       return;
     }
-
+    if (!startTime) {
+      toast.error("Vui lòng chọn thời gian nhận.");
+      return;
+    }
+    if (!endTime) {
+      toast.error("Vui lòng chọn thời gian trả.");
+      return;
+    }
     if (endDate.getTime() === startDate.getTime()) {
-      if (!startTime || !endTime) {
-        toast.error("Thời gian nhận và trả là bắt buộc.");
-        return;
-      }
       if (endTime <= startTime) {
         toast.error(
           "Thời gian nhận phải sau thời gian trả nếu trong cùng một ngày."
@@ -104,7 +107,7 @@ const NewCar = () => {
       phone,
       web,
       email,
-      number,
+      total,
       describe,
       form,
       price,
@@ -268,8 +271,8 @@ const NewCar = () => {
                     label="Số lượng"
                     className="w-full flex-1"
                     placeholder="Nhập số lượng"
-                    value={number}
-                    onChange={(e) => setNumber(e.target.value)}
+                    value={total}
+                    onChange={(e) => setTotal(e.target.value)}
                   />
                 </div>
               </Grid.Col>

@@ -79,12 +79,15 @@ const NewLodging = () => {
       toast.error("Ngày trả phòng phải sau ngày nhận phòng.");
       return;
     }
-
+    if (!startTime) {
+      toast.error("Vui lòng chọn thời gian nhận phòng.");
+      return;
+    }
+    if (!endTime) {
+      toast.error("Vui lòng chọn thời gian trả phòng.");
+      return;
+    }
     if (endDate.getTime() === startDate.getTime()) {
-      if (!startTime || !endTime) {
-        toast.error("Thời gian nhận phòng và trả phòng là bắt buộc.");
-        return;
-      }
       if (endTime <= startTime) {
         toast.error(
           "Thời gian trả phòng phải sau thời gian nhận phòng nếu trong cùng một ngày."

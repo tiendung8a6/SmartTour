@@ -83,12 +83,15 @@ const NewFlights = () => {
       toast.error("Ngày đến phải sau ngày khởi hành.");
       return;
     }
-
+    if (!startTime) {
+      toast.error("Vui lòng chọn thời gian khởi hành.");
+      return;
+    }
+    if (!endTime) {
+      toast.error("Vui lòng chọn thời gian đến.");
+      return;
+    }
     if (endDate.getTime() === startDate.getTime()) {
-      if (!startTime || !endTime) {
-        toast.error("Thời gian khởi hành và đến là bắt buộc.");
-        return;
-      }
       if (endTime <= startTime) {
         toast.error(
           "Thời gian khởi hành phải sau thời gian đến nếu trong cùng một ngày."
@@ -202,11 +205,11 @@ const NewFlights = () => {
               <div className="w-full ">
                 <TimeInput
                   ref={startTimeRef}
-                  label="Giờ khởi hành"
+                  label="Thời gian khởi hành"
                   leftSection={pickerStartTimeControl}
                   withAsterisk
                   // description="Input description"
-                  placeholder="Chọn giờ khởi hành"
+                  placeholder="Chọn thời gian khởi hành"
                   onChange={(e) => setStartTime(e.target.value)}
                 />
               </div>

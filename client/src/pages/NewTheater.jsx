@@ -83,12 +83,15 @@ const NewTheater = () => {
       toast.error("Ngày kết thúc phải sau ngày bắt đầu.");
       return;
     }
-
+    if (!startTime) {
+      toast.error("Vui lòng chọn thời gian bắt đầu.");
+      return;
+    }
+    if (!endTime) {
+      toast.error("Vui lòng chọn thời gian kết thúc.");
+      return;
+    }
     if (endDate.getTime() === startDate.getTime()) {
-      if (!startTime || !endTime) {
-        toast.error("Thời gian bắt đầu và kết thúc là bắt buộc.");
-        return;
-      }
       if (endTime <= startTime) {
         toast.error(
           "Thời gian kết thúc phải sau thời gian bắt đầu nếu cùng một ngày."
