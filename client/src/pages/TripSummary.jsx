@@ -138,42 +138,29 @@ const TripSummary = () => {
   });
 
   let currentDate = null;
-  let itemsInCurrentDay = 0;
-  let totalItemsUntilCurrentDate = 0;
+  let itemsUntilCurrentDate = 0; // Thay đổi tên biến để phản ánh ý nghĩa
   const currentDateStr = new Date().toLocaleDateString("vi-VN");
 
   console.log(`Ngày hiện tại: ${currentDateStr}`);
-  timelineData.forEach((item, index) => {
+
+  timelineData.forEach((item) => {
     const itemDate = new Date(item.time).toLocaleDateString("vi-VN");
 
-    if (itemDate !== currentDate) {
-      if (currentDate !== null) {
-        console.log(`Ngày ${currentDate}: ${itemsInCurrentDay} mục`);
-        if (currentDate === currentDateStr) {
-          totalItemsUntilCurrentDate += itemsInCurrentDay;
-        }
-      }
-      currentDate = itemDate;
-      itemsInCurrentDay = 0;
-    }
-
-    itemsInCurrentDay++;
-
-    if (index === timelineData.length - 1) {
-      console.log(`Ngày ${currentDate}: ${itemsInCurrentDay} mục`);
-      if (currentDate === currentDateStr) {
-        totalItemsUntilCurrentDate += itemsInCurrentDay;
-      }
+    // Nếu ngày của item nhỏ hơn hoặc bằng ngày hiện tại
+    if (itemDate <= currentDateStr) {
+      itemsUntilCurrentDate++; // Tăng tổng số mục
     }
   });
 
   console.log(
-    `Tổng số mục từ ngày đầu đến ngày hiện tại (${currentDateStr}): ${totalItemsUntilCurrentDate}`
+    `Tổng số mục từ ngày đầu đến ngày hiện tại (${currentDateStr}): ${itemsUntilCurrentDate}`
   );
 
   // console.log(`Tổng số mục trong ngày trước đó tính từ ngày hiện tại (${currentDate}) lùi về trước: ${totalItemsInPreviousDay}`);
 
-  const isPassperItem = totalItemsUntilCurrentDate - 1;
+  // console.log(`Tổng số mục trong ngày trước đó tính từ ngày hiện tại (${currentDate}) lùi về trước: ${totalItemsInPreviousDay}`);
+
+  const isPassperItem = itemsUntilCurrentDate - 1;
   return (
     <div className="m-[50px] h-fit">
       <Link to="/trip">
@@ -274,7 +261,7 @@ const TripSummary = () => {
                   >
                     <Link
                       to={`/trip/${trip._id}/print`}
-                      className="text-[#0782c5] flex items-center text-sm"
+                      className="text-[#0782c5] flex items-center font-medium text-sm"
                     >
                       In chuyến đi
                     </Link>
@@ -334,7 +321,7 @@ const TripSummary = () => {
       <Grid className="ml-[30px] mt-[200px]">
         <Grid.Col span={{ base: 12, md: 6, lg: 9 }}>
           <Timeline
-            color="cyan"
+            color="#15AABF"
             radius="xl"
             active={isPassperItem}
             bulletSize={45}
@@ -414,16 +401,16 @@ const TripSummary = () => {
 
                   {showNewDate && (
                     <div
-                      className={`bg-[#dee2e6] h-[50px] mt-[-85px] ml-[-100px] p-3 rounded-[50px]
+                      className={`bg-[#dee2e6] h-[50px] mt-[-85px] ml-[-100px] p-3 rounded-[100px]
                           ${
                             isCurrentDate
-                              ? "bg-cyan-900"
+                              ? "bg-[#15AABF] text-white"
                               : isPassedDate
-                              ? "bg-cyan-400"
-                              : ""
+                              ? "bg-[#15AABF] text-white"
+                              : "text-black"
                           }`}
                     >
-                      <span className="text-black ml-5">
+                      <span className=" ml-5">
                         {new Date(item.time).toLocaleDateString("vi-VN")}
                       </span>
                     </div>
@@ -433,7 +420,7 @@ const TripSummary = () => {
                     {/* <br /> */}
                     {/* <div ></div> */}
                     <Grid.Col span={{ base: 12, md: 6, lg: 8 }}>
-                      <span className="text-xl font-medium text-[#0782c5]">
+                      <span className="text-xl font-medium text-[#085da6f6]">
                         {" "}
                         {`${item.planName} ${
                           item.typeTime === "start"
@@ -685,3 +672,35 @@ export default TripSummary;
 // const itemsPassed = countItemsInDay() - 1;
 
 // console.log("Total items passed:", itemsPassed);
+
+// let currentDate = null;
+// let itemsInCurrentDay = 0;
+// let totalItemsUntilCurrentDate = 0;
+// const currentDateStr = new Date().toLocaleDateString("vi-VN");
+
+// console.log(`Ngày hiện tại: ${currentDateStr}`);
+// timelineData.forEach((item, index) => {
+//   const itemDate = new Date(item.time).toLocaleDateString("vi-VN");
+
+//   if (itemDate !== currentDate) {
+//     if (currentDate !== null) {
+//       console.log(`Ngày ${currentDate}: ${itemsInCurrentDay} mục`);
+//       if (currentDate === currentDateStr) {
+//         totalItemsUntilCurrentDate += itemsInCurrentDay;
+//       }
+//     }
+//     currentDate = itemDate;
+//     itemsInCurrentDay = 0;
+//   }
+
+//   itemsInCurrentDay++;
+
+//   if (index === timelineData.length - 1) {
+//     console.log(`Ngày ${currentDate}: ${itemsInCurrentDay} mục`);
+//     if (currentDate === currentDateStr) {
+//       totalItemsUntilCurrentDate += itemsInCurrentDay;
+//     }
+//   }
+// });
+
+// console.log(`Tổng số mục từ ngày  hiện tại (${currentDateStr}) trở về trước là : ${totalItemsUntilCurrentDate}`);
