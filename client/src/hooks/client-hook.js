@@ -222,7 +222,6 @@ export const useCreateLodgingPlan = (id, toast, token) => {
     },
   });
 };
-
 export const useCreateFlightsPlan = (id, toast, token) => {
   return useMutation({
     mutationFn: async (formData) => {
@@ -383,6 +382,33 @@ export const useCreateParkingPlan = (id, toast, token) => {
     onSuccess: async (data) => {
       toast.success(data?.message);
 
+      setTimeout(() => {
+        window.location.replace(`/trip/${data?.tripId}`);
+      }, 1000);
+    },
+  });
+};
+export const useCreateRestaurantPlan = (id, toast, token) => {
+  return useMutation({
+    mutationFn: async (formData) => {
+      const { data } = await axios.post(
+        `${API_URL}/plans/create/restaurant/${id}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return data;
+    },
+
+    onError: async (error) => {
+      toast.error(error?.response?.data?.message ?? error.message);
+    },
+
+    onSuccess: async (data) => {
+      toast.success(data?.message);
       setTimeout(() => {
         window.location.replace(`/trip/${data?.tripId}`);
       }, 1000);

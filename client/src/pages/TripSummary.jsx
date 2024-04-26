@@ -420,7 +420,7 @@ const TripSummary = () => {
                     {/* <br /> */}
                     {/* <div ></div> */}
                     <Grid.Col span={{ base: 12, md: 6, lg: 8 }}>
-                      <span className="text-xl font-medium text-[#085da6f6]">
+                      <span className="text-xl font-medium text-[#0d4d84f4]">
                         {" "}
                         {`${item.planName} ${
                           item.typeTime === "start"
@@ -469,7 +469,7 @@ const TripSummary = () => {
                     </Grid.Col>
                     <Grid.Col
                       span={{ base: 12, md: 6, lg: 4 }}
-                      className="mt-[-10px]ư"
+                      className="mt-[-10px] flex justify-end"
                     >
                       <Menu shadow="md" width={200}>
                         <Menu.Target>

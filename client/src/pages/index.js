@@ -26,6 +26,7 @@ import NewTheater from "./NewTheater";
 import PrintTrip from "./PrintTrip";
 import NewCamp from "./NewCamp";
 import NewParking from "./NewParking";
+import NewRestaurant from "./NewRestaurant";
 export {
   BlogDetail,
   CategoryPage,
@@ -55,4 +56,5 @@ export {
   PrintTrip,
   NewCamp,
   NewParking,
+  NewRestaurant,
 };

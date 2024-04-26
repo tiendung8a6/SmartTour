@@ -465,7 +465,66 @@ export const createPlanParking = async (req, res, next) => {
     res.status(201).json({
       success: true,
       message:
-        "Lập kế hoạch cho hoạt động thành công và đã được thêm vào chuyến đi",
+        "Lập kế hoạch cho đỗ xe thành công và đã được thêm vào chuyến đi",
+      data: plan,
+      tripId: trip._id,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
+};
+export const createPlanRestaurant = async (req, res, next) => {
+  try {
+    const {
+      planName,
+      startDate,
+      startTime,
+      endDate,
+      endTime,
+      address,
+      info,
+      phone,
+      web,
+      email,
+      describe,
+      form,
+      price,
+    } = req.body;
+    const { id } = req.params;
+
+    const plan = await Plans.create({
+      planName,
+      startDate,
+      startTime,
+      endDate,
+      endTime,
+      address,
+      info,
+      phone,
+      web,
+      email,
+      describe,
+      form,
+      price,
+      type: "restaurant",
+    });
+
+    const trip = await Trips.findById(id);
+    if (!trip) {
+      return res.status(404).json({
+        success: false,
+        message: "Trip not found",
+      });
+    }
+
+    trip.plans.push(plan._id);
+    await trip.save();
+
+    res.status(201).json({
+      success: true,
+      message:
+        "Lập kế hoạch cho nhà hàng thành công và đã được thêm vào chuyến đi",
       data: plan,
       tripId: trip._id,
     });
