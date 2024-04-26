@@ -8,6 +8,7 @@ import {
   createPlanConcert,
   createPlanTheater,
   createPlanCamp,
+  createPlanParking,
 } from "../controllers/planController.js";
 
 const router = express.Router();
@@ -20,5 +21,6 @@ router.post("/create/car/:id", userAuth, createPlanCar); //car
 router.post("/create/concert/:id", userAuth, createPlanConcert); //concert
 router.post("/create/theater/:id", userAuth, createPlanTheater); //theater
 router.post("/create/camp/:id", userAuth, createPlanCamp); //camp
+router.post("/create/parking/:id", userAuth, createPlanParking); //parking
 
 export default router;
