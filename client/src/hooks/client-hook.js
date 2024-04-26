@@ -415,6 +415,33 @@ export const useCreateRestaurantPlan = (id, toast, token) => {
     },
   });
 };
+export const useCreateRailPlan = (id, toast, token) => {
+  return useMutation({
+    mutationFn: async (formData) => {
+      const { data } = await axios.post(
+        `${API_URL}/plans/create/rail/${id}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return data;
+    },
+
+    onError: async (error) => {
+      toast.error(error?.response?.data?.message ?? error.message);
+    },
+
+    onSuccess: async (data) => {
+      toast.success(data?.message);
+      setTimeout(() => {
+        window.location.replace(`/trip/${data?.tripId}`);
+      }, 1000);
+    },
+  });
+};
 export const useUpdateTrip = (toast, token) => {
   return useMutation({
     mutationFn: async ({ id, tripName, city, startDate, endDate, image }) => {

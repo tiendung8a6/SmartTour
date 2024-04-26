@@ -12,14 +12,14 @@ import { TimeInput } from "@mantine/dates";
 import { IconClock, IconArrowLeft } from "@tabler/icons-react";
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useCreateFlightsPlan } from "../hooks/client-hook";
+import { useCreateRailPlan } from "../hooks/client-hook";
 import { getSingleTrip } from "../utils/apiCalls";
 
-const NewFlights = () => {
+const NewRail = () => {
   const { colorScheme } = useMantineColorScheme();
   const { id } = useParams();
   const { user } = useStore();
-  const { isPending, mutate } = useCreateFlightsPlan(id, toast, user?.token);
+  const { isPending, mutate } = useCreateRailPlan(id, toast, user?.token);
   const [planName, setPlanName] = useState(null);
   const [address, setAddress] = useState(null);
   const [info, setInfo] = useState(null);
@@ -68,7 +68,7 @@ const NewFlights = () => {
   );
   const handleSubmit = async () => {
     if (!planName) {
-      toast.error("Vui lòng nhập hãng hàng không.");
+      toast.error("Vui lòng nhập tên nhà cung cấp.");
       return;
     }
     if (!startDate) {
@@ -156,7 +156,7 @@ const NewFlights = () => {
           theme ? "text-white" : "text-slate-700"
         } text-2xl font-semibold mt-4`}
       >
-        Thêm chuyến bay
+        Thêm đường sắt
       </p>
       <br />
 
@@ -173,9 +173,9 @@ const NewFlights = () => {
           <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[15px]">
             <TextInput
               withAsterisk
-              label="Hãng hàng không"
+              label="Tên nhà cung cấp"
               className="w-full flex-1"
-              placeholder="Nhập hãng hàng không"
+              placeholder="Nhập tên nhà cung cấp"
               value={planName}
               onChange={(e) => setPlanName(e.target.value)}
             />
@@ -221,9 +221,9 @@ const NewFlights = () => {
               <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
                 <TextInput
                   // withAsterisk
-                  label="Số chuyến bay"
+                  label="Số tàu"
                   className="w-full flex-1"
-                  placeholder="Nhập số chuyến bay "
+                  placeholder="Nhập số tàu "
                   value={info}
                   onChange={(e) => setInfo(e.target.value)}
                 />
@@ -245,9 +245,9 @@ const NewFlights = () => {
               <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
                 <TextInput
                   // withAsterisk
-                  label="Hạng vé"
+                  label="Loại vé"
                   className="w-full flex-1"
-                  placeholder="Nhập hạng vé"
+                  placeholder="Nhập loại vé"
                   value={form}
                   onChange={(e) => setForm(e.target.value)}
                 />
@@ -269,9 +269,21 @@ const NewFlights = () => {
               <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
                 <TextInput
                   // withAsterisk
-                  label="Cổng"
+                  label="Loại chỗ"
                   className="w-full flex-1"
-                  placeholder="Nhập cổng"
+                  placeholder="Nhập loại chỗ"
+                  value={arrivalGate}
+                  onChange={(e) => setArrivalGate(e.target.value)}
+                />
+              </div>
+            </Grid.Col>
+            <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
+              <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
+                <TextInput
+                  // withAsterisk
+                  label="Toa"
+                  className="w-full flex-1"
+                  placeholder="Nhập toa"
                   value={departureGate}
                   onChange={(e) => setDepartureGate(e.target.value)}
                 />
@@ -281,9 +293,9 @@ const NewFlights = () => {
           <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[5px]">
             <TextInput
               // withAsterisk
-              label="Địa chỉ sân bay"
+              label="Địa chỉ sân ga"
               className="w-full flex-1"
-              placeholder="Nhập địa chỉ sân bay"
+              placeholder="Nhập địa chỉ sân ga"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
             />
@@ -331,22 +343,13 @@ const NewFlights = () => {
                 </div>
               </Grid.Col>
             </Grid>
-            <div className="w-[50%] flex flex-col md:flex-row flex-wrap gap-5 mb-[20px] mt-[5px]">
-              <TextInput
-                // withAsterisk
-                label="Cổng"
-                className="w-full flex-1"
-                placeholder="Nhập cổng"
-                value={arrivalGate}
-                onChange={(e) => setArrivalGate(e.target.value)}
-              />
-            </div>
+
             <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-[20px] mt-[5px]">
               <TextInput
                 // withAsterisk
-                label="Địa chỉ đến"
+                label="Ga đến"
                 className="w-full flex-1"
-                placeholder="Nhập địa chỉ đến"
+                placeholder="Nhập địa chỉ ga đến"
                 value={destination}
                 onChange={(e) => setDestination(e.target.value)}
               />
@@ -434,4 +437,4 @@ const NewFlights = () => {
   );
 };
 
-export default NewFlights;
+export default NewRail;

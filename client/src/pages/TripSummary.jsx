@@ -33,6 +33,7 @@ import {
   IconToolsKitchen2,
   IconMasksTheater,
   IconEditCircle,
+  IconCampfire,
 } from "@tabler/icons-react";
 
 const TripSummary = () => {
@@ -362,23 +363,23 @@ const TripSummary = () => {
                         <IconBuildingSkyscraper stroke={2} className="" />
                       ) : item.type === "activity" ? (
                         <IconWalk stroke={2} className="" />
-                      ) : item.type === "chuyenbay" ? (
+                      ) : item.type === "flights" ? (
                         <IconPlaneInflight stroke={2} className="" />
-                      ) : item.type === "oto" ? (
+                      ) : item.type === "car" ? (
                         <IconCar stroke={2} className="" />
-                      ) : item.type === "hát kịch" ? (
+                      ) : item.type === "theater" ? (
                         <IconMasksTheater stroke={2} className="" />
-                      ) : item.type === "hop" ? (
-                        <IconBrandZoom stroke={2} className="" />
-                      ) : item.type === "show" ? (
+                      ) : item.type === "camp" ? (
+                        <IconCampfire stroke={2} className="" />
+                      ) : item.type === "concert" ? (
                         <IconMusic stroke={2} className="" />
                       ) : item.type === "note" ? (
                         <IconNote stroke={2} className="" />
-                      ) : item.type === "park" ? (
+                      ) : item.type === "parking" ? (
                         <IconParkingCircle stroke={2} className="" />
-                      ) : item.type === "Duongsat" ? (
+                      ) : item.type === "rail" ? (
                         <IconTrain stroke={2} className="" />
-                      ) : item.type === "nhahang" ? (
+                      ) : item.type === "restaurant" ? (
                         <IconToolsKitchen2 stroke={2} className="" />
                       ) : (
                         <IconCirclePlus stroke={2} className="" />

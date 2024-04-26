@@ -20,7 +20,7 @@ const planSchema = new mongoose.Schema(
     price: { type: String, required: false }, //                                                      restaurant(giá tiền),              flights(Giá vé)              ,car(Chi phí)           concert&theater&camp(Giá vé)               ,parking(Giá tiền)
     destination: { type: String, required: false }, //                                                                                   flights(điểm đến)
     departureGate: { type: String, required: false }, //                                                                                 flights(cổng khởi hành)                             concert&theater&camp(Cổng vào)
-    arrivalGate: { type: String, required: false }, //                                                                                  flights(cổng đến/cổng ra)
+    arrivalGate: { type: String, required: false }, //                                                                                  flights(cổng đến/cổng ra)->rail(đổi thành loại chỗ)
   },
   { timestamps: true }
 );

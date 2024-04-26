@@ -157,7 +157,7 @@ const PlansCreate = () => {
           </Link>
           <br />
           <Link
-            to={`/trip/${trip._id}/activity/create`}
+            to={`/trip/${trip._id}/................./create`}
             className="p-4 border rounded-full flex bg-gray-50"
           >
             <IconBrandZoom stroke={2} className="ml-[10px] text-[#41b7cb] " />
@@ -194,15 +194,14 @@ const PlansCreate = () => {
           </Link>
           <br />
           <Link
-            to={`/trip/${trip._id}/activity/create`}
+            to={`/trip/${trip._id}/rail/create`}
             className="p-4 border rounded-full flex bg-gray-50"
           >
             <IconTrain stroke={2} className="ml-[10px] text-[#41b7cb] " />
             <span className="ml-[10px] text-[#0782c5] font-semibold ">
-              {" "}
               Đường sắt
             </span>
-          </Link>{" "}
+          </Link>
           <br />
           <Link
             to={`/trip/${trip._id}/restaurant/create`}

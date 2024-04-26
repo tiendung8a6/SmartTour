@@ -10,6 +10,7 @@ import {
   createPlanCamp,
   createPlanParking,
   createPlanRestaurant,
+  createPlanRail,
 } from "../controllers/planController.js";
 
 const router = express.Router();
@@ -24,5 +25,6 @@ router.post("/create/theater/:id", userAuth, createPlanTheater); //theater
 router.post("/create/camp/:id", userAuth, createPlanCamp); //camp
 router.post("/create/parking/:id", userAuth, createPlanParking); //parking
 router.post("/create/restaurant/:id", userAuth, createPlanRestaurant); //restaurant
+router.post("/create/rail/:id", userAuth, createPlanRail); //rail
 
 export default router;
