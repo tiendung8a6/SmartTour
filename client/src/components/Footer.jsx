@@ -1,60 +1,37 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import Logo from "./Logo";
 const Footer = () => {
   return (
     <div className="bg-gray-100 px-4 pt-16 mx-auto sm:max-w-xl md:max-w-full  md:px-24 ">
       <div className="grid gap-10 row-gap-6 mb-8 sm:grid-cols-2 lg:grid-cols-4">
         <div className="sm:col-span-2">
-          <a
-            href="/"
-            aria-label="Go home"
-            title="Company"
-            className="inline-flex items-center"
-          >
-            <svg
-              className="w-8 text-deep-purple-accent-400"
-              viewBox="0 0 24 24"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeMiterlimit="10"
-              stroke="currentColor"
-              fill="none"
-            >
-              <rect x="3" y="1" width="7" height="12" />
-              <rect x="3" y="17" width="7" height="6" />
-              <rect x="14" y="1" width="7" height="6" />
-              <rect x="14" y="11" width="7" height="12" />
-            </svg>
-            <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
-              Company
-            </span>
-          </a>
+          <Logo />
+
           <div className="mt-6 lg:max-w-sm">
             <p className="text-sm text-gray-800">
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-              accusantium doloremque laudantium, totam rem aperiam.
+              SmartTour giúp tối ưu hóa thời gian và theo dõi chi tiêu du lịch
+              đảm bảo không vượt quá ngân sách
             </p>
             <p className="mt-4 text-sm text-gray-800">
-              Eaque ipsa quae ab illo inventore veritatis et quasi architecto
-              beatae vitae dicta sunt explicabo.
+              Tìm kiếm thông tin về các điểm đến, hoạt động du lịch và nhà hàng
+              trên SmartTour một cách dễ dàng và đa dạng.
             </p>
           </div>
         </div>
         <div className="space-y-2 text-sm">
           <p className="text-base font-bold tracking-wide text-gray-900">
-            Contacts
+            Liên Hệ
           </p>
           <div className="flex">
-            <p className="mr-1 text-gray-800">Phone:</p>
+            <p className="mr-1 text-gray-800">Số điện thoại:</p>
             <a
               href="tel:850-123-5021"
               aria-label="Our phone"
               title="Our phone"
               className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800"
             >
-              850-123-5021
+              (+84) 985 872 885
             </a>
           </div>
           <div className="flex">
@@ -65,26 +42,26 @@ const Footer = () => {
               title="Our email"
               className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800"
             >
-              info@lorem.mail
+              tiendung8a6@gmail.com
             </a>
           </div>
           <div className="flex">
-            <p className="mr-1 text-gray-800">Address:</p>
+            <p className="mr-1 text-gray-800">Địa chỉ:</p>
             <a
-              href="https://www.google.com/maps"
+              href="https://www.google.com/maps/place/Tr%C6%B0%E1%BB%9Dng+%C4%90%E1%BA%A1i+h%E1%BB%8Dc+V%C4%83n+Lang+-+C%C6%A1+s%E1%BB%9F+3/@10.8275392,106.6974458,17z/data=!3m1!4b1!4m6!3m5!1s0x317528f4a62fce9b:0xc99902aa1e26ef02!8m2!3d10.8275392!4d106.7000207!16s%2Fg%2F11c4l_xlrf?entry=ttu"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Our address"
               title="Our address"
               className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800"
             >
-              312 Lovely Street, NY
+              69/68 Đặng Thùy Trâm, P. 13, Q. Bình Thạnh, Tp.Hồ Chí Minh
             </a>
           </div>
         </div>
         <div>
           <span className="text-base font-bold tracking-wide text-gray-900">
-            Social
+            Mạng Xã Hội
           </span>
           <div className="flex items-center mt-1 space-x-3">
             <a
@@ -114,14 +91,14 @@ const Footer = () => {
             </a>
           </div>
           <p className="mt-4 text-sm text-gray-500">
-            Bacon ipsum dolor amet short ribs pig sausage prosciutto chicken
-            spare ribs salami.
+            Theo dõi chúng tôi trên mạng xã hội. Đừng ngần ngại mà hãy chia sẽ
+            chuyến đi của bạn lên mạng xã hội
           </p>
         </div>
       </div>
       <div className="flex flex-col-reverse justify-between pt-5 pb-10 border-t lg:flex-row">
         <p className="text-sm text-gray-600">
-          © Copyright 2020 Lorem Inc. All rights reserved.
+          © Copyright 2024 SmartTour. All rights reserved.
         </p>
         <ul className="flex flex-col mb-3 space-y-2 lg:mb-0 sm:space-y-0 sm:space-x-5 sm:flex-row">
           <li>

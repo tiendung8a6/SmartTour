@@ -262,7 +262,7 @@ const TripSummary = () => {
                   >
                     <Link
                       to={`/trip/${trip._id}/print`}
-                      className="text-[#0782c5] flex items-center font-medium text-sm"
+                      className="text-[#0782c5] flex items-center "
                     >
                       In chuyến đi
                     </Link>
