@@ -322,7 +322,7 @@ const TripSummary = () => {
       <Grid className="ml-[30px] mt-[200px]">
         <Grid.Col span={{ base: 12, md: 6, lg: 9 }}>
           <Timeline
-            color="#15AABF"
+            color="cyan"
             radius="xl"
             active={isPassperItem}
             bulletSize={45}
@@ -405,9 +405,9 @@ const TripSummary = () => {
                       className={`bg-[#dee2e6] h-[50px] mt-[-85px] ml-[-100px] p-3 rounded-[100px]
                           ${
                             isCurrentDate
-                              ? "bg-[#15AABF] text-white"
+                              ? "bg-cyan-800 text-white"
                               : isPassedDate
-                              ? "bg-[#15AABF] text-white"
+                              ? "bg-cyan-800 text-white"
                               : "text-black"
                           }`}
                     >
