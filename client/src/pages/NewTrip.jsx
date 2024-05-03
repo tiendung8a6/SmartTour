@@ -30,6 +30,7 @@ const NewTrip = () => {
   const [city, setCity] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+  const [status, setStatus] = useState(false);
 
   const [fileURL, setFileURL] = useState(null);
 
@@ -67,6 +68,7 @@ const NewTrip = () => {
       city,
       startDate,
       endDate,
+      status,
     });
   };
 
@@ -177,7 +179,12 @@ const NewTrip = () => {
       </Grid>
 
       <div className="w-full flex items-end justify-start mt-6">
-        <Switch color="indigo" label="Công Khai chuyển đi" />
+        <Switch
+          color="indigo"
+          label="Công Khai chuyển đi"
+          checked={status === true}
+          onChange={(e) => setStatus(e.target.checked ? true : false)}
+        />
       </div>
       <div className="flex justify-start gap-3">
         <div className=" flex items-end justify-start mt-6">

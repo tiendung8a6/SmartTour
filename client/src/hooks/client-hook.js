@@ -444,10 +444,18 @@ export const useCreateRailPlan = (id, toast, token) => {
 };
 export const useUpdateTrip = (toast, token) => {
   return useMutation({
-    mutationFn: async ({ id, tripName, city, startDate, endDate, image }) => {
+    mutationFn: async ({
+      id,
+      tripName,
+      city,
+      startDate,
+      endDate,
+      image,
+      status,
+    }) => {
       const { data } = await axios.patch(
         `${API_URL}/trips/update/${id}`,
-        { tripName, city, startDate, endDate, image },
+        { tripName, city, startDate, endDate, image, status },
         {
           headers: {
             Authorization: `Bearer ${token}`,

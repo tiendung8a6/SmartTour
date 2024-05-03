@@ -5,13 +5,13 @@ import Plans from "../models/planModel.js";
 export const createTrip = async (req, res, next) => {
   try {
     const { userId } = req.body.user;
-    const { tripName, city, startDate, endDate, image } = req.body;
+    const { tripName, city, startDate, endDate, image, status } = req.body;
 
     if (!(tripName && city && startDate && endDate && image)) {
       return res.status(400).json({
         success: false,
         message:
-          "All fields are required. Please enter tripName, city, startDate, endDate, image.",
+          "All fields are required. Please enter tripName, city, startDate, endDate, status, image.",
       });
     }
 
@@ -32,6 +32,7 @@ export const createTrip = async (req, res, next) => {
       startDate,
       endDate,
       image,
+      status,
       // plans: plan._id, // Gán ID của plan đã tìm thấy
     });
 
@@ -57,7 +58,8 @@ export const getTrips = async (req, res, next) => {
     //   query.user = writerId;
     // }
 
-    let query = { user: userId, status: true };
+    // let query = { user: userId, status: true };
+    let query = { user: userId };
 
     let queryResult = Trips.find(query)
       .populate({
@@ -128,7 +130,7 @@ export const getTrip = async (req, res, next) => {
 export const updateTrip = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { tripName, city, startDate, endDate, image } = req.body;
+    const { tripName, city, startDate, endDate, image, status } = req.body;
 
     const updatedFields = {};
     if (tripName) updatedFields.tripName = tripName;
@@ -136,6 +138,7 @@ export const updateTrip = async (req, res, next) => {
     if (startDate) updatedFields.startDate = startDate;
     if (endDate) updatedFields.endDate = endDate;
     if (image) updatedFields.image = image;
+    if (status) updatedFields.status = status;
 
     const trip = await Trips.findByIdAndUpdate(id, updatedFields, {
       new: true,

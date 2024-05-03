@@ -9,7 +9,7 @@ const tripSchema = new mongoose.Schema(
     image: { type: String },
     plans: [{ type: Schema.Types.ObjectId, ref: "Plans", required: false }],
     user: { type: Schema.Types.ObjectId, ref: "Users" },
-    status: { type: Boolean, default: true },
+    status: { type: Boolean, required: true },
   },
   { timestamps: true }
 );
