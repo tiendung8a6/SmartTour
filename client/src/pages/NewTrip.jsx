@@ -5,6 +5,7 @@ import {
   useMantineColorScheme,
   Grid,
   Switch,
+  Autocomplete,
 } from "@mantine/core";
 import { IconCalendarEvent } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
@@ -18,6 +19,40 @@ import { uploadFile } from "../utils";
 import { DateInput } from "@mantine/dates";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
+import cities from "../assets/cities.json";
+
+// Hàm chuyển đổi chuỗi sang dạng không dấu
+const removeDiacritics = (str) => {
+  return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+};
+
+const optionsFilter = ({ options, search }) => {
+  const searchWithoutDiacritics = removeDiacritics(search).toLowerCase().trim();
+  const splittedSearch = searchWithoutDiacritics.split(" ");
+
+  return options.filter((option) => {
+    const labelWithoutDiacritics = removeDiacritics(option.label)
+      .toLowerCase()
+      .trim();
+    const words = labelWithoutDiacritics.split(" ");
+
+    return splittedSearch.every((searchWord) =>
+      words.some((word) => word.includes(searchWord))
+    );
+  });
+};
+
+//Hiển thị số lượng người tham gia
+const generateOptions = (num) => {
+  const options = [];
+  for (let i = 1; i <= 10; i++) {
+    options.push(`${i} người lớn`);
+    for (let j = 1; j <= 10; j++) {
+      options.push(`${i} người lớn và ${j} trẻ em`);
+    }
+  }
+  return options;
+};
 
 const NewTrip = () => {
   const { colorScheme } = useMantineColorScheme();
@@ -27,7 +62,7 @@ const NewTrip = () => {
   const { isPending, mutate } = useCreateTrip(toast, user?.token);
   const [file, setFile] = useState("");
   const [tripName, setTripName] = useState(null);
-  const [city, setCity] = useState(null);
+  const [city, setCity] = useState("");
   const [total, setTotal] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -36,6 +71,9 @@ const NewTrip = () => {
   const [fileURL, setFileURL] = useState(null);
 
   const theme = colorScheme === "dark";
+
+  //Gọi Danh sách city từ Json
+  const cityOptions = cities.map((cityData) => cityData.city);
 
   useEffect(() => {
     file && uploadFile(setFileURL, file);
@@ -108,23 +146,27 @@ const NewTrip = () => {
           </div>
 
           <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
-            <TextInput
+            <Autocomplete
               withAsterisk
               label="Thành Phố"
               className="w-full flex-1"
               placeholder="Thành Phố"
-              defaultValue={city}
-              onChange={(e) => setCity(e.target.value)}
+              data={cityOptions}
+              value={city}
+              onChange={(value) => setCity(value)}
+              filter={optionsFilter}
             />
           </div>
           <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
-            <TextInput
+            <Autocomplete
               withAsterisk
               label="Số lượng người tham gia"
               className="w-full flex-1"
               placeholder="Nhập số lượng thành viên tham gia"
-              defaultValue={total}
-              onChange={(e) => setTotal(e.target.value)}
+              value={total}
+              onChange={(value) => setTotal(value)}
+              limit={51}
+              data={generateOptions(total)}
             />
           </div>
           <Grid className="mt-6">
