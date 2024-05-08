@@ -138,17 +138,16 @@ const TripSummary = () => {
     }
   });
 
-  let currentDate = null;
-  let itemsUntilCurrentDate = 0; // Thay đổi tên biến để phản ánh ý nghĩa
+  const currentDate = new Date(); // Lấy ngày hiện tại
+  let itemsUntilCurrentDate = 0;
   const currentDateStr = new Date().toLocaleDateString("vi-VN");
 
   console.log(`Ngày hiện tại: ${currentDateStr}`);
 
   timelineData.forEach((item) => {
-    const itemDate = new Date(item.time).toLocaleDateString("vi-VN");
-
+    const itemDate = new Date(item.time);
     // Nếu ngày của item nhỏ hơn hoặc bằng ngày hiện tại
-    if (itemDate <= currentDateStr) {
+    if (itemDate <= currentDate) {
       itemsUntilCurrentDate++; // Tăng tổng số mục
     }
   });
