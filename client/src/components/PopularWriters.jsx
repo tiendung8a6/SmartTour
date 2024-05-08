@@ -6,7 +6,7 @@ const PopularWriters = ({ data }) => {
   return (
     <div className="w-full flex flex-col gap-8">
       <p className="text-xl font-bold -mb-3 text-gray-600 dark:text-slate-500">
-        Popular Writers
+        Tác giả nổi bật
       </p>
       {data?.map((el, id) => (
         <Link

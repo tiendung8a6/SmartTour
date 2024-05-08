@@ -191,7 +191,7 @@ const TripSummary = () => {
               {new Date(trip?.endDate).toLocaleDateString("vi-VN")} (
               {diffDays === 0 ? "1 ngày" : `${diffDays} ngày`})
             </span>
-
+            <span className="text-sm text-gray-600">{trip?.total}</span>
             <span className="flex">
               <span className="bg-[#0782c5] border-[#0782c5] border rounded-full w-[24px] h-[24px] p-[2px]">
                 <IconCirclesRelation

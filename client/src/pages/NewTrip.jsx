@@ -28,6 +28,7 @@ const NewTrip = () => {
   const [file, setFile] = useState("");
   const [tripName, setTripName] = useState(null);
   const [city, setCity] = useState(null);
+  const [total, setTotal] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [status, setStatus] = useState(false);
@@ -47,6 +48,10 @@ const NewTrip = () => {
     }
     if (!city) {
       toast.error("city is required.");
+      return;
+    }
+    if (!total) {
+      toast.error("total is required.");
       return;
     }
     if (!startDate) {
@@ -69,6 +74,7 @@ const NewTrip = () => {
       startDate,
       endDate,
       status,
+      total,
     });
   };
 
@@ -109,6 +115,16 @@ const NewTrip = () => {
               placeholder="Thành Phố"
               defaultValue={city}
               onChange={(e) => setCity(e.target.value)}
+            />
+          </div>
+          <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
+            <TextInput
+              withAsterisk
+              label="Số lượng người tham gia"
+              className="w-full flex-1"
+              placeholder="Nhập số lượng thành viên tham gia"
+              defaultValue={total}
+              onChange={(e) => setTotal(e.target.value)}
             />
           </div>
           <Grid className="mt-6">

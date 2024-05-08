@@ -37,7 +37,7 @@ const Blog = () => {
         {/* Categories */}
         <div className="mt-6 md:mt-0">
           <p className="text-2xl font-semibold text-gray-600 dark:text-white">
-            Popular Categories
+            Danh mục nổi bật
           </p>
           <div className="w-full flex flex-wrap py-10 gap-8">
             {CATEGORIES.map((cat) => (
