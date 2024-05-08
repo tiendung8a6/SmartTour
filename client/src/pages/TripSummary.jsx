@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Button, Container, GridCol, Timeline } from "@mantine/core";
+import { Button, Container, GridCol, Timeline, Badge } from "@mantine/core";
 import useStore from "../store";
 import { getSingleTrip } from "../utils/apiCalls";
 import { Text } from "@mantine/core";
@@ -194,7 +194,19 @@ const TripSummary = () => {
               {new Date(trip?.endDate).toLocaleDateString("vi-VN")} (
               {diffDays === 0 ? "1 ngày" : `${diffDays} ngày`})
             </span>
-
+            <span className="text-sm">
+              <Badge
+                size="md"
+                variant="light"
+                color={
+                  trip?.status === true
+                    ? "rgba(31, 105, 13, 1)"
+                    : "rgba(207, 2, 125, 1)"
+                }
+              >
+                {trip?.status === true ? "Công khai" : "Chỉ mình tôi"}
+              </Badge>
+            </span>
             <span className="flex">
               <span className="bg-[#0782c5] border-[#0782c5] border rounded-full w-[24px] h-[24px] p-[2px]">
                 <IconCirclesRelation

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Grid, Menu, Button, rem } from "@mantine/core";
+import { Grid, Menu, Button, rem, Badge } from "@mantine/core";
 import {
   IconCirclesRelation,
   IconPencil,
@@ -43,7 +43,19 @@ const TripCard = ({ trip, index }) => {
             {new Date(trip?.endDate).toLocaleDateString("vi-VN")} (
             {diffDays === 0 ? "1 ngày" : `${diffDays} ngày`})
           </span>
-
+          <span className="text-sm">
+            <Badge
+              size="md"
+              variant="light"
+              color={
+                trip?.status === true
+                  ? "rgba(31, 105, 13, 1)"
+                  : "rgba(207, 2, 125, 1)"
+              }
+            >
+              {trip?.status === true ? "Công khai" : "Chỉ mình tôi"}
+            </Badge>
+          </span>
           <Grid>
             <Grid.Col span={{ base: 12, md: 6, lg: 3 }} className="ml-[-19px]">
               <Menu shadow="md" width={210}>
