@@ -10,6 +10,7 @@ const tripSchema = new mongoose.Schema(
     plans: [{ type: Schema.Types.ObjectId, ref: "Plans", required: false }],
     user: { type: Schema.Types.ObjectId, ref: "Users" },
     status: { type: Boolean, required: true },
+    total: { type: String, required: true },
   },
   { timestamps: true }
 );

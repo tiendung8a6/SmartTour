@@ -4,6 +4,8 @@ const planSchema = new mongoose.Schema(
   {
     type: { type: String, required: true }, //[activity,lodging,flights,car,concert,theater,parking,restaurant,rail]
     planName: { type: String, required: true }, //activity,   lodging(tên chỗ ở),                     restaurant(Nhà hàng),             flights(Hãng hàng không)  ,car(Tên đại lý),         concert&theater&camp(Tên sự kiện)       ,parking(Tên bãi đậu xe)
+    estimatedPrice: { type: String, required: false },
+    actualPrice: { type: String, required: false },
     startDate: { type: Date, required: true }, //activity,    lodging (Ngày nhận phòng)               restaurant(ngày bắt đầu),   ,     flights(Ngày khởi hành)   ,car(ngày đón),           concert&theater&camp(ngày bắt đầu)      ,parking(Ngày gửi)
     endDate: { type: Date, required: true }, //activity,      lodging ((Ngày trả phòng),              restaurant(ngày kết thúc),        flights(Ngày tới)         ,car(thời gian đón)       concert&theater&camp(ngày kết thúc)     ,parking(Ngày trả)
     startTime: { type: String, required: true }, //activity, lodging (Giờ nhận phòng),                restaurant(giờ bắt đầu),          flights(Giờ khởi hành)    ,car(ngày trả)            concert&theater&camp(Tzan bắt đầu)       ,parking(Tzan bắt đầu)
