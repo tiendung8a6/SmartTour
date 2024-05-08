@@ -171,7 +171,8 @@ export const getTrip = async (req, res, next) => {
 export const updateTrip = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { tripName, city, startDate, endDate, image, status } = req.body;
+    const { tripName, city, startDate, endDate, image, status, total } =
+      req.body;
 
     const updatedFields = {};
     if (tripName) updatedFields.tripName = tripName;
@@ -179,12 +180,13 @@ export const updateTrip = async (req, res, next) => {
     if (startDate) updatedFields.startDate = startDate;
     if (endDate) updatedFields.endDate = endDate;
     if (image) updatedFields.image = image;
-    if (status) updatedFields.status = status;
+    updatedFields.status = status; // Change the way of checking status
+    if (total) updatedFields.total = total;
 
+    console.log("-----------", updatedFields.status);
     const trip = await Trips.findByIdAndUpdate(id, updatedFields, {
       new: true,
     });
-
     res.status(200).json({
       success: true,
       message: "Trip updated successfully",
@@ -195,6 +197,7 @@ export const updateTrip = async (req, res, next) => {
     res.status(404).json({ message: error.message });
   }
 };
+
 export const deleteTrip = async (req, res, next) => {
   try {
     const { id } = req.params;

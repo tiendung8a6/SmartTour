@@ -452,17 +452,18 @@ export const useUpdateTrip = (toast, token) => {
       endDate,
       image,
       status,
+      total,
     }) => {
       const { data } = await axios.patch(
         `${API_URL}/trips/update/${id}`,
-        { tripName, city, startDate, endDate, image, status },
+        { tripName, city, startDate, endDate, image, status, total },
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-
+      console.log("API STATUS", status);
       return data;
     },
     onError: (error) => {

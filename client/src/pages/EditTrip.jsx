@@ -5,6 +5,7 @@ import {
   useMantineColorScheme,
   Grid,
   Switch,
+  Autocomplete,
 } from "@mantine/core";
 import { IconCalendarEvent } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
@@ -19,22 +20,58 @@ import { DateInput } from "@mantine/dates";
 import dayjs from "dayjs";
 import { Link, useParams } from "react-router-dom";
 import { getSingleTrip } from "../utils/apiCalls";
+import cities from "../assets/cities.json";
 
-const NewTrip = () => {
+// Hàm chuyển đổi chuỗi sang dạng không dấu
+const removeDiacritics = (str) => {
+  return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+};
+
+const optionsFilter = ({ options, search }) => {
+  const searchWithoutDiacritics = removeDiacritics(search).toLowerCase().trim();
+  const splittedSearch = searchWithoutDiacritics.split(" ");
+
+  return options.filter((option) => {
+    const labelWithoutDiacritics = removeDiacritics(option.label)
+      .toLowerCase()
+      .trim();
+    const words = labelWithoutDiacritics.split(" ");
+
+    return splittedSearch.every((searchWord) =>
+      words.some((word) => word.includes(searchWord))
+    );
+  });
+};
+
+//Hiển thị số lượng người tham gia
+const generateOptions = (num) => {
+  const options = [];
+  for (let i = 1; i <= 10; i++) {
+    options.push(`${i} người lớn`);
+    for (let j = 1; j <= 10; j++) {
+      options.push(`${i} người lớn và ${j} trẻ em`);
+    }
+  }
+  return options;
+};
+
+const EditTrip = () => {
   const { id } = useParams();
   const [trip, setTrip] = useState(null);
-
   const { colorScheme } = useMantineColorScheme();
   const { user } = useStore();
   const [visible, { toggle }] = useDisclosure(false);
   const [file, setFile] = useState("");
   const [tripName, setTripName] = useState(trip?.tripName);
   const [city, setCity] = useState(trip?.city);
+  const [status, setStatus] = useState(trip?.status);
+  const [total, setTotal] = useState(trip?.total);
   const [startDate, setStartDate] = useState(trip?.startDate);
   const [endDate, setEndDate] = useState(trip?.startDate);
 
   const [fileURL, setFileURL] = useState(trip?.image);
   const { isPending, mutate } = useUpdateTrip(toast, user?.token);
+  const cityOptions = cities.map((cityData) => cityData.city);
 
   const theme = colorScheme === "dark";
 
@@ -49,6 +86,8 @@ const NewTrip = () => {
       setTrip(data || []);
       setTripName(data?.tripName);
       setCity(data?.city); // Cập nhật giá trị
+      setStatus(data?.status); // Cập nhật giá trị
+      setTotal(data?.total); // Cập nhật giá trị
       let startDateObject = new Date(data?.startDate);
       setStartDate(startDateObject);
       let setEndDateObject = new Date(data?.endDate);
@@ -69,37 +108,55 @@ const NewTrip = () => {
     setTripName(event.target.value);
   };
 
-  const handCityChange = (event) => {
-    setCity(event.target.value);
+  const handCityChange = (value) => {
+    setCity(value);
   };
 
+  const handTotalChange = (value) => {
+    setTotal(value);
+  };
+
+  const handStatusChange = (event) => {
+    setStatus(event.target.checked);
+  };
   const handleSubmit = async () => {
     if (!tripName) {
-      toast.error("tripName is required.");
+      toast.error("Vui lòng nhập tên chuyến đi.");
       return;
     }
     if (!city) {
-      toast.error("city is required.");
+      toast.error("Vui lòng nhập thành phố.");
+      return;
+    }
+    if (!total) {
+      toast.error("Vui lòng nhập số lượng người tham gia.");
       return;
     }
     if (!startDate) {
-      toast.error("startDate is required.");
+      toast.error("Vui lòng chọn ngày bắt đầu.");
       return;
     }
     if (!endDate) {
-      toast.error("endDate is required.");
+      toast.error("Vui lòng chọn ngày kết thúc.");
       return;
     }
+    if (endDate < startDate) {
+      toast.error("Ngày kết thúc phải sau ngày bắt đầu.");
+      return;
+    }
+
     if (!fileURL) {
       toast.error("Please upload an image.");
       return;
     }
-
+    console.log("status", status);
     mutate({
       id: trip._id,
       tripName,
       image: fileURL,
       city,
+      total,
+      status,
       startDate,
       endDate,
     });
@@ -126,22 +183,36 @@ const NewTrip = () => {
           <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
             <TextInput
               withAsterisk
-              label="Tên Chuyến Đi"
+              label="Tên chuyến đi"
               className="w-full flex-1"
-              placeholder="Tên Chuyến Đi"
+              placeholder="Nhập tên chuyến đi"
               value={tripName}
               onChange={handTripNameChange}
             />
           </div>
 
           <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
-            <TextInput
+            <Autocomplete
               withAsterisk
-              label="Thành Phố"
+              label="Thành phố"
               className="w-full flex-1"
-              placeholder="Thành Phố"
+              placeholder="Nhập tên thành Phố"
+              data={cityOptions}
               value={city}
               onChange={handCityChange}
+              filter={optionsFilter}
+            />
+          </div>
+          <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
+            <Autocomplete
+              withAsterisk
+              label="Số lượng người tham gia"
+              className="w-full flex-1"
+              placeholder="Nhập số lượng thành viên tham gia"
+              onChange={handTotalChange}
+              value={total}
+              limit={51}
+              data={generateOptions(total)}
             />
           </div>
           <Grid className="mt-6">
@@ -153,9 +224,9 @@ const NewTrip = () => {
                   }
                   clearable
                   withAsterisk
-                  label="Ngày Bắt Đầu"
+                  label="Ngày bắt đầu"
                   className="w-full flex-1"
-                  placeholder="Ngày Bắt Đầu"
+                  placeholder="Chọn ngày bắt đầu"
                   minDate={new Date()}
                   valueFormat="DD/MM/YYYY"
                   value={startDate}
@@ -172,9 +243,9 @@ const NewTrip = () => {
                   }
                   clearable
                   withAsterisk
-                  label="Ngày Kết Thúc"
+                  label="Ngày kết thúc"
                   className="w-full flex-1"
-                  placeholder="Ngày Kết Thúc"
+                  placeholder="Chọn ngày kết thúc"
                   valueFormat="DD/MM/YYYY"
                   minDate={startDate}
                   value={endDate}
@@ -213,7 +284,12 @@ const NewTrip = () => {
       </Grid>
 
       <div className="w-full flex items-end justify-start mt-6">
-        <Switch color="indigo" label="Công Khai chuyển đi" />
+        <Switch
+          color="indigo"
+          label="Công Khai chuyển đi"
+          checked={status}
+          onChange={handStatusChange}
+        />
       </div>
       <div className="flex justify-start gap-3">
         <div className=" flex items-end justify-start mt-6">
@@ -243,4 +319,4 @@ const NewTrip = () => {
   );
 };
 
-export default NewTrip;
+export default EditTrip;
