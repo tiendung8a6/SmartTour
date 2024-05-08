@@ -8,6 +8,7 @@ import Users from "./Users";
 import Contacts from "./Contacts";
 import Policy from "./Policy";
 import Categories from "./Categories";
+import Trips from "./Trips";
 export {
   Analytics,
   Contents,
@@ -19,4 +20,5 @@ export {
   Contacts,
   Policy,
   Categories,
+  Trips,
 };

@@ -13,6 +13,7 @@ import {
   Contacts,
   Policy,
   Categories,
+  Trips,
 } from "./pages";
 import useStore from "./store/store";
 
@@ -48,8 +49,8 @@ function App() {
     <main className="w-full min-h-screen">
       <Routes>
         <Route element={<Layout />}>
-          <Route index psth="/" element={<Navigate to="/dashboard" />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route index psth="/" element={<Navigate to="/analytics" />} />
+          {/* <Route path="/dashboard" element={<Dashboard />} /> */}
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/policy" element={<Policy />} />
           <Route path="/categories" element={<Categories />} />
@@ -57,6 +58,7 @@ function App() {
           <Route path="/contents" element={<Contents />} />
           <Route path="/users" element={<Users />} />
           <Route path="/contacts" element={<Contacts />} />
+          <Route path="/trips" element={<Trips />} />
         </Route>
 
         <Route path="/auth" element={<StartPage />} />
