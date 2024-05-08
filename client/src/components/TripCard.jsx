@@ -29,11 +29,14 @@ const TripCard = ({ trip, index }) => {
       <div className="w-full md:w-full flex flex-col gap-3 py-[5px] px-[20px]  ">
         <h6 className=" text-[1.5rem] font-semibold text-[#0782c5] dark:text-white text-justify">
           <span>
-            <Link to={`/trip/${trip._id}`}>{trip?.tripName.slice(0, 60)}</Link>
+            <Link to={`/trip/${trip._id}`}>{trip?.tripName.slice(0, 65)}</Link>
           </span>
         </h6>
         <div className=" flex gap-2 flex-col mt[-10px]">
-          <span>{trip?.city?.slice(0, 60)}</span>
+          <span>{trip?.city?.slice(0, 100)}</span>
+          <span className="text-sm text-gray-600">
+            {trip?.total?.slice(0, 120)}
+          </span>
 
           <span className="text-sm text-gray-600">
             {new Date(trip?.startDate).toLocaleDateString("vi-VN")} -

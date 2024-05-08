@@ -179,18 +179,22 @@ const TripSummary = () => {
         <div className="w-full md:w-full flex flex-col gap-3 py-[5px] px-[20px]">
           <h6 className="text-[1.5rem] font-semibold dark:text-white text-justify">
             <span>
-              <div to={`/trip/${trip._id}`}>{trip?.tripName}</div>
+              <div>{trip?.tripName.slice(0, 70)}</div>
             </span>
           </h6>
           <div className="flex gap-2 flex-col mt-[10px]">
-            <span>{trip?.city?.slice(0, 60)}</span>
+            <span>{trip?.city?.slice(0, 100)}</span>
+
+            <span className="text-sm text-gray-600">
+              {trip?.total?.slice(0, 100)}
+            </span>
 
             <span className="text-sm text-gray-600">
               {new Date(trip?.startDate).toLocaleDateString("vi-VN")} -
               {new Date(trip?.endDate).toLocaleDateString("vi-VN")} (
               {diffDays === 0 ? "1 ngày" : `${diffDays} ngày`})
             </span>
-            <span className="text-sm text-gray-600">{trip?.total}</span>
+
             <span className="flex">
               <span className="bg-[#0782c5] border-[#0782c5] border rounded-full w-[24px] h-[24px] p-[2px]">
                 <IconCirclesRelation
