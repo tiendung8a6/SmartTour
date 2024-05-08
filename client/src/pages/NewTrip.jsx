@@ -81,23 +81,27 @@ const NewTrip = () => {
 
   const handleSubmit = async () => {
     if (!tripName) {
-      toast.error("tripName is required.");
+      toast.error("Vui lòng nhập tên chuyến đi.");
       return;
     }
     if (!city) {
-      toast.error("city is required.");
+      toast.error("Vui lòng nhập tên thành phố.");
       return;
     }
     if (!total) {
-      toast.error("total is required.");
+      toast.error("Vui lòng nhập số lượng người tham gia.");
       return;
     }
     if (!startDate) {
-      toast.error("startDate is required.");
+      toast.error("Vui lòng chọn ngày bắt đầu.");
       return;
     }
     if (!endDate) {
-      toast.error("endDate is required.");
+      toast.error("Vui lòng chọn ngày kết thúc.");
+      return;
+    }
+    if (endDate < startDate) {
+      toast.error("Ngày kết thúc phải sau ngày bắt đầu.");
       return;
     }
     if (!fileURL) {
@@ -137,9 +141,9 @@ const NewTrip = () => {
           <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
             <TextInput
               withAsterisk
-              label="Tên Chuyến Đi"
+              label="Tên chuyến đi"
               className="w-full flex-1"
-              placeholder="Tên Chuyến Đi"
+              placeholder="Nhập tên chuyến đi"
               defaultValue={tripName}
               onChange={(e) => setTripName(e.target.value)}
             />
@@ -148,9 +152,9 @@ const NewTrip = () => {
           <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
             <Autocomplete
               withAsterisk
-              label="Thành Phố"
+              label="Thành phố"
               className="w-full flex-1"
-              placeholder="Thành Phố"
+              placeholder="Nhập tên thành Phố"
               data={cityOptions}
               value={city}
               onChange={(value) => setCity(value)}
@@ -178,9 +182,9 @@ const NewTrip = () => {
                   }
                   clearable
                   withAsterisk
-                  label="Ngày Bắt Đầu"
+                  label="Ngày bắt đầu"
                   className="w-full flex-1"
-                  placeholder="Ngày Bắt Đầu"
+                  placeholder="Chọn ngày bắt đầu"
                   minDate={new Date()}
                   valueFormat="DD/MM/YYYY"
                   value={startDate}
@@ -196,9 +200,9 @@ const NewTrip = () => {
                   }
                   clearable
                   withAsterisk
-                  label="Ngày Kết Thúc"
+                  label="Ngày kết thúc"
                   className="w-full flex-1"
-                  placeholder="Ngày Kết Thúc"
+                  placeholder="Chọn ngày kết thúc"
                   valueFormat="DD/MM/YYYY"
                   minDate={startDate}
                   value={endDate}
@@ -239,8 +243,8 @@ const NewTrip = () => {
       <div className="w-full flex items-end justify-start mt-6">
         <Switch
           color="indigo"
-          label="Công Khai chuyển đi"
-          checked={status === true}
+          label="Công khai chuyển đi"
+          checked={status}
           onChange={(e) => setStatus(e.target.checked ? true : false)}
         />
       </div>

@@ -125,7 +125,7 @@ const EditTrip = () => {
       return;
     }
     if (!city) {
-      toast.error("Vui lòng nhập thành phố.");
+      toast.error("Vui lòng nhập tên thành phố.");
       return;
     }
     if (!total) {
@@ -286,7 +286,7 @@ const EditTrip = () => {
       <div className="w-full flex items-end justify-start mt-6">
         <Switch
           color="indigo"
-          label="Công Khai chuyển đi"
+          label="Công khai chuyển đi"
           checked={status}
           onChange={handStatusChange}
         />
