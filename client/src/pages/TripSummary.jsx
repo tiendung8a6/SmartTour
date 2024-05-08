@@ -73,7 +73,6 @@ const TripSummary = () => {
       </div>
     );
   }
-
   if (trip && trip.plans && trip.plans.length > 0) {
     console.log(trip.plans);
   } else {
@@ -84,6 +83,7 @@ const TripSummary = () => {
   trip.plans.forEach((item) => {
     if (item.startDate) {
       timelineData.push({
+        _id: item._id,
         type: item.type,
         planName: item.planName,
         time: item.startDate,
@@ -93,6 +93,7 @@ const TripSummary = () => {
     }
     if (item.endDate) {
       timelineData.push({
+        _id: item._id,
         planName: item.planName,
         time: item.endDate,
         typeTime: "end",
@@ -101,7 +102,6 @@ const TripSummary = () => {
       });
     }
   });
-
   // Sắp xếp timelineData theo thời gian và loại
   timelineData.sort((a, b) => {
     const dateA = new Date(a.time); // date a là mốc bắt dầu
@@ -517,7 +517,11 @@ const TripSummary = () => {
                             }
                             className="text-[#0782c5] flex items-center"
                           >
-                            Chỉnh sửa kế hoạch
+                            <Link
+                              to={`/trip/${trip?._id}/${item?.type}/${item?._id}/edit`}
+                            >
+                              Chỉnh sửa kế hoạch
+                            </Link>
                           </Menu.Item>
 
                           <Menu.Divider />
