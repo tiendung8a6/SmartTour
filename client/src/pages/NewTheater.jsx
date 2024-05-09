@@ -22,7 +22,7 @@ const NewTheater = () => {
   const [visible, { toggle }] = useDisclosure(false);
   const { isPending, mutate } = useCreateTheaterPlan(id, toast, user?.token);
   const [planName, setPlanName] = useState(null);
-  const [address, setAddress] = useState(null);
+  const [startAddress, setStartAddress] = useState(null);
   const [info, setInfo] = useState(null);
   const [phone, setPhone] = useState(null);
   const [web, setWeb] = useState(null);
@@ -105,7 +105,7 @@ const NewTheater = () => {
       startTime,
       endDate,
       endTime,
-      address,
+      startAddress,
       info,
       phone,
       web,
@@ -245,8 +245,8 @@ const NewTheater = () => {
               label="Địa điểm"
               className="w-full flex-1"
               placeholder="Nhập địa điểm"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
+              value={startAddress}
+              onChange={(e) => setStartAddress(e.target.value)}
             />
           </div>
           <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[5px]">

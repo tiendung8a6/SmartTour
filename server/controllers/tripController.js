@@ -70,7 +70,7 @@ export const getTrips = async (req, res, next) => {
       })
       .populate({
         path: "plans",
-        select: "planName startDate startTime endDate endTime address info",
+        select: "",
       })
       .sort({ _id: -1 });
 
@@ -109,7 +109,7 @@ export const getAdminTrips = async (req, res, next) => {
       })
       .populate({
         path: "plans",
-        select: "planName startDate startTime endDate endTime address info",
+        select: "",
       })
       .sort({ _id: -1 });
     // pagination

@@ -21,7 +21,7 @@ const NewRail = () => {
   const { user } = useStore();
   const { isPending, mutate } = useCreateRailPlan(id, toast, user?.token);
   const [planName, setPlanName] = useState(null);
-  const [address, setAddress] = useState(null);
+  const [startAddress, setStartAddress] = useState(null);
   const [info, setInfo] = useState(null);
   const [phone, setPhone] = useState(null);
   const [web, setWeb] = useState(null);
@@ -30,7 +30,7 @@ const NewRail = () => {
   const [describe, setDescribe] = useState(null);
   const [form, setForm] = useState(null);
   const [price, setPrice] = useState(null);
-  const [destination, setDestination] = useState(null);
+  const [endAddress, setEndAddress] = useState(null);
   const [arrivalGate, setArrivalGate] = useState(null);
   const [departureGate, setDepartureGate] = useState(null);
   const [startDate, setStartDate] = useState(null);
@@ -106,7 +106,7 @@ const NewRail = () => {
       startTime,
       endDate,
       endTime,
-      address,
+      startAddress,
       info,
       phone,
       web,
@@ -115,7 +115,7 @@ const NewRail = () => {
       form,
       price,
       describe,
-      destination,
+      endAddress,
       arrivalGate,
       departureGate,
     });
@@ -296,8 +296,8 @@ const NewRail = () => {
               label="Địa chỉ sân ga"
               className="w-full flex-1"
               placeholder="Nhập địa chỉ sân ga"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
+              value={startAddress}
+              onChange={(e) => setStartAddress(e.target.value)}
             />
           </div>
 
@@ -350,8 +350,8 @@ const NewRail = () => {
                 label="Ga đến"
                 className="w-full flex-1"
                 placeholder="Nhập địa chỉ ga đến"
-                value={destination}
-                onChange={(e) => setDestination(e.target.value)}
+                value={endAddress}
+                onChange={(e) => setEndAddress(e.target.value)}
               />
             </div>
           </div>

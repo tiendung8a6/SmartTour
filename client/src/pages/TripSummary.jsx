@@ -108,6 +108,8 @@ const TripSummary = () => {
         _id: item._id,
         type: item.type,
         planName: item.planName,
+        estimatedPrice: item.estimatedPrice,
+        actualPrice: item.actualPrice,
         time: item.startDate,
         typeTime: "start",
         startTime: item.startTime,
@@ -117,6 +119,8 @@ const TripSummary = () => {
       timelineData.push({
         _id: item._id,
         planName: item.planName,
+        estimatedPrice: item.estimatedPrice,
+        actualPrice: item.actualPrice,
         time: item.endDate,
         typeTime: "end",
         endTime: item.endTime,
@@ -173,7 +177,6 @@ const TripSummary = () => {
       itemsUntilCurrentDate++; // Tăng tổng số mục
     }
   });
-
   console.log(
     `Tổng số mục từ ngày đầu đến ngày hiện tại (${currentDateStr}): ${itemsUntilCurrentDate}`
   );
@@ -393,6 +396,8 @@ const TripSummary = () => {
             bulletSize={45}
           >
             {timelineData.map((item, index) => {
+              console.log("item", item);
+
               // Kiểm tra xem có cần hiển thị ngày mới không
               const showNewDate =
                 index === 0 ||
@@ -459,7 +464,7 @@ const TripSummary = () => {
                           isLastItemOfDay ? "none" : ""
                         }`}
                       >
-                        {/* {`${item.planName} - ${item.typeTime === "start" ? "Start" : "End"}`}  */}{" "}
+                        {/* {`${item.planName} - ${item.typeTime === "start" ? "Start" : "End"}`}  */}
                         <br />
                       </div>
                     </div>
@@ -487,37 +492,32 @@ const TripSummary = () => {
                     {/* <div ></div> */}
                     <Grid.Col span={{ base: 12, md: 6, lg: 8 }}>
                       <span className="text-xl font-medium text-[#0d4d84f4]">
-                        {" "}
                         {`${item.planName} ${
                           item.typeTime === "start"
                             ? "(Hoạt động bắt đầu )"
                             : "(Hoạt động kết thúc)"
                         } `}
                       </span>
-
                       <span className="">
                         {item.typeTime === "start" ? (
                           <p className="my-5">
-                            {new Date(item.time).toLocaleDateString("vi-VN")}{" "}
+                            {new Date(item.time).toLocaleDateString("vi-VN")}
                           </p>
                         ) : (
                           <p className="my-5">
-                            {new Date(item.time).toLocaleDateString("vi-VN")}{" "}
+                            {new Date(item.time).toLocaleDateString("vi-VN")}
                           </p>
                         )}
                       </span>
 
                       <span>
-                        {" "}
                         {item.typeTime === "start" && item.startTime && (
                           <p className="my-5">
-                            {" "}
                             Thời gian bắt đầu : {item.startTime}
                           </p>
                         )}
                       </span>
                       <span>
-                        {" "}
                         {item.typeTime === "end" && item.endTime && (
                           <p className="my-5">
                             Thời gian kết thúc : {item.endTime}

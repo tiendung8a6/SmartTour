@@ -27,6 +27,8 @@ import {
 import React from "react";
 import { useParams } from "react-router-dom";
 import { getSingleTrip } from "../utils/apiCalls";
+import { Autocomplete } from "@react-google-maps/api";
+
 const NewActivity = () => {
   const { colorScheme } = useMantineColorScheme();
   const { id } = useParams();
@@ -34,7 +36,7 @@ const NewActivity = () => {
   const [visible, { toggle }] = useDisclosure(false);
   const { isPending, mutate } = useCreateActivityPlan(id, toast, user?.token);
   const [planName, setPlanName] = useState(null);
-  const [address, setAddress] = useState(null);
+  const [startAddress, setStartAddress] = useState(null);
   const [info, setInfo] = useState(null);
   const [estimatedPrice, setEstimatedPrice] = useState(null);
   const [actualPrice, setActualPrice] = useState(null);
@@ -105,13 +107,21 @@ const NewActivity = () => {
         return;
       }
     }
+    if (!startAddress) {
+      toast.error("Vui lòng nhập địa chỉ.");
+      return;
+    }
+    if (!estimatedPrice) {
+      toast.error("Vui lòng nhập tổng chi phí dự kiến.");
+      return;
+    }
     mutate({
       planName,
       startDate,
       startTime,
       endDate,
       endTime,
-      address,
+      startAddress,
       info,
       estimatedPrice,
       actualPrice,
@@ -239,16 +249,18 @@ const NewActivity = () => {
             </Grid.Col>
           </Grid>
 
-          <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[5px]">
-            <TextInput
-              // withAsterisk
-              label="Địa chỉ"
-              className="w-full flex-1"
-              placeholder="Nhập địa chỉ"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-            />
-          </div>
+          <Autocomplete>
+            <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[5px]">
+              <TextInput
+                withAsterisk
+                label="Địa chỉ"
+                className="w-full flex-1"
+                placeholder="Nhập địa chỉ"
+                value={startAddress}
+                onChange={(e) => setStartAddress(e.target.value)}
+              />
+            </div>
+          </Autocomplete>
 
           <Grid className="mt-[24px]">
             <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>

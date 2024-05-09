@@ -26,7 +26,7 @@ const NewParking = () => {
   const [web, setWeb] = useState(null);
   const [email, setEmail] = useState(null);
   const [total, setTotal] = useState(null);
-  const [address, setAddress] = useState(null);
+  const [startAddress, setStartAddress] = useState(null);
   const [price, setPrice] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -104,7 +104,7 @@ const NewParking = () => {
       web,
       email,
       price,
-      address,
+      startAddress,
       total,
     });
   };
@@ -236,8 +236,8 @@ const NewParking = () => {
               label="Địa chỉ"
               className="w-full flex-1"
               placeholder="Nhập địa chỉ"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
+              value={startAddress}
+              onChange={(e) => setStartAddress(e.target.value)}
             />
           </div>
 

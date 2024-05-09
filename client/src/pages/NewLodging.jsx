@@ -22,7 +22,7 @@ const NewLodging = () => {
   const [visible, { toggle }] = useDisclosure(false);
   const { isPending, mutate } = useCreateLodgingPlan(id, toast, user?.token);
   const [planName, setPlanName] = useState(null);
-  const [address, setAddress] = useState(null);
+  const [startAddress, setStartAddress] = useState(null);
   const [info, setInfo] = useState(null);
   const [phone, setPhone] = useState(null);
   const [web, setWeb] = useState(null);
@@ -102,7 +102,7 @@ const NewLodging = () => {
       startTime,
       endDate,
       endTime,
-      address,
+      startAddress,
       info,
       phone,
       web,
@@ -239,8 +239,8 @@ const NewLodging = () => {
               label="Địa chỉ"
               className="w-full flex-1"
               placeholder="Nhập địa chỉ"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
+              value={startAddress}
+              onChange={(e) => setStartAddress(e.target.value)}
             />
           </div>
 

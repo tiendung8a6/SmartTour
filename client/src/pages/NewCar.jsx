@@ -21,7 +21,7 @@ const NewCar = () => {
   const { user } = useStore();
   const { isPending, mutate } = useCreateCarPlan(id, toast, user?.token);
   const [planName, setPlanName] = useState(null);
-  const [address, setAddress] = useState(null);
+  const [startAddress, setStartAddress] = useState(null);
   const [phone, setPhone] = useState(null);
   const [web, setWeb] = useState(null);
   const [email, setEmail] = useState(null);
@@ -103,7 +103,7 @@ const NewCar = () => {
       startTime,
       endDate,
       endTime,
-      address,
+      startAddress,
       phone,
       web,
       email,
@@ -170,8 +170,8 @@ const NewCar = () => {
               label="Địa chỉ đại lý"
               className="w-full flex-1"
               placeholder="Nhập địa chỉ đại lý"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
+              value={startAddress}
+              onChange={(e) => setStartAddress(e.target.value)}
             />
           </div>
           <Grid className="mt-[24px]">

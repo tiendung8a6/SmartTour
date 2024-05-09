@@ -10,7 +10,8 @@ const planSchema = new mongoose.Schema(
     endDate: { type: Date, required: true }, //activity,      lodging ((Ngày trả phòng),              restaurant(ngày kết thúc),        flights(Ngày tới)         ,car(thời gian đón)       concert&theater&camp(ngày kết thúc)     ,parking(Ngày trả)
     startTime: { type: String, required: true }, //activity, lodging (Giờ nhận phòng),                restaurant(giờ bắt đầu),          flights(Giờ khởi hành)    ,car(ngày trả)            concert&theater&camp(Tzan bắt đầu)       ,parking(Tzan bắt đầu)
     endTime: { type: String, required: true }, //activity,   lodging (Giờ trả phòng),                 restaurant(giờ kết thúc),         flights(Giờ tới)          ,car(thời gian trả)       concert&theater&camp(Tzan kết thúc)      ,parking(Tzan kết thúc)
-    address: { type: String, required: false }, //activity,   lodging (Địa chỉ),                      restaurant(Địa chỉ),              flights(sân bay)          ,car(Địa chỉ)             concert&theater&camp(Địa điểm)          ,parking(Địa chỉ)
+    startAddress: { type: String, required: false }, //activity,   lodging (Địa chỉ),                      restaurant(Địa chỉ),              flights(sân bay)          ,car(Địa chỉ)             concert&theater&camp(Địa điểm)          ,parking(Địa chỉ)
+    endAddress: { type: String, required: false }, //                                                                                   flights(điểm đến)
     info: { type: String, required: false }, //activity,      lodging (Liên hệ nhà cung cấp),         restaurant(Liên hệ),              flights(Số chuyến bay),                           concert&theater&camp(Thông tin hoạt động) ,parking(Thông tin liên hệ)
     phone: { type: String, required: false }, //              lodging (Điện thoại nhà cung cấp),      restaurant(SĐT),                  flights(ĐT Sân bay)          ,car(SĐT đai lý)  concert&theater&camp(SĐT)                 ,parking(SĐT)
     web: { type: String, required: false }, //                lodging (Web nhà cung cấp),             restaurant(web),                  flights(Web Sân bay)          ,car(web đại lý)   concert&theater&camp(web)                 ,parking(Web)
@@ -20,7 +21,6 @@ const planSchema = new mongoose.Schema(
     describe: { type: String, required: false }, //           lodging (mô tả),                        restaurant(Ẩm thực),               flights(Bữa ăn Sân bay)   ,car(Chi tiết xe)         concert&theater&camp(Địa chỉ)
     form: { type: String, required: false }, //                                                       restaurant(Quy định trang phục),   flights(Hạng vé)             ,car(loại xe)            concert&theater&camp(Hạng vé)
     price: { type: String, required: false }, //                                                      restaurant(giá tiền),              flights(Giá vé)              ,car(Chi phí)           concert&theater&camp(Giá vé)               ,parking(Giá tiền)
-    destination: { type: String, required: false }, //                                                                                   flights(điểm đến)
     departureGate: { type: String, required: false }, //                                                                                 flights(cổng khởi hành)                             concert&theater&camp(Cổng vào)
     arrivalGate: { type: String, required: false }, //                                                                                  flights(cổng đến/cổng ra)->rail(đổi thành loại chỗ)
   },
