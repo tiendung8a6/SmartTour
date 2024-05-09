@@ -11,11 +11,14 @@ import {
   createPlanParking,
   createPlanRestaurant,
   createPlanRail,
+  getPlanById,
+  updatePlanActivity,
 } from "../controllers/planController.js";
 
 const router = express.Router();
 
 //ROUTES
+//CREATE
 router.post("/create/activity/:id", userAuth, createPlanActivity); //activity
 router.post("/create/lodging/:id", userAuth, createPlanLodging); //lodging
 router.post("/create/flights/:id", userAuth, createPlanFlights); //flights
@@ -27,4 +30,9 @@ router.post("/create/parking/:id", userAuth, createPlanParking); //parking
 router.post("/create/restaurant/:id", userAuth, createPlanRestaurant); //restaurant
 router.post("/create/rail/:id", userAuth, createPlanRail); //rail
 
+//UPDATE
+router.patch("/update/activity/:id", userAuth, updatePlanActivity); //activity
+
+//GET
+router.get("/:planId", getPlanById);
 export default router;

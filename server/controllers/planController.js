@@ -613,3 +613,70 @@ export const createPlanRail = async (req, res, next) => {
     res.status(500).json({ success: false, message: "Server Error" });
   }
 };
+export const getPlanById = async (req, res, next) => {
+  try {
+    const { planId } = req.params;
+
+    const plan = await Plans.findById(planId);
+
+    if (!plan) {
+      return res.status(404).json({ message: "Plan not found" });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Successful",
+      data: plan,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+export const updatePlanActivity = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const {
+      planName,
+      startDate,
+      startTime,
+      endDate,
+      endTime,
+      startAddress,
+      info,
+      estimatedPrice,
+      actualPrice,
+    } = req.body;
+
+    const updatedFields = {};
+    if (planName) updatedFields.planName = planName;
+    if (startDate) updatedFields.startDate = startDate;
+    if (startTime) updatedFields.startTime = startTime;
+    if (endDate) updatedFields.endDate = endDate;
+    if (endTime) updatedFields.endTime = endTime;
+    if (startAddress) updatedFields.startAddress = startAddress;
+    if (info) updatedFields.info = info;
+    if (estimatedPrice) updatedFields.estimatedPrice = estimatedPrice;
+    if (actualPrice) updatedFields.actualPrice = actualPrice;
+    const plan = await Plans.findByIdAndUpdate(id, updatedFields, {
+      new: true,
+    });
+
+    if (!plan) {
+      return res.status(404).json({
+        success: false,
+        message: "Không tìm thấy kế hoạch cho hoạt động",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Kế hoạch cho hoạt động đã được cập nhật thành công.",
+      data: plan,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+};
