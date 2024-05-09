@@ -1,4 +1,12 @@
-import { Button, TextInput, useMantineColorScheme, Grid } from "@mantine/core";
+import {
+  Button,
+  TextInput,
+  useMantineColorScheme,
+  Grid,
+  Textarea,
+  NumberInput,
+  Tooltip,
+} from "@mantine/core";
 import { IconCalendarEvent } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
 import { useEffect, useState } from "react";
@@ -11,7 +19,11 @@ import { Link } from "react-router-dom";
 import { useRef } from "react";
 import { ActionIcon, rem } from "@mantine/core";
 import { TimeInput } from "@mantine/dates";
-import { IconClock, IconArrowLeft } from "@tabler/icons-react";
+import {
+  IconClock,
+  IconArrowLeft,
+  IconCurrencyDong,
+} from "@tabler/icons-react";
 import React from "react";
 import { useParams } from "react-router-dom";
 import { getSingleTrip } from "../utils/apiCalls";
@@ -24,6 +36,8 @@ const NewActivity = () => {
   const [planName, setPlanName] = useState(null);
   const [address, setAddress] = useState(null);
   const [info, setInfo] = useState(null);
+  const [estimatedPrice, setEstimatedPrice] = useState(null);
+  const [actualPrice, setActualPrice] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [startTime, setStartTime] = useState(null);
@@ -99,6 +113,8 @@ const NewActivity = () => {
       endTime,
       address,
       info,
+      estimatedPrice,
+      actualPrice,
     });
   };
 
@@ -234,12 +250,63 @@ const NewActivity = () => {
             />
           </div>
 
+          <Grid className="mt-[24px]">
+            <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
+              <div className="w-full">
+                <NumberInput
+                  withAsterisk
+                  label="Tổng chi phí dự kiến"
+                  placeholder="Nhập tổng giá tiền dự kiến"
+                  allowDecimal={false}
+                  clampBehavior="strict"
+                  min={0}
+                  max={100000000000}
+                  thousandSeparator="."
+                  decimalSeparator=","
+                  rightSection={
+                    <IconCurrencyDong
+                      style={{ width: rem(20), height: rem(20) }}
+                      stroke={1.5}
+                    />
+                  }
+                  value={estimatedPrice}
+                  onChange={(value) => setEstimatedPrice(value)}
+                />
+              </div>
+            </Grid.Col>
+            <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
+              <div className="w-full ">
+                <NumberInput
+                  label="Tổng chi phí thực tế"
+                  placeholder="Nhập tổng chi phí thực tế"
+                  allowDecimal={false}
+                  clampBehavior="strict"
+                  min={0}
+                  max={100000000000}
+                  thousandSeparator="."
+                  decimalSeparator=","
+                  rightSection={
+                    <IconCurrencyDong
+                      style={{ width: rem(20), height: rem(20) }}
+                      stroke={1.5}
+                    />
+                  }
+                  value={actualPrice}
+                  onChange={(value) => setActualPrice(value)}
+                />
+              </div>
+            </Grid.Col>
+          </Grid>
+
           <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[24px]">
-            <TextInput
+            <Textarea
               // withAsterisk
-              label="Thông tin liên hệ"
+              label="Thông tin"
               className="w-full flex-1"
-              placeholder="Nhập thông tin liên hệ"
+              placeholder="Nhập thông tin"
+              autosize
+              minRows={3}
+              maxRows={6}
               value={info}
               onChange={(e) => setInfo(e.target.value)}
             />
