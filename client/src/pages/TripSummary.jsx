@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Button, Container, GridCol, Timeline, Badge } from "@mantine/core";
+import {
+  Button,
+  Container,
+  GridCol,
+  Timeline,
+  Badge,
+  NumberFormatter,
+} from "@mantine/core";
 import useStore from "../store";
 import { getSingleTrip } from "../utils/apiCalls";
 import { Text } from "@mantine/core";
@@ -34,6 +41,7 @@ import {
   IconMasksTheater,
   IconEditCircle,
   IconCampfire,
+  IconCurrencyDong,
 } from "@tabler/icons-react";
 
 const TripSummary = () => {
@@ -44,7 +52,6 @@ const TripSummary = () => {
   const endDate = new Date(trip?.endDate);
   const diffTime = Math.abs(endDate - startDate);
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
   const fetchTrip = async () => {
     try {
       setIsLoading(true);
@@ -63,6 +70,21 @@ const TripSummary = () => {
       window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     }
   }, [id]);
+
+  // Function to calculate total estimated price and actual price
+  const calculateTotalPrices = () => {
+    let totalEstimatedPrice = 0;
+    let totalActualPrice = 0;
+
+    trip?.plans?.forEach((plan) => {
+      totalEstimatedPrice += plan.estimatedPrice || 0;
+      totalActualPrice += plan.actualPrice || 0;
+    });
+
+    return { totalEstimatedPrice, totalActualPrice };
+  };
+
+  const { totalEstimatedPrice, totalActualPrice } = calculateTotalPrices();
 
   const timelineData = [];
 
@@ -159,7 +181,6 @@ const TripSummary = () => {
   // console.log(`Tổng số mục trong ngày trước đó tính từ ngày hiện tại (${currentDate}) lùi về trước: ${totalItemsInPreviousDay}`);
 
   // console.log(`Tổng số mục trong ngày trước đó tính từ ngày hiện tại (${currentDate}) lùi về trước: ${totalItemsInPreviousDay}`);
-
   const isPassperItem = itemsUntilCurrentDate - 1;
   return (
     <div className="m-[50px] h-fit">
@@ -194,6 +215,35 @@ const TripSummary = () => {
               {new Date(trip?.endDate).toLocaleDateString("vi-VN")} (
               {diffDays === 0 ? "1 ngày" : `${diffDays} ngày`})
             </span>
+
+            <div className="flex gap-1 text-sm text-gray-600">
+              Tổng chi phí dự kiến:
+              <NumberFormatter
+                thousandSeparator="."
+                decimalSeparator=","
+                value={totalEstimatedPrice}
+              />
+              <span>
+                <IconCurrencyDong
+                  style={{ width: rem(15), height: rem(15) }}
+                  stroke={1.5}
+                />
+              </span>
+            </div>
+
+            <div className="flex gap-1 text-sm text-gray-600 ">
+              Tổng chi phí thực tế:
+              <NumberFormatter
+                thousandSeparator="."
+                decimalSeparator=","
+                value={totalActualPrice}
+              />
+              <IconCurrencyDong
+                style={{ width: rem(15), height: rem(15) }}
+                stroke={1.5}
+              />
+            </div>
+
             <span className="text-sm">
               <Badge
                 size="md"
