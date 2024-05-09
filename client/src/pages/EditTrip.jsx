@@ -59,7 +59,7 @@ const EditTrip = () => {
   const { id } = useParams();
   const [trip, setTrip] = useState(null);
   const { colorScheme } = useMantineColorScheme();
-  const { user } = useStore();
+  const { user, setIsLoading } = useStore();
   const [visible, { toggle }] = useDisclosure(false);
   const [file, setFile] = useState("");
   const [tripName, setTripName] = useState(trip?.tripName);
@@ -149,7 +149,7 @@ const EditTrip = () => {
       toast.error("Please upload an image.");
       return;
     }
-    console.log("status", status);
+    setIsLoading(true);
     mutate({
       id: trip._id,
       tripName,

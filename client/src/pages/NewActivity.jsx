@@ -32,7 +32,7 @@ import { Autocomplete } from "@react-google-maps/api";
 const NewActivity = () => {
   const { colorScheme } = useMantineColorScheme();
   const { id } = useParams();
-  const { user } = useStore();
+  const { user, setIsLoading } = useStore();
   const [visible, { toggle }] = useDisclosure(false);
   const { isPending, mutate } = useCreateActivityPlan(id, toast, user?.token);
   const [planName, setPlanName] = useState(null);
@@ -48,7 +48,6 @@ const NewActivity = () => {
   const endTimeRef = useRef(null);
   const theme = colorScheme === "dark";
 
-  const { setIsLoading } = useStore();
   const [trip, setTrip] = useState(null);
 
   //AuTo Fill GOOGLE
@@ -131,6 +130,7 @@ const NewActivity = () => {
       toast.error("Vui lòng nhập tổng chi phí dự kiến.");
       return;
     }
+    setIsLoading(true);
     mutate({
       planName,
       startDate,

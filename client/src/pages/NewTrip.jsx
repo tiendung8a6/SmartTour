@@ -57,7 +57,7 @@ const generateOptions = (num) => {
 const NewTrip = () => {
   const { colorScheme } = useMantineColorScheme();
 
-  const { user } = useStore();
+  const { user, setIsLoading } = useStore();
   const [visible, { toggle }] = useDisclosure(false);
   const { isPending, mutate } = useCreateTrip(toast, user?.token);
   const [file, setFile] = useState("");
@@ -108,7 +108,7 @@ const NewTrip = () => {
       toast.error("Please upload an image.");
       return;
     }
-
+    setIsLoading(true);
     mutate({
       tripName,
       image: fileURL,
