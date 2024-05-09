@@ -195,7 +195,7 @@ const TripSummary = () => {
           color="#0782c5"
           size="md"
         >
-          <span className="text-[#0782c5]">Trở Lại danh sách chuyến đi</span>
+          <span className="text-[#0782c5]">Trở lại danh sách chuyến đi</span>
         </Button>
       </Link>
 

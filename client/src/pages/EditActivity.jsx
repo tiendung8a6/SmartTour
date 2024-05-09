@@ -12,7 +12,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { useEffect, useState } from "react";
 import { Toaster, toast } from "sonner";
 import { LoadingClient } from "../components";
-import { useCreateActivityPlan } from "../hooks/client-hook";
+import { useUpdateActivityPlan } from "../hooks/client-hook";
 import useStore from "../store";
 import { DateInput } from "@mantine/dates";
 import { Link } from "react-router-dom";
@@ -26,15 +26,20 @@ import {
 } from "@tabler/icons-react";
 import React from "react";
 import { useParams } from "react-router-dom";
-import { getSingleTrip } from "../utils/apiCalls";
+import { getSingleTrip, getSinglePlans } from "../utils/apiCalls";
 import { Autocomplete } from "@react-google-maps/api";
 
-const NewActivity = () => {
+const EditActivity = () => {
   const { colorScheme } = useMantineColorScheme();
-  const { id } = useParams();
+  const { id, planId } = useParams();
   const { user } = useStore();
   const [visible, { toggle }] = useDisclosure(false);
-  const { isPending, mutate } = useCreateActivityPlan(id, toast, user?.token);
+  const { isPending, mutate } = useUpdateActivityPlan(
+    planId,
+    toast,
+    user?.token,
+    id
+  );
   const [planName, setPlanName] = useState(null);
   const [startAddress, setStartAddress] = useState(null);
   const [info, setInfo] = useState(null);
@@ -66,7 +71,6 @@ const NewActivity = () => {
       }
     }
   };
-
   const pickerStartTimeControl = (
     <ActionIcon
       className="text-[#107ac5]"
@@ -89,6 +93,10 @@ const NewActivity = () => {
       <IconClock style={{ width: rem(16), height: rem(16) }} stroke={3} />
     </ActionIcon>
   );
+
+  const handleChange = (setStateFunction) => (e) => {
+    setStateFunction(e.target.value);
+  };
 
   const handleSubmit = async () => {
     if (!planName) {
@@ -144,6 +152,34 @@ const NewActivity = () => {
     });
   };
 
+  //TRUY VẤN DỮ LIỆU PLAN
+  const fetchPlan = async () => {
+    try {
+      const data = await getSinglePlans(planId);
+
+      if (data) {
+        setPlanName(data.planName);
+        setStartAddress(data.startAddress);
+        setInfo(data.info);
+        setEstimatedPrice(data.estimatedPrice);
+        setActualPrice(data.actualPrice);
+        setStartDate(new Date(data.startDate));
+        setEndDate(new Date(data.endDate));
+        setStartTime(data.startTime);
+        setEndTime(data.endTime);
+      }
+    } catch (error) {
+      console.error("Error fetching plan:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (planId) {
+      fetchPlan();
+    }
+  }, [planId]);
+
+  //TRUY VẤN DỮ LIỆU TRIP
   const fetchTrip = async () => {
     try {
       const data = await getSingleTrip(id);
@@ -163,7 +199,7 @@ const NewActivity = () => {
   }, [id]);
   return (
     <div className="px-[100px] mb-10">
-      <Link to={`/trip/${trip?._id}/plans/create`}>
+      <Link to={`/trip/${trip?._id}`}>
         <Button
           className="border-none hover:text-[#0782c5] hover:bg-transparent flex justify-start ml-[-20px] "
           leftSection={<IconArrowLeft className="text-[#0782c5]" size={30} />}
@@ -179,7 +215,7 @@ const NewActivity = () => {
           theme ? "text-white" : "text-slate-700"
         } text-lg font-semibold mt-4`}
       >
-        Thêm hoạt động
+        Chỉnh sửa hoạt động
       </p>
       <br />
 
@@ -192,6 +228,7 @@ const NewActivity = () => {
               className="w-full flex-1"
               placeholder="Nhập tên sự kiện"
               onChange={(e) => setPlanName(e.target.value)}
+              value={planName}
             />
           </div>
 
@@ -224,6 +261,7 @@ const NewActivity = () => {
                   withAsterisk
                   // description="Input description"
                   placeholder="Chọn thời gian bắt đầu"
+                  value={startTime}
                   onChange={(e) => setStartTime(e.target.value)}
                 />
               </div>
@@ -259,6 +297,7 @@ const NewActivity = () => {
                   withAsterisk
                   // description="Input description"
                   placeholder="Chọn thời gian kết thúc"
+                  value={endTime}
                   onChange={(e) => setEndTime(e.target.value)}
                 />
               </div>
@@ -274,6 +313,7 @@ const NewActivity = () => {
                 placeholder="Nhập địa chỉ"
                 value={startAddress}
                 onChange={(e) => setStartAddress(e.target.value)}
+                maxLength={255} // Giới hạn số lượng ký tự nhập vào
               />
             </div>
           </Autocomplete>
@@ -344,7 +384,7 @@ const NewActivity = () => {
 
       <div className="flex justify-start gap-3">
         <div className=" flex items-end justify-start mt-6">
-          <Link to={`/trip/${trip?._id}/plans/create`}>
+          <Link to={`/trip/${trip?._id}`}>
             <Button variant="outline" color="Red" size="md" radius="md">
               Hủy
             </Button>
@@ -370,4 +410,4 @@ const NewActivity = () => {
   );
 };
 
-export default NewActivity;
+export default EditActivity;

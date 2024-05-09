@@ -30,6 +30,7 @@ import {
   NewParking,
   NewRestaurant,
   NewRail,
+  EditActivity,
 } from "./pages";
 import { Footer, Loading, Navbar } from "./components";
 import useStore from "./store";
@@ -82,6 +83,12 @@ function App() {
             <Route path="/trip/:id/camp/create" element={<NewCamp />} />
             <Route path="/trip/:id/parking/create" element={<NewParking />} />
             <Route path="/trip/:id/rail/create" element={<NewRail />} />
+
+            <Route
+              path="/trip/:id/activity/:planId/edit"
+              element={<EditActivity />}
+            />
+
             <Route
               path="/trip/:id/restaurant/create"
               element={<NewRestaurant />}

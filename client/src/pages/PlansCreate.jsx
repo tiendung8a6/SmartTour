@@ -62,7 +62,7 @@ const PlansCreate = () => {
           color="#0782c5"
           size="md"
         >
-          <span className="text-[#0782c5]">Trở Lại Tóm tắt chuyến đi</span>
+          <span className="text-[#0782c5]">Trở lại tóm tắt chuyến đi</span>
         </Button>
       </Link>
       <div className="text-xl font-medium mt-5">

@@ -203,3 +203,14 @@ export const getSingleTrip = async (id) => {
     return err;
   }
 };
+export const getSinglePlans = async (planId) => {
+  try {
+    const { data } = await axios.get(`${API_URI}plans/${planId}`);
+    return data?.data;
+  } catch (error) {
+    const err = error?.response?.data || error?.response;
+    console.log(error);
+
+    return err;
+  }
+};

@@ -195,6 +195,34 @@ export const useCreateActivityPlan = (id, toast, token) => {
     },
   });
 };
+export const useUpdateActivityPlan = (planId, toast, token, id) => {
+  return useMutation({
+    mutationFn: async (formData) => {
+      const { data } = await axios.patch(
+        `${API_URL}/plans/update/activity/${planId}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return data;
+    },
+
+    onError: async (error) => {
+      toast.error(error?.response?.data?.message ?? error.message);
+    },
+
+    onSuccess: async (data) => {
+      toast.success(data?.message);
+
+      setTimeout(() => {
+        window.location.replace(`/trip/${id}`);
+      }, 1000);
+    },
+  });
+};
 export const useCreateLodgingPlan = (id, toast, token) => {
   return useMutation({
     mutationFn: async (formData) => {

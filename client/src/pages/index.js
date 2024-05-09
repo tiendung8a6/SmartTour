@@ -28,6 +28,7 @@ import NewCamp from "./NewCamp";
 import NewParking from "./NewParking";
 import NewRestaurant from "./NewRestaurant";
 import NewRail from "./NewRail";
+import EditActivity from "./EditActivity";
 export {
   BlogDetail,
   CategoryPage,
@@ -59,4 +60,5 @@ export {
   NewParking,
   NewRestaurant,
   NewRail,
+  EditActivity,
 };
