@@ -151,8 +151,7 @@ export const getTrip = async (req, res, next) => {
       })
       .populate({
         path: "plans",
-        select:
-          "planName type startDate startTime endDate endTime address info phone web email number describe destination, arrivalGate, departureGate",
+        select: "", // Object trống để lấy tất cả các trường
       });
 
     await Trips.findByIdAndUpdate(tripId, trip);

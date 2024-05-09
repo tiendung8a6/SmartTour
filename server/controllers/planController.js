@@ -4,9 +4,20 @@ import Plans from "../models/planModel.js";
 
 export const createPlanActivity = async (req, res, next) => {
   try {
-    const { planName, startDate, startTime, endDate, endTime, address, info } =
-      req.body;
+    const {
+      planName,
+      startDate,
+      startTime,
+      endDate,
+      endTime,
+      address,
+      info,
+      estimatedPrice,
+      actualPrice,
+    } = req.body;
     const { id } = req.params;
+
+    const price = actualPrice ? actualPrice : estimatedPrice;
 
     const plan = await Plans.create({
       planName,
@@ -14,6 +25,8 @@ export const createPlanActivity = async (req, res, next) => {
       startTime,
       endDate,
       endTime,
+      estimatedPrice,
+      actualPrice: price,
       address,
       info,
       type: "activity",
