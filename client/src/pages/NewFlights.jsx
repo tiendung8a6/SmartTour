@@ -314,13 +314,19 @@ const NewFlights = () => {
           <Grid className="my-6">
             <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
               <div className="w-full flex flex-col md:flex-row flex-wrap  ">
-                <TextInput
+                <MantineAutocomplete
                   // withAsterisk
                   label="Hạng vé"
                   className="w-full flex-1"
                   placeholder="Nhập hạng vé"
+                  data={[
+                    "Phổ thông",
+                    "Phổ thông đặt biệt",
+                    "Thương gia",
+                    "Hạng nhất",
+                  ]}
                   value={form}
-                  onChange={(e) => setForm(e.target.value)}
+                  onChange={(value) => setForm(value)}
                 />
               </div>
             </Grid.Col>
