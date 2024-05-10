@@ -6,26 +6,23 @@ import {
   Textarea,
   NumberInput,
   Tooltip,
+  ActionIcon,
+  rem,
 } from "@mantine/core";
-import { IconCalendarEvent } from "@tabler/icons-react";
-import { useDisclosure } from "@mantine/hooks";
-import { useEffect, useState } from "react";
-import { Toaster, toast } from "sonner";
-import { LoadingClient } from "../components";
-import { useCreateActivityPlan } from "../hooks/client-hook";
-import useStore from "../store";
-import { DateInput } from "@mantine/dates";
-import { Link } from "react-router-dom";
-import { useRef } from "react";
-import { ActionIcon, rem } from "@mantine/core";
-import { TimeInput } from "@mantine/dates";
 import {
+  IconCalendarEvent,
   IconClock,
   IconArrowLeft,
   IconCurrencyDong,
 } from "@tabler/icons-react";
-import React from "react";
-import { useParams } from "react-router-dom";
+import { useDisclosure } from "@mantine/hooks";
+import React, { useEffect, useState, useRef } from "react";
+import { Toaster, toast } from "sonner";
+import { LoadingClient } from "../components";
+import { useCreateActivityPlan } from "../hooks/client-hook";
+import useStore from "../store";
+import { DateInput, TimeInput } from "@mantine/dates";
+import { Link, useParams } from "react-router-dom";
 import { getSingleTrip } from "../utils/apiCalls";
 import { Autocomplete } from "@react-google-maps/api";
 
