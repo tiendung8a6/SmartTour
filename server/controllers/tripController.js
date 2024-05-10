@@ -230,3 +230,44 @@ export const updateTripStatus = async (req, res, next) => {
     res.status(404).json({ message: error.message });
   }
 };
+export const getPublicTrips = async (req, res, next) => {
+  try {
+    const query = { status: true };
+
+    let queryResult = Trips.find(query)
+      .populate({
+        path: "user",
+        select: "name image -password",
+      })
+      .populate({
+        path: "plans",
+        select: "",
+      })
+      .sort({ _id: -1 });
+
+    // Phân trang
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 5;
+    const skip = (page - 1) * limit;
+
+    // Số lượng chuyến đi
+    const totalTrips = await Trips.countDocuments(query);
+
+    const numOfPage = Math.ceil(totalTrips / limit);
+
+    queryResult = queryResult.skip(skip).limit(limit);
+
+    const trips = await queryResult;
+
+    res.status(200).json({
+      success: true,
+      totalTrips: totalTrips,
+      data: trips,
+      page,
+      numOfPage,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: error.message });
+  }
+};

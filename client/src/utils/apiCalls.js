@@ -214,3 +214,14 @@ export const getSinglePlans = async (planId) => {
     return err;
   }
 };
+export const getPublicTrips = async (planId) => {
+  try {
+    const { data } = await axios.get(`${API_URI}trips/public`);
+    return data?.data;
+  } catch (error) {
+    const err = error?.response?.data || error?.response;
+    console.log(error);
+
+    return err;
+  }
+};

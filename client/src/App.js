@@ -31,6 +31,8 @@ import {
   NewRestaurant,
   NewRail,
   EditActivity,
+  MyTripsPanel,
+  PublicTripsPanel,
 } from "./pages";
 import { Footer, Loading, Navbar } from "./components";
 import useStore from "./store";
@@ -69,6 +71,8 @@ function App() {
             <Route path="/new-post" element={<NewPost />} />
             <Route path="/my-posts" element={<MyPosts />} />
             <Route path="/trip" element={<Trip />} />
+            <Route path="/my-trips" element={<MyTripsPanel />} />
+            <Route path="/public-trips" element={<PublicTripsPanel />} />
             <Route path="/trip/:id" element={<TripSummary />} />
             <Route path="/trip/create" element={<NewTrip />} />
             <Route path="/trip/:id/edit" element={<EditTrip />} />

@@ -29,6 +29,8 @@ import NewParking from "./NewParking";
 import NewRestaurant from "./NewRestaurant";
 import NewRail from "./NewRail";
 import EditActivity from "./EditActivity";
+import MyTripsPanel from "./MyTripsPanel";
+import PublicTripsPanel from "./PublicTripsPanel";
 export {
   BlogDetail,
   CategoryPage,
@@ -61,4 +63,6 @@ export {
   NewRestaurant,
   NewRail,
   EditActivity,
+  MyTripsPanel,
+  PublicTripsPanel,
 };
