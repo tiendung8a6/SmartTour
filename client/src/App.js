@@ -33,6 +33,7 @@ import {
   EditActivity,
   MyTripsPanel,
   PublicTripsPanel,
+  EditFlights,
 } from "./pages";
 import { Footer, Loading, Navbar } from "./components";
 import useStore from "./store";
@@ -93,6 +94,10 @@ function App() {
               element={<EditActivity />}
             />
 
+            <Route
+              path="/trip/:id/flights/:planId/edit"
+              element={<EditFlights />}
+            />
             <Route
               path="/trip/:id/restaurant/create"
               element={<NewRestaurant />}

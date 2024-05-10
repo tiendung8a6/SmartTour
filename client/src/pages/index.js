@@ -31,6 +31,7 @@ import NewRail from "./NewRail";
 import EditActivity from "./EditActivity";
 import MyTripsPanel from "./MyTripsPanel";
 import PublicTripsPanel from "./PublicTripsPanel";
+import EditFlights from "./EditFlights";
 export {
   BlogDetail,
   CategoryPage,
@@ -65,4 +66,5 @@ export {
   EditActivity,
   MyTripsPanel,
   PublicTripsPanel,
+  EditFlights,
 };

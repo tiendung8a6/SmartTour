@@ -277,6 +277,34 @@ export const useCreateFlightsPlan = (id, toast, token) => {
     },
   });
 };
+export const useUpdateFlightsPlan = (planId, toast, token, id) => {
+  return useMutation({
+    mutationFn: async (formData) => {
+      const { data } = await axios.patch(
+        `${API_URL}/plans/update/flights/${planId}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return data;
+    },
+
+    onError: async (error) => {
+      toast.error(error?.response?.data?.message ?? error.message);
+    },
+
+    onSuccess: async (data) => {
+      toast.success(data?.message);
+
+      setTimeout(() => {
+        window.location.replace(`/trip/${id}`);
+      }, 1000);
+    },
+  });
+};
 export const useCreateCarPlan = (id, toast, token) => {
   return useMutation({
     mutationFn: async (formData) => {

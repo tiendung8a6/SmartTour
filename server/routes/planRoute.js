@@ -13,6 +13,7 @@ import {
   createPlanRail,
   getPlanById,
   updatePlanActivity,
+  updatePlanFlights,
 } from "../controllers/planController.js";
 
 const router = express.Router();
@@ -32,6 +33,7 @@ router.post("/create/rail/:id", userAuth, createPlanRail); //rail
 
 //UPDATE
 router.patch("/update/activity/:id", userAuth, updatePlanActivity); //activity
+router.patch("/update/flights/:id", userAuth, updatePlanFlights); //flights
 
 //GET
 router.get("/:planId", getPlanById);
