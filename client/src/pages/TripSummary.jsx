@@ -113,20 +113,23 @@ const TripSummary = () => {
         time: item.startDate,
         typeTime: "start",
         startTime: item.startTime,
+        startAddress: item.startAddress,
       });
     }
     if (item.endDate) {
       timelineData.push({
         _id: item._id,
+        type: item.type, // Add type for end events
         planName: item.planName,
         estimatedPrice: item.estimatedPrice,
         actualPrice: item.actualPrice,
         time: item.endDate,
         typeTime: "end",
         endTime: item.endTime,
-        type: item.type, // Add type for end events
+        endAddress: item.endAddress,
       });
     }
+    console.log("=================", item);
   });
   // Sắp xếp timelineData theo thời gian và loại
   timelineData.sort((a, b) => {
@@ -501,10 +504,12 @@ const TripSummary = () => {
                       <span className="">
                         {item.typeTime === "start" ? (
                           <p className="my-5">
+                            Ngày:{" "}
                             {new Date(item.time).toLocaleDateString("vi-VN")}
                           </p>
                         ) : (
                           <p className="my-5">
+                            Ngày:{" "}
                             {new Date(item.time).toLocaleDateString("vi-VN")}
                           </p>
                         )}
@@ -512,16 +517,75 @@ const TripSummary = () => {
 
                       <span>
                         {item.typeTime === "start" && item.startTime && (
+                          <p className="my-5 ">Thời gian: {item.startTime}</p>
+                        )}
+                      </span>
+                      <span>
+                        {item.typeTime === "start" && item.estimatedPrice && (
                           <p className="my-5">
-                            Thời gian bắt đầu : {item.startTime}
+                            Chi phí dự kiến:{" "}
+                            <NumberFormatter
+                              thousandSeparator="."
+                              decimalSeparator=","
+                              value={item.estimatedPrice}
+                            />{" "}
+                            VND
                           </p>
                         )}
                       </span>
                       <span>
-                        {item.typeTime === "end" && item.endTime && (
+                        {item.typeTime === "start" && item.actualPrice && (
                           <p className="my-5">
-                            Thời gian kết thúc : {item.endTime}
+                            Chi phí thực tế:{" "}
+                            <NumberFormatter
+                              thousandSeparator="."
+                              decimalSeparator=","
+                              value={item.actualPrice}
+                            />{" "}
+                            VND
                           </p>
+                        )}
+                      </span>
+                      <span>
+                        {item.typeTime === "start" && item.startAddress && (
+                          <p className="my-5">Địa chỉ: {item.startAddress}</p>
+                        )}
+                      </span>
+                      <span>
+                        {item.typeTime === "end" && item.endTime && (
+                          <p className="my-5">Thời gian: {item.endTime}</p>
+                        )}
+                      </span>
+                      <span>
+                        {item.typeTime === "end" && item.estimatedPrice && (
+                          <p className="my-5">
+                            Chi phí dự kiến:{" "}
+                            <NumberFormatter
+                              thousandSeparator="."
+                              decimalSeparator=","
+                              value={item.estimatedPrice}
+                            />{" "}
+                            VND
+                          </p>
+                        )}
+                      </span>
+                      <span>
+                        {item.typeTime === "end" && item.actualPrice && (
+                          <p className="my-5">
+                            Chi phí thực tế:{" "}
+                            <NumberFormatter
+                              thousandSeparator="."
+                              decimalSeparator=","
+                              value={item.actualPrice}
+                            />{" "}
+                            VND
+                          </p>
+                        )}
+                      </span>
+
+                      <span>
+                        {item.typeTime === "end" && item.endAddress && (
+                          <p className="my-5">Địa chỉ: {item.endAddress}</p>
                         )}
                       </span>
 
