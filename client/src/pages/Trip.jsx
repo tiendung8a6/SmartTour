@@ -31,6 +31,7 @@ const Trip = () => {
             </Tabs.Tab>
           </Tabs.List>
 
+          {/* CHUYẾN ĐI CỦA TÔI */}
           <Tabs.Panel value="first" pt="xs">
             <MyTripsPanel />
           </Tabs.Panel>
