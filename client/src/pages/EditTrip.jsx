@@ -72,6 +72,9 @@ const EditTrip = () => {
   const [fileURL, setFileURL] = useState(trip?.image);
   const { isPending, mutate } = useUpdateTrip(toast, user?.token);
   const cityOptions = cities.map((cityData) => cityData.city);
+  //Biến kiểm tra Điều kiện Token và My Trips
+  const isUserValid = user?.user?._id === trip?.user?._id;
+  const [isLoadingTrip, setIsLoadingTrip] = useState(true); // Thêm biến state mới
 
   const theme = colorScheme === "dark";
 
@@ -93,8 +96,10 @@ const EditTrip = () => {
       let setEndDateObject = new Date(data?.endDate);
       setEndDate(setEndDateObject);
       setFileURL(data?.image);
+      setIsLoadingTrip(false); //Đánh dấu rằng đã tải xong dữ liệu
     } catch (error) {
       console.error("Error fetching trip or popular content:", error);
+      setIsLoadingTrip(false); // Đánh dấu rằng đã tải xong dữ liệu
     }
   };
 
@@ -161,6 +166,38 @@ const EditTrip = () => {
       endDate,
     });
   };
+
+  //Bổ xung check điều kiện Đăng nhập và Đúng kế hoạch của tôi
+  if (isLoadingTrip) {
+    return null;
+  }
+  if (!user?.token) {
+    return (
+      <div className="w-full h-full py-[100px] flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-9xl font-black text-gray-200">404</h1>
+          <p className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            Uh-oh!
+          </p>
+          <p className="mt-4 text-gray-500">Vui lòng đăng nhập.</p>
+          <Link
+            to={`/sign-in`}
+            className="mt-6 inline-block rounded bg-indigo-600 px-5 py-3 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring"
+          >
+            Đăng nhập
+          </Link>
+        </div>
+      </div>
+    );
+  } else if (!isUserValid) {
+    return (
+      <div className="w-full h-full py-8 flex items-center justify-center">
+        <span className="text-lg text-slate-500">
+          Đây không phải kế hoạch của bạn
+        </span>
+      </div>
+    );
+  }
 
   return (
     <div className="px-[100px] ">
@@ -282,7 +319,6 @@ const EditTrip = () => {
           </div>
         </Grid.Col>
       </Grid>
-
       <div className="w-full flex items-end justify-start mt-6">
         <Switch
           color="indigo"
@@ -312,7 +348,6 @@ const EditTrip = () => {
           </Button>
         </div>
       </div>
-
       <LoadingClient visible={isPending} />
       <Toaster richColors />
     </div>
