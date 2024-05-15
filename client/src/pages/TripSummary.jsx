@@ -399,8 +399,6 @@ const TripSummary = () => {
             bulletSize={45}
           >
             {timelineData.map((item, index) => {
-              console.log("item", item);
-
               // Kiểm tra xem có cần hiển thị ngày mới không
               const showNewDate =
                 index === 0 ||
