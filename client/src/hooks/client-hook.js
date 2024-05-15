@@ -519,7 +519,7 @@ export const useUpdateTrip = (toast, token) => {
           },
         }
       );
-      console.log("API STATUS", status);
+      console.log("API STATUS", id);
       return data;
     },
     onError: (error) => {

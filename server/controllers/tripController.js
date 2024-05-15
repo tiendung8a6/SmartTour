@@ -182,10 +182,10 @@ export const updateTrip = async (req, res, next) => {
     updatedFields.status = status; // Change the way of checking status
     if (total) updatedFields.total = total;
 
-    console.log("-----------", updatedFields.status);
     const trip = await Trips.findByIdAndUpdate(id, updatedFields, {
       new: true,
     });
+    console.log("trip======", trip);
     res.status(200).json({
       success: true,
       message: "Trip updated successfully",

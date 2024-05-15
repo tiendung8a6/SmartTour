@@ -57,9 +57,19 @@ const Trip = () => {
   };
 
   useEffect(() => {
+    //Fix Bug API được gọi nhiều lần
+    const fetchPublicTrip = async () => {
+      try {
+        const data = await getPublicTrips();
+        setPublicTrip(data || []);
+      } catch (error) {
+        console.error("Error fetching trip or popular content:", error);
+      }
+    };
+
     fetchPublicTrip();
     // window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-  });
+  }, []);
   // console.log("publicTrip", publicTrip);
 
   if (publicTrip?.length < 1)
