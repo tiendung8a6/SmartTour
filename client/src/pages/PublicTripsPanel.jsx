@@ -10,8 +10,12 @@ import {
   Button,
   ActionIcon,
   Badge,
+  Card,
+  Image,
+  Avatar,
+  Text,
+  Group,
 } from "@mantine/core";
-import { Card, Image, Avatar, Text, Group } from "@mantine/core";
 import classes from "./PublicTripCard.module.css";
 import { getPublicTrips } from "../utils/apiCalls";
 import { useEffect, useState } from "react";
@@ -36,7 +40,7 @@ import {
   IconArrowRight,
 } from "@tabler/icons-react";
 import {} from "@tabler/icons-react";
-const Trip = () => {
+const PublicTripsPanel = () => {
   const { trips, numOfPages, setPage } = useTrips();
 
   const handlePageChange = (val) => {
@@ -68,7 +72,7 @@ const Trip = () => {
     };
 
     fetchPublicTrip();
-    // window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, []);
   // console.log("publicTrip", publicTrip);
 
@@ -169,4 +173,4 @@ const Trip = () => {
   );
 };
 
-export default Trip;
+export default PublicTripsPanel;

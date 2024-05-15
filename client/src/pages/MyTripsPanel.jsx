@@ -21,7 +21,6 @@ import {
   IconLuggage,
   IconAirBalloon,
 } from "@tabler/icons-react";
-import {} from "@tabler/icons-react";
 const MyTripsPanel = () => {
   const { trips, numOfPages, setPage } = useTrips();
   const icon = (
