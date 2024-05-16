@@ -257,13 +257,13 @@ export const createPlanConcert = async (req, res, next) => {
       web,
       email,
       number,
-      describe,
       form,
-      price,
+      estimatedPrice,
+      actualPrice,
       departureGate,
     } = req.body;
     const { id } = req.params;
-
+    const price = actualPrice ? actualPrice : estimatedPrice;
     const plan = await Plans.create({
       planName,
       startDate,
@@ -276,9 +276,9 @@ export const createPlanConcert = async (req, res, next) => {
       web,
       email,
       number,
-      describe,
       form,
-      price,
+      estimatedPrice,
+      actualPrice: price,
       departureGate,
       type: "concert",
     });

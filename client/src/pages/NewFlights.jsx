@@ -399,7 +399,7 @@ const NewFlights = () => {
                 onLoad={onLoadStart}
                 onPlaceChanged={handleStartPlaceChanged}
               >
-                <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[5px]">
+                <div className="w-full flex flex-col md:flex-row flex-wrap">
                   <TextInput
                     withAsterisk
                     label="Địa chỉ"
