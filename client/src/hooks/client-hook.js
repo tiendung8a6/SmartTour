@@ -533,3 +533,32 @@ export const useUpdateTrip = (toast, token) => {
     },
   });
 };
+export const useUpdateConcertPlan = (planId, toast, token, id) => {
+  return useMutation({
+    mutationFn: async (formData) => {
+      const { data } = await axios.patch(
+        `${API_URL}/plans/update/concert/${planId}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("aaaaaaaaaaaa", data);
+      return data;
+    },
+
+    onError: async (error) => {
+      toast.error(error?.response?.data?.message ?? error.message);
+    },
+
+    onSuccess: async (data) => {
+      toast.success(data?.message);
+
+      setTimeout(() => {
+        window.location.replace(`/trip/${id}`);
+      }, 1000);
+    },
+  });
+};

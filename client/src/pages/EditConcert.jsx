@@ -13,7 +13,7 @@ import {
 } from "@mantine/core";
 import { Toaster, toast } from "sonner";
 import { LoadingClient } from "../components";
-import { useCreateConcertPlan } from "../hooks/client-hook";
+import { useUpdateConcertPlan } from "../hooks/client-hook";
 import useStore from "../store";
 import { DateInput, TimeInput } from "@mantine/dates";
 import {
@@ -22,15 +22,20 @@ import {
   IconCurrencyDong,
   IconCalendarEvent,
 } from "@tabler/icons-react";
-import { getSingleTrip } from "../utils/apiCalls";
+import { getSingleTrip, getSinglePlans } from "../utils/apiCalls";
 import { Autocomplete } from "@react-google-maps/api";
 
-const NewConcert = () => {
+const EditConcert = () => {
   const { colorScheme } = useMantineColorScheme();
-  const { id } = useParams();
+  const { id, planId } = useParams();
   const { user } = useStore();
   const [visible, { toggle }] = useDisclosure(false);
-  const { isPending, mutate } = useCreateConcertPlan(id, toast, user?.token);
+  const { isPending, mutate } = useUpdateConcertPlan(
+    planId,
+    toast,
+    user?.token,
+    id
+  );
   const [planName, setPlanName] = useState(null);
   const [startAddress, setStartAddress] = useState(null);
   const [info, setInfo] = useState(null);
@@ -158,6 +163,40 @@ const NewConcert = () => {
     });
   };
 
+  //TRUY VẤN DỮ LIỆU PLAN
+  const fetchPlan = async () => {
+    try {
+      const data = await getSinglePlans(planId);
+
+      if (data) {
+        setPlanName(data.planName);
+        setStartAddress(data.startAddress);
+        setInfo(data.info);
+        setEstimatedPrice(data.estimatedPrice);
+        setActualPrice(data.actualPrice);
+        setStartDate(new Date(data.startDate));
+        setEndDate(new Date(data.endDate));
+        setStartTime(data.startTime);
+        setEndTime(data.endTime);
+        setNumber(data.number);
+        setForm(data.form);
+        setDepartureGate(data.departureGate);
+        setPhone(data.phone);
+        setWeb(data.web);
+        setEmail(data.email);
+      }
+    } catch (error) {
+      console.error("Error fetching plan:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (planId) {
+      fetchPlan();
+    }
+  }, [planId]);
+
+  //TRUY VẤN DỮ LIỆU TRIP
   const fetchTrip = async () => {
     try {
       const data = await getSingleTrip(id);
@@ -175,6 +214,7 @@ const NewConcert = () => {
       window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     }
   }, [id]);
+
   return (
     <div className="px-[100px] mb-10">
       <Link to={`/trip/${trip?._id}/plans/create`}>
@@ -193,7 +233,7 @@ const NewConcert = () => {
           theme ? "text-white" : "text-slate-700"
         } text-2xl font-semibold mt-4`}
       >
-        Thêm buổi hòa nhạc
+        Chỉnh sửa buổi hòa nhạc
       </p>
       <br />
 
@@ -484,7 +524,7 @@ const NewConcert = () => {
 
       <div className="flex justify-start gap-3">
         <div className=" flex items-end justify-start ">
-          <Link to={`/trip/${trip?._id}/plans/create`}>
+          <Link to={`/trip/${trip?._id}`}>
             <Button variant="outline" color="Red" size="md" radius="md">
               Hủy
             </Button>
@@ -510,4 +550,4 @@ const NewConcert = () => {
   );
 };
 
-export default NewConcert;
+export default EditConcert;
