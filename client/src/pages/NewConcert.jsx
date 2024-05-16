@@ -151,7 +151,7 @@ const NewConcert = () => {
       <p
         className={`${
           theme ? "text-white" : "text-slate-700"
-        } text-lg font-semibold mt-4`}
+        } text-2xl font-semibold mt-4`}
       >
         Thêm buổi hòa nhạc
       </p>
@@ -159,19 +159,25 @@ const NewConcert = () => {
 
       <Grid className="">
         <Grid.Col span={{ base: 12, md: 7, lg: 7 }}>
-          <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-[20px] mt-[-5px]">
-            <TextInput
-              withAsterisk
-              label="Tên sự kiện"
-              className="w-full flex-1"
-              placeholder="Nhập tên sự kiện"
-              onChange={(e) => setPlanName(e.target.value)}
-            />
-          </div>
+          {/* Nhập tên sự kiện */}
+          <Grid className="mb-6 mt-1">
+            <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
+              <div className="w-full flex flex-col md:flex-row flex-wrap  ">
+                <TextInput
+                  withAsterisk
+                  label="Tên sự kiện"
+                  className="w-full flex-1"
+                  placeholder="Nhập tên sự kiện"
+                  onChange={(e) => setPlanName(e.target.value)}
+                />
+              </div>
+            </Grid.Col>
+          </Grid>
 
-          <Grid className="mt-[24px]">
+          {/* Ngày bắt đầu */}
+          <Grid className="my-6">
             <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
-              <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
+              <div className="w-full flex flex-col md:flex-row flex-wrap">
                 <DateInput
                   leftSection={
                     <IconCalendarEvent className="text-[#107ac5]" size={24} />
@@ -204,9 +210,9 @@ const NewConcert = () => {
             </Grid.Col>
           </Grid>
 
-          <Grid className="mt-[5px]">
+          <Grid className="my-6">
             <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
-              <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
+              <div className="w-full flex flex-col md:flex-row flex-wrap">
                 <DateInput
                   leftSection={
                     <IconCalendarEvent className="text-[#107ac5]" size={24} />
@@ -239,78 +245,116 @@ const NewConcert = () => {
             </Grid.Col>
           </Grid>
 
-          <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[5px]">
-            <TextInput
-              // withAsterisk
-              label="Địa điểm"
-              className="w-full flex-1"
-              placeholder="Nhập địa điểm"
-              value={startAddress}
-              onChange={(e) => setStartAddress(e.target.value)}
-            />
-          </div>
-          <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[5px]">
-            <TextInput
-              // withAsterisk
-              label="Địa chỉ"
-              className="w-full flex-1"
-              placeholder="Nhập địa chỉ"
-              value={describe}
-              onChange={(e) => setDescribe(e.target.value)}
-            />
-          </div>
+          <Grid className="my-6">
+            <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
+              <div className="w-full flex flex-col md:flex-row flex-wrap  ">
+                <TextInput
+                  // withAsterisk
+                  label="Địa điểm"
+                  className="w-full flex-1"
+                  placeholder="Nhập địa điểm"
+                  value={startAddress}
+                  onChange={(e) => setStartAddress(e.target.value)}
+                />
+              </div>
+            </Grid.Col>
+          </Grid>
 
-          <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[24px]">
-            <TextInput
-              // withAsterisk
-              label="Thông tin"
-              className="w-full flex-1"
-              placeholder="Nhập thông tin"
-              value={info}
-              onChange={(e) => setInfo(e.target.value)}
-            />
-          </div>
-          <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[24px]">
-            <TextInput
-              // withAsterisk
-              label="Điện thoại"
-              className="w-full flex-1"
-              placeholder="Nhập điện thoại"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            />
-          </div>
-          <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[24px]">
-            <TextInput
-              // withAsterisk
-              label="Trang web"
-              className="w-full flex-1"
-              placeholder="Nhập trang web"
-              value={web}
-              onChange={(e) => setWeb(e.target.value)}
-            />
-          </div>
-          <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[24px]">
-            <TextInput
-              // withAsterisk
-              label="Email"
-              className="w-full flex-1"
-              placeholder="Nhập email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className="mt-[40px] text-lg	text-black	">
+          <Grid className="my-6">
+            <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
+              <div className="w-full flex flex-col md:flex-row flex-wrap  ">
+                <TextInput
+                  // withAsterisk
+                  label="Địa chỉ"
+                  className="w-full flex-1"
+                  placeholder="Nhập địa chỉ"
+                  value={describe}
+                  onChange={(e) => setDescribe(e.target.value)}
+                />
+              </div>
+            </Grid.Col>
+          </Grid>
+
+          <Grid className="my-6">
+            <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
+              <div className="w-full flex flex-col md:flex-row flex-wrap ">
+                <TextInput
+                  // withAsterisk
+                  label="Thông tin"
+                  className="w-full flex-1"
+                  placeholder="Nhập thông tin"
+                  value={info}
+                  onChange={(e) => setInfo(e.target.value)}
+                />
+              </div>
+            </Grid.Col>
+          </Grid>
+
+          <Grid className="my-6">
+            <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
+              <div className="w-full flex flex-col md:flex-row flex-wrap ">
+                <TextInput
+                  // withAsterisk
+                  label="Điện thoại"
+                  className="w-full flex-1"
+                  placeholder="Nhập điện thoại"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                />
+              </div>
+            </Grid.Col>
+          </Grid>
+
+          <Grid className="my-6">
+            <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
+              <div className="w-full flex flex-col md:flex-row flex-wrap ">
+                <TextInput
+                  // withAsterisk
+                  label="Trang web"
+                  className="w-full flex-1"
+                  placeholder="Nhập trang web"
+                  value={web}
+                  onChange={(e) => setWeb(e.target.value)}
+                />
+              </div>
+            </Grid.Col>
+          </Grid>
+
+          {/* Email */}
+          <Grid className="my-6">
+            <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
+              <div className="w-full flex flex-col md:flex-row flex-wrap ">
+                <TextInput
+                  // withAsterisk
+                  label="Email"
+                  className="w-full flex-1"
+                  placeholder="Nhập email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+            </Grid.Col>
+          </Grid>
+
+          {/* <Grid className="my-6">
+            <Grid.Col span={{ base: 12, md: 12, lg: 12 }}></Grid.Col>
+          </Grid>
+
+          <Grid>
+            <Grid.Col span={{ base: 12, md: 12, lg: 12 }}></Grid.Col>
+          </Grid> */}
+
+          <div className=" mt-16	">
             <p
               className={`${
                 theme ? "text-white" : "text-slate-700"
-              } text-base	 font-semibold`}
+              } text-xl font-semibold`}
             >
               Thông Tin Vé
             </p>
-            <Grid className="mt-[5px]">
+            <Grid className="my-6">
               <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
-                <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
+                <div className="w-full flex flex-col md:flex-row flex-wrap">
                   <TextInput
                     // withAsterisk
                     label="Hạng vé"
@@ -321,6 +365,7 @@ const NewConcert = () => {
                   />
                 </div>
               </Grid.Col>
+
               <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
                 <div className="w-full ">
                   <TextInput
@@ -334,9 +379,10 @@ const NewConcert = () => {
                 </div>
               </Grid.Col>
             </Grid>
-            <Grid className="mt-[5px]">
+
+            <Grid className=" mt-6">
               <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
-                <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
+                <div className="w-full flex flex-col md:flex-row flex-wrap">
                   <TextInput
                     // withAsterisk
                     label="Cổng vào"
@@ -347,6 +393,7 @@ const NewConcert = () => {
                   />
                 </div>
               </Grid.Col>
+
               <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
                 <div className="w-full ">
                   <TextInput
@@ -364,8 +411,8 @@ const NewConcert = () => {
         </Grid.Col>
       </Grid>
 
-      <div className="flex justify-start gap-3">
-        <div className=" flex items-end justify-start mt-6">
+      <div className="flex justify-start my-10 ">
+        <div className=" flex items-end justify-start ">
           <Link to="/trip/">
             <Button variant="outline" color="Red" size="md" radius="md">
               Hủy
@@ -373,7 +420,7 @@ const NewConcert = () => {
           </Link>
         </div>
 
-        <div className=" flex items-end justify-start mt-6">
+        <div className=" flex items-end justify-start ml-8">
           <Button
             variant="filled"
             color="indigo"
