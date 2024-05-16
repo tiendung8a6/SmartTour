@@ -748,3 +748,63 @@ export const updatePlanFlights = async (req, res, next) => {
     res.status(500).json({ success: false, message: "Lỗi máy chủ" });
   }
 };
+
+export const updatePlanConcert = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const {
+      planName,
+      startDate,
+      startTime,
+      endDate,
+      endTime,
+      startAddress,
+      info,
+      phone,
+      web,
+      email,
+      number,
+      form,
+      estimatedPrice,
+      actualPrice,
+      departureGate,
+    } = req.body;
+
+    const updatedFields = {};
+    if (planName) updatedFields.planName = planName;
+    if (startDate) updatedFields.startDate = startDate;
+    if (startTime) updatedFields.startTime = startTime;
+    if (endDate) updatedFields.endDate = endDate;
+    if (endTime) updatedFields.endTime = endTime;
+    if (startAddress) updatedFields.startAddress = startAddress;
+    if (info) updatedFields.info = info;
+    if (phone) updatedFields.phone = phone;
+    if (web) updatedFields.web = web;
+    if (email) updatedFields.email = email;
+    if (number) updatedFields.number = number;
+    if (form) updatedFields.form = form;
+    if (estimatedPrice) updatedFields.estimatedPrice = estimatedPrice;
+    if (actualPrice) updatedFields.actualPrice = actualPrice;
+    if (departureGate) updatedFields.departureGate = departureGate;
+
+    const plan = await Plans.findByIdAndUpdate(id, updatedFields, {
+      new: true,
+    });
+
+    if (!plan) {
+      return res.status(404).json({
+        success: false,
+        message: "Không tìm thấy kế hoạch buổi hòa nhạc",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Cập nhật kế hoạch buổi hòa nhạc đã thành công.",
+      data: plan,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Lỗi máy chủ" });
+  }
+};
