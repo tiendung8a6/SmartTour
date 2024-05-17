@@ -193,7 +193,7 @@ const NewConcert = () => {
           theme ? "text-white" : "text-slate-700"
         } text-2xl font-semibold mt-4`}
       >
-        Thêm buổi hòa nhạc
+        Thêm Buổi Hòa Nhạc
       </p>
       <br />
 

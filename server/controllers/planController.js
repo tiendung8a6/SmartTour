@@ -320,13 +320,13 @@ export const createPlanTheater = async (req, res, next) => {
       web,
       email,
       number,
-      describe,
       form,
-      price,
+      estimatedPrice,
+      actualPrice,
       departureGate,
     } = req.body;
     const { id } = req.params;
-
+    const price = actualPrice ? actualPrice : estimatedPrice;
     const plan = await Plans.create({
       planName,
       startDate,
@@ -339,9 +339,9 @@ export const createPlanTheater = async (req, res, next) => {
       web,
       email,
       number,
-      describe,
       form,
-      price,
+      estimatedPrice,
+      actualPrice: price,
       departureGate,
       type: "theater",
     });
@@ -360,7 +360,7 @@ export const createPlanTheater = async (req, res, next) => {
     res.status(201).json({
       success: true,
       message:
-        "Lập kế hoạch cho xem phim thành công và đã được thêm vào chuyến đi",
+        "Lập kế hoạch cho buổi xem phim thành công và đã được thêm vào chuyến đi",
       data: plan,
       tripId: trip._id,
     });
