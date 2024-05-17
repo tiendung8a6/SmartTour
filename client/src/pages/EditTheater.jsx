@@ -14,7 +14,7 @@ import {
 } from "@mantine/core";
 import { Toaster, toast } from "sonner";
 import { LoadingClient } from "../components";
-import { useCreateTheaterPlan } from "../hooks/client-hook";
+import { useUpdateTheaterPlan } from "../hooks/client-hook";
 import useStore from "../store";
 import { DateInput, TimeInput } from "@mantine/dates";
 import {
@@ -23,15 +23,20 @@ import {
   IconCurrencyDong,
   IconCalendarEvent,
 } from "@tabler/icons-react";
-import { getSingleTrip } from "../utils/apiCalls";
+import { getSingleTrip, getSinglePlans } from "../utils/apiCalls";
 import { Autocomplete } from "@react-google-maps/api";
 
-const NewTheater = () => {
+const EditTheater = () => {
   const { colorScheme } = useMantineColorScheme();
-  const { id } = useParams();
+  const { id, planId } = useParams();
   const { user } = useStore();
   const [visible, { toggle }] = useDisclosure(false);
-  const { isPending, mutate } = useCreateTheaterPlan(id, toast, user?.token);
+  const { isPending, mutate } = useUpdateTheaterPlan(
+    planId,
+    toast,
+    user?.token,
+    id
+  );
   const [planName, setPlanName] = useState(null);
   const [startAddress, setStartAddress] = useState(null);
   const [info, setInfo] = useState(null);
@@ -159,6 +164,40 @@ const NewTheater = () => {
     });
   };
 
+  //TRUY VẤN DỮ LIỆU PLAN
+  const fetchPlan = async () => {
+    try {
+      const data = await getSinglePlans(planId);
+
+      if (data) {
+        setPlanName(data.planName);
+        setStartAddress(data.startAddress);
+        setInfo(data.info);
+        setEstimatedPrice(data.estimatedPrice);
+        setActualPrice(data.actualPrice);
+        setStartDate(new Date(data.startDate));
+        setEndDate(new Date(data.endDate));
+        setStartTime(data.startTime);
+        setEndTime(data.endTime);
+        setNumber(data.number);
+        setForm(data.form);
+        setDepartureGate(data.departureGate);
+        setPhone(data.phone);
+        setWeb(data.web);
+        setEmail(data.email);
+      }
+    } catch (error) {
+      console.error("Error fetching plan:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (planId) {
+      fetchPlan();
+    }
+  }, [planId]);
+
+  //TRUY VẤN DỮ LIỆU TRIP
   const fetchTrip = async () => {
     try {
       const data = await getSingleTrip(id);
@@ -176,6 +215,7 @@ const NewTheater = () => {
       window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     }
   }, [id]);
+
   return (
     <div className="px-[100px] mb-10">
       <Link to={`/trip/${trip?._id}/plans/create`}>
@@ -194,13 +234,13 @@ const NewTheater = () => {
           theme ? "text-white" : "text-slate-700"
         } text-2xl font-semibold mt-4`}
       >
-        Thêm Buổi Xem Phim
+        Chỉnh Sửa Buổi Xem Phim
       </p>
       <br />
 
       <Grid className="">
         <Grid.Col span={{ base: 12, md: 7, lg: 7 }}>
-          {/* Nhập tên */}
+          {/* Nhập tên sự kiện */}
           <Grid className="mb-6 mt-1">
             <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
               <div className="w-full flex flex-col md:flex-row flex-wrap  ">
@@ -485,7 +525,7 @@ const NewTheater = () => {
 
       <div className="flex justify-start gap-3">
         <div className=" flex items-end justify-start ">
-          <Link to={`/trip/${trip?._id}/plans/create`}>
+          <Link to={`/trip/${trip?._id}`}>
             <Button variant="outline" color="Red" size="md" radius="md">
               Hủy
             </Button>
@@ -511,4 +551,4 @@ const NewTheater = () => {
   );
 };
 
-export default NewTheater;
+export default EditTheater;

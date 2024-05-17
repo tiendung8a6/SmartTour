@@ -48,7 +48,7 @@ body {
 
   &:hover {
     background-color: #f0f0f0;
-    color: #9f1239;
+    color: #1b33bb;
   }
 
   &:disabled {
@@ -58,7 +58,7 @@ body {
 }
 
 .active {
-  background-color: #9f1239;
+  background-color: #308cdc;
   color: #fff;
 }
 

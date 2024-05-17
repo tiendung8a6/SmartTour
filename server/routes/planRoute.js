@@ -15,6 +15,7 @@ import {
   updatePlanActivity,
   updatePlanFlights,
   updatePlanConcert,
+  updatePlanTheater,
 } from "../controllers/planController.js";
 
 const router = express.Router();
@@ -36,6 +37,7 @@ router.post("/create/rail/:id", userAuth, createPlanRail); //rail
 router.patch("/update/activity/:id", userAuth, updatePlanActivity); //activity
 router.patch("/update/flights/:id", userAuth, updatePlanFlights); //flights
 router.patch("/update/concert/:id", userAuth, updatePlanConcert); //concert
+router.patch("/update/theater/:id", userAuth, updatePlanTheater); //theater
 
 //GET
 router.get("/:planId", getPlanById);

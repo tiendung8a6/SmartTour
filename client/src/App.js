@@ -35,6 +35,7 @@ import {
   PublicTripsPanel,
   EditFlights,
   EditConcert,
+  EditTheater,
 } from "./pages";
 import { Footer, Loading, Navbar } from "./components";
 import useStore from "./store";
@@ -104,6 +105,10 @@ function App() {
             <Route
               path="/trip/:id/concert/:planId/edit"
               element={<EditConcert />}
+            />
+            <Route
+              path="/trip/:id/theater/:planId/edit"
+              element={<EditTheater />}
             />
 
             <Route path="/profile" element={<Profile />} />
