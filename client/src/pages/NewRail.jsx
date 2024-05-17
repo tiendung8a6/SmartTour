@@ -99,7 +99,7 @@ const NewRail = () => {
         return;
       }
     }
-
+    setIsLoading(true);
     mutate({
       planName,
       startDate,

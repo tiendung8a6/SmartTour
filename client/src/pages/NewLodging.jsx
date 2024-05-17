@@ -95,7 +95,7 @@ const NewLodging = () => {
         return;
       }
     }
-
+    setIsLoading(true);
     mutate({
       planName,
       startDate,

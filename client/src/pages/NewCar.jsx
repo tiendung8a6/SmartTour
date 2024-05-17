@@ -134,6 +134,7 @@ const NewCar = () => {
       toast.error("Vui lòng nhập tổng chi phí dự kiến.");
       return;
     }
+    setIsLoading(true);
     mutate({
       planName,
       startDate,

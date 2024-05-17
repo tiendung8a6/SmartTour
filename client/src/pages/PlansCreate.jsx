@@ -156,7 +156,7 @@ const PlansCreate = () => {
             </span>
           </Link>
           <br />
-          <Link
+          {/* <Link
             to={`/trip/${trip._id}/................./create`}
             className="p-4 border rounded-full flex bg-gray-50"
           >
@@ -165,12 +165,12 @@ const PlansCreate = () => {
               {" "}
               Cuộc họp
             </span>
-          </Link>{" "}
+          </Link>{" "} */}
           <br />
         </Grid.Col>
 
         <Grid.Col span={{ base: 12, md: 6, lg: 2 }} className="mt-5">
-          <Link
+          {/* <Link
             to={`/trip/${trip._id}/camp/create`}
             className="p-4 border rounded-full flex bg-gray-50"
           >
@@ -178,8 +178,8 @@ const PlansCreate = () => {
             <span className="ml-[10px] text-[#0782c5] font-semibold ">
               Cắm trại
             </span>
-          </Link>
-          <br />
+          </Link> */}
+          {/* <br /> */}
           <Link
             to={`/trip/${trip._id}/parking/create`}
             className="p-4 border rounded-full flex bg-gray-50"

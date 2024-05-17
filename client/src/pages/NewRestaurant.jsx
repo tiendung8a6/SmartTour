@@ -97,7 +97,7 @@ const NewRestaurant = () => {
         return;
       }
     }
-
+    setIsLoading(true);
     mutate({
       planName,
       startDate,
