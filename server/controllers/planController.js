@@ -196,13 +196,14 @@ export const createPlanCar = async (req, res, next) => {
       phone,
       web,
       email,
-      total,
+      service,
       describe,
       form,
-      price,
+      estimatedPrice,
+      actualPrice,
     } = req.body;
     const { id } = req.params;
-
+    const price = actualPrice ? actualPrice : estimatedPrice;
     const plan = await Plans.create({
       planName,
       startDate,
@@ -213,10 +214,11 @@ export const createPlanCar = async (req, res, next) => {
       phone,
       web,
       email,
-      total,
+      service,
       describe,
       form,
-      price,
+      estimatedPrice,
+      actualPrice: price,
       type: "car",
     });
 
