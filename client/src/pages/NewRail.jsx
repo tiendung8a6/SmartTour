@@ -1,19 +1,50 @@
-import { Button, TextInput, useMantineColorScheme, Grid } from "@mantine/core";
-import { IconCalendarEvent } from "@tabler/icons-react";
-import { useEffect, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import {
+  Button,
+  TextInput,
+  useMantineColorScheme,
+  Grid,
+  ActionIcon,
+  rem,
+  NumberInput,
+  Textarea,
+  Autocomplete as MantineAutocomplete,
+} from "@mantine/core";
 import { Toaster, toast } from "sonner";
 import { LoadingClient } from "../components";
 import useStore from "../store";
-import { DateInput } from "@mantine/dates";
-import { Link } from "react-router-dom";
-import { useRef } from "react";
-import { ActionIcon, rem } from "@mantine/core";
-import { TimeInput } from "@mantine/dates";
-import { IconClock, IconArrowLeft } from "@tabler/icons-react";
-import React from "react";
-import { useParams } from "react-router-dom";
+import {
+  IconClock,
+  IconArrowLeft,
+  IconCalendarEvent,
+  IconCurrencyDong,
+} from "@tabler/icons-react";
+import { DateInput, TimeInput } from "@mantine/dates";
 import { useCreateRailPlan } from "../hooks/client-hook";
 import { getSingleTrip } from "../utils/apiCalls";
+import trains from "../assets/trains.json";
+
+// Hàm chuyển đổi chuỗi sang dạng không dấu
+const removeDiacritics = (str) => {
+  return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+};
+
+const optionsFilter = ({ options, search }) => {
+  const searchWithoutDiacritics = removeDiacritics(search).toLowerCase().trim();
+  const splittedSearch = searchWithoutDiacritics.split(" ");
+
+  return options.filter((option) => {
+    const labelWithoutDiacritics = removeDiacritics(option.label)
+      .toLowerCase()
+      .trim();
+    const words = labelWithoutDiacritics.split(" ");
+
+    return splittedSearch.every((searchWord) =>
+      words.some((word) => word.includes(searchWord))
+    );
+  });
+};
 
 const NewRail = () => {
   const { colorScheme } = useMantineColorScheme();
@@ -22,6 +53,8 @@ const NewRail = () => {
   const { isPending, mutate } = useCreateRailPlan(id, toast, user?.token);
   const [planName, setPlanName] = useState(null);
   const [startAddress, setStartAddress] = useState(null);
+  const [estimatedPrice, setEstimatedPrice] = useState(null);
+  const [actualPrice, setActualPrice] = useState(null);
   const [info, setInfo] = useState(null);
   const [phone, setPhone] = useState(null);
   const [web, setWeb] = useState(null);
@@ -29,9 +62,7 @@ const NewRail = () => {
   const [number, setNumber] = useState(null);
   const [describe, setDescribe] = useState(null);
   const [form, setForm] = useState(null);
-  const [price, setPrice] = useState(null);
   const [endAddress, setEndAddress] = useState(null);
-  const [arrivalGate, setArrivalGate] = useState(null);
   const [departureGate, setDepartureGate] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -43,6 +74,11 @@ const NewRail = () => {
 
   const { setIsLoading } = useStore();
   const [trip, setTrip] = useState(null);
+
+  //Gọi Danh sách trains từ Json
+  const trainOptions = trains.features.map(
+    (trainData) => trainData.properties.Ten_Ga
+  );
 
   const pickerStartTimeControl = (
     <ActionIcon
@@ -71,8 +107,20 @@ const NewRail = () => {
       toast.error("Vui lòng nhập tên nhà cung cấp.");
       return;
     }
+    if (!startAddress) {
+      toast.error("Vui lòng nhập ga đi.");
+      return;
+    }
     if (!startDate) {
-      toast.error("Vui lòng chọn ngày khởi hành.");
+      toast.error("Vui lòng chọn ngày đi.");
+      return;
+    }
+    if (!startTime) {
+      toast.error("Vui lòng chọn thời gian đi.");
+      return;
+    }
+    if (!estimatedPrice) {
+      toast.error("Vui lòng nhập tổng giá vé dự kiến.");
       return;
     }
     if (!endDate) {
@@ -80,11 +128,7 @@ const NewRail = () => {
       return;
     }
     if (endDate < startDate) {
-      toast.error("Ngày đến phải sau ngày khởi hành.");
-      return;
-    }
-    if (!startTime) {
-      toast.error("Vui lòng chọn thời gian khởi hành.");
+      toast.error("Ngày đến phải sau ngày đi.");
       return;
     }
     if (!endTime) {
@@ -94,11 +138,16 @@ const NewRail = () => {
     if (endDate.getTime() === startDate.getTime()) {
       if (endTime <= startTime) {
         toast.error(
-          "Thời gian khởi hành phải sau thời gian đến nếu trong cùng một ngày."
+          "Thời gian đi phải sau thời gian đến nếu trong cùng một ngày."
         );
         return;
       }
     }
+    if (!endAddress) {
+      toast.error("Vui lòng nhập ga đến.");
+      return;
+    }
+
     setIsLoading(true);
     mutate({
       planName,
@@ -113,10 +162,9 @@ const NewRail = () => {
       email,
       number,
       form,
-      price,
-      describe,
       endAddress,
-      arrivalGate,
+      estimatedPrice,
+      actualPrice,
       departureGate,
     });
   };
@@ -160,39 +208,61 @@ const NewRail = () => {
       </p>
       <br />
 
-      <Grid className="">
+      <Grid className="my-6">
         <Grid.Col span={{ base: 12, md: 7, lg: 7 }}>
           <p
             className={`${
               theme ? "text-white" : "text-slate-700"
-            } text-base	 font-semibold `}
+            } text-xl	 font-semibold `}
           >
-            Thông Tin Khởi Hành
+            Thông Tin Ga Đi
           </p>
 
-          <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[15px]">
-            <TextInput
-              withAsterisk
-              label="Tên nhà cung cấp"
-              className="w-full flex-1"
-              placeholder="Nhập tên nhà cung cấp"
-              value={planName}
-              onChange={(e) => setPlanName(e.target.value)}
-            />
-          </div>
+          <Grid className="my-6">
+            <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
+              <div className="w-full flex flex-col md:flex-row flex-wrap">
+                <MantineAutocomplete
+                  withAsterisk
+                  label="Tên nhà cung cấp"
+                  className="w-full flex-1"
+                  placeholder="Nhập tên nhà cung cấp"
+                  data={["Đường sắt Việt Nam (VNR)"]}
+                  value={planName}
+                  onChange={(value) => setPlanName(value)}
+                />
+              </div>
+            </Grid.Col>
+          </Grid>
 
-          <Grid className="mt-[24px]">
+          <Grid className="my-6">
+            <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
+              <div className="w-full flex flex-col md:flex-row flex-wrap">
+                <MantineAutocomplete
+                  withAsterisk
+                  label="Ga đi"
+                  className="w-full flex-1"
+                  placeholder="Nhập ga đi"
+                  data={trainOptions}
+                  value={startAddress}
+                  onChange={(value) => setStartAddress(value)}
+                  filter={optionsFilter}
+                />
+              </div>
+            </Grid.Col>
+          </Grid>
+
+          <Grid className="my-6">
             <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
-              <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
+              <div className="w-full flex flex-col md:flex-row flex-wrap">
                 <DateInput
                   leftSection={
                     <IconCalendarEvent className="text-[#107ac5]" size={24} />
                   }
                   clearable
                   withAsterisk
-                  label="Ngày khởi hành"
+                  label="Ngày đi"
                   className="w-full flex-1"
-                  placeholder="Chọn khởi hành"
+                  placeholder="Chọn ngày đi"
                   minDate={new Date(trip?.startDate)}
                   maxDate={new Date(trip?.endDate)}
                   valueFormat="DD/MM/YYYY"
@@ -205,113 +275,200 @@ const NewRail = () => {
               <div className="w-full ">
                 <TimeInput
                   ref={startTimeRef}
-                  label="Thời gian khởi hành"
+                  label="Thời gian đi"
                   leftSection={pickerStartTimeControl}
                   withAsterisk
                   // description="Input description"
-                  placeholder="Chọn thời gian khởi hành"
+                  placeholder="Chọn thời gian đi"
                   onChange={(e) => setStartTime(e.target.value)}
                 />
               </div>
             </Grid.Col>
           </Grid>
 
-          <Grid className="mt-[5px]">
+          <Grid className="my-6">
             <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
-              <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
-                <TextInput
+              <div className="w-full flex flex-col md:flex-row flex-wrap  ">
+                <MantineAutocomplete
                   // withAsterisk
-                  label="Số tàu"
+                  label="Mác tàu"
                   className="w-full flex-1"
-                  placeholder="Nhập số tàu "
+                  placeholder="Nhập mác tàu"
+                  data={[
+                    "SE3",
+                    "SE7",
+                    "SE1",
+                    "SE5",
+                    "SE11",
+                    "SE17",
+                    "SE35",
+                    "NA3",
+                    "QB1",
+                    "SE19",
+                    "NA1",
+                    "HD1",
+                    "HD3",
+                    "SP1",
+                    "SP3",
+                    "HP1",
+                    "LP3",
+                    "LP5",
+                    "LP7",
+                    "SNT1",
+                    "SPT1",
+                    "SE21",
+                    "HP3",
+                  ]}
                   value={info}
-                  onChange={(e) => setInfo(e.target.value)}
+                  onChange={(value) => setInfo(value)}
                 />
               </div>
             </Grid.Col>
+
             <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
-              <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
+              <div className="w-full flex flex-col md:flex-row flex-wrap  ">
+                <MantineAutocomplete
+                  // withAsterisk
+                  label="Toa"
+                  className="w-full flex-1"
+                  placeholder="Nhập toa"
+                  data={[
+                    "Số 1",
+                    "Số 2",
+                    "Số 3",
+                    "Số 4",
+                    "Số 5",
+                    "Số 6",
+                    "Số 7",
+                    "Số 8",
+                    "Số 9",
+                    "Số 10",
+                    "Số 11",
+                    "Số 12",
+                    "Số 13",
+                    "Số 14",
+                    "Số 15",
+                    "Số 16",
+                    "Số 17",
+                    "Số 18",
+                    "Số 19",
+                    "Số 20",
+                  ]}
+                  value={departureGate}
+                  onChange={(value) => setDepartureGate(value)}
+                />
+              </div>
+            </Grid.Col>
+          </Grid>
+
+          <Grid className="my-6">
+            <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
+              <div className="w-full flex flex-col md:flex-row flex-wrap  ">
+                <MantineAutocomplete
+                  // withAsterisk
+                  label="Loại chỗ"
+                  className="w-full flex-1"
+                  placeholder="Nhập loại chỗ"
+                  data={[
+                    "Ngồi mềm",
+                    "Ngồi mềm điều hoà",
+                    "Nằm khoang 4",
+                    "Nằm khoang 2 điều hòa VIP",
+                    "Nằm khoang 4 điều hòa",
+                    "Nằm khoang 6",
+                    "Nằm khoang 6 điều hòa",
+                    "Ghế phụ",
+                    "Ghế phụ điều hòa",
+                    "Ngồi cứng",
+                    "Ngồi cứng điều hòa",
+                    "Ngồi chuyển đổi điều hòa",
+                    "Ngồi mềm điều hòa",
+                    "Ngồi mềm điều hòa toa 48",
+                    "Ngồi mềm điều hòa toa 56",
+                    "Ngồi mềm điều hòa toa 64",
+                    "Ngồi mềm điều hòa toa vip 20",
+                    "Ngồi mềm điều hòa vip",
+                  ]}
+                  value={form}
+                  onChange={(value) => setForm(value)}
+                />
+              </div>
+            </Grid.Col>
+
+            <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
+              <div className="w-full flex flex-col md:flex-row flex-wrap  ">
                 <TextInput
                   // withAsterisk
-                  label="Chỗ ngồi"
+                  label="Ghế ngồi"
                   className="w-full flex-1"
-                  placeholder="Nhập chỗ ngồi"
+                  placeholder="Nhập ghế ngồi"
                   value={number}
                   onChange={(e) => setNumber(e.target.value)}
                 />
               </div>
             </Grid.Col>
+          </Grid>
+
+          <Grid className="my-6">
             <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
-              <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
-                <TextInput
-                  // withAsterisk
-                  label="Loại vé"
-                  className="w-full flex-1"
-                  placeholder="Nhập loại vé"
-                  value={form}
-                  onChange={(e) => setForm(e.target.value)}
+              <div className="w-full">
+                <NumberInput
+                  withAsterisk
+                  label="Tổng giá vé dự kiến"
+                  placeholder="Nhập tổng giá vé dự kiến"
+                  allowDecimal={false}
+                  clampBehavior="strict"
+                  min={0}
+                  max={100000000000}
+                  thousandSeparator="."
+                  decimalSeparator=","
+                  rightSection={
+                    <IconCurrencyDong
+                      style={{ width: rem(20), height: rem(20) }}
+                      stroke={1.5}
+                    />
+                  }
+                  value={estimatedPrice}
+                  onChange={(value) => setEstimatedPrice(value)}
                 />
               </div>
             </Grid.Col>
             <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
-              <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
-                <TextInput
-                  // withAsterisk
-                  label="Giá vé"
-                  className="w-full flex-1"
-                  placeholder="Nhập giá vé"
-                  value={price}
-                  onChange={(e) => setPrice(e.target.value)}
-                />
-              </div>
-            </Grid.Col>
-            <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
-              <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
-                <TextInput
-                  // withAsterisk
-                  label="Loại chỗ"
-                  className="w-full flex-1"
-                  placeholder="Nhập loại chỗ"
-                  value={arrivalGate}
-                  onChange={(e) => setArrivalGate(e.target.value)}
-                />
-              </div>
-            </Grid.Col>
-            <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
-              <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
-                <TextInput
-                  // withAsterisk
-                  label="Toa"
-                  className="w-full flex-1"
-                  placeholder="Nhập toa"
-                  value={departureGate}
-                  onChange={(e) => setDepartureGate(e.target.value)}
+              <div className="w-full">
+                <NumberInput
+                  label="Tổng giá vé thực tế"
+                  placeholder="Nhập tổng giá vé thực tế"
+                  allowDecimal={false}
+                  clampBehavior="strict"
+                  min={0}
+                  max={100000000000}
+                  thousandSeparator="."
+                  decimalSeparator=","
+                  rightSection={
+                    <IconCurrencyDong
+                      style={{ width: rem(20), height: rem(20) }}
+                      stroke={1.5}
+                    />
+                  }
+                  value={actualPrice}
+                  onChange={(value) => setActualPrice(value)}
                 />
               </div>
             </Grid.Col>
           </Grid>
-          <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[5px]">
-            <TextInput
-              // withAsterisk
-              label="Địa chỉ sân ga"
-              className="w-full flex-1"
-              placeholder="Nhập địa chỉ sân ga"
-              value={startAddress}
-              onChange={(e) => setStartAddress(e.target.value)}
-            />
-          </div>
 
-          <div className="mt-[25px] text-lg	text-black	">
+          <div className="text-lg	text-black  mt-16		">
             <p
               className={`${
                 theme ? "text-white" : "text-slate-700"
-              } text-base	 font-semibold`}
+              } text-xl font-semibold`}
             >
-              Thông Tin Điểm đến
+              Thông Tin Ga Đến
             </p>
-            <Grid className="mt-[5px]">
+
+            <Grid className="my-6">
               <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
-                <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
+                <div className="w-full flex flex-col md:flex-row flex-wrap  ">
                   <DateInput
                     leftSection={
                       <IconCalendarEvent className="text-[#107ac5]" size={24} />
@@ -329,6 +486,7 @@ const NewRail = () => {
                   />
                 </div>
               </Grid.Col>
+
               <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
                 <div className="w-full ">
                   <TimeInput
@@ -344,81 +502,108 @@ const NewRail = () => {
               </Grid.Col>
             </Grid>
 
-            <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-[20px] mt-[5px]">
-              <TextInput
-                // withAsterisk
-                label="Ga đến"
-                className="w-full flex-1"
-                placeholder="Nhập địa chỉ ga đến"
-                value={endAddress}
-                onChange={(e) => setEndAddress(e.target.value)}
-              />
-            </div>
+            <Grid className="my-6">
+              <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
+                <div className="w-full flex flex-col md:flex-row flex-wrap   ">
+                  <MantineAutocomplete
+                    withAsterisk
+                    label="Ga đến"
+                    className="w-full flex-1"
+                    placeholder="Nhập ga đến"
+                    data={trainOptions}
+                    value={endAddress}
+                    onChange={(value) => setEndAddress(value)}
+                    filter={optionsFilter}
+                  />
+                </div>
+              </Grid.Col>
+            </Grid>
           </div>
-          <div className="mt-[25px] text-lg	text-black	">
+
+          <div className=" text-lg	text-black	mt-16">
             <p
               className={`${
                 theme ? "text-white" : "text-slate-700"
-              } text-base	 font-semibold`}
+              } text-xl font-semibold`}
             >
-              Liên Hệ Và Dịch Vụ
+              Liên Hệ Và Quy Định
             </p>
-            <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[5px]">
-              <TextInput
-                // withAsterisk
-                label="Bữa ăn"
-                className="w-full flex-1"
-                placeholder="Nhập bữa ăn"
-                value={describe}
-                onChange={(e) => setDescribe(e.target.value)}
-              />
-            </div>
-            <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[24px]">
-              <TextInput
-                // withAsterisk
-                label="Điện thoại"
-                className="w-full flex-1"
-                placeholder="Nhập điện thoại"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-              />
-            </div>
+            <Grid className="my-6">
+              <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
+                <div className="w-full flex flex-col md:flex-row flex-wrap    ">
+                  <Textarea
+                    // withAsterisk
+                    label="Quy định"
+                    className="w-full flex-1"
+                    placeholder="Nhập quy định"
+                    autosize
+                    minRows={3}
+                    maxRows={6}
+                    value={describe}
+                    onChange={(e) => setDescribe(e.target.value)}
+                  />
+                </div>
+              </Grid.Col>
+            </Grid>
 
-            <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[24px]">
-              <TextInput
-                // withAsterisk
-                label="Trang Web "
-                className="w-full flex-1"
-                placeholder="Nhập trang web"
-                value={web}
-                onChange={(e) => setWeb(e.target.value)}
-              />
-            </div>
+            <Grid className="my-6">
+              <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
+                <div className="w-full flex flex-col md:flex-row flex-wrap    ">
+                  <TextInput
+                    // withAsterisk
+                    label="Điện thoại"
+                    className="w-full flex-1"
+                    placeholder="Nhập điện thoại"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                  />
+                </div>
+              </Grid.Col>
+            </Grid>
 
-            <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[24px]">
-              <TextInput
-                // withAsterisk
-                label="Email"
-                className="w-full flex-1"
-                placeholder="Nhập email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
+            <Grid className="my-6">
+              <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
+                <div className="w-full flex flex-col md:flex-row flex-wrap    ">
+                  <TextInput
+                    // withAsterisk
+                    label="Trang Web "
+                    className="w-full flex-1"
+                    placeholder="Nhập trang web"
+                    value={web}
+                    onChange={(e) => setWeb(e.target.value)}
+                  />
+                </div>
+              </Grid.Col>
+            </Grid>
+
+            <Grid className="my-6">
+              <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
+                <div className="w-full flex flex-col md:flex-row flex-wrap    ">
+                  <TextInput
+                    // withAsterisk
+                    label="Email"
+                    className="w-full flex-1"
+                    placeholder="Nhập email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+              </Grid.Col>
+            </Grid>
           </div>
         </Grid.Col>
       </Grid>
 
       <div className="flex justify-start gap-3">
-        <div className=" flex items-end justify-start mt-6">
-          <Link to="/trip/">
+        <div className=" flex items-end justify-start ">
+          <Link to={`/trip/${trip?._id}/plans/create`}>
             <Button variant="outline" color="Red" size="md" radius="md">
               Hủy
             </Button>
           </Link>
         </div>
 
-        <div className=" flex items-end justify-start mt-6">
+        <div className=" flex items-end justify-start">
           <Button
             variant="filled"
             color="indigo"
