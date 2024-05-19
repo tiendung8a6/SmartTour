@@ -197,6 +197,7 @@ const NewParking = () => {
                   label="Tên bãi đậu xe"
                   className="w-full flex-1"
                   placeholder="Nhập tên bãi đậu xe"
+                  value={planName}
                   onChange={(e) => setPlanName(e.target.value)}
                 />
               </div>
@@ -418,7 +419,7 @@ const NewParking = () => {
 
       <div className="flex justify-start gap-3">
         <div className=" flex items-end justify-start mt-6">
-          <Link to="/trip/">
+          <Link to={`/trip/${trip?._id}/plans/create`}>
             <Button variant="outline" color="Red" size="md" radius="md">
               Hủy
             </Button>

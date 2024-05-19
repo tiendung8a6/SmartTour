@@ -201,6 +201,7 @@ const NewCar = () => {
                   label="Tên đại lý cho thuê"
                   className="w-full flex-1"
                   placeholder="Nhập tên đại lý cho thuê"
+                  value={planName}
                   onChange={(e) => setPlanName(e.target.value)}
                 />
               </div>
