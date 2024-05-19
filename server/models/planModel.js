@@ -22,7 +22,7 @@ const planSchema = new mongoose.Schema(
     form: { type: String, required: false }, //                                                       restaurant(Quy định trang phục),   flights(Hạng vé)             ,car(loại xe)            concert&theater&camp(Hạng vé)
     price: { type: String, required: false }, //                                                      restaurant(giá tiền),              flights(Giá vé)              ,car(Chi phí)           concert&theater&camp(Giá vé)               ,parking(Giá tiền)
     departureGate: { type: String, required: false }, //                                                                                 flights(cổng khởi hành)                             concert&theater&camp(Cổng vào)
-    arrivalGate: { type: String, required: false }, //                                                                                  flights(cổng đến/cổng ra)->rail(đổi thành loại chỗ)
+    arrivalGate: { type: String, required: false }, //                                                                                  flights(cổng đến/cổng ra)
   },
   { timestamps: true }
 );

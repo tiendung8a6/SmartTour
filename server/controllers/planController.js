@@ -559,6 +559,9 @@ export const createPlanRail = async (req, res, next) => {
       endDate,
       endTime,
       startAddress,
+      endAddress,
+      estimatedPrice,
+      actualPrice,
       info,
       phone,
       web,
@@ -566,13 +569,11 @@ export const createPlanRail = async (req, res, next) => {
       number,
       describe,
       form,
-      price,
-      endAddress,
       arrivalGate,
       departureGate,
     } = req.body;
     const { id } = req.params;
-
+    const price = actualPrice ? actualPrice : estimatedPrice;
     const plan = await Plans.create({
       planName,
       startDate,
@@ -587,7 +588,8 @@ export const createPlanRail = async (req, res, next) => {
       number,
       describe,
       form,
-      price,
+      estimatedPrice,
+      actualPrice: price,
       endAddress,
       arrivalGate,
       departureGate,
