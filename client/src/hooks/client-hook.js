@@ -332,6 +332,7 @@ export const useCreateCarPlan = (id, toast, token) => {
     },
   });
 };
+
 export const useCreateConcertPlan = (id, toast, token) => {
   return useMutation({
     mutationFn: async (formData) => {
@@ -566,6 +567,62 @@ export const useUpdateTheaterPlan = (planId, toast, token, id) => {
     mutationFn: async (formData) => {
       const { data } = await axios.patch(
         `${API_URL}/plans/update/theater/${planId}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return data;
+    },
+
+    onError: async (error) => {
+      toast.error(error?.response?.data?.message ?? error.message);
+    },
+
+    onSuccess: async (data) => {
+      toast.success(data?.message);
+
+      setTimeout(() => {
+        window.location.replace(`/trip/${id}`);
+      }, 1000);
+    },
+  });
+};
+export const useUpdateCarPlan = (planId, toast, token, id) => {
+  return useMutation({
+    mutationFn: async (formData) => {
+      const { data } = await axios.patch(
+        `${API_URL}/plans/update/car/${planId}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return data;
+    },
+
+    onError: async (error) => {
+      toast.error(error?.response?.data?.message ?? error.message);
+    },
+
+    onSuccess: async (data) => {
+      toast.success(data?.message);
+
+      setTimeout(() => {
+        window.location.replace(`/trip/${id}`);
+      }, 1000);
+    },
+  });
+};
+export const useUpdateParkingPlan = (planId, toast, token, id) => {
+  return useMutation({
+    mutationFn: async (formData) => {
+      const { data } = await axios.patch(
+        `${API_URL}/plans/update/parking/${planId}`,
         formData,
         {
           headers: {

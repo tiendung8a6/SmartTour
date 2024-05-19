@@ -36,6 +36,8 @@ import {
   EditFlights,
   EditConcert,
   EditTheater,
+  EditCar,
+  EditParking,
 } from "./pages";
 import { Footer, Loading, Navbar } from "./components";
 import useStore from "./store";
@@ -110,9 +112,10 @@ function App() {
               path="/trip/:id/theater/:planId/edit"
               element={<EditTheater />}
             />
+            <Route path="/trip/:id/car/:planId/edit" element={<EditCar />} />
             <Route
-              path="/trip/:id/theater/:planId/edit"
-              element={<EditTheater />}
+              path="/trip/:id/parking/:planId/edit"
+              element={<EditParking />}
             />
 
             <Route path="/profile" element={<Profile />} />

@@ -34,6 +34,8 @@ import PublicTripsPanel from "./PublicTripsPanel";
 import EditFlights from "./EditFlights";
 import EditConcert from "./EditConcert";
 import EditTheater from "./EditTheater";
+import EditCar from "./EditCar";
+import EditParking from "./EditParking";
 export {
   BlogDetail,
   CategoryPage,
@@ -71,4 +73,6 @@ export {
   EditFlights,
   EditConcert,
   EditTheater,
+  EditCar,
+  EditParking,
 };
