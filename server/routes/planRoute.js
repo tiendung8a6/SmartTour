@@ -16,6 +16,8 @@ import {
   updatePlanFlights,
   updatePlanConcert,
   updatePlanTheater,
+  updatePlanCar,
+  updatePlanParking,
 } from "../controllers/planController.js";
 
 const router = express.Router();
@@ -38,6 +40,8 @@ router.patch("/update/activity/:id", userAuth, updatePlanActivity); //activity
 router.patch("/update/flights/:id", userAuth, updatePlanFlights); //flights
 router.patch("/update/concert/:id", userAuth, updatePlanConcert); //concert
 router.patch("/update/theater/:id", userAuth, updatePlanTheater); //theater
+router.patch("/update/car/:id", userAuth, updatePlanCar); //car
+router.patch("/update/parking/:id", userAuth, updatePlanParking); //parking
 
 //GET
 router.get("/:planId", getPlanById);

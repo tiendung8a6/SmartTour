@@ -110,6 +110,10 @@ function App() {
               path="/trip/:id/theater/:planId/edit"
               element={<EditTheater />}
             />
+            <Route
+              path="/trip/:id/theater/:planId/edit"
+              element={<EditTheater />}
+            />
 
             <Route path="/profile" element={<Profile />} />
           </Route>
