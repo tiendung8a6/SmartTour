@@ -36,6 +36,7 @@ import EditConcert from "./EditConcert";
 import EditTheater from "./EditTheater";
 import EditCar from "./EditCar";
 import EditParking from "./EditParking";
+import EditRail from "./EditRail";
 export {
   BlogDetail,
   CategoryPage,
@@ -75,4 +76,5 @@ export {
   EditTheater,
   EditCar,
   EditParking,
+  EditRail,
 };

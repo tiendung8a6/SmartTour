@@ -163,6 +163,7 @@ const NewRail = () => {
       number,
       form,
       endAddress,
+      describe,
       estimatedPrice,
       actualPrice,
       departureGate,

@@ -1,3 +1,5 @@
+import React, { useRef, useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import {
   Button,
   TextInput,
@@ -7,42 +9,66 @@ import {
   rem,
   NumberInput,
   Textarea,
+  Autocomplete as MantineAutocomplete,
 } from "@mantine/core";
-import { useEffect, useState } from "react";
 import { Toaster, toast } from "sonner";
 import { LoadingClient } from "../components";
-import { useUpdateParkingPlan } from "../hooks/client-hook";
 import useStore from "../store";
-import { DateInput, TimeInput } from "@mantine/dates";
-import React, { useRef } from "react";
 import {
   IconClock,
   IconArrowLeft,
   IconCalendarEvent,
   IconCurrencyDong,
 } from "@tabler/icons-react";
-import { useParams, Link } from "react-router-dom";
+import { DateInput, TimeInput } from "@mantine/dates";
+import { useUpdateRailPlan } from "../hooks/client-hook";
 import { getSingleTrip, getSinglePlans } from "../utils/apiCalls";
-import { Autocomplete } from "@react-google-maps/api";
+import trains from "../assets/trains.json";
 
-const EditParking = () => {
+// Hàm chuyển đổi chuỗi sang dạng không dấu
+const removeDiacritics = (str) => {
+  return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+};
+
+const optionsFilter = ({ options, search }) => {
+  const searchWithoutDiacritics = removeDiacritics(search).toLowerCase().trim();
+  const splittedSearch = searchWithoutDiacritics.split(" ");
+
+  return options.filter((option) => {
+    const labelWithoutDiacritics = removeDiacritics(option.label)
+      .toLowerCase()
+      .trim();
+    const words = labelWithoutDiacritics.split(" ");
+
+    return splittedSearch.every((searchWord) =>
+      words.some((word) => word.includes(searchWord))
+    );
+  });
+};
+
+const EditRail = () => {
   const { colorScheme } = useMantineColorScheme();
   const { id, planId } = useParams();
   const { user } = useStore();
-  const { isPending, mutate } = useUpdateParkingPlan(
+  const { isPending, mutate } = useUpdateRailPlan(
     planId,
     toast,
     user?.token,
     id
   );
   const [planName, setPlanName] = useState(null);
+  const [startAddress, setStartAddress] = useState(null);
+  const [estimatedPrice, setEstimatedPrice] = useState(null);
+  const [actualPrice, setActualPrice] = useState(null);
   const [info, setInfo] = useState(null);
   const [phone, setPhone] = useState(null);
   const [web, setWeb] = useState(null);
   const [email, setEmail] = useState(null);
-  const [startAddress, setStartAddress] = useState(null);
-  const [estimatedPrice, setEstimatedPrice] = useState(null);
-  const [actualPrice, setActualPrice] = useState(null);
+  const [number, setNumber] = useState(null);
+  const [describe, setDescribe] = useState(null);
+  const [form, setForm] = useState(null);
+  const [endAddress, setEndAddress] = useState(null);
+  const [departureGate, setDepartureGate] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [startTime, setStartTime] = useState(null);
@@ -54,26 +80,11 @@ const EditParking = () => {
   const { setIsLoading } = useStore();
   const [trip, setTrip] = useState(null);
 
-  // AuTo Fill GOOGLE
-  const [startAutocomplete, setStartAutocomplete] = useState(null);
-  const [endAutocomplete, setEndAutocomplete] = useState(null);
+  //Gọi Danh sách trains từ Json
+  const trainOptions = trains.features.map(
+    (trainData) => trainData.properties.Ten_Ga
+  );
 
-  const onLoadStart = (autocomplete) => {
-    setStartAutocomplete(autocomplete);
-  };
-
-  const onLoadEnd = (autocomplete) => {
-    setEndAutocomplete(autocomplete);
-  };
-
-  const handleStartPlaceChanged = () => {
-    if (startAutocomplete) {
-      const place = startAutocomplete.getPlace();
-      if (place && place.formatted_address) {
-        setStartAddress(place.formatted_address);
-      }
-    }
-  };
   const pickerStartTimeControl = (
     <ActionIcon
       className="text-[#107ac5]"
@@ -96,46 +107,52 @@ const EditParking = () => {
       <IconClock style={{ width: rem(16), height: rem(16) }} stroke={3} />
     </ActionIcon>
   );
-
   const handleSubmit = async () => {
     if (!planName) {
-      toast.error("Vui lòng nhập tên bãi xe.");
+      toast.error("Vui lòng nhập tên nhà cung cấp.");
       return;
     }
     if (!startAddress) {
-      toast.error("Vui lòng nhập địa chỉ bãi xe.");
+      toast.error("Vui lòng nhập ga đi.");
       return;
     }
     if (!startDate) {
-      toast.error("Vui lòng chọn ngày gửi.");
+      toast.error("Vui lòng chọn ngày đi.");
       return;
     }
     if (!startTime) {
-      toast.error("Vui lòng chọn thời gian gửi.");
+      toast.error("Vui lòng chọn thời gian đi.");
       return;
-    }
-    if (!endDate) {
-      toast.error("Vui lòng chọn ngày lấy.");
-      return;
-    }
-    if (endDate < startDate) {
-      toast.error("Ngày lấy phải sau ngày gửi.");
-      return;
-    }
-    if (!endTime) {
-      toast.error("Vui lòng chọn thời gian lấy.");
-      return;
-    }
-    if (endDate.getTime() === startDate.getTime()) {
-      if (endTime <= startTime) {
-        toast.error("Thời gian lấy phải sau thời gian gửi nếu cùng một ngày.");
-        return;
-      }
     }
     if (!estimatedPrice) {
       toast.error("Vui lòng nhập tổng giá vé dự kiến.");
       return;
     }
+    if (!endDate) {
+      toast.error("Vui lòng chọn ngày đến.");
+      return;
+    }
+    if (endDate < startDate) {
+      toast.error("Ngày đến phải sau ngày đi.");
+      return;
+    }
+    if (!endTime) {
+      toast.error("Vui lòng chọn thời gian đến.");
+      return;
+    }
+    if (endDate.getTime() === startDate.getTime()) {
+      if (endTime <= startTime) {
+        toast.error(
+          "Thời gian đi phải sau thời gian đến nếu trong cùng một ngày."
+        );
+        return;
+      }
+    }
+    if (!endAddress) {
+      toast.error("Vui lòng nhập ga đến.");
+      return;
+    }
+
     setIsLoading(true);
     mutate({
       planName,
@@ -143,13 +160,17 @@ const EditParking = () => {
       startTime,
       endDate,
       endTime,
+      startAddress,
       info,
       phone,
       web,
       email,
+      number,
+      form,
+      endAddress,
       estimatedPrice,
       actualPrice,
-      startAddress,
+      departureGate,
     });
   };
 
@@ -161,16 +182,22 @@ const EditParking = () => {
       if (data) {
         setPlanName(data.planName);
         setStartAddress(data.startAddress);
+        setEndAddress(data.endAddress);
+        setInfo(data.info);
         setEstimatedPrice(data.estimatedPrice);
         setActualPrice(data.actualPrice);
         setStartDate(new Date(data.startDate));
         setEndDate(new Date(data.endDate));
         setStartTime(data.startTime);
         setEndTime(data.endTime);
+        setNumber(data.number);
+        setForm(data.form);
+        setDepartureGate(data.departureGate);
+        // setArrivalGate(data.arrivalGate);
+        setDescribe(data.describe);
         setPhone(data.phone);
         setWeb(data.web);
         setEmail(data.email);
-        setInfo(data.info);
       }
     } catch (error) {
       console.error("Error fetching plan:", error);
@@ -219,22 +246,31 @@ const EditParking = () => {
           theme ? "text-white" : "text-slate-700"
         } text-2xl font-semibold mt-4`}
       >
-        Cập Nhật Giữ Xe
+        Cập Nhật Đường Sắt
       </p>
       <br />
 
-      <Grid>
+      <Grid className="my-6">
         <Grid.Col span={{ base: 12, md: 7, lg: 7 }}>
-          <Grid className="mb-6 mt-1">
+          <p
+            className={`${
+              theme ? "text-white" : "text-slate-700"
+            } text-xl	 font-semibold `}
+          >
+            Thông Tin Ga Đi
+          </p>
+
+          <Grid className="my-6">
             <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
-              <div className="w-full flex flex-col md:flex-row flex-wrap  ">
-                <TextInput
+              <div className="w-full flex flex-col md:flex-row flex-wrap">
+                <MantineAutocomplete
                   withAsterisk
-                  label="Tên bãi đậu xe"
+                  label="Tên nhà cung cấp"
                   className="w-full flex-1"
-                  placeholder="Nhập tên bãi đậu xe"
+                  placeholder="Nhập tên nhà cung cấp"
+                  data={["Đường sắt Việt Nam (VNR)"]}
                   value={planName}
-                  onChange={(e) => setPlanName(e.target.value)}
+                  onChange={(value) => setPlanName(value)}
                 />
               </div>
             </Grid.Col>
@@ -242,21 +278,18 @@ const EditParking = () => {
 
           <Grid className="my-6">
             <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
-              <Autocomplete
-                onLoad={onLoadStart}
-                onPlaceChanged={handleStartPlaceChanged}
-              >
-                <div className="w-full flex flex-col md:flex-row flex-wrap">
-                  <TextInput
-                    withAsterisk
-                    label="Địa chỉ bãi xe"
-                    className="w-full flex-1"
-                    placeholder="Nhập địa chỉ bãi xe"
-                    value={startAddress}
-                    onChange={(e) => setStartAddress(e.target.value)}
-                  />
-                </div>
-              </Autocomplete>
+              <div className="w-full flex flex-col md:flex-row flex-wrap">
+                <MantineAutocomplete
+                  withAsterisk
+                  label="Ga đi"
+                  className="w-full flex-1"
+                  placeholder="Nhập ga đi"
+                  data={trainOptions}
+                  value={startAddress}
+                  onChange={(value) => setStartAddress(value)}
+                  filter={optionsFilter}
+                />
+              </div>
             </Grid.Col>
           </Grid>
 
@@ -269,9 +302,9 @@ const EditParking = () => {
                   }
                   clearable
                   withAsterisk
-                  label="Ngày gửi"
+                  label="Ngày đi"
                   className="w-full flex-1"
-                  placeholder="Chọn ngày gửi"
+                  placeholder="Chọn ngày đi"
                   minDate={new Date(trip?.startDate)}
                   maxDate={new Date(trip?.endDate)}
                   valueFormat="DD/MM/YYYY"
@@ -284,12 +317,12 @@ const EditParking = () => {
               <div className="w-full ">
                 <TimeInput
                   ref={startTimeRef}
-                  label="Thời gian gửi"
+                  label="Thời gian đi"
                   leftSection={pickerStartTimeControl}
                   withAsterisk
                   // description="Input description"
-                  placeholder="Chọn thời gian gửi"
                   value={startTime}
+                  placeholder="Chọn thời gian đi"
                   onChange={(e) => setStartTime(e.target.value)}
                 />
               </div>
@@ -298,35 +331,122 @@ const EditParking = () => {
 
           <Grid className="my-6">
             <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
-              <div className="w-full flex flex-col md:flex-row flex-wrap">
-                <DateInput
-                  leftSection={
-                    <IconCalendarEvent className="text-[#107ac5]" size={24} />
-                  }
-                  clearable
-                  withAsterisk
-                  label="Ngày lấy"
+              <div className="w-full flex flex-col md:flex-row flex-wrap  ">
+                <MantineAutocomplete
+                  // withAsterisk
+                  label="Mác tàu"
                   className="w-full flex-1"
-                  placeholder="Chọn ngày lấy"
-                  valueFormat="DD/MM/YYYY"
-                  minDate={new Date(trip?.startDate)}
-                  maxDate={new Date(trip?.endDate)}
-                  value={endDate}
-                  onChange={(date) => setEndDate(date)}
+                  placeholder="Nhập mác tàu"
+                  data={[
+                    "SE3",
+                    "SE7",
+                    "SE1",
+                    "SE5",
+                    "SE11",
+                    "SE17",
+                    "SE35",
+                    "NA3",
+                    "QB1",
+                    "SE19",
+                    "NA1",
+                    "HD1",
+                    "HD3",
+                    "SP1",
+                    "SP3",
+                    "HP1",
+                    "LP3",
+                    "LP5",
+                    "LP7",
+                    "SNT1",
+                    "SPT1",
+                    "SE21",
+                    "HP3",
+                  ]}
+                  value={info}
+                  onChange={(value) => setInfo(value)}
                 />
               </div>
             </Grid.Col>
+
             <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
-              <div className="w-full ">
-                <TimeInput
-                  ref={endTimeRef}
-                  label="Thời gian lấy"
-                  leftSection={pickerEndTimeControl}
-                  withAsterisk
-                  // description="Input description"
-                  placeholder="Chọn thời gian lấy"
-                  value={endTime}
-                  onChange={(e) => setEndTime(e.target.value)}
+              <div className="w-full flex flex-col md:flex-row flex-wrap  ">
+                <MantineAutocomplete
+                  // withAsterisk
+                  label="Toa"
+                  className="w-full flex-1"
+                  placeholder="Nhập toa"
+                  data={[
+                    "Số 1",
+                    "Số 2",
+                    "Số 3",
+                    "Số 4",
+                    "Số 5",
+                    "Số 6",
+                    "Số 7",
+                    "Số 8",
+                    "Số 9",
+                    "Số 10",
+                    "Số 11",
+                    "Số 12",
+                    "Số 13",
+                    "Số 14",
+                    "Số 15",
+                    "Số 16",
+                    "Số 17",
+                    "Số 18",
+                    "Số 19",
+                    "Số 20",
+                  ]}
+                  value={departureGate}
+                  onChange={(value) => setDepartureGate(value)}
+                />
+              </div>
+            </Grid.Col>
+          </Grid>
+
+          <Grid className="my-6">
+            <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
+              <div className="w-full flex flex-col md:flex-row flex-wrap  ">
+                <MantineAutocomplete
+                  // withAsterisk
+                  label="Loại chỗ"
+                  className="w-full flex-1"
+                  placeholder="Nhập loại chỗ"
+                  data={[
+                    "Ngồi mềm",
+                    "Ngồi mềm điều hoà",
+                    "Nằm khoang 4",
+                    "Nằm khoang 2 điều hòa VIP",
+                    "Nằm khoang 4 điều hòa",
+                    "Nằm khoang 6",
+                    "Nằm khoang 6 điều hòa",
+                    "Ghế phụ",
+                    "Ghế phụ điều hòa",
+                    "Ngồi cứng",
+                    "Ngồi cứng điều hòa",
+                    "Ngồi chuyển đổi điều hòa",
+                    "Ngồi mềm điều hòa",
+                    "Ngồi mềm điều hòa toa 48",
+                    "Ngồi mềm điều hòa toa 56",
+                    "Ngồi mềm điều hòa toa 64",
+                    "Ngồi mềm điều hòa toa vip 20",
+                    "Ngồi mềm điều hòa vip",
+                  ]}
+                  value={form}
+                  onChange={(value) => setForm(value)}
+                />
+              </div>
+            </Grid.Col>
+
+            <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
+              <div className="w-full flex flex-col md:flex-row flex-wrap  ">
+                <TextInput
+                  // withAsterisk
+                  label="Ghế ngồi"
+                  className="w-full flex-1"
+                  placeholder="Nhập ghế ngồi"
+                  value={number}
+                  onChange={(e) => setNumber(e.target.value)}
                 />
               </div>
             </Grid.Col>
@@ -379,27 +499,92 @@ const EditParking = () => {
               </div>
             </Grid.Col>
           </Grid>
+
+          <div className="text-lg	text-black  mt-16		">
+            <p
+              className={`${
+                theme ? "text-white" : "text-slate-700"
+              } text-xl font-semibold`}
+            >
+              Thông Tin Ga Đến
+            </p>
+
+            <Grid className="my-6">
+              <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
+                <div className="w-full flex flex-col md:flex-row flex-wrap  ">
+                  <DateInput
+                    leftSection={
+                      <IconCalendarEvent className="text-[#107ac5]" size={24} />
+                    }
+                    clearable
+                    withAsterisk
+                    label="Ngày đến"
+                    className="w-full flex-1"
+                    placeholder="Chọn ngày đến"
+                    valueFormat="DD/MM/YYYY"
+                    minDate={new Date(trip?.startDate)}
+                    maxDate={new Date(trip?.endDate)}
+                    value={endDate}
+                    onChange={(date) => setEndDate(date)}
+                  />
+                </div>
+              </Grid.Col>
+
+              <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
+                <div className="w-full ">
+                  <TimeInput
+                    ref={endTimeRef}
+                    label="Thời gian đến"
+                    leftSection={pickerEndTimeControl}
+                    withAsterisk
+                    // description="Input description"
+                    value={endTime}
+                    placeholder="Chọn thời gian đến"
+                    onChange={(e) => setEndTime(e.target.value)}
+                  />
+                </div>
+              </Grid.Col>
+            </Grid>
+
+            <Grid className="my-6">
+              <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
+                <div className="w-full flex flex-col md:flex-row flex-wrap   ">
+                  <MantineAutocomplete
+                    withAsterisk
+                    label="Ga đến"
+                    className="w-full flex-1"
+                    placeholder="Nhập ga đến"
+                    data={trainOptions}
+                    value={endAddress}
+                    onChange={(value) => setEndAddress(value)}
+                    filter={optionsFilter}
+                  />
+                </div>
+              </Grid.Col>
+            </Grid>
+          </div>
+
           <div className=" text-lg	text-black	mt-16">
             <p
               className={`${
                 theme ? "text-white" : "text-slate-700"
               } text-xl font-semibold`}
             >
-              Nội Quy Và Liên Hệ
+              Liên Hệ Và Quy Định
             </p>
             <Grid className="my-6">
               <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
                 <div className="w-full flex flex-col md:flex-row flex-wrap    ">
                   <Textarea
                     // withAsterisk
+                    label="Tiện ích"
+                    className="w-full flex-1"
+                    placeholder="Nhập tiện ích"
                     autosize
                     minRows={3}
                     maxRows={6}
-                    label="Nội quy bãi xe"
-                    className="w-full flex-1"
-                    placeholder="Nhập nội quy bãi xe"
-                    value={info}
-                    onChange={(e) => setInfo(e.target.value)}
+                    value={describe}
+                    onChange={(e) => setDescribe(e.target.value)}
                   />
                 </div>
               </Grid.Col>
@@ -454,7 +639,7 @@ const EditParking = () => {
       </Grid>
 
       <div className="flex justify-start gap-3">
-        <div className=" flex items-end justify-start mt-6">
+        <div className=" flex items-end justify-start ">
           <Link to={`/trip/${trip?._id}`}>
             <Button variant="outline" color="Red" size="md" radius="md">
               Hủy
@@ -462,7 +647,7 @@ const EditParking = () => {
           </Link>
         </div>
 
-        <div className=" flex items-end justify-start mt-6">
+        <div className=" flex items-end justify-start">
           <Button
             variant="filled"
             color="indigo"
@@ -481,4 +666,4 @@ const EditParking = () => {
   );
 };
 
-export default EditParking;
+export default EditRail;

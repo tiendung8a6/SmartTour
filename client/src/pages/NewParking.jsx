@@ -183,7 +183,7 @@ const NewParking = () => {
           theme ? "text-white" : "text-slate-700"
         } text-2xl font-semibold mt-4`}
       >
-        Thêm giữ xe
+        Thêm Giữ Xe
       </p>
       <br />
 
