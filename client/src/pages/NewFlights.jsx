@@ -113,6 +113,10 @@ const NewFlights = () => {
       toast.error("Vui lòng nhập hãng hàng không.");
       return;
     }
+    if (!startAddress) {
+      toast.error("Vui lòng nhập địa chỉ sân bay.");
+      return;
+    }
     if (!startDate) {
       toast.error("Vui lòng chọn ngày khởi hành.");
       return;
@@ -123,10 +127,6 @@ const NewFlights = () => {
     }
     if (!estimatedPrice) {
       toast.error("Vui lòng nhập tổng giá vé dự kiến.");
-      return;
-    }
-    if (!startAddress) {
-      toast.error("Vui lòng nhập địa chỉ sân bay.");
       return;
     }
 
@@ -249,6 +249,25 @@ const NewFlights = () => {
           </Grid>
 
           <Grid className="my-6">
+            <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
+              <Autocomplete
+                onLoad={onLoadStart}
+                onPlaceChanged={handleStartPlaceChanged}
+              >
+                <div className="w-full flex flex-col md:flex-row flex-wrap">
+                  <TextInput
+                    withAsterisk
+                    label="Địa chỉ"
+                    className="w-full flex-1"
+                    placeholder="Nhập địa chỉ"
+                    value={startAddress}
+                    onChange={(e) => setStartAddress(e.target.value)}
+                  />
+                </div>
+              </Autocomplete>
+            </Grid.Col>
+          </Grid>
+          <Grid className="my-6">
             <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
               <div className="w-full flex flex-col md:flex-row flex-wrap">
                 <DateInput
@@ -257,9 +276,9 @@ const NewFlights = () => {
                   }
                   clearable
                   withAsterisk
-                  label="Ngày khởi hành"
+                  label="Ngày ngày khởi hành"
                   className="w-full flex-1"
-                  placeholder="Chọn khởi hành"
+                  placeholder="Chọn ngày khởi hành"
                   minDate={new Date(trip?.startDate)}
                   maxDate={new Date(trip?.endDate)}
                   valueFormat="DD/MM/YYYY"
@@ -390,26 +409,6 @@ const NewFlights = () => {
                   onChange={(value) => setActualPrice(value)}
                 />
               </div>
-            </Grid.Col>
-          </Grid>
-
-          <Grid className="my-6">
-            <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
-              <Autocomplete
-                onLoad={onLoadStart}
-                onPlaceChanged={handleStartPlaceChanged}
-              >
-                <div className="w-full flex flex-col md:flex-row flex-wrap">
-                  <TextInput
-                    withAsterisk
-                    label="Địa chỉ"
-                    className="w-full flex-1"
-                    placeholder="Nhập địa chỉ"
-                    value={startAddress}
-                    onChange={(e) => setStartAddress(e.target.value)}
-                  />
-                </div>
-              </Autocomplete>
             </Grid.Col>
           </Grid>
 

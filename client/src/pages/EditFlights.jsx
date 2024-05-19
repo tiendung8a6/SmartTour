@@ -462,7 +462,7 @@ const EditFlights = () => {
                 theme ? "text-white" : "text-slate-700"
               } text-xl font-semibold`}
             >
-              Thông Tin Điểm đến
+              Thông Tin Điểm Đến
             </p>
 
             <Grid className="my-6">
