@@ -482,7 +482,7 @@ export const createPlanParking = async (req, res, next) => {
     res.status(201).json({
       success: true,
       message:
-        "Lập kế hoạch cho đỗ xe thành công và đã được thêm vào chuyến đi",
+        "Lập kế hoạch cho giữ xe thành công và đã được thêm vào chuyến đi",
       data: plan,
       tripId: trip._id,
     });
@@ -972,7 +972,7 @@ export const updatePlanParking = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Cập nhật kế hoạch đỗ xe đã thành công.",
+      message: "Cập nhật kế hoạch giữ xe đã thành công.",
       data: plan,
     });
   } catch (error) {
