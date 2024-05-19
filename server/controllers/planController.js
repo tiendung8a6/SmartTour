@@ -982,3 +982,68 @@ export const updatePlanParking = async (req, res, next) => {
     res.status(500).json({ success: false, message: "Lỗi máy chủ" });
   }
 };
+export const updatePlanRail = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const {
+      planName,
+      startDate,
+      startTime,
+      endDate,
+      endTime,
+      startAddress,
+      endAddress,
+      estimatedPrice,
+      actualPrice,
+      info,
+      phone,
+      web,
+      email,
+      number,
+      describe,
+      form,
+      arrivalGate,
+      departureGate,
+    } = req.body;
+
+    const updatedFields = {};
+    if (planName) updatedFields.planName = planName;
+    if (startDate) updatedFields.startDate = startDate;
+    if (startTime) updatedFields.startTime = startTime;
+    if (endDate) updatedFields.endDate = endDate;
+    if (endTime) updatedFields.endTime = endTime;
+    if (startAddress) updatedFields.startAddress = startAddress;
+    if (endAddress) updatedFields.endAddress = endAddress;
+    if (estimatedPrice) updatedFields.estimatedPrice = estimatedPrice;
+    if (actualPrice) updatedFields.actualPrice = actualPrice;
+    if (info) updatedFields.info = info;
+    if (phone) updatedFields.phone = phone;
+    if (web) updatedFields.web = web;
+    if (email) updatedFields.email = email;
+    if (number) updatedFields.number = number;
+    if (describe) updatedFields.describe = describe;
+    if (form) updatedFields.form = form;
+    if (arrivalGate) updatedFields.arrivalGate = arrivalGate;
+    if (departureGate) updatedFields.departureGate = departureGate;
+
+    const plan = await Plans.findByIdAndUpdate(id, updatedFields, {
+      new: true,
+    });
+
+    if (!plan) {
+      return res.status(404).json({
+        success: false,
+        message: "Không tìm thấy kế hoạch tàu hỏa",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Cập nhật kế hoạch tàu hỏa đã thành công.",
+      data: plan,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Lỗi máy chủ" });
+  }
+};
