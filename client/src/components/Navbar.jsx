@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import useStore from "../store";
@@ -50,60 +50,53 @@ const MobileMenu = ({ user, signOut }) => {
         </svg>
       </button>
       {isMenuOpen && (
-        <div className="fixed top-0 left-0 w-full h-fit bg-white dark:bg-[#020b19] z-50 flex flex-col py-10 items-center justify-center shadow-xl gap-8">
+        <div className="fixed top-0 left-0 w-full h-fit bg-white dark:bg-[#020b19] z-50 flex flex-col py-10 items-center justify-center shadow-xl gap-4">
           <Logo />
           <ul className="flex flex-col gap-4 text-base text-black dark:text-gray-300">
             <li onClick={toggleMenu}>
-              <Link to="/">Home</Link>
+              <Link to="/">Trang Chủ</Link>
             </li>
             <li onClick={toggleMenu}>
-              <Link to="/contact">Contact</Link>
+              <Link to="/trip">Chuyến Đi</Link>
+            </li>
+            <li onClick={toggleMenu}>
+              <Link to="/travel-guide">Hướng Dẫn Viên AI</Link>
             </li>
             <li onClick={toggleMenu}>
               <Link to="/blog">Blog</Link>
             </li>
+            <li onClick={toggleMenu}>
+              <Link to="/contact">Liên Hệ</Link>
+            </li>
           </ul>
           <div className="flex gap-2 items-center">
             {user?.token ? (
-              <div className="w-full flex  flex-col items-center justify-center ">
-                <Grid>
-                  <Grid.Col span={4} className="my-auto">
-                    <img
-                      src={user?.user?.image}
-                      alt="Profile"
-                      className="w-10 h-10 rounded-full"
-                    />
-                  </Grid.Col>
-
-                  <Grid.Col span={4}>
-                    <div className="font-medium te">
-                      {user?.user?.name?.split(" ")[0]}
-                    </div>
-                    <div className="text-gray-500 text-sm">@{username1}</div>
-                  </Grid.Col>
-                </Grid>
-                <hr />
+              <div className="w-full flex flex-col items-center justify-center ">
+                <div class="hidden lg:block">
+                  <Grid>
+                    <Grid.Col span={4} className="my-auto">
+                      <img
+                        src={user?.user?.image}
+                        alt="Profile"
+                        className="w-10 h-10 rounded-full"
+                      />
+                    </Grid.Col>
+                    <Grid.Col span={4}>
+                      <div className="font-medium">
+                        {user?.user?.name?.split(" ")[0]}
+                      </div>
+                      <div className="text-gray-500 text-sm">@{username1}</div>
+                    </Grid.Col>
+                  </Grid>
+                  <hr />
+                </div>
                 <Link
                   to="/profile"
-                  className="dark:text-white text-gray-500 text-sm"
+                  className="text-base text-black dark:text-gray-300"
                 >
-                  Trang cá nhân{" "}
-                </Link>{" "}
-                <hr />
-                <Link className="text-gray-500 text-sm" to="/new-post">
-                  Viết blog
-                </Link>
-                <Link className="text-gray-500 text-sm" to="/new-post">
-                  Bài viết của tôi
+                  Tài Khoản Của Tôi
                 </Link>
                 <hr />
-                <Link className="text-gray-500 text-sm" to="/new-post">
-                  Bài viết đã lưu
-                </Link>
-                <hr />
-                <Link className="text-gray-500 text-sm" to="/new-post">
-                  Cài đặt
-                </Link>
                 <button
                   className="bg-black dark:bg-sky-600 text-white dark:text-white px-8 py-1.5 rounded-full text-center outline-none"
                   onClick={() => signOut()}
@@ -148,6 +141,21 @@ const Navbar = () => {
   const userEmail = user?.user?.email;
   const username1 = userEmail ? userEmail?.split("@")[0] : "";
 
+  //use-click-outside: Click ra vùng trống để mất menu
+  const profileRef = useRef();
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
+        setShowProfile(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <nav className="flex flex-col md:flex-row w-full py-5  items-center justify-between gap-4 md:gap-0">
       <Logo />
@@ -155,9 +163,9 @@ const Navbar = () => {
         <ul className="flex gap-8 text-base text-black dark:text-white">
           <Link to="/">Trang Chủ</Link>
           <Link to="/trip">Chuyến Đi</Link>
-          <Link to="/contact">Liên Hệ</Link>
           <Link to="/travel-guide">Hướng Dẫn Viên AI</Link>
           <Link to="/blog">Blog</Link>
+          <Link to="/contact">Liên Hệ</Link>
         </ul>
 
         {/* theme switch */}
@@ -166,6 +174,7 @@ const Navbar = () => {
         <div className="flex gap-2 items-center cursor-pointer">
           {user?.token ? (
             <div
+              ref={profileRef}
               className="relative"
               onClick={() => setShowProfile((prev) => !prev)}
             >
@@ -209,10 +218,10 @@ const Navbar = () => {
                     to="/profile"
                     className="dark:text-white text-gray-500 text-sm"
                   >
-                    Trang cá nhân{" "}
-                  </Link>{" "}
+                    Tài Khoản Của Tôi
+                  </Link>
                   <hr />
-                  <Link className="text-gray-500 text-sm" to="/profile">
+                  {/* <Link className="text-gray-500 text-sm" to="/profile">
                     Viết blog
                   </Link>
                   <Link className="text-gray-500 text-sm" to="/new-post">
@@ -225,7 +234,7 @@ const Navbar = () => {
                   <hr />
                   <Link className="text-gray-500 text-sm" to="/new-post">
                     Cài đặt
-                  </Link>
+                  </Link> */}
                   <span
                     className="text-gray-500 text-sm"
                     onClick={handleSignOut}

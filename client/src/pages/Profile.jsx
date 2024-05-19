@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FaEdit } from "react-icons/fa";
+import clsx from "clsx";
 import {
   Button,
   Container,
@@ -8,15 +8,16 @@ import {
   useMantineColorScheme,
   Textarea,
   NumberInput,
+  Tabs,
+  rem,
+  Table,
+  Grid,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import clsx from "clsx";
 import { Toaster, toast } from "sonner";
 import { useUpdateUser } from "../hooks/client-hook";
 import useStore from "../store";
 import { uploadFile } from "../utils";
-import { LoadingClient } from "../components";
-import { Tabs, rem, Table } from "@mantine/core";
 import {
   IconPhoto,
   IconMessageCircle,
@@ -25,10 +26,11 @@ import {
   IconBrandSamsungpass,
   IconTrashFilled,
 } from "@tabler/icons-react";
+import { FaEdit } from "react-icons/fa";
+import { LoadingClient } from "../components";
+import { NewPost } from "../components";
+import { MyPosts } from "../components";
 import classes from "./Profile.module.css";
-import { Grid } from "@mantine/core";
-import WritePost from "./NewPost";
-import MyPosts from "./MyPosts";
 
 const Profile = () => {
   const { colorScheme } = useMantineColorScheme();
@@ -84,16 +86,6 @@ const Profile = () => {
   const userEmail = user?.user?.email;
   const username1 = userEmail ? userEmail.split("@")[0] : "";
 
-  const handleClickMyPost = () => {
-    window.location.href = "http://localhost:3000/profile#myblog";
-  };
-  const handleClickCreatePost = () => {
-    window.location.href = "http://localhost:3000/profile#createblog";
-  };
-
-  const handleClicksetting = () => {
-    window.location.href = "http://localhost:3000/profile#setting";
-  };
   return (
     <>
       <Tabs
@@ -142,7 +134,6 @@ const Profile = () => {
               <IconMessageCircle style={{ width: rem(16), height: rem(16) }} />
             }
             className="mt-[20px] mb-[10px]"
-            onClick={handleClickCreatePost}
           >
             Viết Blog
           </Tabs.Tab>
@@ -153,7 +144,6 @@ const Profile = () => {
               <IconPhoto style={{ width: rem(16), height: rem(16) }} />
             }
             className="mt-[10px] mb-[20px]"
-            onClick={handleClickMyPost}
           >
             Bài viết của tôi
           </Tabs.Tab>
@@ -164,7 +154,6 @@ const Profile = () => {
               <IconSettings style={{ width: rem(16), height: rem(16) }} />
             }
             className="my-[20px]"
-            onClick={handleClicksetting}
           >
             Cài đặt
           </Tabs.Tab>
@@ -253,9 +242,12 @@ const Profile = () => {
             </Grid>
           </Tabs.Panel>
 
+          {/* ĐĂNG BÀI */}
           <Tabs.Panel className="m-5" value="createBlog">
-            <WritePost></WritePost>
+            <NewPost />
           </Tabs.Panel>
+
+          {/* DANH SÁCH BÀI ĐĂNG */}
           <Tabs.Panel className="m-5" value="MyPost">
             <MyPosts />
           </Tabs.Panel>

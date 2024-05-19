@@ -28,6 +28,8 @@ import Contact from "./Home/Contact";
 import TripCard from "./TripCard";
 import ConfirmDialog from "./ConfirmDialog";
 import EditPost from "./EditPost";
+import NewPost from "./NewPost";
+import MyPosts from "./MyPosts";
 export {
   Banner,
   Button,
@@ -59,4 +61,6 @@ export {
   TripCard,
   EditPost,
   ConfirmDialog,
+  NewPost,
+  MyPosts,
 };

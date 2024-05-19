@@ -10,13 +10,11 @@ import {
   OTPVerification,
   ForgotPassword,
   Contact,
-  NewPost,
   Trip,
   TravelGuide,
   TripSummary,
   NewTrip,
   Profile,
-  MyPosts,
   PlansCreate,
   NewActivity,
   EditTrip,
@@ -74,8 +72,6 @@ function App() {
             <Route path="/:slug/:id?" element={<BlogDetail />} />
             <Route path="/writer/:id" element={<WriterPage />} />
             <Route path="/travel-guide" element={<TravelGuide />} />
-            <Route path="/new-post" element={<NewPost />} />
-            <Route path="/my-posts" element={<MyPosts />} />
             <Route path="/trip" element={<Trip />} />
             <Route path="/my-trips" element={<MyTripsPanel />} />
             <Route path="/public-trips" element={<PublicTripsPanel />} />

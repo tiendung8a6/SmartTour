@@ -39,7 +39,7 @@ export const uploadFile = (setFileURL, file) => {
     "state_changed",
     (snapshot) => {
       const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      toast.success("Upload is " + progress + "% done");
+      toast.success("Đang tải lên " + progress + "%");
 
       switch (snapshot.state) {
         case "paused":
