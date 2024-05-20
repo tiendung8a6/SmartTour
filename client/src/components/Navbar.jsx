@@ -193,8 +193,9 @@ const Navbar = () => {
                     {getInitials(user?.user?.name)}
                   </span>
                 )}
+
                 <span className=" font-medium text-sky-600 dark:text-gray-500">
-                  {user?.user?.name?.split(" ")[0]}
+                  {user?.user?.name?.split(" ")[0]} |
                 </span>
                 <span className="flex flex-item place-content-center justify-self-center text-yellow-500">
                   <IconCoinBitcoin size="1rem" stroke={2} />
