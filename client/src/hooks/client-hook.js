@@ -64,7 +64,7 @@ export const useCreatePost = (toast, token) => {
 
       setTimeout(() => {
         window.location.replace("/blog");
-      }, 2000);
+      }, 1000);
     },
   });
 };
@@ -143,10 +143,37 @@ export const useDeletePost = (toast, token, mutate) => {
 
 export const useUpdatePost = (toast, token) => {
   return useMutation({
-    mutationFn: async ({ id, title, desc }) => {
+    mutationFn: async ({ id, title, desc, cat, img }) => {
       const { data } = await axios.patch(
         `${API_URL}/posts/update/${id}`,
-        { title, desc },
+        { title, desc, cat, img },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return data;
+    },
+    onError: (error) => {
+      toast.error(error?.response?.data?.message ?? error.message);
+    },
+    onSuccess: async (data) => {
+      toast.success(data?.message);
+
+      setTimeout(() => {
+        window.location.replace("/blog");
+      }, 1000);
+    },
+  });
+};
+export const useAction = (toast, token) => {
+  return useMutation({
+    mutationFn: async ({ id, status }) => {
+      const { data } = await axios.patch(
+        `${API_URL}/posts/update-status/${id}`,
+        { status: status },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -161,12 +188,9 @@ export const useUpdatePost = (toast, token) => {
     },
     onSuccess: (data) => {
       toast.success(data?.message);
-
-      window.location.reload();
     },
   });
 };
-
 export const useCreateActivityPlan = (id, toast, token) => {
   return useMutation({
     mutationFn: async (formData) => {
@@ -671,6 +695,25 @@ export const useUpdateRailPlan = (planId, toast, token, id) => {
       setTimeout(() => {
         window.location.replace(`/trip/${id}`);
       }, 1000);
+    },
+  });
+};
+export const useComments = () => {
+  return useMutation({
+    mutationFn: async (id) => {
+      const { data } = await axios.get(`${API_URL}/posts/comments/` + id);
+
+      return data;
+    },
+  });
+};
+export const useDeleteComment = (token) => {
+  return useMutation({
+    mutationFn: async ({ id, postId }) => {
+      const { data } = await axios.delete(
+        `${API_URL}/posts/comment/client/${id}/${postId}`
+      );
+      return data;
     },
   });
 };

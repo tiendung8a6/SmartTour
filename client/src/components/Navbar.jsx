@@ -6,9 +6,12 @@ import Button from "./Button";
 import Logo from "./Logo";
 import ThemeSwitch from "./Switch";
 import { Grid } from "@mantine/core";
-
+import {
+  IconChevronDown,
+  IconCoinBitcoin,
+  IconChevronRight,
+} from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
-import { Drawer, Button1 } from "@mantine/core";
 function getInitials(fullName) {
   const names = fullName?.split(" ");
 
@@ -190,8 +193,17 @@ const Navbar = () => {
                     {getInitials(user?.user?.name)}
                   </span>
                 )}
-                <span className="font-medium text-black dark:text-gray-500">
+                <span className=" font-medium text-sky-600 dark:text-gray-500">
                   {user?.user?.name?.split(" ")[0]}
+                </span>
+                <span className="flex flex-item place-content-center justify-self-center text-yellow-500">
+                  <IconCoinBitcoin size="1rem" stroke={2} />
+                </span>
+                <span className="flex flex-item place-content-center justify-self-center font-medium text-sky-600">
+                  0
+                </span>
+                <span className="flex flex-item place-content-center justify-self-center">
+                  <IconChevronDown size="1rem" stroke={3} />
                 </span>
               </div>
 
@@ -207,12 +219,25 @@ const Navbar = () => {
                     </Grid.Col>
 
                     <Grid.Col span={4}>
-                      <div className="font-medium">
+                      <div className="font-medium ">
                         {user?.user?.name?.split(" ")[0]}
                       </div>
                       <div className="text-gray-500 text-sm">@{username1}</div>
                     </Grid.Col>
                   </Grid>
+
+                  <Link
+                    to="/profile"
+                    className="dark:text-white text-gray-900 text-sm"
+                  >
+                    <div class="flex justify-start space-x-1 font-semibold">
+                      <div className="flex items-center text-yellow-500">
+                        <IconCoinBitcoin size="1rem" stroke={2} />
+                      </div>
+                      <div>0</div>
+                      <div>Điểm</div>
+                    </div>
+                  </Link>
                   <hr />
                   <Link
                     to="/profile"

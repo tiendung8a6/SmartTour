@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { Button, Modal, TextInput, useMantineColorScheme } from "@mantine/core";
+import {
+  Button,
+  Modal,
+  TextInput,
+  useMantineColorScheme,
+  Select,
+} from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { Link, RichTextEditor } from "@mantine/tiptap";
 import { IconColorPicker } from "@tabler/icons-react";
@@ -14,7 +20,7 @@ import Underline from "@tiptap/extension-underline";
 import { BubbleMenu, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { Toaster, toast } from "sonner";
-import { useUpdatePost } from "../hooks/client-hook";
+import { useUpdatePost, useCategories } from "../hooks/client-hook";
 import useCommentStore from "../store/comments";
 import useStore from "../store";
 import Loading from "./LoadingClient";
@@ -24,8 +30,11 @@ const EditPost = ({ opened, close }) => {
   const { user } = useStore();
   const { post } = useCommentStore();
   const isMobile = useMediaQuery("(max-width: 50em)");
-
+  const [category, setCategory] = useState(post.cat._id);
   const [title, setTitle] = useState(post.title);
+  const [file, setFile] = useState("");
+  const [fileURL, setFileURL] = useState(null);
+  const { data: categoriesData } = useCategories();
 
   const { isPending, mutate, isSuccess } = useUpdatePost(toast, user?.token);
 
@@ -55,6 +64,10 @@ const EditPost = ({ opened, close }) => {
     setTitle(event.target.value);
   };
 
+  const handleCategoryChange = (value) => {
+    setCategory(value);
+  };
+
   const handleSubmit = async () => {
     if (!title) {
       toast.error("Please fill in the Title field.");
@@ -67,6 +80,7 @@ const EditPost = ({ opened, close }) => {
     mutate({
       id: post._id,
       title: title,
+      cat: category,
       desc: editor.getHTML(),
     });
 
@@ -84,7 +98,7 @@ const EditPost = ({ opened, close }) => {
       // fullScreen // ={isMobile}
       radius={0}
       transitionProps={{ transition: "fade", duration: 200 }}
-      title={"Quản lý bài viết"}
+      title={"Chỉnh Sửa Bài Viết"}
     >
       <div className="p-4">
         <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
@@ -97,6 +111,19 @@ const EditPost = ({ opened, close }) => {
             label="Tiêu Đề"
             className="w-full flex-1"
             placeholder="Title"
+          />
+          <Select
+            withAsterisk
+            label="Danh mục"
+            placeholder="Chọn danh mục"
+            value={category}
+            data={
+              categoriesData?.data?.map((category) => ({
+                value: category._id,
+                label: category.label,
+              })) || []
+            }
+            onChange={handleCategoryChange}
           />
         </div>
 

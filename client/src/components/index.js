@@ -30,6 +30,7 @@ import ConfirmDialog from "./ConfirmDialog";
 import EditPost from "./EditPost";
 import NewPost from "./NewPost";
 import MyPosts from "./MyPosts";
+import CommentMyPost from "./CommentMyPost";
 export {
   Banner,
   Button,
@@ -63,4 +64,5 @@ export {
   ConfirmDialog,
   NewPost,
   MyPosts,
+  CommentMyPost,
 };

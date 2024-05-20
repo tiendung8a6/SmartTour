@@ -95,7 +95,7 @@ const Profile = () => {
         orientation="vertical"
         classNames={classes}
       >
-        <Tabs.List grow className="w-[300px] h-[400px] shadow-2xl sm:w-100">
+        <Tabs.List grow className="w-[300px] h-[400px] shadow-2xl sm:w-100 ">
           <div className="m-[10px] ">
             <Grid className="">
               <Grid.Col span={4} className="">
@@ -123,7 +123,7 @@ const Profile = () => {
             leftSection={
               <IconSettings style={{ width: rem(16), height: rem(16) }} />
             }
-            className="my-[20px]"
+            className="my-[20px] hover:bg-gray-100 hover:text-black"
           >
             Trang Cá Nhân
           </Tabs.Tab>
@@ -133,7 +133,7 @@ const Profile = () => {
             leftSection={
               <IconMessageCircle style={{ width: rem(16), height: rem(16) }} />
             }
-            className="mt-[20px] mb-[10px]"
+            className="mt-[20px] mb-[10px] hover:bg-gray-100 hover:text-black"
           >
             Viết Blog
           </Tabs.Tab>
@@ -143,7 +143,7 @@ const Profile = () => {
             leftSection={
               <IconPhoto style={{ width: rem(16), height: rem(16) }} />
             }
-            className="mt-[10px] mb-[20px]"
+            className="mt-[10px] mb-[20px] hover:bg-gray-100 hover:text-black"
           >
             Bài viết của tôi
           </Tabs.Tab>
@@ -153,7 +153,7 @@ const Profile = () => {
             leftSection={
               <IconSettings style={{ width: rem(16), height: rem(16) }} />
             }
-            className="my-[20px]"
+            className="my-[20px] hover:bg-gray-100 hover:text-black"
           >
             Cài đặt
           </Tabs.Tab>

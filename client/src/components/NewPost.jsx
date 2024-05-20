@@ -76,6 +76,7 @@ const NewPost = () => {
       return;
     }
     const slug = createSlug(title);
+    console.log("fileURLNEWWWWWWWW====", fileURL);
 
     mutate({
       title,
@@ -112,6 +113,7 @@ const NewPost = () => {
           onChange={(val) => setCategory(val)}
         />
       </div>
+
       <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-4">
         <div class="flex items-center justify-center w-full">
           <label

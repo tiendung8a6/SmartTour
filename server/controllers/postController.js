@@ -65,11 +65,13 @@ export const updatePostStatus = async (req, res, next) => {
 export const updatePost = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { desc, title } = req.body;
+    const { desc, title, img, cat } = req.body;
 
     const updatedFields = {};
     if (desc) updatedFields.desc = desc;
     if (title) updatedFields.title = title;
+    if (img) updatedFields.img = img;
+    if (cat) updatedFields.cat = cat;
 
     const post = await Posts.findByIdAndUpdate(id, updatedFields, {
       new: true,
@@ -586,5 +588,29 @@ export const deleteFollower = async (req, res, next) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: error.message });
+  }
+};
+export const deleteClientComment = async (req, res, next) => {
+  try {
+    const { id, postId } = req.params;
+
+    await Comments.findByIdAndDelete(id);
+
+    //removing comment id from post
+    const result = await Posts.updateOne(
+      { _id: postId },
+      { $pull: { comments: id } }
+    );
+
+    if (result.modifiedCount > 0) {
+      res
+        .status(200)
+        .json({ success: true, message: "Comment removed successfully" });
+    } else {
+      res.status(404).json({ message: "Post or comment not found" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: error.message });
   }
 };

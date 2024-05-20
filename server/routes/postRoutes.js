@@ -16,6 +16,7 @@ import {
   getOneFollower,
   deleteFollower,
   getMyPost,
+  deleteClientComment,
 } from "../controllers/postController.js";
 import userAuth from "../middleware/authMiddleware.js";
 
@@ -45,6 +46,7 @@ router.get("/comments/:postId", getComments);
 // DELETE POSTS ROUTES
 router.delete("/:id", userAuth, deletePost);
 router.delete("/comment/:id/:postId", userAuth, deleteComment);
+router.delete("/comment/client/:id/:postId", deleteClientComment); //Ko xác thực đăng nhập
 
 router.post("/follower/:id", getOneFollower);
 router.delete("/follower/:id/:writerId", userAuth, deleteFollower);
