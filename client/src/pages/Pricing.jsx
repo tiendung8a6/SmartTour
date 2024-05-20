@@ -187,7 +187,7 @@ const Pricing = () => {
             </p>
 
             <Link
-              className="mt-4 block rounded border border-sky-600 bg-sky-600 px-12 py-3 text-center text-sm font-medium text-white hover:bg-transparent hover:text-white hover:bg-sky-800 focus:outline-none focus:ring sm:mt-6"
+              className="mt-4 block rounded border border-sky-600 bg-sky-600 px-12 py-3 text-center text-sm font-medium text-white hover:text-white hover:bg-sky-800 focus:outline-none focus:ring sm:mt-6"
               to={""}
             >
               Mua Ngay
