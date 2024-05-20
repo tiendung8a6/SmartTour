@@ -169,6 +169,7 @@ const Navbar = () => {
           <Link to="/travel-guide">Hướng Dẫn Viên AI</Link>
           <Link to="/blog">Blog</Link>
           <Link to="/contact">Liên Hệ</Link>
+          <Link to="/pricing">Mua Điểm</Link>
         </ul>
 
         {/* theme switch */}
