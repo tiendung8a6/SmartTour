@@ -8,14 +8,11 @@ const Pricing = () => {
         <div className="flex flex-col mb-16 sm:text-center sm:mb-0">
           <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
             <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
-              <span className="relative inline-block">
-                <span className="relative">The</span>
-              </span>
-              quick, brown fox jumps over a lazy dog
+              Du lịch mọi nơi với gói đăng kí phù hợp
             </h2>
             <p className="text-base text-gray-700 md:text-lg">
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-              accusantium doloremque rem aperiam, eaque ipsa quae.
+              Mua các gói Bạc, Vàng, Kim Cương để nhận ngay điểm thưởng, mở rộng
+              quyền truy cập và tận hưởng đặc quyền độc đáo trong cộng đồng.
             </p>
           </div>
         </div>
@@ -23,34 +20,32 @@ const Pricing = () => {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:items-stretch md:grid-cols-3 md:gap-8">
         <div className="divide-y divide-gray-200 rounded-2xl border border-gray-200 shadow-sm">
           <div className="p-6 sm:px-8">
-            <h2 className="text-lg font-medium text-gray-900">
-              Starter
-              <span className="sr-only">Plan</span>
-            </h2>
+            <h2 className="text-lg font-medium text-gray-900">Gói Hạng Bạc</h2>
 
             <p className="mt-2 text-gray-700">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Truy cập kế hoạch của người dùng khác và tham gia cộng đồng với
+              các tiện ích cơ bản.
             </p>
 
             <p className="mt-2 sm:mt-4">
               <strong className="text-3xl font-bold text-gray-900 sm:text-4xl">
-                20$
+                100.000 VNĐ
               </strong>
 
-              <span className="text-sm font-medium text-gray-700">/month</span>
+              <span className="text-sm font-medium text-gray-700">/Gói</span>
             </p>
 
             <Link
-              className="mt-4 block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-center text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500 sm:mt-6"
+              className="mt-4 block rounded border border-sky-600 px-12 py-3 text-center text-sm font-medium text-sky-600 hover:bg-sky-100 hover:text-sky-600 focus:outline-none focus:ring active:text-sky-500 sm:mt-6"
               to={""}
             >
-              Get Started
+              Mua Ngay
             </Link>
           </div>
 
           <div className="p-6 sm:px-8">
             <p className="text-lg font-medium text-gray-900 sm:text-xl">
-              What's included:
+              Bao gồm:
             </p>
 
             <ul className="mt-2 space-y-2 sm:mt-4">
@@ -61,7 +56,7 @@ const Pricing = () => {
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className="size-5 text-indigo-700"
+                  className="size-5 text-sky-700"
                 >
                   <path
                     strokeLinecap="round"
@@ -70,7 +65,7 @@ const Pricing = () => {
                   />
                 </svg>
 
-                <span className="text-gray-700"> 10 users </span>
+                <span className="text-gray-700"> 100 Điểm thưởng </span>
               </li>
 
               <li className="flex items-center gap-1">
@@ -80,7 +75,7 @@ const Pricing = () => {
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className="size-5 text-indigo-700"
+                  className="size-5 text-sky-700"
                 >
                   <path
                     strokeLinecap="round"
@@ -89,7 +84,7 @@ const Pricing = () => {
                   />
                 </svg>
 
-                <span className="text-gray-700"> 2GB of storage </span>
+                <span className="text-gray-700"> Xem kế hoạch công khai </span>
               </li>
 
               <li className="flex items-center gap-1">
@@ -99,7 +94,7 @@ const Pricing = () => {
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className="size-5 text-indigo-700"
+                  className="size-5 text-sky-700"
                 >
                   <path
                     strokeLinecap="round"
@@ -108,7 +103,7 @@ const Pricing = () => {
                   />
                 </svg>
 
-                <span className="text-gray-700"> Email support </span>
+                <span className="text-gray-700"> Email hỗ trợ </span>
               </li>
 
               <li className="flex items-center gap-1">
@@ -127,7 +122,7 @@ const Pricing = () => {
                   />
                 </svg>
 
-                <span className="text-gray-700"> Help center access </span>
+                <span className="text-gray-700"> Trở thành hội viên </span>
               </li>
 
               <li className="flex items-center gap-1">
@@ -146,7 +141,7 @@ const Pricing = () => {
                   />
                 </svg>
 
-                <span className="text-gray-700"> Phone support </span>
+                <span className="text-gray-700"> Hỗ trợ 24/7 </span>
               </li>
 
               <li className="flex items-center gap-1">
@@ -165,7 +160,158 @@ const Pricing = () => {
                   />
                 </svg>
 
-                <span className="text-gray-700"> Community access </span>
+                <span className="text-gray-700"> Nhóm chat hội viên </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="divide-y divide-gray-200 rounded-2xl border-2 border-sky-600 shadow-sm">
+          <div className="p-6 sm:px-8">
+            <div className="hidden md:block w-32 absolute top-[330px] left-0 right-0 mx-auto px-3 py-2 rounded-full border shadow-md bg-white text-center text-gray-700 text-sm font-semibold">
+              Phổ Biến Nhất
+            </div>
+            <h2 className="text-lg font-medium text-gray-900">Gói Hạng Vàng</h2>
+
+            <p className="mt-2 text-gray-700">
+              Nâng cao trải nghiệm với ưu tiên và truy cập mở rộng đến nội dung
+              và sự kiện cộng đồng.
+            </p>
+
+            <p className="mt-2 sm:mt-4">
+              <strong className="text-3xl font-bold text-gray-900 sm:text-4xl">
+                200.000 VNĐ
+              </strong>
+
+              <span className="text-sm font-medium text-gray-700">/Gói</span>
+            </p>
+
+            <Link
+              className="mt-4 block rounded border border-sky-600 bg-sky-600 px-12 py-3 text-center text-sm font-medium text-white hover:bg-transparent hover:text-white hover:bg-sky-800 focus:outline-none focus:ring sm:mt-6"
+              to={""}
+            >
+              Mua Ngay
+            </Link>
+          </div>
+
+          <div className="p-6 sm:px-8">
+            <p className="text-lg font-medium text-gray-900 sm:text-xl">
+              Bao gồm:
+            </p>
+
+            <ul className="mt-2 space-y-2 sm:mt-4">
+              <li className="flex items-center gap-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="size-5 text-sky-700"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4.5 12.75l6 6 9-13.5"
+                  />
+                </svg>
+
+                <span className="text-gray-700"> 200 Điểm thưởng</span>
+              </li>
+
+              <li className="flex items-center gap-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="size-5 text-sky-700"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4.5 12.75l6 6 9-13.5"
+                  />
+                </svg>
+
+                <span className="text-gray-700"> Xem kế hoạch công khai </span>
+              </li>
+
+              <li className="flex items-center gap-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="size-5 text-sky-700"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4.5 12.75l6 6 9-13.5"
+                  />
+                </svg>
+
+                <span className="text-gray-700"> Email hỗ trợ </span>
+              </li>
+
+              <li className="flex items-center gap-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="size-5 text-sky-700"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4.5 12.75l6 6 9-13.5"
+                  />
+                </svg>
+
+                <span className="text-gray-700"> Trở thành hội viên </span>
+              </li>
+
+              <li className="flex items-center gap-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="size-5 text-red-700"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+
+                <span className="text-gray-700"> Hỗ trợ 24/7</span>
+              </li>
+
+              <li className="flex items-center gap-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="size-5 text-red-700"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+
+                <span className="text-gray-700"> Nhóm chat hội viên </span>
               </li>
             </ul>
           </div>
@@ -174,34 +320,33 @@ const Pricing = () => {
         <div className="divide-y divide-gray-200 rounded-2xl border border-gray-200 shadow-sm">
           <div className="p-6 sm:px-8">
             <h2 className="text-lg font-medium text-gray-900">
-              Pro
-              <span className="sr-only">Plan</span>
+              Gói Hạng Kim Cương
             </h2>
 
             <p className="mt-2 text-gray-700">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Trải nghiệm đỉnh cao với mọi đặc quyền và ưu tiên cao cấp nhất
+              trong cộng đồng.
             </p>
 
             <p className="mt-2 sm:mt-4">
               <strong className="text-3xl font-bold text-gray-900 sm:text-4xl">
-                {" "}
-                30${" "}
+                300.000 VNĐ
               </strong>
 
-              <span className="text-sm font-medium text-gray-700">/month</span>
+              <span className="text-sm font-medium text-gray-700">/Gói</span>
             </p>
 
             <Link
-              className="mt-4 block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-center text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500 sm:mt-6"
+              className="mt-4 block rounded border text-sky-600 border-sky-600 px-12 py-3 text-center text-sm font-medium hover:bg-sky-100 hover:text-sky-600 focus:outline-none focus:ring active:text-sky-500 sm:mt-6"
               to={""}
             >
-              Get Started
+              Mua Ngay
             </Link>
           </div>
 
           <div className="p-6 sm:px-8">
             <p className="text-lg font-medium text-gray-900 sm:text-xl">
-              What's included:
+              Bao gồm:
             </p>
 
             <ul className="mt-2 space-y-2 sm:mt-4">
@@ -212,7 +357,7 @@ const Pricing = () => {
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className="size-5 text-indigo-700"
+                  className="size-5 text-sky-700"
                 >
                   <path
                     strokeLinecap="round"
@@ -221,7 +366,7 @@ const Pricing = () => {
                   />
                 </svg>
 
-                <span className="text-gray-700"> 20 users </span>
+                <span className="text-gray-700">350 Điểm thưởng</span>
               </li>
 
               <li className="flex items-center gap-1">
@@ -231,7 +376,7 @@ const Pricing = () => {
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className="size-5 text-indigo-700"
+                  className="size-5 text-sky-700"
                 >
                   <path
                     strokeLinecap="round"
@@ -240,7 +385,7 @@ const Pricing = () => {
                   />
                 </svg>
 
-                <span className="text-gray-700"> 5GB of storage </span>
+                <span className="text-gray-700"> Xem kế hoạch công khai </span>
               </li>
 
               <li className="flex items-center gap-1">
@@ -250,7 +395,7 @@ const Pricing = () => {
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className="size-5 text-indigo-700"
+                  className="size-5 text-sky-700"
                 >
                   <path
                     strokeLinecap="round"
@@ -259,7 +404,7 @@ const Pricing = () => {
                   />
                 </svg>
 
-                <span className="text-gray-700"> Email support </span>
+                <span className="text-gray-700"> Email hỗ trợ </span>
               </li>
 
               <li className="flex items-center gap-1">
@@ -269,7 +414,7 @@ const Pricing = () => {
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className="size-5 text-indigo-700"
+                  className="size-5 text-sky-700"
                 >
                   <path
                     strokeLinecap="round"
@@ -278,7 +423,7 @@ const Pricing = () => {
                   />
                 </svg>
 
-                <span className="text-gray-700"> Help center access </span>
+                <span className="text-gray-700"> Trở thành hội viên </span>
               </li>
 
               <li className="flex items-center gap-1">
@@ -288,81 +433,7 @@ const Pricing = () => {
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className="size-5 text-red-700"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-
-                <span className="text-gray-700"> Phone support </span>
-              </li>
-
-              <li className="flex items-center gap-1">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="size-5 text-red-700"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-
-                <span className="text-gray-700"> Community access </span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="divide-y divide-gray-200 rounded-2xl border border-gray-200 shadow-sm">
-          <div className="p-6 sm:px-8">
-            <h2 className="text-lg font-medium text-gray-900">
-              Enterprise
-              <span className="sr-only">Plan</span>
-            </h2>
-
-            <p className="mt-2 text-gray-700">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            </p>
-
-            <p className="mt-2 sm:mt-4">
-              <strong className="text-3xl font-bold text-gray-900 sm:text-4xl">
-                100$
-              </strong>
-
-              <span className="text-sm font-medium text-gray-700">/month</span>
-            </p>
-
-            <Link
-              className="mt-4 block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-center text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500 sm:mt-6"
-              to={""}
-            >
-              Get Started
-            </Link>
-          </div>
-
-          <div className="p-6 sm:px-8">
-            <p className="text-lg font-medium text-gray-900 sm:text-xl">
-              What's included:
-            </p>
-
-            <ul className="mt-2 space-y-2 sm:mt-4">
-              <li className="flex items-center gap-1">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="size-5 text-indigo-700"
+                  className="size-5 text-sky-700"
                 >
                   <path
                     strokeLinecap="round"
@@ -371,7 +442,7 @@ const Pricing = () => {
                   />
                 </svg>
 
-                <span className="text-gray-700"> 50 users </span>
+                <span className="text-gray-700"> Hỗ trợ 24/7</span>
               </li>
 
               <li className="flex items-center gap-1">
@@ -381,7 +452,7 @@ const Pricing = () => {
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className="size-5 text-indigo-700"
+                  className="size-5 text-sky-700"
                 >
                   <path
                     strokeLinecap="round"
@@ -390,83 +461,7 @@ const Pricing = () => {
                   />
                 </svg>
 
-                <span className="text-gray-700"> 20GB of storage </span>
-              </li>
-
-              <li className="flex items-center gap-1">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="size-5 text-indigo-700"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4.5 12.75l6 6 9-13.5"
-                  />
-                </svg>
-
-                <span className="text-gray-700"> Email support </span>
-              </li>
-
-              <li className="flex items-center gap-1">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="size-5 text-indigo-700"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4.5 12.75l6 6 9-13.5"
-                  />
-                </svg>
-
-                <span className="text-gray-700"> Help center access </span>
-              </li>
-
-              <li className="flex items-center gap-1">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="size-5 text-indigo-700"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4.5 12.75l6 6 9-13.5"
-                  />
-                </svg>
-
-                <span className="text-gray-700"> Phone support </span>
-              </li>
-
-              <li className="flex items-center gap-1">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="size-5 text-indigo-700"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4.5 12.75l6 6 9-13.5"
-                  />
-                </svg>
-
-                <span className="text-gray-700"> Community access </span>
+                <span className="text-gray-700"> Nhóm chat hội viên </span>
               </li>
             </ul>
           </div>
