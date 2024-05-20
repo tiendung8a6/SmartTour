@@ -12,6 +12,16 @@ const userSchema = new mongoose.Schema(
     followers: [{ type: Schema.Types.ObjectId, ref: "Followers" }],
     isLock: { type: Boolean, default: false },
     isAdmin: { type: Boolean, default: false },
+    points: { type: Number, default: 0 },
+    viewedTrips: [
+      { type: Schema.Types.ObjectId, ref: "Trips", default: false },
+    ],
+    orders: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Order",
+      },
+    ],
   },
   { timestamps: true }
 );
