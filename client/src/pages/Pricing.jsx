@@ -2,6 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Pricing = () => {
+  const formatCurrency = (value) => {
+    return value.toLocaleString("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    });
+  };
   return (
     <div className="place-content-center max-w-screen-xl px-2 py-4 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
       <div className="max-w-xl sm:mx-auto lg:max-w-2xl">
@@ -11,8 +17,8 @@ const Pricing = () => {
               Du lịch mọi nơi với gói đăng kí phù hợp
             </h2>
             <p className="text-base text-gray-700 md:text-lg">
-              Mua các gói Bạc, Vàng, Kim Cương để nhận ngay điểm thưởng, mở rộng
-              quyền truy cập và tận hưởng đặc quyền độc đáo trong cộng đồng.
+              Mua các gói Bạc, Vàng, Kim Cương để nhận ngay điểm, mở rộng quyền
+              truy cập và tận hưởng đặc quyền độc đáo trong cộng đồng.
             </p>
           </div>
         </div>
@@ -20,7 +26,7 @@ const Pricing = () => {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:items-stretch md:grid-cols-3 md:gap-8">
         <div className="divide-y divide-gray-200 rounded-2xl border border-gray-200 shadow-sm">
           <div className="p-6 sm:px-8">
-            <h2 className="text-lg font-medium text-gray-900">Gói Hạng Bạc</h2>
+            <h2 className="text-lg font-medium text-gray-900">Gói Bạc</h2>
 
             <p className="mt-2 text-gray-700">
               Truy cập kế hoạch của người dùng khác và tham gia cộng đồng với
@@ -29,7 +35,7 @@ const Pricing = () => {
 
             <p className="mt-2 sm:mt-4">
               <strong className="text-3xl font-bold text-gray-900 sm:text-4xl">
-                100.000 VNĐ
+                {formatCurrency(100000)}
               </strong>
 
               <span className="text-sm font-medium text-gray-700">/Gói</span>
@@ -37,7 +43,7 @@ const Pricing = () => {
 
             <Link
               className="mt-4 block rounded border border-sky-600 px-12 py-3 text-center text-sm font-medium text-sky-600 hover:bg-sky-100 hover:text-sky-600 focus:outline-none focus:ring active:text-sky-500 sm:mt-6"
-              to={""}
+              to="/checkout/silver"
             >
               Mua Ngay
             </Link>
@@ -65,7 +71,7 @@ const Pricing = () => {
                   />
                 </svg>
 
-                <span className="text-gray-700"> 100 Điểm thưởng </span>
+                <span className="text-gray-700"> 100 Điểm </span>
               </li>
 
               <li className="flex items-center gap-1">
@@ -171,7 +177,7 @@ const Pricing = () => {
             <div className="hidden md:block w-32 absolute top-[330px] left-0 right-0 mx-auto px-3 py-2 rounded-full border shadow-md bg-white text-center text-gray-700 text-sm font-semibold">
               Phổ Biến Nhất
             </div>
-            <h2 className="text-lg font-medium text-gray-900">Gói Hạng Vàng</h2>
+            <h2 className="text-lg font-medium text-gray-900">Gói Vàng</h2>
 
             <p className="mt-2 text-gray-700">
               Nâng cao trải nghiệm với ưu tiên và truy cập mở rộng đến nội dung
@@ -180,7 +186,7 @@ const Pricing = () => {
 
             <p className="mt-2 sm:mt-4">
               <strong className="text-3xl font-bold text-gray-900 sm:text-4xl">
-                200.000 VNĐ
+                {formatCurrency(200000)}
               </strong>
 
               <span className="text-sm font-medium text-gray-700">/Gói</span>
@@ -188,7 +194,7 @@ const Pricing = () => {
 
             <Link
               className="mt-4 block rounded border border-sky-600 bg-sky-600 px-12 py-3 text-center text-sm font-medium text-white hover:text-white hover:bg-sky-800 focus:outline-none focus:ring sm:mt-6"
-              to={""}
+              to="/checkout/gold"
             >
               Mua Ngay
             </Link>
@@ -216,7 +222,7 @@ const Pricing = () => {
                   />
                 </svg>
 
-                <span className="text-gray-700"> 200 Điểm thưởng</span>
+                <span className="text-gray-700"> 200 Điểm</span>
               </li>
 
               <li className="flex items-center gap-1">
@@ -319,9 +325,7 @@ const Pricing = () => {
 
         <div className="divide-y divide-gray-200 rounded-2xl border border-gray-200 shadow-sm">
           <div className="p-6 sm:px-8">
-            <h2 className="text-lg font-medium text-gray-900">
-              Gói Hạng Kim Cương
-            </h2>
+            <h2 className="text-lg font-medium text-gray-900">Gói Kim Cương</h2>
 
             <p className="mt-2 text-gray-700">
               Trải nghiệm đỉnh cao với mọi đặc quyền và ưu tiên cao cấp nhất
@@ -330,7 +334,7 @@ const Pricing = () => {
 
             <p className="mt-2 sm:mt-4">
               <strong className="text-3xl font-bold text-gray-900 sm:text-4xl">
-                300.000 VNĐ
+                {formatCurrency(300000)}
               </strong>
 
               <span className="text-sm font-medium text-gray-700">/Gói</span>
@@ -338,7 +342,7 @@ const Pricing = () => {
 
             <Link
               className="mt-4 block rounded border text-sky-600 border-sky-600 px-12 py-3 text-center text-sm font-medium hover:bg-sky-100 hover:text-sky-600 focus:outline-none focus:ring active:text-sky-500 sm:mt-6"
-              to={""}
+              to="/checkout/diamond"
             >
               Mua Ngay
             </Link>
@@ -366,7 +370,7 @@ const Pricing = () => {
                   />
                 </svg>
 
-                <span className="text-gray-700">350 Điểm thưởng</span>
+                <span className="text-gray-700">350 Điểm</span>
               </li>
 
               <li className="flex items-center gap-1">
