@@ -38,6 +38,7 @@ import {
   EditParking,
   EditRail,
   Pricing,
+  Checkout,
 } from "./pages";
 import { Footer, Loading, Navbar } from "./components";
 import useStore from "./store";
@@ -70,7 +71,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/pricing" element={<Pricing />} />
-
+            <Route path="/checkout/:paymentType" element={<Checkout />} />
             <Route path="/category" element={<CategoryPage />} />
             <Route path="/:slug/:id?" element={<BlogDetail />} />
             <Route path="/writer/:id" element={<WriterPage />} />
