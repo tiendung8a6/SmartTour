@@ -2,13 +2,25 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Toaster, toast } from "sonner"; // Import Toaster và toast từ thư viện sonner
 import { useParams } from "react-router-dom"; // Import useParams từ React Router
+import useStore from "../store";
 
 const Checkout = () => {
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  const { setIsLoading } = useStore();
+
+  const [email, setEmail] = useState(null);
+  const [phone, setPhone] = useState(null);
   const { paymentType } = useParams(); // Trích xuất paymentType từ URL
-  console.log("paymentType", paymentType);
+
   const handlePayment = async () => {
+    if (!email) {
+      toast.error("Vui lòng nhập email.");
+      return;
+    }
+    if (!phone) {
+      toast.error("Vui lòng nhập số điện thoại.");
+      return;
+    }
+    setIsLoading(true);
     try {
       const response = await axios.post(
         `http://localhost:8800/payment/${paymentType}`,
@@ -16,9 +28,22 @@ const Checkout = () => {
       ); // Sử dụng paymentType từ useParams
       window.location.href = response.data.url;
     } catch (error) {
-      toast.error("Đã xảy ra lỗi trong quá trình thanh toán");
+      const err = error?.response?.data?.message;
+      toast.error(err);
+      setIsLoading(false);
+      return err;
     }
   };
+
+  if (!paymentType) {
+    return (
+      <div className="w-full h-full py-8 flex items-center justify-center">
+        <span className="text-xl text-slate-500">Loading...</span>
+      </div>
+    );
+  }
+
+  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 
   // Định nghĩa các giá trị cho mỗi paymentType
   let points, amount, name;
@@ -83,7 +108,7 @@ const Checkout = () => {
               />
               <span className="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white" />
               <label
-                className="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
+                className="peer-checked:border-2 peer-checked:border-sky-600 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
                 htmlFor="radio_1"
               >
                 <img
@@ -109,7 +134,7 @@ const Checkout = () => {
               />
               <span className="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white" />
               <label
-                className="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
+                className="peer-checked:border-2 peer-checked:border-sky-600 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
                 htmlFor="radio_2"
               >
                 <img
@@ -134,11 +159,12 @@ const Checkout = () => {
             thông tin bên dưới.
           </p>
           <div className="">
+            {/* EMAIL */}
             <label
               htmlFor="email"
               className="mt-4 mb-2 block text-sm font-medium"
             >
-              Email
+              Email <span className="text-red-500">*</span>
             </label>
             <div className="relative">
               <input
@@ -147,7 +173,7 @@ const Checkout = () => {
                 name="email"
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
-                placeholder="your.email@gmail.com"
+                placeholder="email@gmail.com"
               />
               <div className="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
                 <svg
@@ -166,20 +192,23 @@ const Checkout = () => {
                 </svg>
               </div>
             </div>
+            {/* SDT */}
             <label
               htmlFor="card-holder"
               className="mt-4 mb-2 block text-sm font-medium"
             >
-              Số Điện Thoại
+              Số Điện Thoại <span className="text-red-500">*</span>
             </label>
             <div className="relative">
               <input
-                type="text"
+                type="number"
                 id="card-holder"
                 name="card-holder"
+                min="0"
+                step="1"
                 onChange={(e) => setPhone(e.target.value)}
-                className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm uppercase shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
-                placeholder="Your full name here"
+                className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
+                placeholder="Nhập số điện thoại"
               />
               <div className="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
                 <svg
@@ -198,7 +227,6 @@ const Checkout = () => {
                 </svg>
               </div>
             </div>
-
             {/* Total */}
             <div className="mt-6 border-t border-b py-2">
               <div className="flex items-center justify-between">
@@ -226,6 +254,7 @@ const Checkout = () => {
             Thanh Toán
           </button>
         </div>
+        <Toaster richColors />
       </div>
     </>
   );

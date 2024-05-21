@@ -19,7 +19,10 @@ export const createPayment = asyncHandler(async (req, res) => {
   const user = await Users.findOne({ email });
 
   if (!user) {
-    throw new Error("User not found");
+    return res.status(404).json({
+      success: false,
+      message: "Email chưa được đăng kí",
+    });
   }
 
   let orderItems;
