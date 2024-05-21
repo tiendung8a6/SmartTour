@@ -5,6 +5,6 @@ import userAuth from "../middleware/authMiddleware.js";
 const router = express.Router();
 
 //ROUTES
-router.post("/", createPayment);
+router.post("/:paymentType", createPayment); // silver, gold, diamond
 
 export default router;
