@@ -5,13 +5,15 @@ import useStore from "../store";
 import Button from "./Button";
 import Logo from "./Logo";
 import ThemeSwitch from "./Switch";
-import { Grid } from "@mantine/core";
+import { Grid, Avatar } from "@mantine/core";
 import {
   IconChevronDown,
   IconCoinBitcoin,
   IconChevronRight,
 } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
+import { getUser } from "../utils/apiCalls";
+
 function getInitials(fullName) {
   const names = fullName?.split(" ");
 
@@ -55,7 +57,7 @@ const MobileMenu = ({ user, signOut }) => {
       {isMenuOpen && (
         <div className="fixed top-0 left-0 w-full h-fit bg-white dark:bg-[#020b19] z-50 flex flex-col py-10 items-center justify-center shadow-xl gap-4">
           <Logo />
-          <ul className="flex flex-col gap-4 text-base text-black dark:text-gray-300">
+          <ul className="flex flex-col text-center gap-3 text-base text-black dark:text-gray-300">
             <li onClick={toggleMenu}>
               <Link to="/">Trang Chủ</Link>
             </li>
@@ -71,6 +73,9 @@ const MobileMenu = ({ user, signOut }) => {
             <li onClick={toggleMenu}>
               <Link to="/contact">Liên Hệ</Link>
             </li>
+            <li onClick={toggleMenu}>
+              <Link to="/pricing">Mua điểm</Link>
+            </li>
           </ul>
           <div className="flex gap-2 items-center">
             {user?.token ? (
@@ -78,7 +83,7 @@ const MobileMenu = ({ user, signOut }) => {
                 <div class="hidden lg:block">
                   <Grid>
                     <Grid.Col span={4} className="my-auto">
-                      <img
+                      <Avatar
                         src={user?.user?.image}
                         alt="Profile"
                         className="w-10 h-10 rounded-full"
@@ -95,7 +100,7 @@ const MobileMenu = ({ user, signOut }) => {
                 </div>
                 <Link
                   to="/profile"
-                  className="text-base text-black dark:text-gray-300"
+                  className="text-base text-center text-black dark:text-gray-300"
                 >
                   Tài Khoản Của Tôi
                 </Link>
@@ -135,6 +140,25 @@ const MobileMenu = ({ user, signOut }) => {
 const Navbar = () => {
   const { user, signOut } = useStore();
   const [showProfile, setShowProfile] = useState(false);
+  const [userInfo, setUserInfo] = useState(null);
+
+  //TRUY VẤN DỮ NGƯỜI DÙNG --> Cập nhật Real-Time POINT
+  const fetchUser = async () => {
+    try {
+      const data = await getUser(user?.user?._id);
+
+      setUserInfo(data || []);
+    } catch (error) {
+      console.error("Error fetching trip or popular content:", error);
+    } finally {
+    }
+  };
+  useEffect(() => {
+    if (user?.user?._id) {
+      fetchUser();
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }
+  }, [user?.user?._id]);
 
   const handleSignOut = () => {
     localStorage.removeItem("userInfo");
@@ -184,10 +208,11 @@ const Navbar = () => {
             >
               <div className="flex gap-1 items-center cursor-pointer">
                 {user?.user?.image ? (
-                  <img
-                    src={user?.user?.image}
-                    alt="Profile"
-                    className="w-8 h-8 rounded-full"
+                  <Avatar
+                    src={userInfo?.image}
+                    alt={user?.user?.name}
+                    radius="xl"
+                    color="blue"
                   />
                 ) : (
                   <span className="text-white w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center">
@@ -202,7 +227,7 @@ const Navbar = () => {
                   <IconCoinBitcoin size="1rem" stroke={2} />
                 </span>
                 <span className="flex flex-item place-content-center justify-self-center font-medium text-sky-600">
-                  0
+                  {userInfo?.points}
                 </span>
                 <span className="flex flex-item place-content-center justify-self-center">
                   <IconChevronDown size="1rem" stroke={3} />
@@ -213,8 +238,8 @@ const Navbar = () => {
                 <div className="border-[2px] border-transparent mt-1  w-[210px] absolute bg-white dark:bg-[#2f2d30] py-6 px-6 flex flex-col shadow-2xl z-50 right-0 gap-3 rounded">
                   <Grid>
                     <Grid.Col span={4} className="my-auto">
-                      <img
-                        src={user?.user?.image}
+                      <Avatar
+                        src={userInfo?.image}
                         alt="Profile"
                         className="w-10 h-10 rounded-full"
                       />
@@ -236,7 +261,7 @@ const Navbar = () => {
                       <div className="flex items-center text-yellow-500">
                         <IconCoinBitcoin size="1rem" stroke={2} />
                       </div>
-                      <div>0</div>
+                      <div>{userInfo?.points}</div>
                       <div>Điểm</div>
                     </div>
                   </Link>
