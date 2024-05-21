@@ -425,3 +425,22 @@ export const getContactsContent = async (req, res, next) => {
     res.status(404).json({ message: error.message });
   }
 };
+export const getUserById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const user = await Users.findById(id);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Xóa trường password trước khi gửi response
+    user.password = undefined;
+
+    res.status(200).json({ success: true, data: user });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to get user information" });
+  }
+};

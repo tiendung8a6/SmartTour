@@ -13,6 +13,7 @@ import {
   getPolicyContent,
   getContactsContent,
   sendReplyEmail,
+  getUserById,
 } from "../controllers/userController.js";
 import userAuth from "../middleware/authMiddleware.js";
 
@@ -25,11 +26,14 @@ router.post("/resend-link/:id", resendOTP);
 router.post("/follower/:id", userAuth, followWritter);
 router.put("/update-user", userAuth, updateUser);
 
-router.get("/get-user/:id?", getWriter);
+router.get("/get-user/:id", getWriter);
 
 router.post("/admin-users", userAuth, getAllUsers);
 router.patch("/update-user-lock/:id", userAuth, updateUserLock);
 router.delete("/delete-user/:id", userAuth, deleteUser);
+
+//get ID user
+router.get("/get-info/:id", getUserById); //Lấy FULL thông tin người dùng
 
 //contact
 router.post("/contact", createContact);

@@ -8,22 +8,52 @@ const OrderSchema = new Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+      required: true,
+    },
+    phone: {
+      type: String,
+      required: true,
+    },
+    orderItems: [
+      {
+        type: Object,
+        required: true,
+      },
+    ],
+    shippingAddress: {
+      type: Object,
       required: false,
     },
-    orderItems: [{ type: Object, required: false }],
-    shippingAddress: { type: Object, required: false },
-    orderNumber: { type: String, default: randomTxt + randomNumbers },
+    orderNumber: {
+      type: String,
+      default: randomTxt + randomNumbers,
+    },
     //for stripe payment
-    paymentStatus: { type: String, default: "Not paid" },
-    paymentMethod: { type: String, default: "Not specified" },
-    currency: { type: String, default: "VND" },
+    paymentStatus: {
+      type: String,
+      default: "Not paid",
+    },
+    paymentMethod: {
+      type: String,
+      default: "Not specified",
+    },
+    totalPrice: {
+      type: Number,
+      default: 0,
+    },
+    currency: {
+      type: String,
+      default: "Not specified",
+    },
     //For admin
     status: {
       type: String,
       default: "pending",
       enum: ["pending", "processing", "shipped", "delivered"],
     },
-    deliveredAt: { type: Date },
+    deliveredAt: {
+      type: Date,
+    },
   },
   {
     timestamps: true,
