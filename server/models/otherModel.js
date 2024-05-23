@@ -8,11 +8,11 @@ const OrderSchema = new Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true,
+      required: false,
     },
     phone: {
       type: String,
-      required: true,
+      required: false,
     },
     orderItems: [
       {
