@@ -107,7 +107,21 @@ export const createStripePayment = asyncHandler(async (req, res) => {
 });
 
 export const createVnPayPayment = asyncHandler(async (req, res) => {
-  process.env.TZ = "Asia/Ho_Chi_Minh";
+  const { email, phone } = req.body;
+  const { paymentType } = req.params;
+
+  if (!email || !phone || !paymentType) {
+    throw new Error("All fields are required");
+  }
+
+  const user = await Users.findOne({ email });
+
+  if (!user) {
+    return res.status(404).json({
+      success: false,
+      message: "Email has not been registered",
+    });
+  }
 
   let date = new Date();
   let createDate = moment(date).format("YYYYMMDDHHmmss");
@@ -123,11 +137,27 @@ export const createVnPayPayment = asyncHandler(async (req, res) => {
   const vnpUrl = process.env.vnp_Url;
   const returnUrl = process.env.vnp_ReturnUrl;
   const orderId = moment(date).format("DDHHmmss");
-  const amount = 100000; // Default amount
 
   let bankCode = req.body.bankCode;
   let locale = req.body.language || "vn";
   const currCode = "VND";
+
+  let amount;
+
+  // Set amount based on paymentType
+  switch (paymentType) {
+    case "silver":
+      amount = 100000;
+      break;
+    case "gold":
+      amount = 200000;
+      break;
+    case "diamond":
+      amount = 300000;
+      break;
+    default:
+      throw new Error("Invalid payment type");
+  }
 
   let vnp_Params = {
     vnp_Version: "2.1.0",
@@ -135,10 +165,10 @@ export const createVnPayPayment = asyncHandler(async (req, res) => {
     vnp_TmnCode: tmnCode,
     vnp_Locale: locale,
     vnp_CurrCode: currCode,
-    vnp_TxnRef: orderId,
-    vnp_OrderInfo: `Thanh toan cho ma GD:${orderId}`,
+    vnp_TxnRef: orderId, // Lưu giá trị orderId vào txnRef
+    vnp_OrderInfo: `Payment for order ID: ${orderId}`,
     vnp_OrderType: "other",
-    vnp_Amount: amount * 100,
+    vnp_Amount: amount * 100, // Convert to VND
     vnp_ReturnUrl: returnUrl,
     vnp_IpAddr: ipAddr,
     vnp_CreateDate: createDate,
@@ -157,7 +187,57 @@ export const createVnPayPayment = asyncHandler(async (req, res) => {
     encode: false,
   })}`;
 
+  // Lưu giá trị txnRef vào CSDL Order
+  const order = await Order.create({
+    orderItems: [{ name: `Payment for ${paymentType}`, amount }],
+    user: user._id,
+    email: email,
+    phone: phone,
+    vnp_TxnRef: orderId, // Lưu giá trị orderId vào txnRef
+  });
+
+  await Users.findByIdAndUpdate(
+    user._id,
+    { $push: { orders: order._id } },
+    { new: true }
+  );
+
   res.json({ url: paymentUrl });
+});
+
+export const vnpayReturn = asyncHandler(async (req, res) => {
+  const vnp_Params = req.query;
+
+  const secureHash = vnp_Params["vnp_SecureHash"];
+  delete vnp_Params["vnp_SecureHash"];
+  delete vnp_Params["vnp_SecureHashType"];
+
+  const sortedParams = sortObject(vnp_Params);
+  const signData = querystring.stringify(sortedParams, { encode: false });
+  const secretKey = process.env.vnp_HashSecret;
+  const hmac = crypto.createHmac("sha512", secretKey);
+  const signed = hmac.update(Buffer.from(signData, "utf-8")).digest("hex");
+
+  if (secureHash === signed) {
+    const txnRef = vnp_Params["vnp_TxnRef"];
+    const rspCode = vnp_Params["vnp_ResponseCode"];
+
+    if (rspCode === "00") {
+      // Assuming the transaction reference is stored in a custom field 'txnRef' in the order model
+      const order = await Order.findOne({ vnp_TxnRef: txnRef });
+      if (order) {
+        order.paymentStatus = "paid";
+        await order.save();
+        res.redirect("http://localhost:3000/success");
+      } else {
+        res.status(404).json({ message: "Order not found" });
+      }
+    } else {
+      res.redirect("http://localhost:3000/failure");
+    }
+  } else {
+    res.status(400).json({ message: "Invalid signature" });
+  }
 });
 
 function sortObject(obj) {

@@ -28,6 +28,10 @@ const OrderSchema = new Schema(
       type: String,
       default: randomTxt + randomNumbers,
     },
+    //VNPAY
+    vnp_TxnRef: {
+      type: Number,
+    },
     //for stripe payment
     paymentStatus: {
       type: String,
