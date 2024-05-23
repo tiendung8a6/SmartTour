@@ -23,7 +23,7 @@ const Checkout = () => {
     setIsLoading(true);
     try {
       const response = await axios.post(
-        `http://localhost:8800/payment/${paymentType}`,
+        `http://localhost:8800/payment/stripe/${paymentType}`,
         { email, phone }
       ); // Sử dụng paymentType từ useParams
       window.location.href = response.data.url;
