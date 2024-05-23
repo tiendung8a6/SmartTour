@@ -120,7 +120,7 @@ export const createVnPayPayment = asyncHandler(async (req, res) => {
   if (!user) {
     return res.status(404).json({
       success: false,
-      message: "Email has not been registered",
+      message: "Email chưa được đăng kí",
     });
   }
 
@@ -271,7 +271,7 @@ export const vnpayReturn = asyncHandler(async (req, res) => {
         res.status(404).json({ message: "Order not found" });
       }
     } else {
-      res.redirect("http://localhost:3000/failure");
+      res.redirect("http://localhost:3000/cancel");
     }
   } else {
     res.status(400).json({ message: "Invalid signature" });
