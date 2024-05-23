@@ -87,7 +87,7 @@ const Checkout = () => {
             <div className="flex flex-col rounded-lg bg-white sm:flex-row">
               <img
                 className="m-2 h-24 w-28 rounded-md border object-cover object-center"
-                src="https://images.unsplash.com/flagged/photo-1556637640-2c80d3201be8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8c25lYWtlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+                src="https://firebasestorage.googleapis.com/v0/b/smarttour-mern.appspot.com/o/17164768997521.png?alt=media&token=0dc98415-9cb9-4431-a5fa-b91b618efa58"
                 alt=""
               />
               <div className="flex w-full flex-col px-4 py-4">
@@ -104,7 +104,7 @@ const Checkout = () => {
               id="radio_1"
               type="radio"
               name="radio"
-              defaultChecked="true"
+              checked={paymentMethods === "vnpay"}
               onChange={() => setPaymentMethods("vnpay")}
             />
             <span className="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white" />
@@ -133,7 +133,7 @@ const Checkout = () => {
                 id="radio_2"
                 type="radio"
                 name="radio"
-                defaultChecked=""
+                checked={paymentMethods === "stripe"}
                 onChange={() => setPaymentMethods("stripe")}
               />
               <span className="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white" />
