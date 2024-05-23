@@ -10,54 +10,30 @@ const OrderSchema = new Schema(
       ref: "User",
       required: false,
     },
-    phone: {
-      type: String,
-      required: false,
-    },
-    orderItems: [
-      {
-        type: Object,
-        required: true,
-      },
-    ],
-    shippingAddress: {
-      type: Object,
-      required: false,
-    },
-    orderNumber: {
-      type: String,
-      default: randomTxt + randomNumbers,
-    },
+    phone: { type: String, required: false },
+    orderItems: [{ type: Object, required: true }],
+    shippingAddress: { type: Object, required: false },
+    orderNumber: { type: String, default: randomTxt + randomNumbers },
+
+    //Hình thức thanh toán
+    payments: { type: String, required: false },
+
     //VNPAY
-    vnp_TxnRef: {
-      type: Number,
-    },
+    vnp_TxnRef: { type: Number },
+
     //for stripe payment
-    paymentStatus: {
-      type: String,
-      default: "Not paid",
-    },
-    paymentMethod: {
-      type: String,
-      default: "Not specified",
-    },
-    totalPrice: {
-      type: Number,
-      default: 0,
-    },
-    currency: {
-      type: String,
-      default: "Not specified",
-    },
+    paymentStatus: { type: String, default: "Not paid" },
+    paymentMethod: { type: String, default: "Not specified" },
+    totalPrice: { type: Number, default: 0 },
+    currency: { type: String, default: "Not specified" },
+
     //For admin
     status: {
       type: String,
       default: "pending",
       enum: ["pending", "processing", "shipped", "delivered"],
     },
-    deliveredAt: {
-      type: Date,
-    },
+    deliveredAt: { type: Date },
   },
   {
     timestamps: true,

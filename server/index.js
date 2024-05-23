@@ -45,7 +45,6 @@ app.post(
     if (event.type === "checkout.session.completed") {
       //update the order
       const session = event.data.object;
-      console.log("=================", session);
       const { orderId } = session.metadata;
       const paymentStatus = session.payment_status;
       const paymentMethod = session.payment_method_types[0];

@@ -70,6 +70,7 @@ export const createStripePayment = asyncHandler(async (req, res) => {
     orderItems,
     user: user._id,
     phone: phone,
+    payments: "STRIPE",
   });
 
   await Users.findByIdAndUpdate(
@@ -166,7 +167,7 @@ export const createVnPayPayment = asyncHandler(async (req, res) => {
     vnp_Locale: locale,
     vnp_CurrCode: currCode,
     vnp_TxnRef: orderId, // Lưu giá trị orderId vào txnRef
-    vnp_OrderInfo: `Payment for order ID: ${orderId}`,
+    vnp_OrderInfo: `Thanh toan cho ma GD: ${orderId}`,
     vnp_OrderType: "other",
     vnp_Amount: amount * 100, // Convert to VND
     vnp_ReturnUrl: returnUrl,
@@ -187,13 +188,14 @@ export const createVnPayPayment = asyncHandler(async (req, res) => {
     encode: false,
   })}`;
 
-  // Lưu giá trị txnRef vào CSDL Order
+  // Lưu giá trị vnp_TxnRef vào CSDL Order
   const order = await Order.create({
-    orderItems: [{ name: `Payment for ${paymentType}`, amount }],
+    orderItems: [{ name: `Thanh toan cho gói: ${paymentType}`, amount }],
     user: user._id,
     email: email,
     phone: phone,
-    vnp_TxnRef: orderId, // Lưu giá trị orderId vào txnRef
+    vnp_TxnRef: orderId, // Lưu giá trị orderId vào vnp_TxnRef
+    payments: "VNPAY",
   });
 
   await Users.findByIdAndUpdate(
@@ -226,8 +228,44 @@ export const vnpayReturn = asyncHandler(async (req, res) => {
       // Assuming the transaction reference is stored in a custom field 'txnRef' in the order model
       const order = await Order.findOne({ vnp_TxnRef: txnRef });
       if (order) {
+        // Assign vnp_CardType to paymentMethod
+        order.paymentMethod = vnp_Params["vnp_CardType"];
+
+        // Assign vnp_Amount to totalPrice
+        order.totalPrice = parseFloat(vnp_Params["vnp_Amount"]);
+
         order.paymentStatus = "paid";
         await order.save();
+
+        // Calculate points based on totalAmount
+        let points;
+        const totalAmount = parseFloat(vnp_Params["vnp_Amount"]);
+        switch (totalAmount) {
+          case 100000 * 100: //Nhân cho 100 Vì giá tiền VNPAY
+            points = 100;
+            break;
+          case 200000 * 100:
+            points = 200;
+            break;
+          case 300000 * 100:
+            points = 350;
+            break;
+          default:
+            points = 0;
+        }
+        // Update user's points
+        const updatedUser = await Users.findByIdAndUpdate(
+          order.user,
+          { $inc: { points: points } },
+          { new: true }
+        );
+
+        if (updatedUser) {
+          console.log("User points updated successfully");
+        } else {
+          console.error("Failed to update user points");
+        }
+
         res.redirect("http://localhost:3000/success");
       } else {
         res.status(404).json({ message: "Order not found" });
