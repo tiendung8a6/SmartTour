@@ -10,6 +10,7 @@ const Checkout = () => {
   const [email, setEmail] = useState(null);
   const [phone, setPhone] = useState(null);
   const { paymentType } = useParams(); // Trích xuất paymentType từ URL
+  const [paymentMethods, setPaymentMethods] = useState("vnpay"); // Thêm state để lưu trữ loại phương thức thanh toán được chọn
 
   const handlePayment = async () => {
     if (!email) {
@@ -23,7 +24,7 @@ const Checkout = () => {
     setIsLoading(true);
     try {
       const response = await axios.post(
-        `http://localhost:8800/payment/stripe/${paymentType}`,
+        `http://localhost:8800/payment/${paymentMethods}/${paymentType}`,
         { email, phone }
       ); // Sử dụng paymentType từ useParams
       window.location.href = response.data.url;
@@ -97,33 +98,35 @@ const Checkout = () => {
             </div>
           </div>
           <p className="mt-8 text-lg font-medium">Phương Thức Thanh Toán</p>
-          <form className="mt-5 grid gap-6">
-            <div className="relative">
-              <input
-                className="peer hidden"
-                id="radio_1"
-                type="radio"
-                name="radio"
-                defaultChecked="true"
+          <div className="relative">
+            <input
+              className="peer hidden"
+              id="radio_1"
+              type="radio"
+              name="radio"
+              defaultChecked="true"
+              onChange={() => setPaymentMethods("vnpay")}
+            />
+            <span className="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white" />
+            <label
+              className="peer-checked:border-2 peer-checked:border-sky-600 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
+              htmlFor="radio_1"
+            >
+              <img
+                className="w-14 object-contain"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQULr3Ust3Yw-IS1KvGuHQFys81W1ava9Ohd8gduuRPXA&s"
+                alt=""
               />
-              <span className="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white" />
-              <label
-                className="peer-checked:border-2 peer-checked:border-sky-600 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
-                htmlFor="radio_1"
-              >
-                <img
-                  className="w-14 object-contain"
-                  src="https://pipedream.com/s.v0/app_OD5hrX/logo/orig"
-                  alt=""
-                />
-                <div className="ml-5">
-                  <span className="mt-2 font-semibold">Thanh Toán Stripe</span>
-                  <p className="text-slate-500 text-sm leading-6">
-                    Thời gian nhận điểm: 24 giờ
-                  </p>
-                </div>
-              </label>
-            </div>
+              <div className="ml-5">
+                <span className="mt-2 font-semibold">Thanh toán VNPAY </span>
+                <p className="text-slate-500 text-sm leading-6">
+                  Xử lý: 2-4 Days
+                </p>
+              </div>
+            </label>
+          </div>
+
+          <form className="mt-5 grid gap-6">
             <div className="relative">
               <input
                 className="peer hidden"
@@ -131,6 +134,7 @@ const Checkout = () => {
                 type="radio"
                 name="radio"
                 defaultChecked=""
+                onChange={() => setPaymentMethods("stripe")}
               />
               <span className="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white" />
               <label
@@ -139,13 +143,13 @@ const Checkout = () => {
               >
                 <img
                   className="w-14 object-contain"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQULr3Ust3Yw-IS1KvGuHQFys81W1ava9Ohd8gduuRPXA&s"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsX675RaIlDiVX-sq6caKYdthgagxcvGn88TquUfvua4xgEYj0Xo0ulZJIzts0quwS_N0&usqp=CAU"
                   alt=""
                 />
                 <div className="ml-5">
-                  <span className="mt-2 font-semibold">Thanh toán </span>
+                  <span className="mt-2 font-semibold">Thanh Toán Stripe</span>
                   <p className="text-slate-500 text-sm leading-6">
-                    Xử lý: 2-4 Days
+                    Thời gian nhận điểm: 24 giờ
                   </p>
                 </div>
               </label>
