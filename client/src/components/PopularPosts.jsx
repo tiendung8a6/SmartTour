@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { CATEGORIES } from "../utils/dummyData";
+import moment from "moment";
 
 const PopularPosts = ({ posts }) => {
   const Card = ({ post }) => {
@@ -22,11 +23,6 @@ const PopularPosts = ({ posts }) => {
           className="w-12 h-12 rounded-full object-cover"
         />
         <div className="w-full flex flex-col gap-1">
-          {/* <span
-            className={`${catColor} w-fit rounded-full px-2 py-0.5 text-white text-[12px] 2xl:text-sm`}
-          >
-            {catLabel}
-          </span> */}
           <span
             style={{ backgroundColor: `${catColor}` }}
             className="w-fit rounded-full px-2 py-0.5 text-white text-[12px] 2xl:text-sm"
@@ -42,7 +38,7 @@ const PopularPosts = ({ posts }) => {
           <div className="flex gap-2 text-sm">
             <span className="font-medium">{post?.user?.name}</span>
             <span className="text-gray-500">
-              {new Date(post?.createdAt).toDateString()}
+              Ngày {moment(post?.createdAt).format("LL")}
             </span>
           </div>
         </div>

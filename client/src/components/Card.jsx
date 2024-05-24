@@ -2,6 +2,7 @@ import Markdown from "markdown-to-jsx";
 import React from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 const Card = ({ post, index }) => {
   return (
@@ -26,7 +27,7 @@ const Card = ({ post, index }) => {
       <div className="w-full md:w-2/4 flex flex-col gap-3">
         <div className="flex gap-2">
           <span className="text-sm text-gray-600">
-            {new Date(post?.createdAt).toDateString()}
+            Ngày {moment(post?.createdAt).format("LL")}
           </span>
           <span
             style={{ backgroundColor: `${post?.cat?.color}` }}
@@ -50,7 +51,7 @@ const Card = ({ post, index }) => {
           to={`/${post?.slug}/${post._id}`}
           className="flex items-center gap-2 text-black dark:text-white"
         >
-          <span className="underline">Read More</span> <AiOutlineArrowRight />
+          <span className="underline">Đọc thêm</span> <AiOutlineArrowRight />
         </Link>
       </div>
     </div>

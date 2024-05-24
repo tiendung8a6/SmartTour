@@ -114,7 +114,7 @@ const Footer = () => {
               href="/"
               className="text-sm text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400"
             >
-              Privacy Policy
+              Chính sách
             </a>
           </li>
           <li>
@@ -122,7 +122,7 @@ const Footer = () => {
               href="/"
               className="text-sm text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400"
             >
-              Terms &amp; Conditions
+              Điều khoản &amp; Dịch vụ
             </a>
           </li>
         </ul>

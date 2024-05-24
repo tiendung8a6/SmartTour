@@ -31,7 +31,7 @@ const NewPost = () => {
   const { user } = useStore();
   const [visible, { toggle }] = useDisclosure(false);
   const { isPending, mutate } = useCreatePost(toast, user?.token);
-  const [category, setCategory] = useState("NEWS");
+  const [category, setCategory] = useState(null);
   const [file, setFile] = useState("");
   const [title, setTitle] = useState(null);
   const [fileURL, setFileURL] = useState(null);
@@ -41,7 +41,7 @@ const NewPost = () => {
   let editor = useEditor({
     extensions: [
       StarterKit,
-      Placeholder.configure({ placeholder: "Write article here...." }),
+      Placeholder.configure({ placeholder: "Nhập nội dung...." }),
       Underline,
       Link,
       Superscript,
@@ -60,23 +60,22 @@ const NewPost = () => {
 
   const handleSubmit = async () => {
     if (!title) {
-      toast.error("Title is required.");
+      toast.error("Vui lòng nhập tiêu đề.");
       return;
     }
     if (!category) {
-      toast.error("Category is required.");
+      toast.error("Vui lòng chọn danh mục.");
       return;
     }
     if (!fileURL) {
-      toast.error("Please upload an image.");
+      toast.error("Vui lòng tải ảnh lên.");
       return;
     }
     if (editor.getHTML().trim() === "<p></p>") {
-      toast.error("Please enter content in the Content field.");
+      toast.error("Vui lòng nhập nội dung.");
       return;
     }
     const slug = createSlug(title);
-    console.log("fileURLNEWWWWWWWW====", fileURL);
 
     mutate({
       title,

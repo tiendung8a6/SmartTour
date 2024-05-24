@@ -43,7 +43,7 @@ const EditPost = ({ opened, close }) => {
   const options = {
     extensions: [
       StarterKit,
-      Placeholder.configure({ placeholder: "Write article here...." }),
+      Placeholder.configure({ placeholder: "Nhập nội dung...." }),
       Underline,
       Link,
       Superscript,
@@ -70,11 +70,15 @@ const EditPost = ({ opened, close }) => {
 
   const handleSubmit = async () => {
     if (!title) {
-      toast.error("Please fill in the Title field.");
+      toast.error("Vui lòng nhập tiêu đề.");
+      return;
+    }
+    if (!category) {
+      toast.error("Vui chọn danh mục.");
       return;
     }
     if (editor.getHTML().trim() === "<p></p>") {
-      toast.error("Please fill in the Content field.");
+      toast.error("Vui lòng nhập nội dung.");
       return;
     }
     mutate({

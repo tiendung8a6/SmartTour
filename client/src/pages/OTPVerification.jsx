@@ -63,7 +63,7 @@ const OTPVerification = () => {
   useEffect(() => {
     if (showPage === false) {
       // Nếu không hiển thị trang thì chuyển hướng
-      alert("Account has automatically been activated. Try login");
+      alert("Đã có lỗi xảy ra. Vui lòng thử lại! ");
       navigate("/sign-in");
       localStorage.removeItem("otp_data");
     }
@@ -97,7 +97,7 @@ const OTPVerification = () => {
                 : "text-slate-700"
             }`}
           >
-            OTP Verification
+            Xác thực OTP
           </p>
           <span
             className={`text-sm ${
@@ -106,7 +106,7 @@ const OTPVerification = () => {
                 : "text-slate-700"
             }`}
           >
-            Please OTP code sent to your mail.
+            Vui lòng nhập mã OTP được gửi từ mail của bạn
           </span>
         </div>
         <PinInput
@@ -123,11 +123,11 @@ const OTPVerification = () => {
               className="text-base text-blue-600 underline cursor-pointer"
               onClick={() => handleResendOTP()}
             >
-              Resend
+              Gửi lại
             </a>
           ) : (
             <>
-              <p className="dark:text-white">OTP will expire in:</p>
+              <p className="dark:text-white">OTP sẽ hết hạn sau:</p>
               <span className="text-sky-600 font-semibold">
                 {formatTime(seconds)}
               </span>

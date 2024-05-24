@@ -60,7 +60,7 @@ const WriterPage = () => {
   if (!writer)
     return (
       <div className="w-full h-full py-8 flex items-center justify-center">
-        <span className="text-lg text-slate-500">No Writer Found</span>
+        <span className="text-lg text-slate-500">Không tìm thấy tác giả</span>
       </div>
     );
 
@@ -82,14 +82,14 @@ const WriterPage = () => {
               <p className="text-gray-300 text-2xl font-semibold">
                 {formatNumber(writer?.followers?.length ?? 0)}
               </p>
-              <span className="text-gray-500">Followers</span>
+              <span className="text-gray-500">Người theo dõi</span>
             </div>
 
             <div className="flex flex-col items-center">
               <p className="text-gray-300 text-2xl font-semibold">
                 {formatNumber(posts?.length ?? 0)}
               </p>
-              <span className="text-gray-500">Posts</span>
+              <span className="text-gray-500">Bài đăng</span>
             </div>
           </div>
 
@@ -97,13 +97,13 @@ const WriterPage = () => {
             <div>
               {!followerIds?.includes(user?.user?._id) ? (
                 <Button
-                  label="Follow"
+                  label="Theo dõi"
                   onClick={() => handleFollow()}
                   styles="text-slate-800 text-semibold md:-mt-4 px-6 py-1 rounded-full bg-white"
                 />
               ) : (
                 <div className="flex items-center justify-center gap-2 text-white text-semibold md:-mt-4 px-6 py-1 rounded-full border">
-                  <span>Following</span>
+                  <span>Đã theo dõi</span>
                   <FaUserCheck />
                 </div>
               )}
@@ -117,7 +117,7 @@ const WriterPage = () => {
         <div className="w-full md:w-2/3 flex flex-col gap-y-28 md:gap-y-14">
           {posts?.length === 0 ? (
             <div className="w-full h-full py-8 flex  justify-center">
-              <span className="text-lg text-slate-500">No Post Available</span>
+              <span className="text-lg text-slate-500">Không có bài đăng</span>
             </div>
           ) : (
             <>

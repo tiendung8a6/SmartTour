@@ -2,10 +2,10 @@ import Markdown from "markdown-to-jsx";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { PopularPosts, PopularWriters, PostComments } from "../components";
-
 import { usePopularPost } from "../hooks/post_hooks";
 import useStore from "../store";
 import { getSinglePost } from "../utils/apiCalls";
+import moment from "moment";
 
 const BlogDetail = () => {
   const { setIsLoading } = useStore();
@@ -37,7 +37,7 @@ const BlogDetail = () => {
   if (!post)
     return (
       <div className="w-full h-full py-8 flex items-center justify-center">
-        <span className="text-xl text-slate-500">Loading...</span>
+        <span className="text-xl text-slate-500">Đang tải...</span>
       </div>
     );
 
@@ -56,7 +56,7 @@ const BlogDetail = () => {
 
             <span className="flex flex-1 items-baseline text-2xl font-medium text-slate-700 dark:text-gray-400">
               {post?.views?.length}
-              <span className="text-base text-sky-600">Views</span>
+              <span className="pl-2 text-base text-sky-600"> Lượt xem</span>
             </span>
           </div>
 
@@ -71,7 +71,7 @@ const BlogDetail = () => {
                 {post?.user?.name}
               </p>
               <span className="text-slate-600">
-                {new Date(post?.createdAt).toDateString()}
+                Ngày {moment(post?.createdAt).format("LL")}
               </span>
             </div>
           </Link>

@@ -29,7 +29,7 @@ const CategoryPage = () => {
           {posts?.length === 0 ? (
             <div className="w-full h-full py-8 flex  justify-center">
               <span className="text-lg text-slate-500">
-                No Post Available for this category
+                Không có bài viết nào cho danh mục này
               </span>
             </div>
           ) : (

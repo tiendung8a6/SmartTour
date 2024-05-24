@@ -129,7 +129,6 @@ const TripSummary = () => {
         endAddress: item.endAddress,
       });
     }
-    console.log("=================", item);
   });
   // Sắp xếp timelineData theo thời gian và loại
   timelineData.sort((a, b) => {

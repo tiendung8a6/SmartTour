@@ -1,6 +1,7 @@
 import Markdown from "markdown-to-jsx";
 import React from "react";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 const Banner = ({ post }) => {
   return (
@@ -30,7 +31,7 @@ const Banner = ({ post }) => {
             to={`/${post?.slug}/${post?._id}`}
             className="w-fit bg-sky-600 bg-opacity-20 text-sky-700 px-4 py-1 rounded-full text-sm cursor-pointer "
           >
-            Read more...
+            Đọc thêm...
           </Link>
           <Link
             to={`/writer/${post?.user?._id}`}
@@ -45,7 +46,7 @@ const Banner = ({ post }) => {
               {post?.user?.name}
             </span>
             <span className="text-gray-500 dark:text-gray-600">
-              {new Date(post?.createdAt).toDateString()}
+              Ngày {moment(post?.createdAt).format("LL")}
             </span>
           </Link>
         </div>

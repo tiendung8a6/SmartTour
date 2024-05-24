@@ -53,9 +53,9 @@ const PostComments = ({ postId }) => {
       setDesc("");
       fetchCommetns();
 
-      toast.success("Comment published successfully");
+      toast.success("Bình luận bài viết thành công");
     } else {
-      toast.error("Something went wrong, please try again");
+      toast.error("Đã xảy ra lỗi. Vui lòng thử lại");
     }
   };
 
@@ -74,7 +74,7 @@ const PostComments = ({ postId }) => {
   return (
     <div className="w-full py-10">
       <p className="text-lg text-slate-700 dark:text-slate-500 mb-6">
-        Post Comments
+        Bình luận bài viết
       </p>
 
       {user?.token ? (
@@ -109,7 +109,7 @@ const PostComments = ({ postId }) => {
       <div className="w-full h-full flex flex-col gap-10 2xl:gap-y-14 px-2">
         {comments?.length === 0 ? (
           <span className="text-base text-slate-600">
-            No Comment, be the first to comment
+            Không có bình luận, hãy là người đầu tiên bình luận
           </span>
         ) : (
           comments?.map((el) => (
@@ -137,7 +137,7 @@ const PostComments = ({ postId }) => {
                       className="text-base text-red-600 cursor-pointer"
                       onClick={() => handleDeleteComment(el?._id)}
                     >
-                      Delete
+                      Xóa
                     </span>
                   )}
                 </div>
