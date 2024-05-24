@@ -30,12 +30,12 @@ const Success = () => {
         </div>
 
         <div className="absolute left-0 top-0 -z-10 flex h-full w-full items-center justify-between space-x-5 md:space-x-8 lg:space-x-14">
-          <div className="h-full w-1/3 bg-gradient-to-t from-[#4063727c] to-[#C4C4C400]"></div>
+          <div className="h-full w-1/3 bg-gradient-to-t from-[#c6c9ab7c] to-[#C4C4C400]"></div>
           <div className="flex h-full w-1/3">
-            <div className="h-full w-1/2 bg-gradient-to-b from-[#4c648065] to-[#C4C4C400]"></div>
-            <div className="h-full w-1/2 bg-gradient-to-t from-[#47508070] to-[#C4C4C400]"></div>
+            <div className="h-full w-1/2 bg-gradient-to-b from-[#b3eee265] to-[#C4C4C400]"></div>
+            <div className="h-full w-1/2 bg-gradient-to-t from-[#c5d5df70] to-[#C4C4C400]"></div>
           </div>
-          <div className="h-full w-1/3 bg-gradient-to-b from-[#42467b37] to-[#C4C4C400]"></div>
+          <div className="h-full w-1/3 bg-gradient-to-b from-[#85d7a737] to-[#C4C4C400]"></div>
         </div>
       </section>
     </>
