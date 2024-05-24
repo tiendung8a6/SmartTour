@@ -71,10 +71,10 @@ const MobileMenu = ({ user, signOut }) => {
               <Link to="/blog">Blog</Link>
             </li>
             <li onClick={toggleMenu}>
-              <Link to="/contact">Liên Hệ</Link>
+              <Link to="/pricing">Mua điểm</Link>
             </li>
             <li onClick={toggleMenu}>
-              <Link to="/pricing">Mua điểm</Link>
+              <Link to="/contact">Liên Hệ</Link>
             </li>
           </ul>
           <div className="flex gap-2 items-center">
@@ -192,8 +192,8 @@ const Navbar = () => {
           <Link to="/trip">Chuyến Đi</Link>
           <Link to="/travel-guide">Hướng Dẫn Viên AI</Link>
           <Link to="/blog">Blog</Link>
-          <Link to="/contact">Liên Hệ</Link>
           <Link to="/pricing">Mua Điểm</Link>
+          <Link to="/contact">Liên Hệ</Link>
         </ul>
 
         {/* theme switch */}
