@@ -247,3 +247,30 @@ export const useDeleteFollower = (token) => {
     },
   });
 };
+export const usePayment = (toast, token) => {
+  return useMutation({
+    mutationFn: async (page) => {
+      const { data } = await axios.post(
+        `${API_URL}/payment/admin-payments?page=${page}`,
+        null,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return data;
+    },
+    onError: (error) => {
+      const errMsg = error?.response?.data?.message;
+      toast.error(errMsg ?? error.message);
+      if (errMsg === "Authentication failed") {
+        localStorage.removeItem("user");
+      }
+    },
+    onSuccess: (data) => {
+      toast.success(data?.message);
+    },
+  });
+};

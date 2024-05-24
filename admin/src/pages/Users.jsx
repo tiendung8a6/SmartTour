@@ -14,7 +14,7 @@ import { AiFillLock } from "react-icons/ai";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { BiSolidLike } from "react-icons/bi";
-import { IconSearch, IconUserPlus } from "@tabler/icons-react";
+import { IconSearch, IconUserPlus, IconCoinBitcoin } from "@tabler/icons-react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Toaster, toast } from "sonner";
 
@@ -180,6 +180,7 @@ const Users = () => {
               <Table.Th>Email</Table.Th>
               <Table.Th>Hình Thức</Table.Th>
               <Table.Th>Người Theo Dõi</Table.Th>
+              <Table.Th>Điểm Thưởng</Table.Th>
               <Table.Th>Xác Thực OTP</Table.Th>
               <Table.Th>Ngày Tạo</Table.Th>
               {/* <Table.Th>Chỉnh Sửa</Table.Th> */}
@@ -214,6 +215,15 @@ const Users = () => {
                     <div className="flex gap-1 items-center cursor-pointer">
                       <BiSolidLike size={18} className="text-slate-500" />
                       {formatNumber(el?.followers?.length)}
+                    </div>
+                  </Table.Td>
+                  <Table.Td className="text-justify font-bold">
+                    <div class="flex justify-start space-x-1 font-semibold">
+                      <div className="flex items-center text-yellow-500">
+                        <IconCoinBitcoin size="1rem" stroke={2} />
+                      </div>
+                      <div>{el?.points}</div>
+                      <div>Điểm</div>
                     </div>
                   </Table.Td>
                   <Table.Td className="text-justify whitespace-nowrap">

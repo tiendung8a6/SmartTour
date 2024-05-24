@@ -20,6 +20,7 @@ import {
   IconThumbUp,
   IconCategory,
   IconPlaneDeparture,
+  IconCreditCard,
 } from "@tabler/icons-react";
 import { BsPencilSquare } from "react-icons/bs";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -44,6 +45,7 @@ function NavbarLink({ icon: Icon, label, active, onClick }) {
 const mockdata = [
   // { icon: IconGauge, label: "Dashboard", to: "dashboard" },
   { icon: IconDeviceDesktopAnalytics, label: "Thống kê", to: "analytics" },
+  { icon: IconCreditCard, label: "Thanh toán", to: "payments" },
   { icon: IconUsers, label: "Người dùng", to: "users" },
   { icon: IconPlaneDeparture, label: "Kế hoạch", to: "trips" },
   { icon: IconCalendarStats, label: "Bài viết", to: "contents" },

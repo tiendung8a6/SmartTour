@@ -14,6 +14,7 @@ import {
   Policy,
   Categories,
   Trips,
+  Payments,
 } from "./pages";
 import useStore from "./store/store";
 
@@ -59,6 +60,7 @@ function App() {
           <Route path="/users" element={<Users />} />
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/trips" element={<Trips />} />
+          <Route path="/payments" element={<Payments />} />
         </Route>
 
         <Route path="/auth" element={<StartPage />} />
