@@ -23,6 +23,7 @@ import {
   IconMessageCircle,
   IconSettings,
   IconUsers,
+  IconUser,
   IconBrandSamsungpass,
   IconTrashFilled,
 } from "@tabler/icons-react";
@@ -121,7 +122,7 @@ const Profile = () => {
           <Tabs.Tab
             value="profile"
             leftSection={
-              <IconSettings style={{ width: rem(16), height: rem(16) }} />
+              <IconUser style={{ width: rem(16), height: rem(16) }} />
             }
             className="my-[20px] hover:bg-gray-100 hover:text-black"
           >
