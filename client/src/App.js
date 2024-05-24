@@ -39,6 +39,8 @@ import {
   EditRail,
   Pricing,
   Checkout,
+  Cancel,
+  Success,
 } from "./pages";
 import { Footer, Loading, Navbar } from "./components";
 import useStore from "./store";
@@ -71,6 +73,9 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/pricing" element={<Pricing />} />
+            <Route path="/cancel" element={<Cancel />} />
+            <Route path="/success" element={<Success />} />
+
             <Route path="/checkout/:paymentType" element={<Checkout />} />
             <Route path="/category" element={<CategoryPage />} />
             <Route path="/:slug/:id?" element={<BlogDetail />} />
@@ -93,6 +98,7 @@ function App() {
             <Route path="/trip/:id/camp/create" element={<NewCamp />} />
             <Route path="/trip/:id/parking/create" element={<NewParking />} />
             <Route path="/trip/:id/rail/create" element={<NewRail />} />
+
             <Route
               path="/trip/:id/restaurant/create"
               element={<NewRestaurant />}

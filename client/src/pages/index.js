@@ -37,6 +37,8 @@ import EditParking from "./EditParking";
 import EditRail from "./EditRail";
 import Pricing from "./Pricing";
 import Checkout from "./Checkout";
+import Cancel from "./Cancel";
+import Success from "./Success";
 export {
   BlogDetail,
   CategoryPage,
@@ -77,4 +79,6 @@ export {
   EditRail,
   Pricing,
   Checkout,
+  Cancel,
+  Success,
 };
