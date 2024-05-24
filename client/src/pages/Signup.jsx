@@ -81,7 +81,6 @@ function SignUp() {
         }}
       >
         <Logo type="sigin" />
-        <span className="text-xl font-semibold text-white">Welcome!</span>
       </div>
 
       {/* RIGHT */}
@@ -100,7 +99,7 @@ function SignUp() {
                 />
               )}
               <h2 className="text-2xl lg:text-3xl font-extrabold text-gray-900 dark:text-white">
-                Sign up for an account
+                Đăng kí tài khoản
               </h2>
             </div>
 
@@ -111,15 +110,15 @@ function SignUp() {
                 <div className="max-w-md w-full space-y-8">
                   <Button
                     onClick={() => googleLogin()}
-                    label="Sign up with Google"
+                    label="Đăng kí với Google"
                     icon={<FcGoogle className="text-xl" />}
                     styles="w-full flex flex-row-reverse gap-4 bg-black dark:bg-transparent dark:border text-white px-5 py-2.5 rounded-full"
                   />
-                  <Divider label="OR" />
+                  <Divider label="Hoặc" />
 
                   <Button
                     onClick={() => setShowForm(true)}
-                    label="Sign up with email"
+                    label="Đăng kí với email"
                     styles="w-full gap-4 bg-white text-black dark:bg-sky-800 dark:text-white px-5 py-2.5 rounded-full border dark:border-none border-gray-300"
                   />
                 </div>
@@ -127,9 +126,9 @@ function SignUp() {
             )}
 
             <p className="max-w-md w-full text-center text-gray-600 dark:text-gray-300">
-              Already has an account?{" "}
+              Bạn đã có tài khoản?{" "}
               <Link to="/sign-in" className="text-sky-800 font-medium">
-                Sign in
+                Đăng nhập
               </Link>
             </p>
           </div>

@@ -25,10 +25,10 @@ function PasswordRequirement({ meets, label }) {
 }
 
 const requirements = [
-  { re: /[0-9]/, label: "Includes number" },
-  { re: /[a-z]/, label: "Includes lowercase letter" },
-  { re: /[A-Z]/, label: "Includes uppercase letter" },
-  { re: /[$&+,:;=?@#|'<>.^*()%!-]/, label: "Includes special symbol" },
+  { re: /[0-9]/, label: "Bao gồm số" },
+  { re: /[a-z]/, label: "Bao gồm chữ thường" },
+  { re: /[A-Z]/, label: "Bao gồm chữ hoa" },
+  { re: /[$&+,:;=?@#|'<>.^*()%!-]/, label: "Bao gồm kí tự đặt biệt" },
 ];
 
 function getStrength(password) {
@@ -79,8 +79,8 @@ export function PasswordStrength({ value, setValue, setStrength, isSignin }) {
         type="password"
         value={value}
         onChange={setValue}
-        placeholder="Your password"
-        label="Password"
+        placeholder="Mật khẩu"
+        label="Mật khẩu"
         isRequired={true}
       />
 
@@ -91,7 +91,7 @@ export function PasswordStrength({ value, setValue, setStrength, isSignin }) {
           </Group>
 
           <PasswordRequirement
-            label="Has at least 6 characters"
+            label="Ít nhất 6 kí tự"
             meets={value.length > 5}
           />
           {checks}

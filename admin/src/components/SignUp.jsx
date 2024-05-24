@@ -51,29 +51,29 @@ const SignUpForm = ({ toast, isSignin, setIsSignin, setFormClose, toggle }) => {
   return (
     <form
       onSubmit={form.onSubmit(handleSubmit)}
-      className='flex flex-col gap-3'
+      className="flex flex-col gap-3"
     >
-      <div className='w-full flex gap-2 '>
+      <div className="w-full flex gap-2 ">
         <TextInput
-          className='w-full'
+          className="w-full"
           withAsterisk
-          label='First Name'
-          placeholder='First Name'
+          label="First Name"
+          placeholder="First Name"
           {...form.getInputProps("firstName")}
         />
         <TextInput
-          className='w-full'
+          className="w-full"
           withAsterisk
-          label='Last Name'
-          placeholder='Last Name'
+          label="Last Name"
+          placeholder="Last Name"
           {...form.getInputProps("lastName")}
         />
       </div>
 
       <TextInput
         withAsterisk
-        label='Email Address'
-        placeholder='your@email.com'
+        label="Email Address"
+        placeholder="your@email.com"
         {...form.getInputProps("email")}
       />
 
@@ -84,22 +84,22 @@ const SignUpForm = ({ toast, isSignin, setIsSignin, setFormClose, toggle }) => {
         isSignin={false}
       />
 
-      <Group className={`w-full flex  justify-between`} mt='md'>
+      <Group className={`w-full flex  justify-between`} mt="md">
         <div className={`flex flex-col items-center justify-between`}>
           <label
             className={clsx(
               "flex items-center gap-1 text-base cursor-pointer",
               theme ? "text-gray-500" : "text-slate-700"
             )}
-            htmlFor='imgUpload'
+            htmlFor="imgUpload"
           >
             <input
-              type='file'
+              type="file"
               onChange={(e) => setFile(e.target.files[0])}
-              className='hidden'
-              id='imgUpload'
-              data-max-size='5120'
-              accept='.jpg, .png, .jpeg'
+              className="hidden"
+              id="imgUpload"
+              data-max-size="5120"
+              accept=".jpg, .png, .jpeg"
             />
             <BiImages />
             <span>Picture</span>
@@ -107,16 +107,16 @@ const SignUpForm = ({ toast, isSignin, setIsSignin, setFormClose, toggle }) => {
         </div>
 
         <Button
-          type='submit'
+          type="submit"
           className={clsx(theme ? "bg-blue-600" : "bg-black")}
         >
           Submit
         </Button>
       </Group>
-      <p className='text-sm'>
+      <p className="text-sm">
         {isSignin ? "Don't have an account?" : "Already has an account?"}
         <span
-          className='underline text-blue-600 ml-1 cursor-pointer'
+          className="underline text-blue-600 ml-1 cursor-pointer"
           onClick={() => setIsSignin((prev) => !prev)}
         >
           {isSignin ? "Sign up" : "Sign in"}

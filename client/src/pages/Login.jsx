@@ -67,7 +67,7 @@ function SignIn() {
         }}
       >
         <Logo type="sigin" />
-        <span className="text-xl font-semibold text-white">Welcome, back!</span>
+        <span className="text-xl font-semibold text-white">Xin chào!</span>
       </div>
 
       <div className="flex w-full md:w-2/3 h-full bg-white dark:bg-gradient-to-b md:dark:bg-gradient-to-r from-black via-[#071b3e] to-black items-center px-10 md:px-20 lg:px-40">
@@ -78,37 +78,37 @@ function SignIn() {
           <div className="max-w-md w-full space-y-8">
             <div>
               <h2 className="mt-6 text-center text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white">
-                Sign in to your account
+                Đăng nhập với tài khoản của bạn
               </h2>
             </div>
 
             <Button
               onClick={() => googleLogin()}
-              label="Sign in with Google"
+              label="Đăng nhập bằng Google"
               icon={<FcGoogle className="" />}
               styles="w-full flex flex-row-reverse gap-4 bg-white dark:bg-transparent text-black dark:text-white px-5 py-2.5 rounded-full border border-gray-300"
             />
 
-            <Divider label="or sign in with email" />
+            <Divider label="hoặc đăng nhập bằng email" />
 
             <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
               <div className="flex flex-col rounded-md shadow-sm -space-y-px gap-5">
                 <Inputbox
-                  label="Email Address"
+                  label="Email"
                   name="email"
                   type="email"
                   isRequired={true}
-                  placeholder="email@example.com"
+                  placeholder="Email"
                   value={data?.email}
                   onChange={handleChange}
                 />
 
                 <Inputbox
-                  label="Password"
+                  label="Mật khẩu"
                   name="password"
                   type="password"
                   isRequired={true}
-                  placeholder="Password"
+                  placeholder="Mật khẩu"
                   value={data?.password}
                   onChange={handleChange}
                 />
@@ -118,14 +118,14 @@ function SignIn() {
                       to="/forgot-password"
                       className="text-sky-800 font-medium"
                     >
-                      Forgot password
+                      Quên mật khẩu
                     </Link>
                   </p>
                 </div>
               </div>
 
               <Button
-                label=" Sign In"
+                label="Đăng nhập"
                 type="submit"
                 styles="group relative w-full flex justify-center py-2.5 2xl:py-3 px-4 border border-transparent text-sm font-medium rounded-full text-white bg-black dark:bg-sky-800 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 mt-8"
               />
@@ -133,9 +133,9 @@ function SignIn() {
 
             <div className="flex items-center justify-center text-gray-600 dark:text-gray-300">
               <p>
-                Dont't have an account?{" "}
+                Bạn chưa có tài khoản?{" "}
                 <Link to="/sign-up" className="text-sky-800 font-medium">
-                  Sign up
+                  Đăng kí
                 </Link>
               </p>
             </div>

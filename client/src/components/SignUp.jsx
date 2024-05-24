@@ -28,12 +28,6 @@ const SignUpForm = ({ toast }) => {
       firstName: "",
       lastName: "",
     },
-    validate: {
-      firstName: (value) =>
-        value.length < 3 ? "First name is too short" : null,
-      lastName: (value) => (value.length < 2 ? "Last name is too short" : null),
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
-    },
   });
 
   const handleSubmit = async (values) => {
@@ -70,26 +64,26 @@ const SignUpForm = ({ toast }) => {
           className="w-full"
           withAsterisk
           isRequired={true}
-          label="First Name"
-          placeholder="First Name"
+          label="Họ"
+          placeholder="Họ"
           {...form.getInputProps("firstName")}
         />
         <Inputbox
           className="w-full"
           withAsterisk
-          label="Last Name"
+          label="Tên"
           isRequired={true}
-          placeholder="Last Name"
+          placeholder="Tên"
           {...form.getInputProps("lastName")}
         />
       </div>
 
       <Inputbox
         withAsterisk
-        label="Email Address"
+        label="Email"
         type="email"
         isRequired={true}
-        placeholder="your@email.com"
+        placeholder="Email"
         {...form.getInputProps("email")}
       />
 
@@ -118,7 +112,7 @@ const SignUpForm = ({ toast }) => {
               accept=".jpg, .png, .jpeg"
             />
             <BiImages />
-            <span className="mr-[10px]">Picture</span>
+            <span className="mr-[10px]">Ảnh đại diện</span>
             <div>
               {fileURL && (
                 <img
@@ -135,7 +129,7 @@ const SignUpForm = ({ toast }) => {
           type="submit"
           className={clsx(theme ? "bg-black	" : "bg-sky-500	")}
         >
-          Submit
+          Đăng kí
         </Button>
       </Group>
     </form>

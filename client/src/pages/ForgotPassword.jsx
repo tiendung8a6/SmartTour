@@ -50,7 +50,6 @@ function ForgotPassword() {
         }}
       >
         <Logo type="sigin" />
-        <span className="text-xl font-semibold text-white">Hello !</span>
       </div>
 
       <div className="flex w-full md:w-2/3 h-full bg-white dark:bg-gradient-to-b md:dark:bg-gradient-to-r from-black via-[#071b3e] to-black items-center px-10 md:px-20 lg:px-40">
@@ -61,7 +60,7 @@ function ForgotPassword() {
           <div className="max-w-md w-full space-y-8">
             <div>
               <h2 className="mt-6 text-center text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white">
-                Reset password
+                Quên mật khẩu
               </h2>
             </div>
 
@@ -69,8 +68,8 @@ function ForgotPassword() {
             <div className="flex items-center mt-4">
               {/* <div className="flex-1 border-t border-gray-300 dark:border-gray-500"></div> */}
               <div className="mx-4 text-gray-400 text-sm text-center	">
-                Please enter your email. You will receive a new password from
-                this email
+                Vui lòng nhập email của bạn. Bạn sẽ nhận được mật khẩu mới từ
+                email này!
               </div>
               {/* <div className="flex-1 border-t border-gray-300 dark:border-gray-500"></div> */}
             </div>
@@ -78,18 +77,18 @@ function ForgotPassword() {
             <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
               <div className="flex flex-col rounded-md shadow-sm -space-y-px gap-5">
                 <Inputbox
-                  label="Email Address"
+                  label="Email"
                   name="email"
                   type="email"
                   isRequired={true}
-                  placeholder="email@example.com"
+                  placeholder="Email"
                   value={data?.email}
                   onChange={handleChange}
                 />
               </div>
 
               <Button
-                label="Send"
+                label="Gửi"
                 type="submit"
                 styles="group relative w-full flex justify-center py-2.5 2xl:py-3 px-4 border border-transparent text-sm font-medium rounded-full text-white bg-black dark:bg-sky-800 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 mt-8"
               />
@@ -101,7 +100,7 @@ function ForgotPassword() {
                   to="/sign-in"
                   className="text-sky-800 font-medium text-center"
                 >
-                  Sign in
+                  Đăng nhập
                 </Link>
               </p>
               <div className="text-sky-800 font-medium text-center mx-9	 ">
@@ -110,7 +109,7 @@ function ForgotPassword() {
               </div>
               <p>
                 <Link to="/sign-up" className="text-sky-800 font-medium">
-                  Sign up
+                  Đăng kí
                 </Link>
               </p>
             </div>
