@@ -23,7 +23,7 @@ const Contact = () => {
     axios
       .post(`http://localhost:8800/users/contact`, formData)
       .then((response) => {
-        toast.success("Form data submitted successfully!");
+        toast.success("Gửi liên hệ thành công!");
 
         // Clear the form fields after successful submission
         setFormData({
@@ -34,27 +34,25 @@ const Contact = () => {
         });
       })
       .catch((error) => {
-        toast.error("Failed to submit form data. Please try again later.");
+        toast.error("Gửi liên hệ thất bại. Vui lòng thử lại sau.");
       });
   };
   return (
     <>
-      <section className="relative z-10 overflow-hidden bg-white pt-9 dark:bg-dark ">
+      <section className="flex items-center justify-center relative z-10 overflow-hidden bg-white pt-9 dark:bg-dark ">
         <div className="container">
           <div className="-mx-4 flex flex-wrap lg:justify-between">
             <div className="w-full px-4 lg:w-1/2 xl:w-6/12">
               <div className="mb-12 max-w-[570px] lg:mb-0">
-                <span className="mb-4 block text-base font-semibold text-primary">
-                  Contact Us
-                </span>
                 <h2 className="mb-6 text-[32px] font-bold uppercase text-dark dark:text-white sm:text-[40px] lg:text-[36px] xl:text-[40px]">
-                  GET IN TOUCH WITH US
+                  LIÊN HỆ VỚI CHÚNG TÔI
                 </h2>
-                <p className="mb-9 text-base leading-relaxed text-body-color dark:text-dark-6">
-                  Welcome to our favorite travel community! We are delighted
-                  that you are interested and want to contact us. Any questions,
-                  comments or needs you have about travel, we are happy to
-                  listen and support you.
+                <p className="mb-9 text-base leading-relaxed text-body-color text-justify	 dark:text-dark-6">
+                  Chào mừng bạn đến với Liên hệ SmartTour! Chúng tôi rất vui
+                  mừng và hạnh phúc khi nhận thấy sự quan tâm của bạn và mong
+                  muốn liên hệ với chúng tôi. Bất kỳ thắc mắc, nhận xét hoặc nhu
+                  cầu nào về dịch vụ, chúng tôi luôn sẵn lòng lắng nghe và sẽ
+                  phản hồi bạn trong thời gian sớm nhất.
                 </p>
                 <div className="mb-8 flex w-full max-w-[370px]">
                   <div className="mr-6 flex h-[60px] w-full max-w-[60px] items-center justify-center overflow-hidden rounded bg-primary/5 text-primary sm:h-[70px] sm:max-w-[70px]">
@@ -73,11 +71,11 @@ const Contact = () => {
                   </div>
                   <div className="w-full">
                     <h4 className="mb-1 text-xl font-bold text-dark dark:text-white">
-                      Our Location
+                      Địa Chỉ
                     </h4>
                     <p className="text-base text-body-color dark:text-dark-6">
-                      69/68 Dang Thuy Tram Street, Ward 13, Binh Thanh, Ho Chi
-                      Minh City
+                      69/68 Đ. Đặng Thuỳ Trâm, Phường 13, Bình Thạnh, Thành phố
+                      Hồ Chí Minh
                     </p>
                   </div>
                 </div>
@@ -114,10 +112,10 @@ const Contact = () => {
                   </div>
                   <div className="w-full">
                     <h4 className="mb-1 text-xl font-bold text-dark dark:text-white">
-                      Phone Number
+                      Số Điện Thoại
                     </h4>
                     <p className="text-base text-body-color dark:text-dark-6">
-                      (+84)985 872 885
+                      (+84) 985 872 885
                     </p>
                   </div>
                 </div>
@@ -139,7 +137,7 @@ const Contact = () => {
                   </div>
                   <div className="w-full">
                     <h4 className="mb-1 text-xl font-bold text-dark dark:text-white">
-                      Email Address
+                      Địa Chỉ Email
                     </h4>
                     <p className="text-base text-body-color dark:text-dark-6">
                       tiendung8a6@gmail.com
@@ -157,7 +155,7 @@ const Contact = () => {
                       type="text"
                       id="name"
                       name="name"
-                      placeholder="Your Name"
+                      placeholder="Tên"
                       value={formData.name}
                       onChange={handleChange}
                       required
@@ -169,7 +167,7 @@ const Contact = () => {
                       type="email"
                       id="email"
                       name="email"
-                      placeholder="Your Email"
+                      placeholder="Email"
                       value={formData.email}
                       onChange={handleChange}
                       required
@@ -181,7 +179,7 @@ const Contact = () => {
                       type="number"
                       id="phone"
                       name="phone"
-                      placeholder="Your Phone"
+                      placeholder="Số điện thoại"
                       value={formData.phone}
                       onChange={handleChange}
                       required
@@ -194,7 +192,7 @@ const Contact = () => {
                       type="textarea"
                       id="message"
                       name="message"
-                      placeholder="Your Message"
+                      placeholder="Thông tin liên hệ"
                       value={formData.message}
                       onChange={handleChange}
                       required
@@ -207,7 +205,7 @@ const Contact = () => {
                       type="submit"
                       className="w-full rounded border border-primary bg-primary p-3 text-white bg-sky-500 transition hover:bg-opacity-90 focus:border-blue-600  focus:ring-blue-600"
                     >
-                      Send Message
+                      Gửi liên hệ
                     </button>
                   </div>
                 </form>

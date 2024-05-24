@@ -120,7 +120,7 @@ const Checkout = () => {
               <div className="ml-5">
                 <span className="mt-2 font-semibold">Thanh toán VNPAY </span>
                 <p className="text-slate-500 text-sm leading-6">
-                  Xử lý: 2-4 Days
+                  Xử lý: 1-2 phút
                 </p>
               </div>
             </label>
@@ -149,7 +149,7 @@ const Checkout = () => {
                 <div className="ml-5">
                   <span className="mt-2 font-semibold">Thanh Toán Stripe</span>
                   <p className="text-slate-500 text-sm leading-6">
-                    Thời gian nhận điểm: 24 giờ
+                    Xử lý: 1-2 phút
                   </p>
                 </div>
               </label>
@@ -241,7 +241,7 @@ const Checkout = () => {
               </div>
               <div className="flex items-center justify-between">
                 <p className="text-sm font-medium text-gray-900">Điểm</p>
-                <p className="font-semibold text-gray-900">{points} Điểm</p>
+                <p className="font-semibold text-gray-900 ">{points} Điểm</p>
               </div>
             </div>
             <div className="mt-6 flex items-center justify-between">
