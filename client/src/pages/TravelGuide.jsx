@@ -63,7 +63,7 @@ const Recommendations = ({ place, isLoading, recommendations }) => {
           Object.entries(recommendations).map(([title, list]) => (
             <div key={title} className="prose">
               <h2 className="mt-0 mb-4 font-bold text-gray-900">
-                Những điều cần làm {title}
+                AI khuyên bạn nên ({title})
               </h2>
               <ul className="list-none pl-0">
                 {list.map((item) => (
