@@ -232,22 +232,22 @@ export const vnpayReturn = asyncHandler(async (req, res) => {
         order.paymentMethod = vnp_Params["vnp_CardType"];
 
         // Assign vnp_Amount to totalPrice
-        order.totalPrice = parseFloat(vnp_Params["vnp_Amount"]);
+        order.totalPrice = parseFloat(vnp_Params["vnp_Amount"]) / 100;
 
         order.paymentStatus = "paid";
         await order.save();
 
         // Calculate points based on totalAmount
         let points;
-        const totalAmount = parseFloat(vnp_Params["vnp_Amount"]);
+        const totalAmount = parseFloat(vnp_Params["vnp_Amount"]) / 100;
         switch (totalAmount) {
-          case 100000 * 100: //Nhân cho 100 Vì giá tiền VNPAY
+          case 100000: //Nhân cho 100 Vì giá tiền VNPAY
             points = 100;
             break;
-          case 200000 * 100:
+          case 200000:
             points = 200;
             break;
-          case 300000 * 100:
+          case 300000:
             points = 350;
             break;
           default:
@@ -293,3 +293,39 @@ function sortObject(obj) {
   }
   return sorted;
 }
+
+export const getPayments = async (req, res, next) => {
+  try {
+    let queryResult = Order.find()
+      .populate({
+        path: "user",
+        select: "-password",
+      })
+      .sort({ _id: -1 });
+    // pagination
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+
+    //records count
+    const totalPayments = await Order.countDocuments();
+
+    const numOfPage = Math.ceil(totalPayments / limit);
+
+    queryResult = queryResult.skip(skip).limit(limit);
+
+    const payments = await queryResult;
+
+    res.status(200).json({
+      success: true,
+      message: "Payment Loaded successfully",
+      totalPayments: totalPayments,
+      data: payments,
+      page,
+      numOfPage,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: error.message });
+  }
+};

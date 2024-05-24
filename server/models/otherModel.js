@@ -1,19 +1,22 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 //Generate random numbers for order
-const randomTxt = Math.random().toString(36).substring(7).toLocaleUpperCase();
-const randomNumbers = Math.floor(1000 + Math.random() * 90000);
+const generateOrderNumber = () => {
+  const randomTxt = Math.random().toString(36).substring(7).toUpperCase();
+  const randomNumbers = Math.floor(1000 + Math.random() * 90000);
+  return randomTxt + randomNumbers;
+};
 const OrderSchema = new Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: "Users",
       required: false,
     },
     phone: { type: String, required: false },
     orderItems: [{ type: Object, required: true }],
     shippingAddress: { type: Object, required: false },
-    orderNumber: { type: String, default: randomTxt + randomNumbers },
+    orderNumber: { type: String, default: generateOrderNumber, unique: true },
 
     //Hình thức thanh toán
     payments: { type: String, required: false },
@@ -23,7 +26,7 @@ const OrderSchema = new Schema(
 
     //for stripe payment
     paymentStatus: { type: String, default: "Not paid" },
-    paymentMethod: { type: String, default: "Not specified" },
+    paymentMethod: { type: String, default: "Chưa cập nhật" },
     totalPrice: { type: Number, default: 0 },
     currency: { type: String, default: "Not specified" },
 
