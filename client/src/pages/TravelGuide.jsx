@@ -5,12 +5,11 @@ const getRandomLoadingMessage = (place) => {
   const capitalizedPlace = place.charAt(0).toUpperCase() + place.slice(1);
 
   const messages = [
-    `Discovering the best things to do in ${capitalizedPlace}...`,
-    `Unveiling the hidden gems of ${capitalizedPlace}...`,
-    `Finding the best activities in ${capitalizedPlace}...`,
-    `Searching for the best places to visit in ${capitalizedPlace}...`,
-    `Looking for the best things to do in ${capitalizedPlace}...`,
-    `Finding the best places to go in ${capitalizedPlace}...`,
+    `Khám phá những điều tốt nhất ở ${capitalizedPlace}...`,
+    `Tìm kiếm những hoạt động tốt nhất tại ${capitalizedPlace}...`,
+    `Tìm kiếm những địa điểm tốt nhất để ghé thăm ở ${capitalizedPlace}...`,
+    `Tìm kiếm những điều tốt nhất để làm ở ${capitalizedPlace}...`,
+    `Tìm kiếm những địa điểm tốt nhất để đến ở ${capitalizedPlace}...`,
   ];
 
   return messages[Math.floor(Math.random() * messages.length)];
@@ -20,13 +19,13 @@ const Header = ({ place, setPlace, handleSearch }) => (
   <header>
     <div className="prose">
       <h1 className="mt-0 mb-6 font-bold text-gray-900 text-center text-3xl">
-        AI-Powered Travel Guide
+        Hướng dẫn du lịch với AI hỗ trợ
       </h1>
     </div>
     <div className="flex">
       <input
         type="text"
-        placeholder="I'm going to..."
+        placeholder="Tôi đang đi đến..."
         value={place}
         onChange={(e) => setPlace(e.target.value)}
         onKeyDown={(e) => {
@@ -40,7 +39,7 @@ const Header = ({ place, setPlace, handleSearch }) => (
         className="px-4 py-2 text-lg text-white bg-orange-500 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         onClick={() => handleSearch()}
       >
-        Explore
+        Khám phá
       </button>
     </div>
   </header>
@@ -64,7 +63,7 @@ const Recommendations = ({ place, isLoading, recommendations }) => {
           Object.entries(recommendations).map(([title, list]) => (
             <div key={title} className="prose">
               <h2 className="mt-0 mb-4 font-bold text-gray-900">
-                Things to {title}
+                Những điều cần làm {title}
               </h2>
               <ul className="list-none pl-0">
                 {list.map((item) => (
@@ -89,25 +88,25 @@ Recommendations.propTypes = {
 const About = () => {
   const aboutLists = [
     {
-      title: "🌎 Explore the World",
+      title: "🌎 Khám Phá Thế Giới",
       items: [
-        "Find the best things to do in any city, from sightseeing to dining",
-        "Discover hidden gems and off-the-beaten-path experiences",
+        "- Tìm những điều tốt nhất để làm ở bất kỳ thành phố nào, từ tham quan đến ẩm thực.",
+        "- Khám phá những địa điểm ẩn dật và những trải nghiệm ngoài lề.",
       ],
     },
     {
-      title: "🎯 Hit the Target",
+      title: "🎯 Đạt Được Mục Tiêu",
       items: [
-        "Save time planning your trip",
-        "Discover new places and experiences you wouldn't have found on your own",
-        "Make the most of your time in trips",
+        "- Tiết kiệm thời gian lập kế hoạch cho chuyến đi.",
+        "- Khám phá những địa điểm và trải nghiệm mới mà bạn không thể tìm thấy một mình.",
+        "- Tận dụng tối đa thời gian trong các chuyến đi.",
       ],
     },
     {
-      title: "🤖 Powered by AI",
+      title: "🤖 Được Hỗ Trợ Bởi Trí Tuệ Nhân Tạo",
       items: [
-        "Our AI-powered recommendations are trained on millions of reviews and articles",
-        "Best of all, it's completely free!",
+        "- Những gợi ý của chúng tôi được huấn luyện trên hàng triệu đánh giá và bài viết.",
+        "- Quan trọng nhất, nó hoàn toàn miễn phí!",
       ],
     },
   ];
