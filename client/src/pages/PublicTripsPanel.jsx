@@ -79,7 +79,9 @@ const PublicTripsPanel = () => {
   if (publicTrip?.length < 1)
     return (
       <div className="w-full h-full py-8 flex items-center justify-center">
-        <span className="text-lg text-slate-500">No Trip Available</span>
+        <span className="text-lg text-slate-500">
+          Chưa có chuyến đi nào được công khai
+        </span>
       </div>
     );
 

@@ -92,7 +92,7 @@ const Profile = () => {
       <Tabs
         variant="unstyled"
         className=""
-        defaultValue="profile"
+        defaultValue="createBlcdcd ogc"
         orientation="vertical"
         classNames={classes}
       >
@@ -119,7 +119,7 @@ const Profile = () => {
           </div>
           <hr />
 
-          <Tabs.Tab
+          {/* <Tabs.Tab
             value="profile"
             leftSection={
               <IconUser style={{ width: rem(16), height: rem(16) }} />
@@ -127,7 +127,7 @@ const Profile = () => {
             className="my-[20px] hover:bg-gray-100 hover:text-black"
           >
             Trang Cá Nhân
-          </Tabs.Tab>
+          </Tabs.Tab> */}
           <hr />
           <Tabs.Tab
             value="createBlog"

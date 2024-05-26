@@ -65,7 +65,7 @@ function UserMenu({ user, theme }) {
           }
           onClick={() => handleSignOut()}
         >
-          Logout
+          Đăng xuất
         </Menu.Item>
 
         {/* <Menu.Divider />

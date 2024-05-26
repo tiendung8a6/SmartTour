@@ -84,7 +84,7 @@ const PostComments = ({ postId }) => {
             onChange={(e) => setDesc(e.target.value)}
             value={desc}
             required={true}
-            placeholder="Add a comment..."
+            placeholder="Nhập bình luận..."
             className="bg-transparent w-full p-2 border border-gray-300 focus:outline-none focus:border-blue-600  focus:ring-blue-600 rounded"
           ></textarea>
 
@@ -92,7 +92,7 @@ const PostComments = ({ postId }) => {
             <Button
               type={"submit"}
               onClick={() => {}}
-              label="Submit"
+              label="Bình luận"
               styles="bg-blue-600 text-white py-2 px-5 rounded"
             />
           </div>
@@ -100,7 +100,7 @@ const PostComments = ({ postId }) => {
       ) : (
         <Link to="/sign-in" className="flex flex-col py-10">
           <Button
-            label="Sign in to comment"
+            label="Đăng nhập để bình luận"
             styles="flex items-center justify-center bg-white dark:bg-transparent text-black dark:text-gray-500 px-4 py-1.5 rounded-full border"
           />
         </Link>
@@ -109,7 +109,7 @@ const PostComments = ({ postId }) => {
       <div className="w-full h-full flex flex-col gap-10 2xl:gap-y-14 px-2">
         {comments?.length === 0 ? (
           <span className="text-base text-slate-600">
-            Không có bình luận, hãy là người đầu tiên bình luận
+            Chưa có bình luận nào, hãy là người đầu tiên bình luận
           </span>
         ) : (
           comments?.map((el) => (

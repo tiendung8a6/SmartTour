@@ -109,13 +109,13 @@ const MobileMenu = ({ user, signOut }) => {
                   className="bg-black dark:bg-sky-600 text-white dark:text-white px-8 py-1.5 rounded-full text-center outline-none"
                   onClick={() => signOut()}
                 >
-                  Logout
+                  Đăng xuất
                 </button>
               </div>
             ) : (
               <Link to="/sign-in">
                 <Button
-                  label="Sign in"
+                  label="Đăng nhập"
                   styles="flex items-center justify-center bg-black dark:bg-sky-600 text-white dark:text-white text-white px-4 py-1.5 rounded-full"
                 />
               </Link>
@@ -291,7 +291,7 @@ const Navbar = () => {
                     className="text-gray-500 text-sm"
                     onClick={handleSignOut}
                   >
-                    Logout
+                    Đăng xuất
                   </span>
                 </div>
               )}
@@ -299,7 +299,7 @@ const Navbar = () => {
           ) : (
             <Link to="/sign-in">
               <Button
-                label="Sign in"
+                label="Đăng nhập"
                 styles="flex items-center justify-center bg-black dark:bg-sky-600 text-white dark:text-white px-4 py-1.5 rounded-full"
               />
             </Link>
