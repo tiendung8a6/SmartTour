@@ -63,7 +63,7 @@ const Recommendations = ({ place, isLoading, recommendations }) => {
           Object.entries(recommendations).map(([title, list]) => (
             <div key={title} className="prose">
               <h2 className="mt-0 mb-4 font-bold text-gray-900">
-                AI khuyên bạn nên ({title})
+                AI khuyên bạn nên {title}
               </h2>
               <ul className="list-none pl-0">
                 {list.map((item) => (
@@ -128,7 +128,8 @@ const About = () => {
 };
 
 const getThingsToDo = (place) => {
-  return fetch(`https://thingsto-api.glitch.me/${place}`, {
+  // return fetch(`https://thingsto-api.glitch.me/${place}`, {
+  return fetch(`http://localhost:8800/ai/${place}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
