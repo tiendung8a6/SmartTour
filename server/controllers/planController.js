@@ -67,13 +67,15 @@ export const createPlanLodging = async (req, res, next) => {
       startAddress,
       info,
       phone,
+      estimatedPrice,
+      actualPrice,
       web,
       email,
       number,
       describe,
     } = req.body;
     const { id } = req.params;
-
+    const price = actualPrice ? actualPrice : estimatedPrice;
     const plan = await Plans.create({
       planName,
       startDate,
@@ -86,6 +88,8 @@ export const createPlanLodging = async (req, res, next) => {
       web,
       email,
       number,
+      estimatedPrice,
+      actualPrice: price,
       describe,
       type: "lodging",
     });
