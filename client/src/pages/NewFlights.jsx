@@ -503,7 +503,7 @@ const NewFlights = () => {
             </p>
             <Grid className="my-6">
               <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
-                <div className="w-full flex flex-col md:flex-row flex-wrap    ">
+                <div className="w-full flex flex-col md:flex-row flex-wrap ">
                   <Textarea
                     // withAsterisk
                     label="Tiện ích"
@@ -551,7 +551,7 @@ const NewFlights = () => {
 
             <Grid className="my-6">
               <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
-                <div className="w-full flex flex-col md:flex-row flex-wrap    ">
+                <div className="w-full flex flex-col md:flex-row flex-wrap">
                   <TextInput
                     // withAsterisk
                     label="Email"
