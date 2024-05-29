@@ -203,6 +203,7 @@ export const createPlanCar = async (req, res, next) => {
       service,
       describe,
       form,
+      info,
       estimatedPrice,
       actualPrice,
     } = req.body;
@@ -221,6 +222,7 @@ export const createPlanCar = async (req, res, next) => {
       service,
       describe,
       form,
+      info,
       estimatedPrice,
       actualPrice: price,
       type: "car",
@@ -892,6 +894,7 @@ export const updatePlanCar = async (req, res, next) => {
       web,
       email,
       service,
+      info,
       describe,
       form,
       estimatedPrice,
@@ -907,6 +910,7 @@ export const updatePlanCar = async (req, res, next) => {
     if (startAddress) updatedFields.startAddress = startAddress;
     if (phone) updatedFields.phone = phone;
     if (web) updatedFields.web = web;
+    if (info) updatedFields.info = info;
     if (email) updatedFields.email = email;
     if (service) updatedFields.service = service;
     if (describe) updatedFields.describe = describe;

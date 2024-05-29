@@ -39,6 +39,7 @@ const NewCar = () => {
   const [service, setService] = useState(null);
   const [describe, setDescribe] = useState(null);
   const [form, setForm] = useState(null);
+  const [info, setInfo] = useState(null);
   const [estimatedPrice, setEstimatedPrice] = useState(null);
   const [actualPrice, setActualPrice] = useState(null);
   const [startDate, setStartDate] = useState(null);
@@ -144,6 +145,7 @@ const NewCar = () => {
       startAddress,
       phone,
       web,
+      info,
       email,
       service,
       describe,
@@ -354,7 +356,7 @@ const NewCar = () => {
                 theme ? "text-white" : "text-slate-700"
               } text-xl font-semibold`}
             >
-              Thông Tin Xe
+              Thông tin xe
             </p>
             <Grid className="my-6">
               <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
@@ -451,8 +453,26 @@ const NewCar = () => {
                 theme ? "text-white" : "text-slate-700"
               } text-xl font-semibold`}
             >
-              Thông Tin Liên Hệ
+              Quy đinh và liên hệ
             </p>
+
+            <Grid className="my-6">
+              <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
+                <div className="w-full flex flex-col md:flex-row flex-wrap    ">
+                  <Textarea
+                    // withAsterisk
+                    label="Quy định"
+                    className="w-full flex-1"
+                    placeholder="Nhập quy định"
+                    autosize
+                    minRows={3}
+                    maxRows={6}
+                    value={info}
+                    onChange={(e) => setInfo(e.target.value)}
+                  />
+                </div>
+              </Grid.Col>
+            </Grid>
 
             <Grid className="my-6">
               <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>

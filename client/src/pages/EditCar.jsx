@@ -49,6 +49,7 @@ const EditCar = () => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [startTime, setStartTime] = useState(null);
+  const [info, setInfo] = useState(null);
   const [endTime, setEndTime] = useState(null);
   const startTimeRef = useRef(null);
   const endTimeRef = useRef(null);
@@ -150,6 +151,7 @@ const EditCar = () => {
       phone,
       web,
       email,
+      info,
       service,
       describe,
       form,
@@ -175,6 +177,7 @@ const EditCar = () => {
         setForm(data.form);
         setService(data.service);
         setDescribe(data.describe);
+        setInfo(data.info);
         setPhone(data.phone);
         setWeb(data.web);
         setEmail(data.email);
@@ -392,14 +395,14 @@ const EditCar = () => {
                 theme ? "text-white" : "text-slate-700"
               } text-xl font-semibold`}
             >
-              Thông Tin Xe
+              Thông tin xe
             </p>
             <Grid className="my-6">
               <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
                 <div className="w-full flex flex-col md:flex-row flex-wrap">
                   <Select
                     classNames={{
-                      groupLabel: "text-sky-700", // Màu chữ là đỏ
+                      groupLabel: "text-sky-700",
                     }}
                     data={[
                       {
@@ -489,8 +492,26 @@ const EditCar = () => {
                 theme ? "text-white" : "text-slate-700"
               } text-xl font-semibold`}
             >
-              Thông Tin Liên Hệ
+              Quy đinh và liên hệ
             </p>
+
+            <Grid className="my-6">
+              <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
+                <div className="w-full flex flex-col md:flex-row flex-wrap    ">
+                  <Textarea
+                    // withAsterisk
+                    label="Quy định"
+                    className="w-full flex-1"
+                    placeholder="Nhập quy định"
+                    autosize
+                    minRows={3}
+                    maxRows={6}
+                    value={info}
+                    onChange={(e) => setInfo(e.target.value)}
+                  />
+                </div>
+              </Grid.Col>
+            </Grid>
 
             <Grid className="my-6">
               <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
