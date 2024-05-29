@@ -108,7 +108,7 @@ export const createPlanLodging = async (req, res, next) => {
     res.status(201).json({
       success: true,
       message:
-        "Lập kế hoạch cho khách sạn thành công và đã được thêm vào chuyến đi",
+        "Lập kế hoạch cho lưu trú thành công và đã được thêm vào chuyến đi",
       data: plan,
       tripId: trip._id,
     });
@@ -1103,7 +1103,7 @@ export const updatePlanLodging = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Cập nhật kế hoạch khách sạn đã thành công.",
+      message: "Cập nhật kế hoạch lưu trú đã thành công.",
       data: plan,
     });
   } catch (error) {

@@ -32,6 +32,7 @@ import {
   IconPlane,
   IconCar,
   IconBuildingSkyscraper,
+  IconBed,
   IconTrain,
   IconParkingCircle,
   IconWalk,
@@ -431,7 +432,7 @@ const TripSummary = () => {
                   bullet={
                     <div className="">
                       {item.type === "lodging" ? (
-                        <IconBuildingSkyscraper stroke={2} className="" />
+                        <IconBed stroke={2} className="" />
                       ) : item.type === "activity" ? (
                         <IconWalk stroke={2} className="" />
                       ) : item.type === "flights" ? (

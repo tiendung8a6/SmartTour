@@ -42,6 +42,7 @@ import Success from "./Success";
 import EditLodging from "./EditLodging";
 import EditRestaurant from "./EditRestaurant";
 import ViewFlights from "./ViewFlights";
+import ViewLodging from "./ViewLodging";
 export {
   BlogDetail,
   CategoryPage,
@@ -87,4 +88,5 @@ export {
   EditLodging,
   EditRestaurant,
   ViewFlights,
+  ViewLodging,
 };

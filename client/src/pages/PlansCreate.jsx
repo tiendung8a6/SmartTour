@@ -111,7 +111,7 @@ const PlansCreate = () => {
               className="ml-[10px] text-[#41b7cb] "
             />
             <span className="ml-[10px] text-[#0782c5] font-semibold ">
-              Khách sạn
+              Lưu trú
             </span>
           </Link>
         </Grid.Col>
