@@ -14,7 +14,7 @@ import useStore from "../store";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { getSingleTrip, getSinglePlans } from "../utils/apiCalls";
-import QRCode from "react-qr-code";
+import QRCode from "qrcode.react";
 
 const ViewFlights = () => {
   const { colorScheme } = useMantineColorScheme();
@@ -53,6 +53,21 @@ const ViewFlights = () => {
           currency: "VND",
         })
       : "N/A";
+  };
+
+  // download QR code
+  const downloadQRCode = () => {
+    const qrCodeURL = document
+      .getElementById("qrCodeEl")
+      .toDataURL("image/png")
+      .replace("image/png", "image/octet-stream");
+    console.log(qrCodeURL);
+    let aEl = document.createElement("a");
+    aEl.href = qrCodeURL;
+    aEl.download = "QR_Code.png";
+    document.body.appendChild(aEl);
+    aEl.click();
+    document.body.removeChild(aEl);
   };
 
   //TRUY VẤN DỮ LIỆU PLAN
@@ -171,13 +186,13 @@ const ViewFlights = () => {
           <div className="mt-4 bg-gray-100 flex flex-row flex-wrap md:flex-nowrap justify-between">
             <div className="flex mx-6 py-4 flex-row flex-wrap items-center">
               <QRCode
-                id="qrcode"
+                id="qrCodeEl"
                 value={`http://localhost:3000/trip/${id}/flights/${planId}/view`}
                 size={100}
                 fgColor={"#000000"}
                 bgColor={"#FFFFFF"}
                 level={"M"}
-                includeMargin={true}
+                // includeMargin={true}
               />
 
               <div className="text-sm mx-2 flex flex-col space-y-2">
@@ -225,6 +240,7 @@ const ViewFlights = () => {
               >
                 <div>Chỉnh sửa</div>
               </Link>
+              <Button onClick={downloadQRCode}> Download QR</Button>
             </div>
           </div>
         </div>
