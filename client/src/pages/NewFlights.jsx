@@ -223,7 +223,7 @@ const NewFlights = () => {
               theme ? "text-white" : "text-slate-700"
             } text-xl	 font-semibold `}
           >
-            Thông Tin Khởi Hành
+            Thông tin khởi hành
           </p>
 
           <Grid className="my-6">
@@ -257,9 +257,9 @@ const NewFlights = () => {
                 <div className="w-full flex flex-col md:flex-row flex-wrap">
                   <TextInput
                     withAsterisk
-                    label="Địa chỉ"
+                    label="Địa chỉ sân bay khởi hành"
                     className="w-full flex-1"
-                    placeholder="Nhập địa chỉ"
+                    placeholder="Nhập địa chỉ sân bay khởi hành"
                     value={startAddress}
                     onChange={(e) => setStartAddress(e.target.value)}
                   />
@@ -276,9 +276,9 @@ const NewFlights = () => {
                   }
                   clearable
                   withAsterisk
-                  label="Ngày ngày khởi hành"
+                  label="Ngày khởi hành"
                   className="w-full flex-1"
-                  placeholder="Chọn ngày khởi hành"
+                  placeholder="Chọn khởi hành"
                   minDate={new Date(trip?.startDate)}
                   maxDate={new Date(trip?.endDate)}
                   valueFormat="DD/MM/YYYY"
@@ -418,7 +418,7 @@ const NewFlights = () => {
                 theme ? "text-white" : "text-slate-700"
               } text-xl font-semibold`}
             >
-              Thông Tin Điểm đến
+              Thông tin điểm đến
             </p>
 
             <Grid className="my-6">
@@ -499,16 +499,16 @@ const NewFlights = () => {
                 theme ? "text-white" : "text-slate-700"
               } text-xl font-semibold`}
             >
-              Liên Hệ Và Tiện Ích
+              Quy định và liên hệ
             </p>
             <Grid className="my-6">
               <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
                 <div className="w-full flex flex-col md:flex-row flex-wrap ">
                   <Textarea
                     // withAsterisk
-                    label="Tiện ích"
+                    label="Quy định"
                     className="w-full flex-1"
-                    placeholder="Nhập tiện ích"
+                    placeholder="Nhập quy định"
                     autosize
                     minRows={3}
                     maxRows={6}

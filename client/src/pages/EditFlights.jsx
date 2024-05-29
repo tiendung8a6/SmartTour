@@ -265,7 +265,7 @@ const EditFlights = () => {
               theme ? "text-white" : "text-slate-700"
             } text-xl	 font-semibold `}
           >
-            Thông Tin Khởi Hành
+            Thông tin khởi hành
           </p>
 
           <Grid className="my-6">
@@ -287,6 +287,25 @@ const EditFlights = () => {
                   onChange={(value) => setPlanName(value)}
                 />
               </div>
+            </Grid.Col>
+          </Grid>
+          <Grid className="my-6">
+            <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
+              <Autocomplete
+                onLoad={onLoadStart}
+                onPlaceChanged={handleStartPlaceChanged}
+              >
+                <div className="w-full flex flex-col md:flex-row flex-wrap">
+                  <TextInput
+                    withAsterisk
+                    label="Địa chỉ sân bay khởi hành"
+                    className="w-full flex-1"
+                    placeholder="Nhập địa chỉ sân bay khởi hành"
+                    value={startAddress}
+                    onChange={(e) => setStartAddress(e.target.value)}
+                  />
+                </div>
+              </Autocomplete>
             </Grid.Col>
           </Grid>
 
@@ -318,7 +337,6 @@ const EditFlights = () => {
                   leftSection={pickerStartTimeControl}
                   withAsterisk
                   // description="Input description"
-                  value={startTime}
                   placeholder="Chọn thời gian khởi hành"
                   onChange={(e) => setStartTime(e.target.value)}
                 />
@@ -436,33 +454,13 @@ const EditFlights = () => {
             </Grid.Col>
           </Grid>
 
-          <Grid className="my-6">
-            <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
-              <Autocomplete
-                onLoad={onLoadStart}
-                onPlaceChanged={handleStartPlaceChanged}
-              >
-                <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[5px]">
-                  <TextInput
-                    withAsterisk
-                    label="Địa chỉ"
-                    className="w-full flex-1"
-                    placeholder="Nhập địa chỉ"
-                    value={startAddress}
-                    onChange={(e) => setStartAddress(e.target.value)}
-                  />
-                </div>
-              </Autocomplete>
-            </Grid.Col>
-          </Grid>
-
           <div className="text-lg	text-black  mt-16		">
             <p
               className={`${
                 theme ? "text-white" : "text-slate-700"
               } text-xl font-semibold`}
             >
-              Thông Tin Điểm Đến
+              Thông tin điểm đến
             </p>
 
             <Grid className="my-6">
@@ -544,16 +542,16 @@ const EditFlights = () => {
                 theme ? "text-white" : "text-slate-700"
               } text-xl font-semibold`}
             >
-              Liên Hệ Và Tiện Ích
+              Quy định và liên hệ
             </p>
             <Grid className="my-6">
               <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
                 <div className="w-full flex flex-col md:flex-row flex-wrap    ">
                   <Textarea
                     // withAsterisk
-                    label="Tiện ích"
+                    label="Quy định"
                     className="w-full flex-1"
-                    placeholder="Nhập tiện ích"
+                    placeholder="Nhập quy định"
                     autosize
                     minRows={3}
                     maxRows={6}
