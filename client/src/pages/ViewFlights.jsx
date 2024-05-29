@@ -14,6 +14,7 @@ import useStore from "../store";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { getSingleTrip, getSinglePlans } from "../utils/apiCalls";
+import QRCode from "react-qr-code";
 
 const ViewFlights = () => {
   const { colorScheme } = useMantineColorScheme();
@@ -129,19 +130,19 @@ const ViewFlights = () => {
         Xem chi tiết kế hoạch máy bay
       </p>
       <br />
-      <>
-        <div>
-          <div className="max-w-full  bg-white flex flex-col rounded overflow-hidden shadow-lg">
-            <div className="flex flex-row items-center flex-nowrap bg-gray-100 p-2">
-              <div className="flex items-center text-sky-500">
-                <IconPlane size="2rem" stroke={2} />
-              </div>
-              <h1 className="ml-2 uppercase font-bold text-gray-500">
-                {planName}
-              </h1>
-              {/* <p className="ml-2 font-normal text-gray-500">Wednesday 18 Aug</p> */}
+
+      <div>
+        <div className="max-w-full bg-white flex flex-col rounded overflow-hidden shadow-lg">
+          <div className="flex flex-row items-center flex-nowrap bg-gray-100 p-2">
+            <div className="flex items-center text-sky-600">
+              <IconPlane size="2rem" stroke={2} />
             </div>
-            {/* <div className="mt-2 flex justify-start bg-white p-2">
+            <h1 className="ml-2 uppercase font-bold text-sky-600">
+              {planName}
+            </h1>
+            {/* <p className="ml-2 font-normal text-gray-500">Wednesday 18 Aug</p> */}
+          </div>
+          {/* <div className="mt-2 flex justify-start bg-white p-2">
               <div className="flex mx-2 ml-6 h8 px-2 flex-row items-center rounded-full bg-gray-100 p-1">
                 <svg
                   viewBox="0 0 64 64"
@@ -158,87 +159,98 @@ const ViewFlights = () => {
                 </p>
               </div>
             </div> */}
-            <div className="mt-2 flex sm:flex-row mx-6 sm:justify-between flex-wrap ">
-              <div className="flex flex-col p-2">
-                <p className="font-bold">{startTime}</p>
-                <p className="text-gray-500">
-                  <span className="font-bold">Ngày khởi hành: </span>
-                  {moment(startDate).format("LL")}
-                </p>
-                <p className="text-gray-500">{startAddress}</p>
-              </div>
-              <div className="flex flex-col flex-wrap p-2">
-                <p className="font-bold">{endTime}</p>
-                <p className="text-gray-500">
-                  <span className="font-bold">Ngày đến: </span>
-                  {moment(endDate).format("LL")}
-                </p>
-                <p className="text-gray-500">{endAddress}</p>
-              </div>
-              <div className="flex flex-row place-items-center p-2">
-                <div className="flex flex-col ml-2">
-                  <p className="text-xs text-black font-bold">Thông tin</p>
-                  <p className="text-xs text-gray-500">Số chuyến bay: {info}</p>
-                  <p className="text-xs text-gray-500">Chỗ ngồi: {number}</p>
-                  <p className="text-xs text-gray-500">Hạng vé: {form}</p>
-                  <p className="text-xs text-gray-500">Cổng: {departureGate}</p>
-                </div>
-              </div>
+          <div className="mt-2 flex sm:flex-row mx-6 sm:justify-between flex-wrap ">
+            <div className="flex flex-col p-2">
+              <p className="font-bold">{startTime}</p>
+              <p className="text-gray-500">
+                <span className="font-bold">Ngày khởi hành: </span>
+                {moment(startDate).format("LL")}
+              </p>
+              <p className="text-gray-500">{startAddress}</p>
             </div>
-            <div className="mt-4 bg-gray-100 flex flex-row flex-wrap md:flex-nowrap justify-between">
-              <div className="flex mx-6 py-4 flex-row flex-wrap">
-                <IconFileInfo
-                  className="w-12 h-10 p-2 mx-2 self-center bg-gray-400 rounded-full text-white"
-                  stroke={2}
-                />
-                <div className="text-sm mx-2 flex flex-col space-y-2">
-                  <div className="flex items-center text-xs text-sky-700 ">
-                    <IconInfoTriangle size="1rem" stroke={2} className="mr-2" />
-                    <span className="max-w-[200px] break-words">
-                      {describe}
-                    </span>
-                  </div>
-                  <div className="flex items-center text-xs text-sky-700">
-                    <IconPhone size="1rem" stroke={2} className="mr-2" />
-                    <span>{phone}</span>
-                  </div>
-                  <div className="flex items-center text-xs text-sky-700">
-                    <IconWorld size="1rem" stroke={2} className="mr-2" />
-                    <span>{web}</span>
-                  </div>
-                  <div className="flex items-center text-xs text-sky-700">
-                    <IconMail size="1rem" stroke={2} className="mr-2" />
-                    <span>{email}</span>
-                  </div>
-                </div>
-              </div>
-              <div className="md:border-l-2 mx-6 md:border-dotted flex flex-row items-center py-4 mr-6 flex-wrap">
-                <IconPlane
-                  className="w-12 h-10 p-2 mx-2 self-center bg-sky-500 rounded-full fill-current text-white"
-                  stroke={2}
-                />
-
-                <div className="text-sm mx-2 flex flex-col">
-                  <p className="text-black">
-                    <span className="font-bold">Giá vé dự kiến: </span>
-                    {formatCurrency(estimatedPrice)}
-                  </p>
-                  <p className="text-black">
-                    <span className="font-bold">Giá vé thực tế: </span>
-                    {formatCurrency(actualPrice)}
-                  </p>
-                </div>
-                <Link
-                  to={`/trip/${id}/flights/${planId}/edit`}
-                  className="w-32 h-11 rounded flex border-solid border text-white bg-sky-800 mx-2 justify-center items-center"
-                >
-                  <div className="">Cập nhật</div>
-                </Link>
+            <div className="flex flex-col flex-wrap p-2">
+              <p className="font-bold">{endTime}</p>
+              <p className="text-gray-500">
+                <span className="font-bold">Ngày đến: </span>
+                {moment(endDate).format("LL")}
+              </p>
+              <p className="text-gray-500">{endAddress}</p>
+            </div>
+            <div className="flex flex-row place-items-center p-2">
+              <div className="flex flex-col ml-2">
+                <p className="text-xs text-black font-bold">Thông tin</p>
+                <p className="text-xs text-gray-500">Số chuyến bay: {info}</p>
+                <p className="text-xs text-gray-500">Chỗ ngồi: {number}</p>
+                <p className="text-xs text-gray-500">Hạng vé: {form}</p>
+                <p className="text-xs text-gray-500">Cổng: {departureGate}</p>
               </div>
             </div>
           </div>
+          <div className="mt-4 bg-gray-100 flex flex-row flex-wrap md:flex-nowrap justify-between">
+            <div className="flex mx-6 py-4 flex-row flex-wrap items-center">
+              {/* <IconFileInfo
+                  className="w-12 h-10 p-2 mx-2 self-center bg-gray-400 rounded-full text-white"
+                  stroke={2}
+                /> */}
+              <QRCode
+                id="qrcode"
+                value={`http://localhost:3000/trip/${id}`}
+                size={100}
+                fgColor={"#000000"}
+                bgColor={"#FFFFFF"}
+                level={"M"}
+                includeMargin={true}
+              />
+
+              <div className="text-sm mx-2 flex flex-col space-y-2">
+                <div className="flex items-center text-xs text-sky-700 ">
+                  <IconInfoTriangle size="1rem" stroke={2} className="mr-2" />
+                  <span className="max-w-[200px] break-words">{describe}</span>
+                </div>
+                <div className="flex items-center text-xs text-sky-700">
+                  <IconPhone size="1rem" stroke={2} className="mr-2" />
+                  <a href={`tel:${phone}`}>{phone}</a>
+                </div>
+                <div className="flex items-center text-xs text-sky-700">
+                  <IconWorld size="1rem" stroke={2} className="mr-2" />
+                  <a href={`${web}`} target="_blank" rel="noreferrer">
+                    {web}
+                  </a>
+                </div>
+                <div className="flex items-center text-xs text-sky-700">
+                  <IconMail size="1rem" stroke={2} className="mr-2" />
+                  <span>
+                    <a href={`mailto:${email}`}>{email}</a>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="md:border-l-2 mx-6 md:border-dotted flex flex-row items-center py-4 mr-6 flex-wrap">
+              <IconPlane
+                className="w-12 h-10 p-2 mx-2 self-center bg-sky-500 rounded-full fill-current text-white"
+                stroke={2}
+              />
+
+              <div className="text-sm mx-2 flex flex-col">
+                <p className="text-black">
+                  <span className="font-bold">Giá vé dự kiến: </span>
+                  {formatCurrency(estimatedPrice)}
+                </p>
+                <p className="text-black">
+                  <span className="font-bold">Giá vé thực tế: </span>
+                  {formatCurrency(actualPrice)}
+                </p>
+              </div>
+              <Link
+                to={`/trip/${id}/flights/${planId}/edit`}
+                className="w-32 h-11 rounded flex border-solid border text-white bg-sky-600 hover:bg-gray-600 transition duration-150 ease-in-out mx-2 justify-center items-center"
+              >
+                <div className="">Cập nhật</div>
+              </Link>
+            </div>
+          </div>
         </div>
-      </>
+      </div>
     </div>
   );
 };
