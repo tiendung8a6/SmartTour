@@ -245,7 +245,7 @@ const ViewFlights = () => {
                 to={`/trip/${id}/flights/${planId}/edit`}
                 className="w-32 h-11 rounded flex border-solid border text-white bg-sky-600 hover:bg-gray-600 transition duration-150 ease-in-out mx-2 justify-center items-center"
               >
-                <div className="">Cập nhật</div>
+                <div>Chỉnh sửa</div>
               </Link>
             </div>
           </div>
