@@ -167,7 +167,7 @@ const NewLodging = () => {
       }
     }
     if (!estimatedPrice) {
-      toast.error("Vui lòng nhập tổng giá vé dự kiến.");
+      toast.error("Vui lòng nhập tổng chi phí dự kiến.");
       return;
     }
     setIsLoading(true);
