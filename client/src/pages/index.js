@@ -40,6 +40,7 @@ import Checkout from "./Checkout";
 import Cancel from "./Cancel";
 import Success from "./Success";
 import EditLodging from "./EditLodging";
+import EditRestaurant from "./EditRestaurant";
 export {
   BlogDetail,
   CategoryPage,
@@ -83,4 +84,5 @@ export {
   Cancel,
   Success,
   EditLodging,
+  EditRestaurant,
 };

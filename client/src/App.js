@@ -42,6 +42,7 @@ import {
   Cancel,
   Success,
   EditLodging,
+  EditRestaurant,
 } from "./pages";
 import { Footer, Loading, Navbar } from "./components";
 import useStore from "./store";
@@ -130,7 +131,10 @@ function App() {
               path="/trip/:id/lodging/:planId/edit"
               element={<EditLodging />}
             />
-
+            <Route
+              path="/trip/:id/restaurant/:planId/edit"
+              element={<EditRestaurant />}
+            />
             <Route path="/profile" element={<Profile />} />
           </Route>
           <Route path="/sign-up" element={<SignUp />} />

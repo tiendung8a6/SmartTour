@@ -1111,3 +1111,60 @@ export const updatePlanLodging = async (req, res, next) => {
     res.status(500).json({ success: false, message: "Lỗi máy chủ" });
   }
 };
+export const updatePlanRestaurant = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const {
+      planName,
+      startDate,
+      startTime,
+      endDate,
+      endTime,
+      startAddress,
+      info,
+      phone,
+      web,
+      email,
+      describe,
+      form,
+      estimatedPrice,
+      actualPrice,
+    } = req.body;
+
+    const updatedFields = {};
+    if (planName) updatedFields.planName = planName;
+    if (startDate) updatedFields.startDate = startDate;
+    if (startTime) updatedFields.startTime = startTime;
+    if (endDate) updatedFields.endDate = endDate;
+    if (endTime) updatedFields.endTime = endTime;
+    if (startAddress) updatedFields.startAddress = startAddress;
+    if (info) updatedFields.info = info;
+    if (phone) updatedFields.phone = phone;
+    if (web) updatedFields.web = web;
+    if (email) updatedFields.email = email;
+    if (describe) updatedFields.describe = describe;
+    if (form) updatedFields.form = form;
+    if (estimatedPrice) updatedFields.estimatedPrice = estimatedPrice;
+    if (actualPrice) updatedFields.actualPrice = actualPrice;
+
+    const plan = await Plans.findByIdAndUpdate(id, updatedFields, {
+      new: true,
+    });
+
+    if (!plan) {
+      return res.status(404).json({
+        success: false,
+        message: "Không tìm thấy kế hoạch",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Cập nhật kế hoạch nhà hàng đã thành công.",
+      data: plan,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Lỗi máy chủ" });
+  }
+};
