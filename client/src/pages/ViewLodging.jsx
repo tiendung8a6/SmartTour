@@ -191,7 +191,7 @@ const ViewLodging = () => {
             </div>
             <div className="md:border-l-2 mx-6 md:border-dotted flex flex-row items-center py-4 mr-6 flex-wrap">
               <IconBed
-                className="w-12 h-10 p-2 mx-2 self-center bg-sky-500 rounded-full fill-current text-white"
+                className="w-12 h-10 p-2 mx-2 self-center bg-sky-500 rounded-full text-white"
                 stroke={2}
               />
 

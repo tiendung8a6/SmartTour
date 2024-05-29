@@ -1,42 +1,44 @@
-import moment from "moment";
-import { Button, useMantineColorScheme } from "@mantine/core";
+import {
+  Button,
+  useMantineColorScheme,
+  Autocomplete as MantineAutocomplete,
+} from "@mantine/core";
+import React, { useEffect, useState, useRef } from "react";
+import useStore from "../store";
+import { DateInput, TimeInput } from "@mantine/dates";
+import { Link, useParams } from "react-router-dom";
 import {
   IconArrowLeft,
-  IconPlane,
+  IconCar,
   IconFileInfo,
   IconPhone,
   IconInfoTriangle,
   IconMail,
   IconWorld,
 } from "@tabler/icons-react";
-import React, { useEffect, useState, useRef } from "react";
-import useStore from "../store";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
 import { getSingleTrip, getSinglePlans } from "../utils/apiCalls";
+import moment from "moment";
 import QRCode from "react-qr-code";
 
-const ViewFlights = () => {
+const ViewCar = () => {
   const { colorScheme } = useMantineColorScheme();
   const { id, planId } = useParams();
+  const { user } = useStore();
 
   const [planName, setPlanName] = useState(null);
   const [startAddress, setStartAddress] = useState(null);
-  const [estimatedPrice, setEstimatedPrice] = useState(null);
-  const [actualPrice, setActualPrice] = useState(null);
-  const [info, setInfo] = useState(null);
   const [phone, setPhone] = useState(null);
   const [web, setWeb] = useState(null);
   const [email, setEmail] = useState(null);
-  const [number, setNumber] = useState(null);
+  const [service, setService] = useState(null);
   const [describe, setDescribe] = useState(null);
   const [form, setForm] = useState(null);
-  const [endAddress, setEndAddress] = useState(null);
-  const [arrivalGate, setArrivalGate] = useState(null);
-  const [departureGate, setDepartureGate] = useState(null);
+  const [estimatedPrice, setEstimatedPrice] = useState(null);
+  const [actualPrice, setActualPrice] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [startTime, setStartTime] = useState(null);
+  const [info, setInfo] = useState(null);
   const [endTime, setEndTime] = useState(null);
   const startTimeRef = useRef(null);
   const endTimeRef = useRef(null);
@@ -63,19 +65,16 @@ const ViewFlights = () => {
       if (data) {
         setPlanName(data.planName);
         setStartAddress(data.startAddress);
-        setEndAddress(data.endAddress);
-        setInfo(data.info);
         setEstimatedPrice(data.estimatedPrice);
         setActualPrice(data.actualPrice);
         setStartDate(new Date(data.startDate));
         setEndDate(new Date(data.endDate));
         setStartTime(data.startTime);
         setEndTime(data.endTime);
-        setNumber(data.number);
         setForm(data.form);
-        setDepartureGate(data.departureGate);
-        setArrivalGate(data.arrivalGate);
+        setService(data.service);
         setDescribe(data.describe);
+        setInfo(data.info);
         setPhone(data.phone);
         setWeb(data.web);
         setEmail(data.email);
@@ -127,7 +126,7 @@ const ViewFlights = () => {
           theme ? "text-white" : "text-slate-700"
         } text-2xl font-semibold mt-4`}
       >
-        Xem chi tiết kế hoạch máy bay
+        Xem chi tiết kế hoạch thuê xe
       </p>
       <br />
 
@@ -135,7 +134,7 @@ const ViewFlights = () => {
         <div className="max-w-full bg-white flex flex-col rounded overflow-hidden shadow-lg">
           <div className="flex flex-row items-center flex-nowrap bg-gray-100 p-2">
             <div className="flex items-center text-sky-600">
-              <IconPlane size="2rem" stroke={2} />
+              <IconCar size="2rem" stroke={2} />
             </div>
             <h1 className="ml-2 uppercase font-bold text-sky-600">
               {planName}
@@ -145,7 +144,7 @@ const ViewFlights = () => {
             <div className="flex flex-col p-2">
               <p className="font-bold">{startTime}</p>
               <p className="text-gray-500">
-                <span className="font-bold">Ngày khởi hành: </span>
+                <span className="font-bold">Ngày nhận: </span>
                 {moment(startDate).format("LL")}
               </p>
               <p className="text-gray-500">{startAddress}</p>
@@ -153,18 +152,17 @@ const ViewFlights = () => {
             <div className="flex flex-col flex-wrap p-2">
               <p className="font-bold">{endTime}</p>
               <p className="text-gray-500">
-                <span className="font-bold">Ngày đến: </span>
+                <span className="font-bold">Ngày trả: </span>
                 {moment(endDate).format("LL")}
               </p>
-              <p className="text-gray-500">{endAddress}</p>
+              <p className="text-gray-500">{startAddress}</p>
             </div>
             <div className="flex flex-row place-items-center p-2">
               <div className="flex flex-col ml-2">
-                <p className="text-xs text-black font-bold">Thông tin</p>
-                <p className="text-xs text-gray-500">Số chuyến bay: {info}</p>
-                <p className="text-xs text-gray-500">Chỗ ngồi: {number}</p>
-                <p className="text-xs text-gray-500">Hạng vé: {form}</p>
-                <p className="text-xs text-gray-500">Cổng: {departureGate}</p>
+                <p className="text-xs text-black font-bold">Thông tin xe</p>
+                <p className="text-xs text-gray-500">Loại xe: {form}</p>
+                <p className="text-xs text-gray-500">Dịch vụ: {service}</p>
+                <p className="text-xs text-gray-500">Chi tiết xe: {describe}</p>
               </div>
             </div>
           </div>
@@ -172,7 +170,7 @@ const ViewFlights = () => {
             <div className="flex mx-6 py-4 flex-row flex-wrap items-center">
               <QRCode
                 id="qrcode"
-                value={`http://localhost:3000/trip/${id}/flights/${planId}/view`}
+                value={`http://localhost:3000/trip/${id}/car/${planId}/view`}
                 size={100}
                 fgColor={"#000000"}
                 bgColor={"#FFFFFF"}
@@ -183,7 +181,7 @@ const ViewFlights = () => {
               <div className="text-sm mx-2 flex flex-col space-y-2">
                 <div className="flex items-center text-xs text-sky-700 ">
                   <IconInfoTriangle size="1rem" stroke={2} className="mr-2" />
-                  <span className="max-w-[200px] break-words">{describe}</span>
+                  <span className="max-w-[200px] break-words">{info}</span>
                 </div>
                 <div className="flex items-center text-xs text-sky-700">
                   <IconPhone size="1rem" stroke={2} className="mr-2" />
@@ -204,9 +202,9 @@ const ViewFlights = () => {
               </div>
             </div>
             <div className="md:border-l-2 mx-6 md:border-dotted flex flex-row items-center py-4 mr-6 flex-wrap">
-              <IconPlane
+              <IconCar
                 className="w-12 h-10 p-2 mx-2 self-center bg-sky-500 rounded-full text-white"
-                stroke={2}
+                stroke={1.5}
               />
 
               <div className="text-sm mx-2 flex flex-col">
@@ -220,7 +218,7 @@ const ViewFlights = () => {
                 </p>
               </div>
               <Link
-                to={`/trip/${id}/flights/${planId}/edit`}
+                to={`/trip/${id}/car/${planId}/edit`}
                 className="w-32 h-11 rounded flex border-solid border text-white bg-sky-600 hover:bg-gray-600 transition duration-150 ease-in-out mx-2 justify-center items-center"
               >
                 <div>Chỉnh sửa</div>
@@ -233,4 +231,4 @@ const ViewFlights = () => {
   );
 };
 
-export default ViewFlights;
+export default ViewCar;
