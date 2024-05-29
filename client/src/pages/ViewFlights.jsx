@@ -194,7 +194,7 @@ const ViewFlights = () => {
                 /> */}
               <QRCode
                 id="qrcode"
-                value={`http://localhost:3000/trip/${id}`}
+                value={`http://localhost:3000/trip/${id}/flights/${planId}/view`}
                 size={100}
                 fgColor={"#000000"}
                 bgColor={"#FFFFFF"}

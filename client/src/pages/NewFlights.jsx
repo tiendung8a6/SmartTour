@@ -114,7 +114,7 @@ const NewFlights = () => {
       return;
     }
     if (!startAddress) {
-      toast.error("Vui lòng nhập địa chỉ sân bay.");
+      toast.error("Vui lòng nhập địa chỉ sân bay khởi hành.");
       return;
     }
     if (!startDate) {
@@ -139,7 +139,7 @@ const NewFlights = () => {
       return;
     }
     if (!endAddress) {
-      toast.error("Vui lòng nhập địa đến.");
+      toast.error("Vui lòng nhập địa chỉ đến.");
       return;
     }
     if (endDate < startDate) {

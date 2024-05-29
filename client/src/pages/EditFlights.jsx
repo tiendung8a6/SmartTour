@@ -118,6 +118,10 @@ const EditFlights = () => {
       toast.error("Vui lòng nhập hãng hàng không.");
       return;
     }
+    if (!startAddress) {
+      toast.error("Vui lòng nhập địa chỉ sân bay khởi hành.");
+      return;
+    }
     if (!startDate) {
       toast.error("Vui lòng chọn ngày khởi hành.");
       return;
@@ -130,10 +134,6 @@ const EditFlights = () => {
       toast.error("Vui lòng nhập tổng giá vé dự kiến.");
       return;
     }
-    if (!startAddress) {
-      toast.error("Vui lòng nhập địa chỉ sân bay.");
-      return;
-    }
 
     if (!endDate) {
       toast.error("Vui lòng chọn ngày đến.");
@@ -144,7 +144,7 @@ const EditFlights = () => {
       return;
     }
     if (!endAddress) {
-      toast.error("Vui lòng nhập địa đến.");
+      toast.error("Vui lòng nhập địa chỉ đến.");
       return;
     }
     if (endDate < startDate) {
