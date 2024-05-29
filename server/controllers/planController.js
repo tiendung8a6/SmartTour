@@ -510,9 +510,11 @@ export const createPlanRestaurant = async (req, res, next) => {
       email,
       describe,
       form,
-      price,
+      estimatedPrice,
+      actualPrice,
     } = req.body;
     const { id } = req.params;
+    const price = actualPrice ? actualPrice : estimatedPrice;
 
     const plan = await Plans.create({
       planName,
@@ -527,7 +529,8 @@ export const createPlanRestaurant = async (req, res, next) => {
       email,
       describe,
       form,
-      price,
+      estimatedPrice,
+      actualPrice: price,
       type: "restaurant",
     });
 
