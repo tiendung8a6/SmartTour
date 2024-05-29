@@ -41,6 +41,7 @@ import {
   Checkout,
   Cancel,
   Success,
+  EditLodging,
 } from "./pages";
 import { Footer, Loading, Navbar } from "./components";
 import useStore from "./store";
@@ -125,6 +126,10 @@ function App() {
               element={<EditParking />}
             />
             <Route path="/trip/:id/rail/:planId/edit" element={<EditRail />} />
+            <Route
+              path="/trip/:id/lodging/:planId/edit"
+              element={<EditLodging />}
+            />
 
             <Route path="/profile" element={<Profile />} />
           </Route>

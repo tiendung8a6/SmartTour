@@ -670,6 +670,34 @@ export const useUpdateParkingPlan = (planId, toast, token, id) => {
     },
   });
 };
+export const useUpdateLodgingPlan = (planId, toast, token, id) => {
+  return useMutation({
+    mutationFn: async (formData) => {
+      const { data } = await axios.patch(
+        `${API_URL}/plans/update/lodging/${planId}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return data;
+    },
+
+    onError: async (error) => {
+      toast.error(error?.response?.data?.message ?? error.message);
+    },
+
+    onSuccess: async (data) => {
+      toast.success(data?.message);
+
+      setTimeout(() => {
+        window.location.replace(`/trip/${id}`);
+      }, 1000);
+    },
+  });
+};
 export const useUpdateRailPlan = (planId, toast, token, id) => {
   return useMutation({
     mutationFn: async (formData) => {

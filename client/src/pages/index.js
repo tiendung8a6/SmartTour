@@ -39,6 +39,7 @@ import Pricing from "./Pricing";
 import Checkout from "./Checkout";
 import Cancel from "./Cancel";
 import Success from "./Success";
+import EditLodging from "./EditLodging";
 export {
   BlogDetail,
   CategoryPage,
@@ -81,4 +82,5 @@ export {
   Checkout,
   Cancel,
   Success,
+  EditLodging,
 };

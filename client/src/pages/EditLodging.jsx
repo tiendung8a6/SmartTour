@@ -13,7 +13,7 @@ import { useDisclosure } from "@mantine/hooks";
 import React, { useEffect, useState, useRef } from "react";
 import { Toaster, toast } from "sonner";
 import { LoadingClient } from "../components";
-import { useCreateLodgingPlan } from "../hooks/client-hook";
+import { useUpdateLodgingPlan } from "../hooks/client-hook";
 import useStore from "../store";
 import { DateInput, TimeInput } from "@mantine/dates";
 import { Link, useParams } from "react-router-dom";
@@ -23,7 +23,7 @@ import {
   IconCalendarEvent,
   IconCurrencyDong,
 } from "@tabler/icons-react";
-import { getSingleTrip } from "../utils/apiCalls";
+import { getSingleTrip, getSinglePlans } from "../utils/apiCalls";
 import { Autocomplete } from "@react-google-maps/api";
 import hotels from "../assets/hotels.json";
 
@@ -35,12 +35,17 @@ const normalizeString = (str) => {
     .toLowerCase();
 };
 
-const NewLodging = () => {
+const EditLodging = () => {
   const { colorScheme } = useMantineColorScheme();
-  const { id } = useParams();
+  const { id, planId } = useParams();
   const { user } = useStore();
   const [visible, { toggle }] = useDisclosure(false);
-  const { isPending, mutate } = useCreateLodgingPlan(id, toast, user?.token);
+  const { isPending, mutate } = useUpdateLodgingPlan(
+    planId,
+    toast,
+    user?.token,
+    id
+  );
   const [planName, setPlanName] = useState(null);
   const [startAddress, setStartAddress] = useState(null);
   const [info, setInfo] = useState(null);
@@ -64,6 +69,7 @@ const NewLodging = () => {
 
   //Gọi Danh sách hotel từ Json
   const [hotelOptions, setHotelOptions] = useState([]);
+  // const [searchQuery, setSearchQuery] = useState("");
 
   // Lấy 100 hotel đầu tiên khi component được render
   useEffect(() => {
@@ -84,6 +90,9 @@ const NewLodging = () => {
       .map((hotelData) => hotelData.hotel)
       .slice(0, 50); // Giới hạn hiển thị 10 kết quả đầu
     setHotelOptions(filteredOptions);
+
+    // Lưu giá trị của planName
+    // setPlanName(query);
   };
 
   // AuTo Fill GOOGLE
@@ -167,7 +176,7 @@ const NewLodging = () => {
       }
     }
     if (!estimatedPrice) {
-      toast.error("Vui lòng nhập tổng giá vé dự kiến.");
+      toast.error("Vui lòng nhập tổng chi phí dự kiến.");
       return;
     }
     setIsLoading(true);
@@ -189,6 +198,39 @@ const NewLodging = () => {
     });
   };
 
+  //TRUY VẤN DỮ LIỆU PLAN
+  const fetchPlan = async () => {
+    try {
+      const data = await getSinglePlans(planId);
+
+      if (data) {
+        setPlanName(data.planName);
+        setStartAddress(data.startAddress);
+        setEstimatedPrice(data.estimatedPrice);
+        setActualPrice(data.actualPrice);
+        setStartDate(new Date(data.startDate));
+        setEndDate(new Date(data.endDate));
+        setStartTime(data.startTime);
+        setEndTime(data.endTime);
+        setPhone(data.phone);
+        setWeb(data.web);
+        setEmail(data.email);
+        setInfo(data.info);
+        setNumber(data.number);
+        setDescribe(data.describe);
+      }
+    } catch (error) {
+      console.error("Error fetching plan:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (planId) {
+      fetchPlan();
+    }
+  }, [planId]);
+
+  //TRUY VẤN DỮ LIỆU TRIP
   const fetchTrip = async () => {
     try {
       const data = await getSingleTrip(id);
@@ -208,7 +250,7 @@ const NewLodging = () => {
   }, [id]);
   return (
     <div className="px-[100px] mb-10">
-      <Link to={`/trip/${trip?._id}/plans/create`}>
+      <Link to={`/trip/${trip?._id}`}>
         <Button
           className="border-none hover:text-[#0782c5] hover:bg-transparent flex justify-start ml-[-20px] "
           leftSection={<IconArrowLeft className="text-[#0782c5]" size={30} />}
@@ -224,7 +266,7 @@ const NewLodging = () => {
           theme ? "text-white" : "text-slate-700"
         } text-2xl font-semibold mt-4`}
       >
-        Thêm chỗ ở
+        Chỉnh sửa chỗ ở
       </p>
       <br />
 
@@ -502,7 +544,7 @@ const NewLodging = () => {
 
       <div className="flex justify-start gap-3 ">
         <div className=" flex items-end justify-start mt-5">
-          <Link to={`/trip/${trip?._id}/plans/create`}>
+          <Link to={`/trip/${trip?._id}`}>
             <Button variant="outline" color="Red" size="md" radius="md">
               Hủy
             </Button>
@@ -528,4 +570,4 @@ const NewLodging = () => {
   );
 };
 
-export default NewLodging;
+export default EditLodging;
