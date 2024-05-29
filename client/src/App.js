@@ -43,6 +43,7 @@ import {
   Success,
   EditLodging,
   EditRestaurant,
+  ViewFlights,
 } from "./pages";
 import { Footer, Loading, Navbar } from "./components";
 import useStore from "./store";
@@ -135,6 +136,12 @@ function App() {
               path="/trip/:id/restaurant/:planId/edit"
               element={<EditRestaurant />}
             />
+
+            <Route
+              path="/trip/:id/flights/:planId/view"
+              element={<ViewFlights />}
+            />
+
             <Route path="/profile" element={<Profile />} />
           </Route>
           <Route path="/sign-up" element={<SignUp />} />

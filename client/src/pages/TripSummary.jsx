@@ -29,6 +29,7 @@ import {
   IconTrash,
   IconArrowsLeftRight,
   IconPlaneInflight,
+  IconPlane,
   IconCar,
   IconBuildingSkyscraper,
   IconTrain,
@@ -434,7 +435,7 @@ const TripSummary = () => {
                       ) : item.type === "activity" ? (
                         <IconWalk stroke={2} className="" />
                       ) : item.type === "flights" ? (
-                        <IconPlaneInflight stroke={2} className="" />
+                        <IconPlane stroke={2} className="" />
                       ) : item.type === "car" ? (
                         <IconCar stroke={2} className="" />
                       ) : item.type === "theater" ? (
@@ -491,13 +492,17 @@ const TripSummary = () => {
                     {/* <br /> */}
                     {/* <div ></div> */}
                     <Grid.Col span={{ base: 12, md: 6, lg: 8 }}>
-                      <span className="text-xl font-medium text-[#0d4d84f4]">
-                        {`${item.planName} ${
-                          item.typeTime === "start"
-                            ? "(Hoạt động bắt đầu )"
-                            : "(Hoạt động kết thúc)"
-                        } `}
-                      </span>
+                      <Link
+                        to={`/trip/${trip?._id}/${item?.type}/${item?._id}/view`}
+                      >
+                        <span className="text-xl font-medium text-[#0d4d84f4]">
+                          {`${item.planName} ${
+                            item.typeTime === "start"
+                              ? "(Hoạt động bắt đầu )"
+                              : "(Hoạt động kết thúc)"
+                          } `}
+                        </span>
+                      </Link>
                       <span className="">
                         {item.typeTime === "start" ? (
                           <p className="my-5">
