@@ -48,7 +48,7 @@ const PlansCreate = () => {
   if (!trip)
     return (
       <div className="w-full h-full py-8 flex items-center justify-center">
-        <span className="text-xl text-slate-500">Loading...</span>
+        <span className="text-xl text-slate-500">Đang tải...</span>
       </div>
     );
 
