@@ -20,6 +20,7 @@ import {
   IconTrain,
   IconLuggage,
   IconAirBalloon,
+  IconPlane,
 } from "@tabler/icons-react";
 const MyTripsPanel = () => {
   const { trips, numOfPages, setPage } = useTrips();
@@ -857,7 +858,7 @@ const MyTripsPanel = () => {
                 >
                   <div className="flex  items-center gap-5 mt-[20px]">
                     <span className="bg-[#41b7cb] border-[#41b7cb] border-none rounded-full w-[40px] h-[40px] p-[2px]">
-                      <IconPlaneTilt
+                      <IconPlane
                         stroke={2}
                         className="text-[white] m-[3px] h-[30px] w-[30px] "
                       />

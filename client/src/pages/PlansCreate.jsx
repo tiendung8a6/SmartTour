@@ -16,6 +16,7 @@ import {
   IconMusic,
   IconToolsKitchen2,
   IconMasksTheater,
+  IconPlane,
 } from "@tabler/icons-react";
 const PlansCreate = () => {
   const { setIsLoading } = useStore();
@@ -93,10 +94,7 @@ const PlansCreate = () => {
             to={`/trip/${trip._id}/flights/create`}
             className="p-4 border rounded-full flex bg-gray-50"
           >
-            <IconPlaneInflight
-              stroke={2}
-              className="ml-[10px] text-[#41b7cb] "
-            />
+            <IconPlane stroke={2} className="ml-[10px] text-[#41b7cb] " />
             <span className="ml-[10px] text-[#0782c5] font-semibold ">
               Chuyến bay
             </span>
