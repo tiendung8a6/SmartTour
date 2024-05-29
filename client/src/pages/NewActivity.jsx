@@ -219,6 +219,7 @@ const NewActivity = () => {
                   label="Thời gian bắt đầu"
                   leftSection={pickerStartTimeControl}
                   withAsterisk
+                  value={startTime}
                   // description="Input description"
                   placeholder="Chọn thời gian bắt đầu"
                   onChange={(e) => setStartTime(e.target.value)}

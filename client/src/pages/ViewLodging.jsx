@@ -11,7 +11,7 @@ import {
   IconBed,
 } from "@tabler/icons-react";
 import { getSingleTrip, getSinglePlans } from "../utils/apiCalls";
-import QRCode from "react-qr-code";
+import QRCode from "qrcode.react";
 import moment from "moment";
 
 const ViewLodging = () => {
@@ -47,6 +47,22 @@ const ViewLodging = () => {
         })
       : "N/A";
   };
+
+  // download QR code
+  const downloadQRCode = () => {
+    const qrCodeURL = document
+      .getElementById("qrCodeEl")
+      .toDataURL("image/png")
+      .replace("image/png", "image/octet-stream");
+    console.log(qrCodeURL);
+    let aEl = document.createElement("a");
+    aEl.href = qrCodeURL;
+    aEl.download = "QR_Code.png";
+    document.body.appendChild(aEl);
+    aEl.click();
+    document.body.removeChild(aEl);
+  };
+
   //TRUY VẤN DỮ LIỆU PLAN
   const fetchPlan = async () => {
     try {
@@ -157,13 +173,12 @@ const ViewLodging = () => {
           <div className="mt-4 bg-gray-100 flex flex-row flex-wrap md:flex-nowrap justify-between">
             <div className="flex mx-6 py-4 flex-row flex-wrap items-center">
               <QRCode
-                id="qrcode"
+                id="qrCodeEl"
                 value={`http://localhost:3000/trip/${id}/lodging/${planId}/view`}
                 size={100}
                 fgColor={"#000000"}
                 bgColor={"#FFFFFF"}
                 level={"M"}
-                includeMargin={true}
               />
 
               <div className="text-sm mx-2 flex flex-col space-y-2">

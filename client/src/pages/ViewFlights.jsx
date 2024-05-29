@@ -1,4 +1,3 @@
-import moment from "moment";
 import { Button, useMantineColorScheme } from "@mantine/core";
 import {
   IconArrowLeft,
@@ -15,6 +14,7 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { getSingleTrip, getSinglePlans } from "../utils/apiCalls";
 import QRCode from "qrcode.react";
+import moment from "moment";
 
 const ViewFlights = () => {
   const { colorScheme } = useMantineColorScheme();
@@ -163,6 +163,10 @@ const ViewFlights = () => {
                 <span className="font-bold">Ngày khởi hành: </span>
                 {moment(startDate).format("LL")}
               </p>
+              <p className="text-gray-500">
+                <span className="font-bold">Cổng: </span>
+                {departureGate}
+              </p>
               <p className="text-gray-500">{startAddress}</p>
             </div>
             <div className="flex flex-col flex-wrap p-2">
@@ -170,6 +174,10 @@ const ViewFlights = () => {
               <p className="text-gray-500">
                 <span className="font-bold">Ngày đến: </span>
                 {moment(endDate).format("LL")}
+              </p>
+              <p className="text-gray-500">
+                <span className="font-bold">Cổng: </span>
+                {arrivalGate}
               </p>
               <p className="text-gray-500">{endAddress}</p>
             </div>
@@ -179,7 +187,7 @@ const ViewFlights = () => {
                 <p className="text-xs text-gray-500">Số chuyến bay: {info}</p>
                 <p className="text-xs text-gray-500">Chỗ ngồi: {number}</p>
                 <p className="text-xs text-gray-500">Hạng vé: {form}</p>
-                <p className="text-xs text-gray-500">Cổng: {departureGate}</p>
+                {/* <p className="text-xs text-gray-500">Cổng: {departureGate}</p> */}
               </div>
             </div>
           </div>
@@ -240,7 +248,6 @@ const ViewFlights = () => {
               >
                 <div>Chỉnh sửa</div>
               </Link>
-              <Button onClick={downloadQRCode}> Download QR</Button>
             </div>
           </div>
         </div>

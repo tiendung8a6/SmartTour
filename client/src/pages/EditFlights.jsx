@@ -336,6 +336,7 @@ const EditFlights = () => {
                   label="Thời gian khởi hành"
                   leftSection={pickerStartTimeControl}
                   withAsterisk
+                  value={startTime}
                   // description="Input description"
                   placeholder="Chọn thời gian khởi hành"
                   onChange={(e) => setStartTime(e.target.value)}

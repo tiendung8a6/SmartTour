@@ -279,6 +279,7 @@ const NewRail = () => {
                   label="Thời gian đi"
                   leftSection={pickerStartTimeControl}
                   withAsterisk
+                  value={startTime}
                   // description="Input description"
                   placeholder="Chọn thời gian đi"
                   onChange={(e) => setStartTime(e.target.value)}
