@@ -524,7 +524,7 @@ const EditConcert = () => {
 
       <div className="flex justify-start gap-3">
         <div className=" flex items-end justify-start ">
-          <Link to={`/trip/${trip?._id}`}>
+          <Link to={`/trip/${id}`}>
             <Button variant="outline" color="Red" size="md" radius="md">
               Hủy
             </Button>
