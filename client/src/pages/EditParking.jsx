@@ -203,7 +203,7 @@ const EditParking = () => {
   }, [id]);
   return (
     <div className="px-[100px] mb-10">
-      <Link to={`/trip/${trip?._id}`}>
+      <Link to={`/trip/${id}`}>
         <Button
           className="border-none hover:text-[#0782c5] hover:bg-transparent flex justify-start ml-[-20px] "
           leftSection={<IconArrowLeft className="text-[#0782c5]" size={30} />}
