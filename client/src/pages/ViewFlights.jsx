@@ -187,7 +187,6 @@ const ViewFlights = () => {
                 <p className="text-xs text-gray-500">Số chuyến bay: {info}</p>
                 <p className="text-xs text-gray-500">Chỗ ngồi: {number}</p>
                 <p className="text-xs text-gray-500">Hạng vé: {form}</p>
-                {/* <p className="text-xs text-gray-500">Cổng: {departureGate}</p> */}
               </div>
             </div>
           </div>

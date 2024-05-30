@@ -194,7 +194,7 @@ const NewTheater = () => {
           theme ? "text-white" : "text-slate-700"
         } text-2xl font-semibold mt-4`}
       >
-        Thêm Buổi Xem Phim
+        Thêm buổi xem phim
       </p>
       <br />
 
@@ -363,7 +363,7 @@ const NewTheater = () => {
                 theme ? "text-white" : "text-slate-700"
               } text-xl font-semibold`}
             >
-              Thông Tin Ghế
+              Thông tin ghế
             </p>
             <Grid className="my-6">
               <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
@@ -415,7 +415,7 @@ const NewTheater = () => {
                 theme ? "text-white" : "text-slate-700"
               } text-xl font-semibold`}
             >
-              Thông Tin Rạp Phim
+              Quy định và liên hệ
             </p>
             <Grid className="my-6">
               <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
