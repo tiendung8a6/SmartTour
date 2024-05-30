@@ -46,6 +46,7 @@ import {
   ViewFlights,
   ViewLodging,
   ViewCar,
+  ViewParking,
 } from "./pages";
 import { Footer, Loading, Navbar } from "./components";
 import useStore from "./store";
@@ -146,6 +147,11 @@ function App() {
             <Route
               path="/trip/:id/lodging/:planId/view"
               element={<ViewLodging />}
+            />
+
+            <Route
+              path="/trip/:id/parking/:planId/view"
+              element={<ViewParking />}
             />
             <Route path="/trip/:id/car/:planId/view" element={<ViewCar />} />
             <Route path="/profile" element={<Profile />} />

@@ -44,6 +44,7 @@ import EditRestaurant from "./EditRestaurant";
 import ViewFlights from "./ViewFlights";
 import ViewLodging from "./ViewLodging";
 import ViewCar from "./ViewCar";
+import ViewParking from "./ViewParking";
 export {
   BlogDetail,
   CategoryPage,
@@ -91,4 +92,5 @@ export {
   ViewFlights,
   ViewLodging,
   ViewCar,
+  ViewParking,
 };

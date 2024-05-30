@@ -183,7 +183,7 @@ const NewParking = () => {
           theme ? "text-white" : "text-slate-700"
         } text-2xl font-semibold mt-4`}
       >
-        Thêm Giữ Xe
+        Thêm giữ xe
       </p>
       <br />
 
@@ -349,7 +349,7 @@ const NewParking = () => {
                 theme ? "text-white" : "text-slate-700"
               } text-xl font-semibold`}
             >
-              Nội Quy Và Liên Hệ
+              Nội quy và liên hệ
             </p>
             <Grid className="my-6">
               <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
