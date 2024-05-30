@@ -397,7 +397,7 @@ const NewRestaurant = () => {
                 theme ? "text-white" : "text-slate-700"
               } text-xl font-semibold`}
             >
-              Nội quy Và liên hệ
+              Nội quy và liên hệ
             </p>
             <Grid className="my-6">
               <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
@@ -435,7 +435,7 @@ const NewRestaurant = () => {
                 <div className="w-full flex flex-col md:flex-row flex-wrap    ">
                   <TextInput
                     // withAsterisk
-                    label="Trang Web "
+                    label="Trang web "
                     className="w-full flex-1"
                     placeholder="Nhập trang web"
                     value={web}

@@ -425,7 +425,7 @@ const EditParking = () => {
                 <div className="w-full flex flex-col md:flex-row flex-wrap    ">
                   <TextInput
                     // withAsterisk
-                    label="Trang Web "
+                    label="Trang web "
                     className="w-full flex-1"
                     placeholder="Nhập trang web"
                     value={web}
