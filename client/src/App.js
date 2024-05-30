@@ -48,6 +48,7 @@ import {
   ViewCar,
   ViewParking,
   ViewTheater,
+  ViewRail,
 } from "./pages";
 import { Footer, Loading, Navbar } from "./components";
 import useStore from "./store";
@@ -160,6 +161,8 @@ function App() {
               element={<ViewParking />}
             />
             <Route path="/trip/:id/car/:planId/view" element={<ViewCar />} />
+            <Route path="/trip/:id/rail/:planId/view" element={<ViewRail />} />
+
             <Route path="/profile" element={<Profile />} />
           </Route>
           <Route path="/sign-up" element={<SignUp />} />

@@ -17,6 +17,7 @@ import {
   IconToolsKitchen2,
   IconMasksTheater,
   IconPlane,
+  IconBed,
 } from "@tabler/icons-react";
 const PlansCreate = () => {
   const { setIsLoading } = useStore();
@@ -106,10 +107,7 @@ const PlansCreate = () => {
             to={`/trip/${trip._id}/lodging/create`}
             className="p-4 border rounded-full flex bg-gray-50"
           >
-            <IconBuildingSkyscraper
-              stroke={2}
-              className="ml-[10px] text-[#41b7cb] "
-            />
+            <IconBed stroke={2} className="ml-[10px] text-[#41b7cb] " />
             <span className="ml-[10px] text-[#0782c5] font-semibold ">
               Lưu trú
             </span>

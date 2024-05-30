@@ -257,7 +257,7 @@ const EditRail = () => {
               theme ? "text-white" : "text-slate-700"
             } text-xl	 font-semibold `}
           >
-            Thông Tin Ga Đi
+            Thông tin ga đi
           </p>
 
           <Grid className="my-6">
@@ -506,7 +506,7 @@ const EditRail = () => {
                 theme ? "text-white" : "text-slate-700"
               } text-xl font-semibold`}
             >
-              Thông Tin Ga Đến
+              Thông tin ga đến
             </p>
 
             <Grid className="my-6">
@@ -570,7 +570,7 @@ const EditRail = () => {
                 theme ? "text-white" : "text-slate-700"
               } text-xl font-semibold`}
             >
-              Liên Hệ Và Quy Định
+              Quy định và liên hệ
             </p>
             <Grid className="my-6">
               <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
