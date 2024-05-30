@@ -50,6 +50,7 @@ import {
   ViewTheater,
   ViewRail,
   ViewConcert,
+  ViewRestaurant,
 } from "./pages";
 import { Footer, Loading, Navbar } from "./components";
 import useStore from "./store";
@@ -166,6 +167,10 @@ function App() {
             <Route
               path="/trip/:id/concert/:planId/view"
               element={<ViewConcert />}
+            />
+            <Route
+              path="/trip/:id/restaurant/:planId/view"
+              element={<ViewRestaurant />}
             />
 
             <Route path="/profile" element={<Profile />} />

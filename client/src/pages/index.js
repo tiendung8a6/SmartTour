@@ -48,6 +48,7 @@ import ViewParking from "./ViewParking";
 import ViewTheater from "./ViewTheater";
 import ViewRail from "./ViewRail";
 import ViewConcert from "./ViewConcert";
+import ViewRestaurant from "./ViewRestaurant";
 export {
   BlogDetail,
   CategoryPage,
@@ -99,4 +100,5 @@ export {
   ViewTheater,
   ViewRail,
   ViewConcert,
+  ViewRestaurant,
 };
