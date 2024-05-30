@@ -193,7 +193,7 @@ const NewConcert = () => {
           theme ? "text-white" : "text-slate-700"
         } text-2xl font-semibold mt-4`}
       >
-        Thêm Buổi Hòa Nhạc
+        Thêm buổi hòa nhạc
       </p>
       <br />
 
@@ -362,7 +362,7 @@ const NewConcert = () => {
                 theme ? "text-white" : "text-slate-700"
               } text-xl font-semibold`}
             >
-              Thông Tin Vé
+              Thông tin vé
             </p>
             <Grid className="my-6">
               <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
@@ -414,7 +414,7 @@ const NewConcert = () => {
                 theme ? "text-white" : "text-slate-700"
               } text-xl font-semibold`}
             >
-              Thông Tin Buổi Hòa Nhạc
+              Thông tin buổi hòa nhạc
             </p>
             <Grid className="my-6">
               <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
