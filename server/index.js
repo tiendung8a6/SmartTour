@@ -110,5 +110,5 @@ app.listen(PORT, () => {
 });
 
 app.get("/", (req, res) => {
-  res.send(`APi is running`);
+  res.send(`API is running`);
 });
