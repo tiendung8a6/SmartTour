@@ -21,10 +21,10 @@ import moment from "moment";
 import QRCode from "qrcode.react";
 
 const ViewCar = () => {
+  const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL;
   const { colorScheme } = useMantineColorScheme();
   const { id, planId } = useParams();
   const { user } = useStore();
-
   const [planName, setPlanName] = useState(null);
   const [startAddress, setStartAddress] = useState(null);
   const [phone, setPhone] = useState(null);
@@ -185,7 +185,7 @@ const ViewCar = () => {
             <div className="flex mx-6 py-4 flex-row flex-wrap items-center">
               <QRCode
                 id="qrCodeEl"
-                value={`http://localhost:3000/trip/${id}/car/${planId}/view`}
+                value={`${REACT_APP_BASE_URL}/trip/${id}/car/${planId}/view`}
                 size={100}
                 fgColor={"#000000"}
                 bgColor={"#FFFFFF"}

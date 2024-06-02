@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import useStore from "../store";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { updateURL } from "../utils";
-import { API_URI } from "../utils/apiCalls";
+import { REACT_APP_API_URL } from "../utils/apiCalls";
 
 export const useTrips = () => {
   const { setIsLoading, user, signOut } = useStore();
@@ -26,11 +26,14 @@ export const useTrips = () => {
       try {
         const token = user?.token; // Lấy token từ user nếu tồn tại
 
-        const { data } = await axios.get(`${API_URI}trips?page=${page}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const { data } = await axios.get(
+          `${REACT_APP_API_URL}/trips?page=${page}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         setTrips(data?.data || []);
         setNumOfPages(data?.numOfPage || 0);

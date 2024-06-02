@@ -3,6 +3,8 @@ import axios from "axios";
 import { Toaster, toast } from "sonner"; // Import Toaster và toast từ thư viện sonner
 
 const Contact = () => {
+  const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -21,7 +23,7 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`http://localhost:8800/users/contact`, formData)
+      .post(`${REACT_APP_API_URL}/users/contact`, formData)
       .then((response) => {
         toast.success("Gửi liên hệ thành công!");
 
