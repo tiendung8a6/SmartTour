@@ -1,0 +1,271 @@
+import mongoose from "mongoose";
+import Trips from "../models/tripModel.js";
+import Plans from "../models/planModel.js";
+
+export const createTrip = async (req, res, next) => {
+  try {
+    const { userId } = req.body.user;
+    const { tripName, city, startDate, endDate, image, status, total } =
+      req.body;
+
+    if (!(tripName && city && startDate && endDate && image)) {
+      return res.status(400).json({
+        success: false,
+        message: "Vui lòng nhập các trường bắt buộc",
+      });
+    }
+
+    // // Kiểm tra xem plans có tồn tại không
+    // const plan = await Plans.findById(plans);
+    // if (!plan) {
+    //   return res.status(404).json({
+    //     success: false,
+    //     message: "Plan not found",
+    //   });
+    // }
+
+    // Tạo trip mới
+    const trip = await Trips.create({
+      user: userId,
+      tripName,
+      city,
+      startDate,
+      endDate,
+      image,
+      status,
+      total,
+      // plans: plan._id, // Gán ID của plan đã tìm thấy
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Chuyến đi được tạo thành công",
+      data: trip,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Lỗi máy chủ" });
+  }
+};
+
+export const getTrips = async (req, res, next) => {
+  try {
+    // const { cat, writerId } = req.query;
+    const { userId } = req.body.user; // Lấy userId từ user đã đăng nhập
+
+    // if (cat) {
+    //   query.cat = cat;
+    // } else if (writerId) {
+    //   query.user = writerId;
+    // }
+
+    // let query = { user: userId, status: true };
+    let query = { user: userId };
+
+    let queryResult = Trips.find(query)
+      .populate({
+        path: "user",
+        select: "name image -password",
+      })
+      .populate({
+        path: "plans",
+        select: "",
+      })
+      .sort({ _id: -1 });
+
+    // pagination
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 5;
+    const skip = (page - 1) * limit;
+
+    //records count
+    const totalTrips = await Trips.countDocuments(query);
+
+    const numOfPage = Math.ceil(totalTrips / limit);
+
+    queryResult = queryResult.skip(skip).limit(limit);
+
+    const trips = await queryResult;
+
+    res.status(200).json({
+      success: true,
+      totalTrips: totalTrips,
+      data: trips,
+      page,
+      numOfPage,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: error.message });
+  }
+};
+export const getAdminTrips = async (req, res, next) => {
+  try {
+    let queryResult = Trips.find()
+      .populate({
+        path: "user",
+        select: "name image -password",
+      })
+      .populate({
+        path: "plans",
+        select: "",
+      })
+      .sort({ _id: -1 });
+    // pagination
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+
+    //records count
+    const totalTrips = await Trips.countDocuments();
+
+    const numOfPage = Math.ceil(totalTrips / limit);
+
+    queryResult = queryResult.skip(skip).limit(limit);
+
+    const trips = await queryResult;
+
+    res.status(200).json({
+      success: true,
+      message: "Dữ liệu chuyến đi đã được tải thành công",
+      totalTrips: totalTrips,
+      data: trips,
+      page,
+      numOfPage,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const getTrip = async (req, res, next) => {
+  try {
+    const { tripId } = req.params;
+
+    const trip = await Trips.findById(tripId)
+      .populate({
+        path: "user",
+        select: "name image -password",
+      })
+      .populate({
+        path: "plans",
+        select: "", // Object trống để lấy tất cả các trường
+      });
+
+    await Trips.findByIdAndUpdate(tripId, trip);
+
+    res.status(200).json({
+      success: true,
+      message: "Thành công",
+      data: trip,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const updateTrip = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { tripName, city, startDate, endDate, image, status, total } =
+      req.body;
+
+    const updatedFields = {};
+    if (tripName) updatedFields.tripName = tripName;
+    if (city) updatedFields.city = city;
+    if (startDate) updatedFields.startDate = startDate;
+    if (endDate) updatedFields.endDate = endDate;
+    if (image) updatedFields.image = image;
+    updatedFields.status = status; // Change the way of checking status
+    if (total) updatedFields.total = total;
+
+    const trip = await Trips.findByIdAndUpdate(id, updatedFields, {
+      new: true,
+    });
+    res.status(200).json({
+      success: true,
+      message: "Chuyến đi được cập nhật thành công",
+      data: trip,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const deleteTrip = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    await Trips.findOneAndDelete({ _id: id });
+
+    res.status(200).json({
+      success: true,
+      message: "Xóa chuyến đi thành công",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const updateTripStatus = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    const trip = await Trips.findByIdAndUpdate(id, { status }, { new: true });
+
+    res.status(200).json({
+      sucess: true,
+      message: "Trạng thái đã được cập nhật thành công",
+      data: trip,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: error.message });
+  }
+};
+export const getPublicTrips = async (req, res, next) => {
+  try {
+    const query = { status: true };
+
+    let queryResult = Trips.find(query)
+      .populate({
+        path: "user",
+        select: "name image -password",
+      })
+      .populate({
+        path: "plans",
+        select: "",
+      })
+      .sort({ _id: -1 });
+
+    // Phân trang
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 5;
+    const skip = (page - 1) * limit;
+
+    // Số lượng chuyến đi
+    const totalTrips = await Trips.countDocuments(query);
+
+    const numOfPage = Math.ceil(totalTrips / limit);
+
+    queryResult = queryResult.skip(skip).limit(limit);
+
+    const trips = await queryResult;
+
+    res.status(200).json({
+      success: true,
+      totalTrips: totalTrips,
+      data: trips,
+      page,
+      numOfPage,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: error.message });
+  }
+};

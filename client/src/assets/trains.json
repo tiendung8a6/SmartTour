@@ -1,0 +1,1001 @@
+{
+    "type": "FeatureCollection",
+    "crs": {
+        "type": "name",
+        "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+        }
+    },
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 1,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Lào Cai (Tổ 26A, Tp. Lào Cai, Lào Cai)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    103.96324970800003,
+                    22.512319191000074
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 2,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Phố Lu (199 Lê Hồng Phong, TT. Phố Lu, Bảo Thắng, Lào Cai)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    104.18166065200006,
+                    22.321967498000049
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 3,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Yên Bái (QL37, P.Hồng Hà, Tp. Yên Bái, Yên Bái)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    104.87503843200005,
+                    21.702350792000061
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 4,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Chí Chủ (312, Chí Tiên, Thanh Ba, Phú Thọ)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.09598366600005,
+                    21.481671533000053
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 5,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Tiên Kiên (TT. Hùng Sơn, Lâm Thao, Phú Thọ)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.28615719600003,
+                    21.370592203000058
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 6,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Việt Trì (Phố Kiến Thiết, phường Bến Gót, thành phố Việt Trì)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.42441131000004,
+                    21.30386883400007
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 7,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Vĩnh Yên (Ngô Quyền, Đống Đa, Tp. Vĩnh Yên, Vĩnh Phúc)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.60415649700008,
+                    21.308052893000081
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 8,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Phúc Yên (Phường Trưng Trắc, Phúc Yên, Vĩnh Phúc)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.71254236400006,
+                    21.23962589000007
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 9,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Hà Nội (120 Đ. Lê Duẩn, Văn Miếu, Đống Đa, Hà Nội)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.83939256300005,
+                    21.029437777000055
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 10,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Nam Định (Trần Đăng Ninh, TP. Nam Định, Trần Đăng Ninh)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.16263896400005,
+                    20.42213060000006
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 11,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Hải Phòng (75 P. Lương Khánh Thiện, Lương Khá Thien, Ngô Quyền, Hải Phòng)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.72297827100004,
+                    20.863501654000061
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 12,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Hạ Long (Giếng Đáy, Tp. Hạ Long, Quảng Ninh)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    107.00113815300006,
+                    20.978436018000082
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 13,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Đồng Đăng (QL1B, TT. Đồng Đăng, Cao Lộc, Lạng Sơn)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.71465346700006,
+                    21.971022038000058
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 14,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Kép (TT. Kép, Lạng Giang, Bắc Giang)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.27938189300005,
+                    21.406971933000079
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 15,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Thái Nguyên (330 Phố, Tp. Thái Nguyên, Thái Nguyên)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.85610173600003,
+                    21.554326742000057
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 16,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Thanh Hóa (19 Dương Đình Nghệ, P. Đông Thọ, Thanh Hoá)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.76488857900006,
+                    19.81120631400006
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 17,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Vinh (1, Lê Ninh, Tp. Vinh, Nghệ An)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.66285723500005,
+                    18.698797526000078
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 18,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Yên Thái (Đô thị Yên Thái, Nông Cống, Thanh Hoá)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.70460350500008,
+                    19.714163337000059
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 19,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Văn Trai (Hải Nhân, Tĩnh Gia, Thanh Hoá)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.76139823200003,
+                    19.475648985000078
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 20,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Chợ Sy (Diễn Kỷ, Diễn Châu, Nghệ An)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.57455578700007,
+                    18.991604943000084
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 21,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Thanh Luyện (Phương Điền, Hương Khê, Hà Tĩnh)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.61257797000007,
+                    18.351482568000051
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 22,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Tân Ấp (Đường Hồ Chí Minh, Tân Ấp, Tuyên Hóa, Quảng Bình)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.86890665000004,
+                    18.027976131000059
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 23,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Đồng Lê (Tiểu Khu 2, Tuyên Hóa, Quảng Bình)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.00119859200004,
+                    17.90475074200009
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 24,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Thọ Lộc (Xóm Lệ, Bố Trạch, Quảng Bình)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.45262135100006,
+                    17.620859303000088
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 25,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Đồng Hới (Tiểu khu 4, Đồng Hới, Quảng Bình)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.59986350800006,
+                    17.465894718000072
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 26,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Sa Lung (ĐT7, Sa Long, Vĩnh Linh, Quảng Trị)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.97035029400007,
+                    17.05517756100005
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 27,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Đông Hà (2 Lê Thánh Tôn, Đông Lễ, Đông Hà, Quảng Trị)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    107.10534792300007,
+                    16.816330212000082
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 28,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Huế (2 Bùi Thị Xuân, Vĩnh Ninh, Thành phố Huế, Thừa Thiên Huế)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    107.59541010300006,
+                    16.453642804000083
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 29,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Đà Nẵng (791 Hải Phòng, Tam Thuận, Thanh Khê, Đà Nẵng)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    108.20656946600008,
+                    16.072321292000083
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 30,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Tam Kỳ (Nguyễn Hoàng, Phường An Xuân, Tp. Tam Kỳ, Quảng Nam)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    108.47173318000006,
+                    15.56281878100009
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 31,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Quãng Ngãi (1, Nguyễn Chánh, Tp. Quảng Ngãi, Quảng Ngãi)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    108.77758991500008,
+                    15.129192453000087
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 32,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Diêu Trì (108 Nguyễn Đình Thụ, Thị trấn Diêu Trì,Tuy Phước,Tỉnh Bình Định.)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    109.14423532700005,
+                    13.811029880000092
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 33,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Quy Nhơn (Lê Hồng Phong, Quy Nhơn, Bình Định)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    109.22104288700007,
+                    13.77755830600006
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 34,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Tuy Hòa (149 Lê Trung Kiên, Phường 2, Tuy Hòa, Phú Yên)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    109.28896368900007,
+                    13.104438169000048
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 35,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Nha Trang (17 Thái Nguyên, Phước Tân, Nha Trang, Khánh Hòa)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    109.18130926000003,
+                    12.24948297800006
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 36,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Ngã Ba (Cam Phước Đông, Tp. Cam Ranh, Khánh Hòa)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    109.14587463700008,
+                    11.895482405000052
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 37,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Tháp Chàm (Minh Mạng, Đô Vinh, Phan Rang-Tháp Chàm, Ninh Thuận)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    108.94804904000006,
+                    11.615030153000077
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 38,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Bình Thuận (Thôn Đại Thành, Mương Mán, Hàm Thuận Nam, Bình Thuận)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    108.00359472900004,
+                    10.973285987000054
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 39,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Phan Thiết (Phong Nẫm, Tp. Phan Thiết, Bình Thuận)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    108.09667493200004,
+                    10.935271484000054
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 40,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Biên Hòa (Hưng Đạo Vương, Thống Nhất, Tp. Biên Hòa, Đồng Nai)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.82525972600007,
+                    10.952826495000068
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 41,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Sài Gòn (Số 1 Nguyễn Thông, Phường 9, Quận 3, Thành phố Hồ Chí Minh)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.66729683700004,
+                    10.785365545000047
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 42,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Long Khánh (Hồng Thập Tự, Xuân An, Long Khánh, Đồng Nai)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    107.25693627100003,
+                    10.935049044000039
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 43,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Giáp Bát (366 Giải Phóng, Hoàng Mai, Hà Nội)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.83972529300007,
+                    20.972955931000058
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 44,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Phú Xuyên (Tiểu khu Mỹ Lâm, Phú Xuyên, Hà Nội)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.90930047300003,
+                    20.735951365000062
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 45,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Đồng Văn (Quốc lộ 1, Phường Đồng Văn, Thị xã Duy Tiên, Tỉnh Hà Nam)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.91433428800008,
+                    20.644021206000048
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 46,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Ninh Binh (Đường Ngô Gia Tự, Nam Bình, Ninh Bình, Ninh Bình)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.98035064600003,
+                    20.257228754000039
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 47,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Cầu Giát (Xóm 1, Quỳnh Lưu, Nghệ An)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.62182473200005,
+                    19.157608794000055
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 48,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Quán Hành (Quốc lộ 1A, TT. Quan Hành, Nghi Lộc, Nghệ An)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.64620431500003,
+                    18.784341682000047
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 49,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Yên Trung (Thị trấn Đức Thọ, huyện Đức Thọ, Hà Tĩnh)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.58632232300005,
+                    18.532777750000037
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 50,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Hương Phố (TT. Hương Khê, Hương Khê, Hà Tĩnh)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.69838788600003,
+                    18.195217409000065
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 51,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Phò Trạch (Phong Điền, Phong Điền, Thừa Thiên Huế)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    107.38131565300006,
+                    16.574817050000092
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 52,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Lăng Cô (TT. Lăng Cô, Phú Lộc, Thừa Thiên Huế)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    108.08515596600006,
+                    16.216291973000068
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 53,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Cầu Hai (QL1A, Lộc Trì, Phú Lộc, Thừa Thiên Huế)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    107.85185700300008,
+                    16.281193475000066
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 54,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Núi Thanh (Thị trấn Núi Thành, huyện Núi Thành, Quảng Nam)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    108.64678630800006,
+                    15.429431831000045
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 55,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Đức Phổ (Khối 4, Nguyễn Nghiêm, Đức Phổ, Quảng Ngãi)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    108.94972857300007,
+                    14.806652006000093
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 56,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Tam Quan (1A, Tam Quan, Hoài Nhơn, Bình Định)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    109.03949311400004,
+                    14.544144733000053
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 57,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Bồng Sơn (Quốc lộ 1, khu 1, Bồng Sơn, Hoài Nhơn, Bình Định)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    109.02093311500005,
+                    14.43768319600008
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 58,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Phù Mỹ (Quốc Lộ 1A, Thôn An Lạc Đông, Thị Trấn Phù Mỹ, Huyện Phù Mỹ, TT. Phù Mỹ, Phù Mỹ, Bình Định)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    109.03777743600006,
+                    14.181461681000087
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 59,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Phù Cát (TT. Ngô Mây, Phù Cát, tt. Ngô Mây)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    109.05235214400005,
+                    14.006446569000047
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 60,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga La Hai (La Hai, Đồng Xuân, Phú Yên)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    109.10605013400004,
+                    13.375686217000066
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 61,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Vân Canh (Thịnh Văn 2, Vân Canh, Vân Canh, Bình Định)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    108.99303167700003,
+                    13.612193981000075
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 62,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Chí Thạnh (1A, Chí Thạnh, Tuy An, Phú Yên)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    109.21756934800004,
+                    13.305919311000082
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 63,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Giã (Tổ 10, Vạn Giã, Vạn Ninh, Khánh Hòa)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    109.21810877900003,
+                    12.697044706000042
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 64,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Trảng Bom (Quốc Lộ 1A, Ấp Quảng Phát, Xã Quảng Tiến, Huyện Trảng Bom, Đồng Nai)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.99955793200007,
+                    10.945943549000049
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 65,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Ma Lâm (Ma Lâm, Hàm Thuận Bắc, Bình Thuận)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    108.13573397200003,
+                    11.077433805000055
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 66,
+                "f_code": "HB02",
+                "Ten_Ga": "Ga Lạng Sơn (Lê Lợi, Vĩnh Trại, Tp. Lạng Sơn, Lạng Sơn)"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.76157983100006,
+                    21.813307166000072
+                ]
+            }
+        }
+    ]
+}
