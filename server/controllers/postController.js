@@ -343,7 +343,7 @@ export const stats = async (req, res, next) => {
     startDate.setDate(currentDate.getDate() - numofDays);
 
     const totalPosts = await Posts.find({
-      user: userId,
+      // user: userId,
       createdAt: { $gte: startDate, $lte: currentDate },
     }).countDocuments();
 
@@ -361,14 +361,14 @@ export const stats = async (req, res, next) => {
     const viewStats = await Views.aggregate([
       {
         $match: {
-          user: new mongoose.Types.ObjectId(userId),
+          // user: new mongoose.Types.ObjectId(userId),
           createdAt: { $gte: startDate, $lte: currentDate },
         },
       },
       {
         $group: {
           _id: {
-            $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
+            $dateToString: { format: "%d-%m-%Y", date: "$createdAt" },
           },
           Total: { $sum: 1 },
         },
@@ -386,7 +386,7 @@ export const stats = async (req, res, next) => {
       {
         $group: {
           _id: {
-            $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
+            $dateToString: { format: "%d-%m-%Y", date: "$createdAt" },
           },
           Total: { $sum: 1 },
         },
@@ -404,7 +404,15 @@ export const stats = async (req, res, next) => {
       },
     });
 
-    const last5Posts = await Posts.find({ user: userId })
+    const last5Posts = await Posts.find()
+      .populate({
+        path: "user",
+        select: "name image -password",
+      })
+      .populate({
+        path: "cat",
+        select: "label color",
+      })
       .limit(5)
       .sort({ _id: -1 });
 

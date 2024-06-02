@@ -38,7 +38,7 @@ export const RecentPostTable = ({ data, theme }) => {
         }
         <div>
           <p className="text-base">{el?.title}</p>
-          <span className="text-[10px] text-sky-600">{el?.cat}</span>
+          <span className="text-[10px] text-sky-600">{el?.cat?.label}</span>
         </div>
       </Table.Td>
       <Table.Td>{formatNumber(el?.views.length)}</Table.Td>
@@ -50,9 +50,9 @@ export const RecentPostTable = ({ data, theme }) => {
     <Table highlightOnHover withTableBorder>
       <Table.Thead>
         <Table.Tr>
-          <Table.Th>Post Title</Table.Th>
-          <Table.Th>Views</Table.Th>
-          <Table.Th>Post Date</Table.Th>
+          <Table.Th>Tiêu đề</Table.Th>
+          <Table.Th>Lượt xem</Table.Th>
+          <Table.Th>Ngày đăng</Table.Th>
         </Table.Tr>
       </Table.Thead>
       {data?.length === 0 && (
@@ -98,8 +98,8 @@ export const RecentFollowersTable = ({ data, theme }) => {
     <Table highlightOnHover withTableBorder>
       <Table.Thead>
         <Table.Tr>
-          <Table.Th>Follower</Table.Th>
-          <Table.Th>Join Date</Table.Th>
+          <Table.Th>Tên</Table.Th>
+          <Table.Th>Ngày theo dõi</Table.Th>
         </Table.Tr>
       </Table.Thead>
       {data?.length === 0 && (

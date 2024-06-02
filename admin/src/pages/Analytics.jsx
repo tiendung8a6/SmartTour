@@ -36,13 +36,13 @@ const Analytics = () => {
             theme ? "text-white" : "text-slate-700"
           } flex-1 text-xl font-semibold text-slate-700`}
         >
-          Analytics
+          Thống kê
         </p>
         <Select
           // label='Range'
-          defaultValue="28 days"
+          defaultValue="28 ngày"
           placeholder="Filter"
-          data={["7 days", "28 days", "90 days", "365 days"]}
+          data={["7 ngày", "28 ngày", "90 ngày", "365 ngày"]}
           onChange={(val) => setNumberOfDays(val?.split(" ")[0])}
           w={isMobile && 110}
         />
@@ -52,14 +52,14 @@ const Analytics = () => {
 
       <div className="w-full py-8">
         <p className="py-5 text-base font-medium ">
-          View Stats for last {numOfDays} days
+          Thống kê bài viết trong {numOfDays} ngày qua
         </p>
         <Graph dt={data?.viewStats} />
       </div>
 
       <div className="w-full py-8">
         <p className="py-5 text-base font-medium ">
-          Followers Stats for last {numOfDays} days
+          Thống kê người theo dõi trong {numOfDays} ngày qua
         </p>
         <Graph dt={data?.followersStats} />
       </div>
@@ -72,7 +72,7 @@ const Analytics = () => {
               theme ? "text-white" : "text-slate-600"
             } py-5 text-base font-medium`}
           >
-            Recent 5 Followers
+            Người theo dõi gần đây
           </span>
           <RecentFollowersTable data={data?.last5Followers} theme={theme} />
         </div>
@@ -83,7 +83,7 @@ const Analytics = () => {
               theme ? "text-white" : "text-slate-600"
             } py-5 text-base font-medium`}
           >
-            Recent 5 Content
+            Bài viết gần đây
           </span>
           <RecentPostTable data={data?.last5Posts} theme={theme} />
         </div>

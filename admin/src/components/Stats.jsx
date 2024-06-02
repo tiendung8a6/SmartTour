@@ -13,25 +13,25 @@ const icons = {
 export const Stats = ({ dt }) => {
   const data = [
     {
-      title: "TOTAL POST",
+      title: "BÀI VIẾT",
       icon: "post",
       value: formatNumber(dt?.totalPosts ?? 0),
       diff: 34,
     },
     {
-      title: "FOLLOWERS",
+      title: "NGƯỜI THEO DÕI",
       icon: "users",
       value: formatNumber(dt?.followers ?? 0),
       diff: -13,
     },
     {
-      title: "TOTAL VIEWS",
+      title: "LƯỢT XEM",
       icon: "view",
       value: formatNumber(dt?.totalViews ?? 0),
       diff: 18,
     },
     {
-      title: "TOTAL WRITERS",
+      title: "NGƯỜI DÙNG",
       icon: "user",
       value: formatNumber(dt?.totalWriters ?? 0),
       diff: -30,
@@ -43,29 +43,29 @@ export const Stats = ({ dt }) => {
     const DiffIcon = stat.diff > 0 ? IconArrowUpRight : IconArrowDownRight;
 
     return (
-      <Paper withBorder p='md' radius='md' key={stat.title}>
-        <Group justify='space-between'>
+      <Paper withBorder p="md" radius="md" key={stat.title}>
+        <Group justify="space-between">
           <Text className={"capitalize text-sm "}>{stat.title}</Text>
-          <Icon className={""} size='1.4rem' stroke={1.5} />
+          <Icon className={""} size="1.4rem" stroke={1.5} />
         </Group>
 
-        <Group align='flex-end' gap='xs' mt={25}>
+        <Group align="flex-end" gap="xs" mt={25}>
           <Text className={"text-2xl 2xl:text-4xl font-semibold "}>
             {stat.value}
           </Text>
           <Text
             c={stat.diff > 0 ? "teal" : "red"}
-            fz='sm'
+            fz="sm"
             fw={500}
             className={"font-medium"}
           >
             <span>{stat?.diff}%</span>
-            <DiffIcon size='1rem' stroke={1.5} />
+            <DiffIcon size="1rem" stroke={1.5} />
           </Text>
         </Group>
 
-        <Text fz='xs' c='dimmed' mt={7}>
-          Compared to previous month
+        <Text fz="xs" c="dimmed" mt={7}>
+          So với tháng trước
         </Text>
       </Paper>
     );

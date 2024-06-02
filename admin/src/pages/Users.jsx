@@ -176,7 +176,7 @@ const Users = () => {
         <Table highlightOnHover withTableBorder>
           <Table.Thead>
             <Table.Tr className="bg-black text-white">
-              <Table.Th>Tên</Table.Th>
+              <Table.Th>#</Table.Th>
               <Table.Th>Email</Table.Th>
               <Table.Th>Hình Thức</Table.Th>
               <Table.Th>Người Theo Dõi</Table.Th>
@@ -203,7 +203,7 @@ const Users = () => {
                       alt={el?.name}
                       className="w-10 h-10 rounded-full object-cover"
                     />
-                    <p className="text-base lg:ml-2">{el?.name}</p>
+                    {/* <p className="text-justify">{el?.name}</p> */}
                   </Table.Td>
                   <Table.Td className="text-justify">{el?.email}</Table.Td>
                   <Table.Td className="text-justify">{el?.provider}</Table.Td>

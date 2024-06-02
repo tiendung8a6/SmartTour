@@ -72,7 +72,7 @@ const EditCategory = ({ opened, close }) => {
       onClose={close}
       size="lg"
       centered
-      fullScreen // ={isMobile}
+      // fullScreen // ={isMobile}
       radius={0}
       transitionProps={{ transition: "fade", duration: 200 }}
       title={"Quản lý danh mục"}

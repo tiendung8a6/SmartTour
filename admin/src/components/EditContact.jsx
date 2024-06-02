@@ -75,9 +75,9 @@ const EditContact = ({ opened, close }) => {
     <Modal
       opened={opened}
       onClose={close}
-      size="lg"
+      size="70%"
       centered
-      fullScreen // ={isMobile}
+      // fullScreen // ={isMobile}
       radius={0}
       transitionProps={{ transition: "fade", duration: 200 }}
       title={"Quản lý liên hệ"}
