@@ -1,12 +1,15 @@
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { API_URL } from "../utils";
+import { REACT_APP_API_URL } from "../utils";
 
 export const useSignUp = (toast, toggle) => {
   return useMutation({
     mutationFn: async (formData) => {
       toggle();
-      const { data } = await axios.post(`${API_URL}/auth/register`, formData);
+      const { data } = await axios.post(
+        `${REACT_APP_API_URL}/auth/register`,
+        formData
+      );
 
       return data;
     },
@@ -36,7 +39,7 @@ export const useSignin = (toast, toggle) => {
     mutationFn: async (formData) => {
       toggle();
       const { data } = await axios.post(
-        `${API_URL}/auth/login-admin`,
+        `${REACT_APP_API_URL}/auth/login-admin`,
         formData
       );
       localStorage.setItem("user", JSON.stringify(data));
@@ -61,7 +64,9 @@ export const useSignin = (toast, toggle) => {
 export const useVerification = (toast) => {
   return useMutation({
     mutationFn: async ({ id, otp }) => {
-      const { data } = await axios.post(`${API_URL}/users/verify/${id}/${otp}`);
+      const { data } = await axios.post(
+        `${REACT_APP_API_URL}/users/verify/${id}/${otp}`
+      );
       return data;
     },
     onError: (error, data) => {
@@ -81,7 +86,9 @@ export const useVerification = (toast) => {
 export const useResend = (toast) => {
   return useMutation({
     mutationFn: async (id) => {
-      const { data } = await axios.post(`${API_URL}/users/resend-link/${id}`);
+      const { data } = await axios.post(
+        `${REACT_APP_API_URL}/users/resend-link/${id}`
+      );
 
       return data;
     },
@@ -110,7 +117,7 @@ export const useUpdateUser = (toast, token) => {
   return useMutation({
     mutationFn: async (formData) => {
       const { data } = await axios.put(
-        `${API_URL}/users/update-user/`,
+        `${REACT_APP_API_URL}/users/update-user/`,
         formData,
         {
           headers: {
@@ -139,7 +146,7 @@ export const useCreateAdmin = (toast, token) => {
   return useMutation({
     mutationFn: async (formData) => {
       const { data } = await axios.post(
-        `${API_URL}/auth/create-admin`,
+        `${REACT_APP_API_URL}/auth/create-admin`,
         formData,
         {
           headers: {
