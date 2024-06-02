@@ -9,7 +9,7 @@ export const createCategory = async (req, res, next) => {
     if (!label || !color) {
       return res.status(400).json({
         success: false,
-        message: "Label and color are required fields.",
+        message: "Tên danh mục và màu sắc là các trường bắt buộc.",
       });
     }
 
@@ -17,7 +17,7 @@ export const createCategory = async (req, res, next) => {
     if (existingCategory) {
       return res.status(400).json({
         success: false,
-        message: "Category already exists.",
+        message: "Danh mục đã tồn tại.",
       });
     }
 
@@ -25,7 +25,7 @@ export const createCategory = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Category created successfully",
+      message: "Danh mục được tạo thành công",
       data: category,
     });
   } catch (error) {
@@ -55,7 +55,7 @@ export const getCategory = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Categories loaded successfully",
+      message: "Dữ liệu danh mục được tải lên thành công",
       totalCategories,
       data: categories,
       page,
@@ -77,7 +77,7 @@ export const deleteCategory = async (req, res, next) => {
     if (postsWithCategory) {
       return res.status(400).json({
         success: false,
-        message: "Category is being used in posts",
+        message: "Danh mục đang được sử dụng trong bài viết",
       });
     }
 
@@ -85,7 +85,7 @@ export const deleteCategory = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Deleted category successfully",
+      message: "Đã xóa danh mục thành công",
     });
   } catch (error) {
     console.log(error);
@@ -102,7 +102,7 @@ export const getCategories = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Categories retrieved successfully",
+      message: "Danh mục được truy xuất thành công",
       data: categories,
     });
   } catch (error) {
@@ -123,7 +123,7 @@ export const getPostsByCategory = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Posts retrieved successfully by category ID",
+      message: "Bài viết được truy xuất thành công theo ID danh mục",
       data: posts,
     });
   } catch (error) {
@@ -140,7 +140,7 @@ export const updateCategory = async (req, res) => {
     if (existingCategory && existingCategory._id.toString() !== id) {
       return res.status(400).json({
         success: false,
-        message: "Category with this label already exists.",
+        message: "Tên danh mục đã tồn tại.",
       });
     }
 
@@ -154,7 +154,7 @@ export const updateCategory = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "Category updated successfully",
+      message: "Danh mục được cập nhật thành công",
       data: category,
     });
   } catch (error) {
@@ -177,7 +177,7 @@ export const updateCategoryStatus = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "Category status updated successfully",
+      message: "Trạng thái danh mục được cập nhật thành công",
       data: category,
     });
   } catch (error) {

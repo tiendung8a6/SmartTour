@@ -10,13 +10,15 @@ import querystring from "qs";
 import moment from "moment";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const BASE_URL = process.env.BASE_URL;
+const BASE_API_URL = process.env.BASE_API_URL;
 
 export const createStripePayment = asyncHandler(async (req, res) => {
   const { email, phone } = req.body;
   const { paymentType } = req.params;
 
   if (!email || !phone || !paymentType) {
-    throw new Error("All are required");
+    throw new Error("Vui lòng nhập các trường được yêu cầu");
   }
 
   const user = await Users.findOne({ email });
@@ -63,7 +65,7 @@ export const createStripePayment = asyncHandler(async (req, res) => {
       ];
       break;
     default:
-      throw new Error("Invalid payment type");
+      throw new Error("Phương thức thanh toán không hợp lệ");
   }
 
   const order = await Order.create({
@@ -100,8 +102,8 @@ export const createStripePayment = asyncHandler(async (req, res) => {
       orderId: JSON.stringify(order?._id),
     },
     mode: "payment",
-    success_url: "http://localhost:3000/success",
-    cancel_url: "http://localhost:3000/cancel",
+    success_url: `${BASE_URL}/success`,
+    cancel_url: `${BASE_URL}/cancel`,
   });
 
   res.send({ url: session.url });
@@ -112,7 +114,7 @@ export const createVnPayPayment = asyncHandler(async (req, res) => {
   const { paymentType } = req.params;
 
   if (!email || !phone || !paymentType) {
-    throw new Error("All fields are required");
+    throw new Error("Tất cả các trường là bắt buộc");
   }
 
   const user = await Users.findOne({ email });
@@ -136,7 +138,7 @@ export const createVnPayPayment = asyncHandler(async (req, res) => {
   const tmnCode = process.env.vnp_TmnCode;
   const secretKey = process.env.vnp_HashSecret;
   const vnpUrl = process.env.vnp_Url;
-  const returnUrl = process.env.vnp_ReturnUrl;
+  const returnUrl = `${BASE_API_URL}/payment/vnpay_return`;
   const orderId = moment(date).format("DDHHmmss");
 
   let bankCode = req.body.bankCode;
@@ -157,7 +159,7 @@ export const createVnPayPayment = asyncHandler(async (req, res) => {
       amount = 300000;
       break;
     default:
-      throw new Error("Invalid payment type");
+      throw new Error("Phương thức thanh toán không hợp lệ");
   }
 
   let vnp_Params = {
@@ -190,7 +192,7 @@ export const createVnPayPayment = asyncHandler(async (req, res) => {
 
   // Lưu giá trị vnp_TxnRef vào CSDL Order
   const order = await Order.create({
-    orderItems: [{ name: `Thanh toan cho gói: ${paymentType}`, amount }],
+    orderItems: [{ name: `Thanh toán cho gói: ${paymentType}`, amount }],
     user: user._id,
     email: email,
     phone: phone,
@@ -261,20 +263,20 @@ export const vnpayReturn = asyncHandler(async (req, res) => {
         );
 
         if (updatedUser) {
-          console.log("User points updated successfully");
+          console.log("Điểm người dùng được cập nhật thành công");
         } else {
-          console.error("Failed to update user points");
+          console.error("Không thể cập nhật điểm người dùng");
         }
 
-        res.redirect("http://localhost:3000/success");
+        res.redirect(`${BASE_URL}/success`);
       } else {
-        res.status(404).json({ message: "Order not found" });
+        res.status(404).json({ message: "Không tìm thấy giao dịch" });
       }
     } else {
-      res.redirect("http://localhost:3000/cancel");
+      res.redirect(`${BASE_URL}/cancel`);
     }
   } else {
-    res.status(400).json({ message: "Invalid signature" });
+    res.status(400).json({ message: "Chữ ký không hợp lệ" });
   }
 });
 
@@ -318,7 +320,7 @@ export const getPayments = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Payment Loaded successfully",
+      message: "Dữ liệu thanh toán được tải thành công",
       totalPayments: totalPayments,
       data: payments,
       page,

@@ -4,7 +4,7 @@ const authMiddleware = async (req, res, next) => {
   const authHeader = req?.headers?.authorization;
 
   if (!authHeader || !authHeader?.startsWith("Bearer")) {
-    next("Authentication== failed");
+    next("Xác thực tài khoản không thành công.");
   }
 
   const token = authHeader?.split(" ")[1];
@@ -19,7 +19,7 @@ const authMiddleware = async (req, res, next) => {
     next();
   } catch (error) {
     console.log(error);
-    next("Authentication failed");
+    next("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại");
   }
 };
 

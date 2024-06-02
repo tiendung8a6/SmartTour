@@ -27,7 +27,7 @@ export const sendReplyEmail = async (req, res) => {
     const contact = await Contacts.findById(id);
 
     if (!contact) {
-      return res.status(404).json({ message: "Contact not found" });
+      return res.status(404).json({ message: "Không tìm thấy liên hệ" });
     }
 
     // // Kiểm tra xem email đã được gửi phản hồi trước đó hay chưa
@@ -41,7 +41,7 @@ export const sendReplyEmail = async (req, res) => {
     const mailOptions = {
       from: process.env.AUTH_EMAIL,
       to: contact.email,
-      subject: "Response to SmartTour",
+      subject: "Phản hồi từ SmartTour",
       html: `<p>${content}</p>`, // Lấy nội dung từ req.body.content
     };
 
@@ -52,10 +52,10 @@ export const sendReplyEmail = async (req, res) => {
     contact.content = content; // Lưu lại nội dung đã gửi
     await contact.save();
 
-    res.status(200).json({ message: "Email response sent successfully" });
+    res.status(200).json({ message: "Đã gửi phản hồi email thành công" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Failed to send email response" });
+    res.status(500).json({ message: "Không thể gửi phản hồi" });
   }
 };
 
@@ -71,7 +71,7 @@ export const OPTVerification = async (req, res, next) => {
     if (expiresAt < Date.now()) {
       await Verification.findOneAndDelete({ userId });
 
-      const message = "Verification token has expired.";
+      const message = "Mã thông báo xác minh đã hết hạn.";
       res.status(404).json({ message });
     } else {
       const isMatch = await compareString(otp, token);
@@ -82,16 +82,16 @@ export const OPTVerification = async (req, res, next) => {
           Verification.findOneAndDelete({ userId }),
         ]);
 
-        const message = "Email verified successfully";
+        const message = "Email đã được xác minh thành công";
         res.status(200).json({ message });
       } else {
-        const message = "Verification failed or link is invalid";
+        const message = "Xác minh không thành công hoặc liên kết không hợp lệ";
         res.status(404).json({ message });
       }
     }
   } catch (error) {
     console.log(error);
-    res.status(404).json({ message: "Something went wrong" });
+    res.status(404).json({ message: "Đã xảy ra lỗi. Vui lòng thử lại!" });
   }
 };
 
@@ -109,10 +109,11 @@ export const resendOTP = async (req, res, next) => {
 
     if (user?.accountType === "Writer") {
       sendVerificationEmail(user, res, token);
-    } else res.status(404).json({ message: "Something went wrong" });
+    } else
+      res.status(404).json({ message: "Đã xảy ra lỗi. Vui lòng thử lại!" });
   } catch (error) {
     console.log(error);
-    res.status(404).json({ message: "Something went wrong" });
+    res.status(404).json({ message: "Đã xảy ra lỗi. Vui lòng thử lại!" });
   }
 };
 
@@ -126,7 +127,7 @@ export const followWritter = async (req, res, next) => {
     if (checks)
       return res.status(201).json({
         success: false,
-        message: "You're already following this writer.",
+        message: "Bạn đã theo dõi tác giả này.",
       });
 
     const writer = await Users.findById(id);
@@ -142,7 +143,7 @@ export const followWritter = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      message: "You're now following writer " + writer?.name,
+      message: "Bạn hiện đang theo dõi tác giả " + writer?.name,
     });
   } catch (error) {
     console.log(error);
@@ -156,7 +157,7 @@ export const updateUser = async (req, res, next) => {
     const { firstName, lastName, image } = req.body;
 
     if (!(firstName || lastName)) {
-      return next("Please provide all required fields");
+      return next("Vui lòng cung cấp tất cả các trường bắt buộc");
     }
 
     const updateUser = {
@@ -175,7 +176,7 @@ export const updateUser = async (req, res, next) => {
 
     res.status(200).json({
       sucess: true,
-      message: "User updated successfully",
+      message: "Cập nhật thành công",
       user,
       token,
     });
@@ -197,7 +198,7 @@ export const getWriter = async (req, res, next) => {
     if (!user) {
       return res.status(200).send({
         success: false,
-        message: "Writer Not Found",
+        message: "Không tìm thấy",
       });
     }
 
@@ -209,7 +210,7 @@ export const getWriter = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    res.status(404).json({ message: "Something went wrong" });
+    res.status(404).json({ message: "Đã xảy ra lỗi. Vui lòng thử lại!" });
   }
 };
 
@@ -234,7 +235,7 @@ export const getAllUsers = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Users Loaded successfully",
+      message: "Dữ liệu người dùng đã tải thành công",
       totalUsers,
       data: users,
       page,
@@ -255,7 +256,7 @@ export const updateUserLock = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "User status updated successfully",
+      message: "Trạng thái người dùng được cập nhật thành công",
       data: user,
     });
   } catch (error) {
@@ -302,7 +303,7 @@ export const deleteUser = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Deleted successfully",
+      message: "Đã xoá người dùng thành công",
     });
   } catch (error) {
     console.log(error);
@@ -331,10 +332,10 @@ export const createContact = async (req, res) => {
     // Save the new contact
     await newContact.save();
 
-    res.status(201).json({ message: "Contact created successfully" });
+    res.status(201).json({ message: "Liên hệ được gửi thành công" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Failed to create contact" });
+    res.status(500).json({ message: "Không gửi được liên hệ" });
   }
 };
 
@@ -351,7 +352,7 @@ export const updatePolicy = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Policy updated successfully",
+      message: "Chính sách được cập nhật thành công",
       data: policy,
     });
   } catch (error) {
@@ -381,7 +382,7 @@ export const getPolicyContent = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Policy loaded successfully",
+      message: "Dữ liệu chính sách đã được tải thành công",
       totalPolicies,
       data: policies,
       page,
@@ -414,7 +415,7 @@ export const getContactsContent = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Contacts loaded successfully",
+      message: "Dữ liệu liên hệ đã được tải lên thành công",
       totalContacts,
       data: contacts,
       page,
@@ -432,7 +433,7 @@ export const getUserById = async (req, res) => {
     const user = await Users.findById(id);
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "Không tìm thấy người dùng" });
     }
 
     // Xóa trường password trước khi gửi response
@@ -441,6 +442,6 @@ export const getUserById = async (req, res) => {
     res.status(200).json({ success: true, data: user });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Failed to get user information" });
+    res.status(500).json({ message: "Không lấy được thông tin người dùng" });
   }
 };

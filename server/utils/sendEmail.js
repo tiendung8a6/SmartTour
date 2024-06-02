@@ -68,18 +68,18 @@ export const sendVerificationEmail = async (user, res, token) => {
           res.status(201).send({
             success: "PENDING",
             message:
-              "OTP has been sent to your account. Check your email and verify your email.",
+              "OTP đã được gửi thành công. Hãy kiểm tra email và xác minh tài khoản của bạn.",
             user,
             token,
           });
         })
         .catch((err) => {
           console.log(err);
-          res.status(404).json({ message: "Something went wrong" });
+          res.status(404).json({ message: "Đã xảy ra lỗi" });
         });
     }
   } catch (error) {
     console.log(error);
-    res.status(404).json({ message: "Something went wrong" });
+    res.status(404).json({ message: "Đã xảy ra lỗi" });
   }
 };

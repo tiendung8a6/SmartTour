@@ -13,17 +13,17 @@ export const register = async (req, res, next) => {
 
   //validate fileds
   if (!(firstName || lastName || email || password)) {
-    return next("Provide Required Fields!");
+    return next("Vui lòng cung cấp các trường bắt buộc!");
   }
 
   if (accountType === "Writer" && !image)
-    return next("Please provide profile picture");
+    return next("Vui lòng cung cấp ảnh đại diện!");
 
   try {
     const userExist = await Users.findOne({ email });
 
     if (userExist) {
-      return next("Email Address already exists. Try Login");
+      return next("Địa chỉ email đã tồn tại. Thử đăng nhập!");
     }
 
     const hashedPassword = await hashString(password);
@@ -47,7 +47,7 @@ export const register = async (req, res, next) => {
     } else {
       res.status(201).json({
         success: true,
-        message: "Account created successfully",
+        message: "Tài khoản được tạo thành công",
         user,
         token,
       });
@@ -65,7 +65,7 @@ export const googleSignUp = async (req, res, next) => {
     const userExist = await Users.findOne({ email });
 
     if (userExist) {
-      next("Email Address already exists. Try Login");
+      next("Địa chỉ email đã tồn tại. Thử đăng nhập!");
       return;
     }
 
@@ -83,7 +83,7 @@ export const googleSignUp = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      message: "Account created successfully",
+      message: "Tài khoản được tạo thành công",
       user,
       token,
     });
@@ -99,7 +99,7 @@ export const login = async (req, res, next) => {
   try {
     //validation
     if (!email) {
-      return next("Please Provide User Credentials");
+      return next("Vui lòng cung cấp thông tin email xác thực người dùng");
     }
     // if (!password) {
     //   next("Please Provide User Credentials");
@@ -110,12 +110,12 @@ export const login = async (req, res, next) => {
     const user = await Users.findOne({ email }).select("+password");
 
     if (!user) {
-      return next("Invalid email or password");
+      return next("Email hoặc mật khẩu không hợp lệ");
     }
 
     // Check if the account is locked
     if (user.isLock) {
-      return next("This account has been locked");
+      return next("Tài khoản này đã bị khóa. Vui lòng liên hệ quản trị viên!");
     }
 
     // Google account signed in
@@ -124,7 +124,7 @@ export const login = async (req, res, next) => {
 
       return res.status(201).json({
         success: true,
-        message: "Login successfully",
+        message: "Đăng nhập thành công",
         user,
         token,
       });
@@ -134,12 +134,12 @@ export const login = async (req, res, next) => {
     const isMatch = await compareString(password, user?.password);
 
     if (!isMatch) {
-      return next("Invalid email or password");
+      return next("Email hoặc mật khẩu không hợp lệ");
     }
 
     // if (user?.accountType === "Writer" && !user?.emailVerified) {
     if (!user?.emailVerified) {
-      return next("Please verify your email address.");
+      return next("Vui lòng xác thực địa chỉ email.");
     }
 
     user.password = undefined;
@@ -148,7 +148,7 @@ export const login = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      message: "Login successfully",
+      message: "Đăng nhập thành công",
       user,
       token,
     });
@@ -164,35 +164,35 @@ export const loginAdmin = async (req, res, next) => {
   try {
     // validation
     if (!email || !password) {
-      return next("Please provide user credentials");
+      return next("Vui lòng cung cấp thông tin đăng nhập của người dùng");
     }
 
     // find user by email
     const user = await Users.findOne({ email }).select("+password");
 
     if (!user) {
-      return next("Invalid email or password");
+      return next("Email hoặc mật khẩu không hợp lệ");
     }
 
     // Check if the account is locked
     if (user.isLock) {
-      return next("This account has been locked");
+      return next("Tài khoản này đã bị khóa");
     }
 
     // Check if the user is an admin
     if (!user.isAdmin) {
-      return next("Access denied. Insufficient permissions");
+      return next("Truy cập bị từ chối. Không đủ quyền!");
     }
 
     // compare password
     const isMatch = await compareString(password, user.password);
 
     if (!isMatch) {
-      return next("Invalid email or password");
+      return next("Email hoặc mật khẩu không hợp lệ");
     }
 
     if (!user.emailVerified) {
-      return next("Please verify your email address.");
+      return next("Vui lòng xác thực địa chỉ email");
     }
 
     user.password = undefined;
@@ -201,7 +201,7 @@ export const loginAdmin = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      message: "Login successfully",
+      message: "Đăng nhập thành công",
       user,
       token,
     });
@@ -240,7 +240,7 @@ export const forgotPassword = async (req, res, next) => {
     const user = await Users.findOne({ email });
 
     if (!user) {
-      return next("Email does not exist");
+      return next("Email không tồn tại");
     }
 
     // const newPassword = generateRandomPassword();
@@ -276,13 +276,14 @@ export const forgotPassword = async (req, res, next) => {
 
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
-        console.log("Error occurred while sending email:", error);
-        return next("Error occurred while sending email");
+        console.log("Đã xảy ra lỗi khi gửi email:", error);
+        return next("Đã xảy ra lỗi khi gửi email");
       } else {
-        console.log("Email sent:", info.response);
-        res
-          .status(200)
-          .json({ success: true, message: "New password sent to your email" });
+        console.log("Đã gửi email:", info.response);
+        res.status(200).json({
+          success: true,
+          message: "Mật khẩu mới được gửi tới email của bạn",
+        });
       }
     });
   } catch (error) {
@@ -298,7 +299,7 @@ export const createAdmin = async (req, res, next) => {
     const userExist = await Users.findOne({ email });
 
     if (userExist) {
-      return next("Email Address already exists");
+      return next("Địa chỉ email đã tồn tại");
     }
 
     const hashedPassword = await hashString(password);
@@ -321,7 +322,7 @@ export const createAdmin = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      message: "Admin account created successfully",
+      message: "Tài khoản quản trị viên được tạo thành công",
       user,
       token,
     });

@@ -36,7 +36,7 @@ export const createPlanActivity = async (req, res, next) => {
     if (!trip) {
       return res.status(404).json({
         success: false,
-        message: "Trip not found",
+        message: "Không tìm thấy chuyến đi",
       });
     }
 
@@ -52,7 +52,7 @@ export const createPlanActivity = async (req, res, next) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, message: "Server Error" });
+    res.status(500).json({ success: false, message: "Lỗi máy chủ" });
   }
 };
 
@@ -98,7 +98,7 @@ export const createPlanLodging = async (req, res, next) => {
     if (!trip) {
       return res.status(404).json({
         success: false,
-        message: "Trip not found",
+        message: "Không tìm thấy chuyến đi",
       });
     }
 
@@ -114,7 +114,7 @@ export const createPlanLodging = async (req, res, next) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, message: "Server Error" });
+    res.status(500).json({ success: false, message: "Lỗi máy chủ" });
   }
 };
 
@@ -168,7 +168,7 @@ export const createPlanFlights = async (req, res, next) => {
     if (!trip) {
       return res.status(404).json({
         success: false,
-        message: "Trip not found",
+        message: "Không tìm thấy chuyến đi",
       });
     }
 
@@ -184,7 +184,7 @@ export const createPlanFlights = async (req, res, next) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, message: "Server Error" });
+    res.status(500).json({ success: false, message: "Lỗi máy chủ" });
   }
 };
 
@@ -232,7 +232,7 @@ export const createPlanCar = async (req, res, next) => {
     if (!trip) {
       return res.status(404).json({
         success: false,
-        message: "Trip not found",
+        message: "Không tìm thấy chuyến đi",
       });
     }
 
@@ -247,7 +247,7 @@ export const createPlanCar = async (req, res, next) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, message: "Server Error" });
+    res.status(500).json({ success: false, message: "Lỗi máy chủ" });
   }
 };
 
@@ -295,7 +295,7 @@ export const createPlanConcert = async (req, res, next) => {
     if (!trip) {
       return res.status(404).json({
         success: false,
-        message: "Trip not found",
+        message: "Không tìm thấy chuyến đi",
       });
     }
 
@@ -311,7 +311,7 @@ export const createPlanConcert = async (req, res, next) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, message: "Server Error" });
+    res.status(500).json({ success: false, message: "Lỗi máy chủ" });
   }
 };
 export const createPlanTheater = async (req, res, next) => {
@@ -358,7 +358,7 @@ export const createPlanTheater = async (req, res, next) => {
     if (!trip) {
       return res.status(404).json({
         success: false,
-        message: "Trip not found",
+        message: "Không tìm thấy chuyến đi",
       });
     }
 
@@ -374,7 +374,7 @@ export const createPlanTheater = async (req, res, next) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, message: "Server Error" });
+    res.status(500).json({ success: false, message: "Lỗi máy chủ" });
   }
 };
 export const createPlanCamp = async (req, res, next) => {
@@ -421,7 +421,7 @@ export const createPlanCamp = async (req, res, next) => {
     if (!trip) {
       return res.status(404).json({
         success: false,
-        message: "Trip not found",
+        message: "Không tìm thấy chuyến đi",
       });
     }
 
@@ -437,7 +437,7 @@ export const createPlanCamp = async (req, res, next) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, message: "Server Error" });
+    res.status(500).json({ success: false, message: "Lỗi máy chủ" });
   }
 };
 export const createPlanParking = async (req, res, next) => {
@@ -478,7 +478,7 @@ export const createPlanParking = async (req, res, next) => {
     if (!trip) {
       return res.status(404).json({
         success: false,
-        message: "Trip not found",
+        message: "Không tìm thấy chuyến đi",
       });
     }
 
@@ -494,7 +494,7 @@ export const createPlanParking = async (req, res, next) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, message: "Server Error" });
+    res.status(500).json({ success: false, message: "Lỗi máy chủ" });
   }
 };
 export const createPlanRestaurant = async (req, res, next) => {
@@ -540,7 +540,7 @@ export const createPlanRestaurant = async (req, res, next) => {
     if (!trip) {
       return res.status(404).json({
         success: false,
-        message: "Trip not found",
+        message: "Không tìm thấy chuyến đi",
       });
     }
 
@@ -556,7 +556,7 @@ export const createPlanRestaurant = async (req, res, next) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, message: "Server Error" });
+    res.status(500).json({ success: false, message: "Lỗi máy chủ" });
   }
 };
 export const createPlanRail = async (req, res, next) => {
@@ -609,7 +609,7 @@ export const createPlanRail = async (req, res, next) => {
     if (!trip) {
       return res.status(404).json({
         success: false,
-        message: "Trip not found",
+        message: "Không tìm thấy chuyến đi",
       });
     }
 
@@ -625,7 +625,7 @@ export const createPlanRail = async (req, res, next) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, message: "Server Error" });
+    res.status(500).json({ success: false, message: "Lỗi máy chủ" });
   }
 };
 export const getPlanById = async (req, res, next) => {
@@ -635,17 +635,17 @@ export const getPlanById = async (req, res, next) => {
     const plan = await Plans.findById(planId);
 
     if (!plan) {
-      return res.status(404).json({ message: "Plan not found" });
+      return res.status(404).json({ message: "Không tìm thấy kế hoạch" });
     }
 
     res.status(200).json({
       success: true,
-      message: "Successful",
+      message: "Thành công",
       data: plan,
     });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: "Lỗi máy chủ" });
   }
 };
 
@@ -692,7 +692,7 @@ export const updatePlanActivity = async (req, res, next) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, message: "Internal server error" });
+    res.status(500).json({ success: false, message: "Lỗi máy chủ" });
   }
 };
 
@@ -866,7 +866,7 @@ export const updatePlanTheater = async (req, res, next) => {
     if (!plan) {
       return res.status(404).json({
         success: false,
-        message: "Không tìm thấy kế hoạch buổi xem phim",
+        message: "Không tìm thấy kế hoạch",
       });
     }
 
@@ -925,7 +925,7 @@ export const updatePlanCar = async (req, res, next) => {
     if (!plan) {
       return res.status(404).json({
         success: false,
-        message: "Không tìm thấy kế hoạch thuê xe",
+        message: "Không tìm thấy kế hoạch",
       });
     }
 
@@ -979,7 +979,7 @@ export const updatePlanParking = async (req, res, next) => {
     if (!plan) {
       return res.status(404).json({
         success: false,
-        message: "Không tìm thấy kế hoạch đỗ xe",
+        message: "Không tìm thấy kế hoạch",
       });
     }
 
@@ -1044,7 +1044,7 @@ export const updatePlanRail = async (req, res, next) => {
     if (!plan) {
       return res.status(404).json({
         success: false,
-        message: "Không tìm thấy kế hoạch tàu hỏa",
+        message: "Không tìm thấy kế hoạch",
       });
     }
 

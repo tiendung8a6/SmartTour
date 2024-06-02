@@ -11,8 +11,7 @@ export const createTrip = async (req, res, next) => {
     if (!(tripName && city && startDate && endDate && image)) {
       return res.status(400).json({
         success: false,
-        message:
-          "All fields are required. Please enter tripName, city, startDate, endDate, status, image.",
+        message: "Vui lòng nhập các trường bắt buộc",
       });
     }
 
@@ -40,12 +39,12 @@ export const createTrip = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Trip created successfully",
+      message: "Chuyến đi được tạo thành công",
       data: trip,
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, message: "Server Error" });
+    res.status(500).json({ success: false, message: "Lỗi máy chủ" });
   }
 };
 
@@ -128,7 +127,7 @@ export const getAdminTrips = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Trip Loaded successfully",
+      message: "Dữ liệu chuyến đi đã được tải thành công",
       totalTrips: totalTrips,
       data: trips,
       page,
@@ -158,7 +157,7 @@ export const getTrip = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Successful",
+      message: "Thành công",
       data: trip,
     });
   } catch (error) {
@@ -185,10 +184,9 @@ export const updateTrip = async (req, res, next) => {
     const trip = await Trips.findByIdAndUpdate(id, updatedFields, {
       new: true,
     });
-    console.log("trip======", trip);
     res.status(200).json({
       success: true,
-      message: "Trip updated successfully",
+      message: "Chuyến đi được cập nhật thành công",
       data: trip,
     });
   } catch (error) {
@@ -222,7 +220,7 @@ export const updateTripStatus = async (req, res, next) => {
 
     res.status(200).json({
       sucess: true,
-      message: "Action performed successfully",
+      message: "Trạng thái đã được cập nhật thành công",
       data: trip,
     });
   } catch (error) {

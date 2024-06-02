@@ -12,16 +12,14 @@ export const createPost = async (req, res, next) => {
     const { desc, img, title, slug, cat } = req.body;
 
     if (!(desc || img || title || cat)) {
-      return next(
-        "All fields are required. Please enter a description, title, category and select image."
-      );
+      return next("Tất cả các trường là bắt buộc.");
     }
 
     // Tìm id của category dựa trên tên category được cung cấp từ request body
     const category = await Categories.findOne({ label: cat });
 
     if (!category) {
-      return next("Category not found");
+      return next("Không tìm thấy danh mục");
     }
 
     const post = await Posts.create({
@@ -36,7 +34,7 @@ export const createPost = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Post created successfully",
+      message: "Bài viết được đăng thành công",
       data: post,
     });
   } catch (error) {
@@ -54,7 +52,7 @@ export const updatePostStatus = async (req, res, next) => {
 
     res.status(200).json({
       sucess: true,
-      message: "Action performed successfully",
+      message: "Cập nhật trạng thái thành công",
       data: post,
     });
   } catch (error) {
@@ -79,7 +77,7 @@ export const updatePost = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Content updated successfully",
+      message: "Bài viết được cập nhật thành công",
       data: post,
     });
   } catch (error) {
@@ -163,7 +161,7 @@ export const getPost = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Successful",
+      message: "Thành công",
       data: post,
     });
   } catch (error) {
@@ -221,7 +219,7 @@ export const getPopularContents = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Successful",
+      message: "Thành công",
       data: { posts, writers },
     });
   } catch (error) {
@@ -243,7 +241,7 @@ export const getComments = async (req, res, next) => {
 
     res.status(200).json({
       sucess: true,
-      message: "successfully",
+      message: "Thành công",
       data: postComments,
     });
   } catch (error) {
@@ -259,7 +257,7 @@ export const commentPost = async (req, res, next) => {
     const { id } = req.params;
 
     if (desc === null) {
-      return res.status(404).json({ message: "Comment is required." });
+      return res.status(404).json({ message: "Nội dung là bắt buộc." });
     }
 
     const newComment = new Comments({ desc, user: userId, post: id });
@@ -277,7 +275,7 @@ export const commentPost = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      message: "Comment published successfully",
+      message: "Bình luận bài viết thành công",
       newComment,
     });
   } catch (error) {
@@ -298,7 +296,7 @@ export const deletePost = async (req, res, next) => {
     await Comments.deleteMany({ post: id });
     res.status(200).json({
       success: true,
-      message: "Deleted successfully",
+      message: "Đã xoá thành công bài viết",
     });
   } catch (error) {
     console.log(error);
@@ -321,9 +319,11 @@ export const deleteComment = async (req, res, next) => {
     if (result.modifiedCount > 0) {
       res
         .status(200)
-        .json({ success: true, message: "Comment removed successfully" });
+        .json({ success: true, message: "Đã xóa bình luận thành công" });
     } else {
-      res.status(404).json({ message: "Post or comment not found" });
+      res
+        .status(404)
+        .json({ message: "Không tìm thấy bài viết hoặc bình luận" });
     }
   } catch (error) {
     console.log(error);
@@ -418,7 +418,7 @@ export const stats = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Data loaded successfully",
+      message: "Dữ liệu thống kê được tải thành công",
       totalPosts,
       totalViews,
       totalWriters,
@@ -494,7 +494,7 @@ export const getPostContent = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Content Loaded successfully",
+      message: "Nội dung bài viết được tải thành công",
       totalPost,
       data: posts,
       page,
@@ -534,7 +534,7 @@ export const getMyPost = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Content Loaded successfully",
+      message: "Nội dung bài viết được tải thành công",
       totalPost,
       data: posts,
       page,
@@ -562,7 +562,7 @@ export const getOneFollower = async (req, res, next) => {
     });
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "Không tìm thấy người dùng" });
     }
 
     res.status(200).json(user);
@@ -590,7 +590,7 @@ export const deleteFollower = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Follower deleted successfully",
+      message: "Đã xóa người theo dõi thành công",
       updatedUser,
     });
   } catch (error) {
@@ -613,9 +613,11 @@ export const deleteClientComment = async (req, res, next) => {
     if (result.modifiedCount > 0) {
       res
         .status(200)
-        .json({ success: true, message: "Comment removed successfully" });
+        .json({ success: true, message: "Đã xóa bình luận thành công" });
     } else {
-      res.status(404).json({ message: "Post or comment not found" });
+      res
+        .status(404)
+        .json({ message: "Không tìm thấy bài viết hoặc bình luận" });
     }
   } catch (error) {
     console.log(error);
