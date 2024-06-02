@@ -1,12 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { API_URL } from "../utils";
-
-export const API_URI = `http://localhost:8800/`;
+import { REACT_APP_API_URL } from "../utils";
 
 export const getWriterInfo = async (id) => {
   try {
-    const { data } = await axios.get(`${API_URI}users/get-user/${id}`);
+    const { data } = await axios.get(
+      `${REACT_APP_API_URL}/users/get-user/${id}`
+    );
 
     return data?.data;
   } catch (error) {
@@ -22,7 +22,7 @@ export const useUsers = (toast, token) => {
   return useMutation({
     mutationFn: async (page) => {
       const { data } = await axios.post(
-        `${API_URL}/users/admin-users?page=${page}`,
+        `${REACT_APP_API_URL}/users/admin-users?page=${page}`,
         null,
         {
           headers: {
@@ -50,7 +50,7 @@ export const useDeleteUser = (toast, token, mutate) => {
   return useMutation({
     mutationFn: async (id) => {
       const { data } = await axios.delete(
-        `${API_URL}/users/delete-user/` + id,
+        `${REACT_APP_API_URL}/users/delete-user/` + id,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -73,7 +73,7 @@ export const useUserAction = (toast, token) => {
   return useMutation({
     mutationFn: async ({ id, isLock }) => {
       const { data } = await axios.patch(
-        `${API_URL}/users/update-user-lock/${id}`,
+        `${REACT_APP_API_URL}/users/update-user-lock/${id}`,
         { isLock: isLock },
         {
           headers: {

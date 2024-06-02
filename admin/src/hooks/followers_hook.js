@@ -1,12 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { API_URL } from "../utils";
+import { REACT_APP_API_URL } from "../utils";
 
 export const useFollowers = (toast, token) => {
   return useMutation({
     mutationFn: async (page) => {
       const { data } = await axios.post(
-        `${API_URL}/posts/admin-followers?page=${page}`,
+        `${REACT_APP_API_URL}/posts/admin-followers?page=${page}`,
         null,
         {
           headers: {

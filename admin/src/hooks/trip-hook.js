@@ -1,12 +1,12 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { API_URL } from "../utils";
+import { REACT_APP_API_URL } from "../utils";
 
 export const useTrip = (toast, token) => {
   return useMutation({
     mutationFn: async (page) => {
       const { data } = await axios.post(
-        `${API_URL}/trips/admin-trip?page=${page}`,
+        `${REACT_APP_API_URL}/trips/admin-trip?page=${page}`,
         null,
         {
           headers: {
@@ -14,7 +14,6 @@ export const useTrip = (toast, token) => {
           },
         }
       );
-      console.log("DTAA", data);
       return data;
     },
     onError: (error) => {
@@ -32,7 +31,7 @@ export const useTrip = (toast, token) => {
 export const useDeleteTrip = (toast, token, mutate) => {
   return useMutation({
     mutationFn: async (id) => {
-      const { data } = await axios.delete(`${API_URL}/trips/` + id, {
+      const { data } = await axios.delete(`${REACT_APP_API_URL}/trips/` + id, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -53,7 +52,7 @@ export const useAction = (toast, token) => {
   return useMutation({
     mutationFn: async ({ id, status }) => {
       const { data } = await axios.patch(
-        `${API_URL}/trips/update-status/${id}`,
+        `${REACT_APP_API_URL}/trips/update-status/${id}`,
         { status: status },
         {
           headers: {

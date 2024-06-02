@@ -1,12 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { API_URL } from "../utils";
+import { REACT_APP_API_URL } from "../utils";
 
 export const useCreateCategory = (toast, token) => {
   return useMutation({
     mutationFn: async (formData) => {
       const { data } = await axios.post(
-        `${API_URL}/categories/create-category`,
+        `${REACT_APP_API_URL}/categories/create-category`,
         formData,
         {
           headers: {
@@ -36,7 +36,7 @@ export const useCategory = (toast, token) => {
   return useMutation({
     mutationFn: async (page) => {
       const { data } = await axios.post(
-        `${API_URL}/categories/admin-category?page=${page}`,
+        `${REACT_APP_API_URL}/categories/admin-category?page=${page}`,
         null,
         {
           headers: {
@@ -63,11 +63,14 @@ export const useCategory = (toast, token) => {
 export const useDeleteCategory = (toast, token, mutate) => {
   return useMutation({
     mutationFn: async (id) => {
-      const { data } = await axios.delete(`${API_URL}/categories/` + id, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const { data } = await axios.delete(
+        `${REACT_APP_API_URL}/categories/` + id,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       return data;
     },
     onError: (error) => {
@@ -84,7 +87,7 @@ export const useAction = (toast, token) => {
   return useMutation({
     mutationFn: async ({ id, status }) => {
       const { data } = await axios.patch(
-        `${API_URL}/categories/update-status/${id}`,
+        `${REACT_APP_API_URL}/categories/update-status/${id}`,
         { status: status },
         {
           headers: {
@@ -106,7 +109,7 @@ export const useAction = (toast, token) => {
 
 export const getPostsByCategory = async (id) => {
   try {
-    const { data } = await axios.get(`${API_URL}/categories/${id}`);
+    const { data } = await axios.get(`${REACT_APP_API_URL}/categories/${id}`);
     return data?.data;
   } catch (error) {
     const err = error?.response?.data || error?.response;
@@ -120,7 +123,7 @@ export const getPostsByCategory = async (id) => {
 export const usePosts = () => {
   return useMutation({
     mutationFn: async (id) => {
-      const { data } = await axios.get(`${API_URL}/categories/` + id);
+      const { data } = await axios.get(`${REACT_APP_API_URL}/categories/` + id);
       return data;
     },
   });
@@ -130,7 +133,7 @@ export const useDeleteComment = (token) => {
   return useMutation({
     mutationFn: async ({ id, postId }) => {
       const { data } = await axios.delete(
-        `${API_URL}/posts/comment/${id}/${postId}`,
+        `${REACT_APP_API_URL}/posts/comment/${id}/${postId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -148,7 +151,7 @@ export const useUpdateCategory = (toast, token) => {
     mutationFn: async ({ id, label, color }) => {
       console.log(token);
       const { data } = await axios.patch(
-        `${API_URL}/categories/update/${id}`,
+        `${REACT_APP_API_URL}/categories/update/${id}`,
         { label, color },
         {
           headers: {

@@ -1,12 +1,12 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { API_URL } from "../utils";
+import { REACT_APP_API_URL } from "../utils";
 
 export const useCategories = () => {
   return useQuery({
     queryKey: "categories",
     queryFn: async () => {
-      const { data } = await axios.get(`${API_URL}/categories`);
+      const { data } = await axios.get(`${REACT_APP_API_URL}/categories`);
       return data;
     },
   });
@@ -15,7 +15,7 @@ export const useCreatePost = (toast, token) => {
   return useMutation({
     mutationFn: async (formData) => {
       const { data } = await axios.post(
-        `${API_URL}/posts/create-post`,
+        `${REACT_APP_API_URL}/posts/create-post`,
         formData,
         {
           headers: {
@@ -45,7 +45,7 @@ export const useAnalytics = (toast, token) => {
   return useMutation({
     mutationFn: async (val) => {
       const { data } = await axios.post(
-        `${API_URL}/posts/admin-analytics?query=${val}`,
+        `${REACT_APP_API_URL}/posts/admin-analytics?query=${val}`,
         null,
         {
           headers: {
@@ -73,7 +73,7 @@ export const useContent = (toast, token) => {
   return useMutation({
     mutationFn: async (page) => {
       const { data } = await axios.post(
-        `${API_URL}/posts/admin-content?page=${page}`,
+        `${REACT_APP_API_URL}/posts/admin-content?page=${page}`,
         null,
         {
           headers: {
@@ -100,7 +100,7 @@ export const useContent = (toast, token) => {
 export const useDeletePost = (toast, token, mutate) => {
   return useMutation({
     mutationFn: async (id) => {
-      const { data } = await axios.delete(`${API_URL}/posts/` + id, {
+      const { data } = await axios.delete(`${REACT_APP_API_URL}/posts/` + id, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -121,7 +121,7 @@ export const useAction = (toast, token) => {
   return useMutation({
     mutationFn: async ({ id, status }) => {
       const { data } = await axios.patch(
-        `${API_URL}/posts/update-status/${id}`,
+        `${REACT_APP_API_URL}/posts/update-status/${id}`,
         { status: status },
         {
           headers: {
@@ -146,7 +146,7 @@ export const useUpdatePost = (toast, token) => {
     mutationFn: async ({ id, title, desc }) => {
       console.log(token);
       const { data } = await axios.patch(
-        `${API_URL}/posts/update/${id}`,
+        `${REACT_APP_API_URL}/posts/update/${id}`,
         { title, desc },
         {
           headers: {
@@ -171,11 +171,15 @@ export const useUpdatePost = (toast, token) => {
 export const usePost = (toast, token) => {
   return useMutation({
     mutationFn: async (id) => {
-      const { data } = await axios.post(`${API_URL}/posts/` + id, null, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const { data } = await axios.post(
+        `${REACT_APP_API_URL}/posts/` + id,
+        null,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       return data;
     },
@@ -191,7 +195,9 @@ export const usePost = (toast, token) => {
 export const useComments = () => {
   return useMutation({
     mutationFn: async (id) => {
-      const { data } = await axios.get(`${API_URL}/posts/comments/` + id);
+      const { data } = await axios.get(
+        `${REACT_APP_API_URL}/posts/comments/` + id
+      );
 
       return data;
     },
@@ -200,7 +206,9 @@ export const useComments = () => {
 export const useFollowers = () => {
   return useMutation({
     mutationFn: async (id) => {
-      const { data } = await axios.post(`${API_URL}/posts/follower/` + id);
+      const { data } = await axios.post(
+        `${REACT_APP_API_URL}/posts/follower/` + id
+      );
       return data;
     },
   });
@@ -208,7 +216,7 @@ export const useFollowers = () => {
 export const useGetPost = () => {
   return useMutation({
     mutationFn: async (id) => {
-      const { data } = await axios.get(`${API_URL}/posts/` + id);
+      const { data } = await axios.get(`${REACT_APP_API_URL}/posts/` + id);
 
       return data?.data;
     },
@@ -219,7 +227,7 @@ export const useDeleteComment = (token) => {
   return useMutation({
     mutationFn: async ({ id, postId }) => {
       const { data } = await axios.delete(
-        `${API_URL}/posts/comment/${id}/${postId}`,
+        `${REACT_APP_API_URL}/posts/comment/${id}/${postId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -235,7 +243,7 @@ export const useDeleteFollower = (token) => {
   return useMutation({
     mutationFn: async ({ id, writerId }) => {
       const { data } = await axios.delete(
-        `${API_URL}/posts/follower/${id}/${writerId}`,
+        `${REACT_APP_API_URL}/posts/follower/${id}/${writerId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -251,7 +259,7 @@ export const usePayment = (toast, token) => {
   return useMutation({
     mutationFn: async (page) => {
       const { data } = await axios.post(
-        `${API_URL}/payment/admin-payments?page=${page}`,
+        `${REACT_APP_API_URL}/payment/admin-payments?page=${page}`,
         null,
         {
           headers: {

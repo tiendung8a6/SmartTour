@@ -1,12 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { API_URL } from "../utils";
+import { REACT_APP_API_URL } from "../utils";
 
 export const useContent = (toast, token) => {
   return useMutation({
     mutationFn: async (page) => {
       const { data } = await axios.post(
-        `${API_URL}/users/admin-contacts?page=${page}`,
+        `${REACT_APP_API_URL}/users/admin-contacts?page=${page}`,
         null,
         {
           headers: {
@@ -35,7 +35,7 @@ export const useUpdateContact = (toast, token) => {
     mutationFn: async ({ id, content }) => {
       console.log(token);
       const { data } = await axios.patch(
-        `${API_URL}/users/contact/${id}`,
+        `${REACT_APP_API_URL}/users/contact/${id}`,
         { content },
         {
           headers: {
