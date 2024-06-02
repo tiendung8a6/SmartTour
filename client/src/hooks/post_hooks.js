@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import useStore from "../store";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { updateURL } from "../utils";
-import { API_URI } from "../utils/apiCalls";
+import { REACT_APP_API_URL } from "../utils/apiCalls";
 
 export const usePopularPost = () => {
   const [popular, setPopular] = useState([]);
@@ -12,7 +12,7 @@ export const usePopularPost = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const { data } = await axios.get(`${API_URI}posts/popular`);
+        const { data } = await axios.get(`${REACT_APP_API_URL}/posts/popular`);
 
         setPopular(data?.data);
       } catch (error) {
@@ -47,7 +47,7 @@ export const usePosts = ({ writerId }) => {
       setIsLoading(true);
       try {
         const { data } = await axios.get(
-          `${API_URI}posts?cat=${category}&page=${page}&writerId=${
+          `${REACT_APP_API_URL}/posts?cat=${category}&page=${page}&writerId=${
             writerId || ""
           }`
         );

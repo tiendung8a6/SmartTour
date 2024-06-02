@@ -128,8 +128,10 @@ const About = () => {
 };
 
 const getThingsToDo = (place) => {
+  const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+
   // return fetch(`https://thingsto-api.glitch.me/${place}`, {
-  return fetch(`http://localhost:8800/ai/${place}`, {
+  return fetch(`${REACT_APP_API_URL}/ai/${place}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

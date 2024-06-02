@@ -1,12 +1,12 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { API_URL } from "../utils";
+import { REACT_APP_API_URL } from "../utils";
 
 export const useCategories = () => {
   return useQuery({
     queryKey: "categories",
     queryFn: async () => {
-      const { data } = await axios.get(`${API_URL}/categories`);
+      const { data } = await axios.get(`${REACT_APP_API_URL}/categories`);
       return data;
     },
   });
@@ -16,7 +16,7 @@ export const useUpdateUser = (toast, token) => {
   return useMutation({
     mutationFn: async (formData) => {
       const { data } = await axios.put(
-        `${API_URL}/users/update-user/`,
+        `${REACT_APP_API_URL}/users/update-user/`,
         formData,
         {
           headers: {
@@ -43,7 +43,7 @@ export const useCreatePost = (toast, token) => {
   return useMutation({
     mutationFn: async (formData) => {
       const { data } = await axios.post(
-        `${API_URL}/posts/create-post`,
+        `${REACT_APP_API_URL}/posts/create-post`,
         formData,
         {
           headers: {
@@ -72,11 +72,15 @@ export const useCreatePost = (toast, token) => {
 export const useCreateTrip = (toast, token) => {
   return useMutation({
     mutationFn: async (formData) => {
-      const { data } = await axios.post(`${API_URL}/trips/create`, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const { data } = await axios.post(
+        `${REACT_APP_API_URL}/trips/create`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       return data;
     },
 
@@ -97,7 +101,7 @@ export const useContent = (toast, token) => {
   return useMutation({
     mutationFn: async (page) => {
       const { data } = await axios.post(
-        `${API_URL}/posts/client-content?page=${page}`,
+        `${REACT_APP_API_URL}/posts/client-content?page=${page}`,
         null,
         {
           headers: {
@@ -124,7 +128,7 @@ export const useContent = (toast, token) => {
 export const useDeletePost = (toast, token, mutate) => {
   return useMutation({
     mutationFn: async (id) => {
-      const { data } = await axios.delete(`${API_URL}/posts/` + id, {
+      const { data } = await axios.delete(`${REACT_APP_API_URL}/posts/` + id, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -145,7 +149,7 @@ export const useUpdatePost = (toast, token) => {
   return useMutation({
     mutationFn: async ({ id, title, desc, cat, img }) => {
       const { data } = await axios.patch(
-        `${API_URL}/posts/update/${id}`,
+        `${REACT_APP_API_URL}/posts/update/${id}`,
         { title, desc, cat, img },
         {
           headers: {
@@ -172,7 +176,7 @@ export const useAction = (toast, token) => {
   return useMutation({
     mutationFn: async ({ id, status }) => {
       const { data } = await axios.patch(
-        `${API_URL}/posts/update-status/${id}`,
+        `${REACT_APP_API_URL}/posts/update-status/${id}`,
         { status: status },
         {
           headers: {
@@ -195,7 +199,7 @@ export const useCreateActivityPlan = (id, toast, token) => {
   return useMutation({
     mutationFn: async (formData) => {
       const { data } = await axios.post(
-        `${API_URL}/plans/create/activity/${id}`,
+        `${REACT_APP_API_URL}/plans/create/activity/${id}`,
         formData,
         {
           headers: {
@@ -223,7 +227,7 @@ export const useUpdateActivityPlan = (planId, toast, token, id) => {
   return useMutation({
     mutationFn: async (formData) => {
       const { data } = await axios.patch(
-        `${API_URL}/plans/update/activity/${planId}`,
+        `${REACT_APP_API_URL}/plans/update/activity/${planId}`,
         formData,
         {
           headers: {
@@ -251,7 +255,7 @@ export const useCreateLodgingPlan = (id, toast, token) => {
   return useMutation({
     mutationFn: async (formData) => {
       const { data } = await axios.post(
-        `${API_URL}/plans/create/lodging/${id}`,
+        `${REACT_APP_API_URL}/plans/create/lodging/${id}`,
         formData,
         {
           headers: {
@@ -278,7 +282,7 @@ export const useCreateFlightsPlan = (id, toast, token) => {
   return useMutation({
     mutationFn: async (formData) => {
       const { data } = await axios.post(
-        `${API_URL}/plans/create/flights/${id}`,
+        `${REACT_APP_API_URL}/plans/create/flights/${id}`,
         formData,
         {
           headers: {
@@ -305,7 +309,7 @@ export const useUpdateFlightsPlan = (planId, toast, token, id) => {
   return useMutation({
     mutationFn: async (formData) => {
       const { data } = await axios.patch(
-        `${API_URL}/plans/update/flights/${planId}`,
+        `${REACT_APP_API_URL}/plans/update/flights/${planId}`,
         formData,
         {
           headers: {
@@ -333,7 +337,7 @@ export const useCreateCarPlan = (id, toast, token) => {
   return useMutation({
     mutationFn: async (formData) => {
       const { data } = await axios.post(
-        `${API_URL}/plans/create/car/${id}`,
+        `${REACT_APP_API_URL}/plans/create/car/${id}`,
         formData,
         {
           headers: {
@@ -361,7 +365,7 @@ export const useCreateConcertPlan = (id, toast, token) => {
   return useMutation({
     mutationFn: async (formData) => {
       const { data } = await axios.post(
-        `${API_URL}/plans/create/concert/${id}`,
+        `${REACT_APP_API_URL}/plans/create/concert/${id}`,
         formData,
         {
           headers: {
@@ -389,7 +393,7 @@ export const useCreateTheaterPlan = (id, toast, token) => {
   return useMutation({
     mutationFn: async (formData) => {
       const { data } = await axios.post(
-        `${API_URL}/plans/create/theater/${id}`,
+        `${REACT_APP_API_URL}/plans/create/theater/${id}`,
         formData,
         {
           headers: {
@@ -417,7 +421,7 @@ export const useCreateCampPlan = (id, toast, token) => {
   return useMutation({
     mutationFn: async (formData) => {
       const { data } = await axios.post(
-        `${API_URL}/plans/create/camp/${id}`,
+        `${REACT_APP_API_URL}/plans/create/camp/${id}`,
         formData,
         {
           headers: {
@@ -445,7 +449,7 @@ export const useCreateParkingPlan = (id, toast, token) => {
   return useMutation({
     mutationFn: async (formData) => {
       const { data } = await axios.post(
-        `${API_URL}/plans/create/parking/${id}`,
+        `${REACT_APP_API_URL}/plans/create/parking/${id}`,
         formData,
         {
           headers: {
@@ -473,7 +477,7 @@ export const useCreateRestaurantPlan = (id, toast, token) => {
   return useMutation({
     mutationFn: async (formData) => {
       const { data } = await axios.post(
-        `${API_URL}/plans/create/restaurant/${id}`,
+        `${REACT_APP_API_URL}/plans/create/restaurant/${id}`,
         formData,
         {
           headers: {
@@ -500,7 +504,7 @@ export const useCreateRailPlan = (id, toast, token) => {
   return useMutation({
     mutationFn: async (formData) => {
       const { data } = await axios.post(
-        `${API_URL}/plans/create/rail/${id}`,
+        `${REACT_APP_API_URL}/plans/create/rail/${id}`,
         formData,
         {
           headers: {
@@ -536,7 +540,7 @@ export const useUpdateTrip = (toast, token) => {
       total,
     }) => {
       const { data } = await axios.patch(
-        `${API_URL}/trips/update/${id}`,
+        `${REACT_APP_API_URL}/trips/update/${id}`,
         { tripName, city, startDate, endDate, image, status, total },
         {
           headers: {
@@ -562,7 +566,7 @@ export const useUpdateConcertPlan = (planId, toast, token, id) => {
   return useMutation({
     mutationFn: async (formData) => {
       const { data } = await axios.patch(
-        `${API_URL}/plans/update/concert/${planId}`,
+        `${REACT_APP_API_URL}/plans/update/concert/${planId}`,
         formData,
         {
           headers: {
@@ -590,7 +594,7 @@ export const useUpdateTheaterPlan = (planId, toast, token, id) => {
   return useMutation({
     mutationFn: async (formData) => {
       const { data } = await axios.patch(
-        `${API_URL}/plans/update/theater/${planId}`,
+        `${REACT_APP_API_URL}/plans/update/theater/${planId}`,
         formData,
         {
           headers: {
@@ -618,7 +622,7 @@ export const useUpdateCarPlan = (planId, toast, token, id) => {
   return useMutation({
     mutationFn: async (formData) => {
       const { data } = await axios.patch(
-        `${API_URL}/plans/update/car/${planId}`,
+        `${REACT_APP_API_URL}/plans/update/car/${planId}`,
         formData,
         {
           headers: {
@@ -646,7 +650,7 @@ export const useUpdateRestaurantPlan = (planId, toast, token, id) => {
   return useMutation({
     mutationFn: async (formData) => {
       const { data } = await axios.patch(
-        `${API_URL}/plans/update/restaurant/${planId}`,
+        `${REACT_APP_API_URL}/plans/update/restaurant/${planId}`,
         formData,
         {
           headers: {
@@ -674,7 +678,7 @@ export const useUpdateParkingPlan = (planId, toast, token, id) => {
   return useMutation({
     mutationFn: async (formData) => {
       const { data } = await axios.patch(
-        `${API_URL}/plans/update/parking/${planId}`,
+        `${REACT_APP_API_URL}/plans/update/parking/${planId}`,
         formData,
         {
           headers: {
@@ -702,7 +706,7 @@ export const useUpdateLodgingPlan = (planId, toast, token, id) => {
   return useMutation({
     mutationFn: async (formData) => {
       const { data } = await axios.patch(
-        `${API_URL}/plans/update/lodging/${planId}`,
+        `${REACT_APP_API_URL}/plans/update/lodging/${planId}`,
         formData,
         {
           headers: {
@@ -730,7 +734,7 @@ export const useUpdateRailPlan = (planId, toast, token, id) => {
   return useMutation({
     mutationFn: async (formData) => {
       const { data } = await axios.patch(
-        `${API_URL}/plans/update/rail/${planId}`,
+        `${REACT_APP_API_URL}/plans/update/rail/${planId}`,
         formData,
         {
           headers: {
@@ -757,7 +761,9 @@ export const useUpdateRailPlan = (planId, toast, token, id) => {
 export const useComments = () => {
   return useMutation({
     mutationFn: async (id) => {
-      const { data } = await axios.get(`${API_URL}/posts/comments/` + id);
+      const { data } = await axios.get(
+        `${REACT_APP_API_URL}/posts/comments/` + id
+      );
 
       return data;
     },
@@ -767,7 +773,7 @@ export const useDeleteComment = (token) => {
   return useMutation({
     mutationFn: async ({ id, postId }) => {
       const { data } = await axios.delete(
-        `${API_URL}/posts/comment/client/${id}/${postId}`
+        `${REACT_APP_API_URL}/posts/comment/client/${id}/${postId}`
       );
       return data;
     },

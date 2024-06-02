@@ -25,6 +25,7 @@ import moment from "moment";
 import QRCode from "qrcode.react";
 
 const ViewRail = () => {
+  const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL;
   const { colorScheme } = useMantineColorScheme();
   const { id, planId } = useParams();
 
@@ -178,7 +179,7 @@ const ViewRail = () => {
             <div className="flex mx-6 py-4 flex-row flex-wrap items-center">
               <QRCode
                 id="qrCodeEl"
-                value={`http://localhost:3000/trip/${id}/rail/${planId}/view`}
+                value={`${REACT_APP_BASE_URL}/trip/${id}/rail/${planId}/view`}
                 size={100}
                 fgColor={"#000000"}
                 bgColor={"#FFFFFF"}

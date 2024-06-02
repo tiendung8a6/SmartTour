@@ -7,7 +7,7 @@ import {
 import { toast } from "sonner";
 import { app } from "./firebase";
 
-export const API_URL = "http://localhost:8800";
+export const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
 export function formatNumber(num) {
   if (num >= 1000000) {

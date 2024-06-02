@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const API_URI = `http://localhost:8800/`;
+export const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
 export const getGoogleSignup = async (access_token) => {
   try {
@@ -18,7 +18,10 @@ export const getGoogleSignup = async (access_token) => {
         image: user.picture,
       };
 
-      const result = await axios.post(`${API_URI}auth/google-signup`, data);
+      const result = await axios.post(
+        `${REACT_APP_API_URL}/auth/google-signup`,
+        data
+      );
       console.log(result);
 
       return result?.data;
@@ -44,7 +47,7 @@ export const googleSignin = async (token) => {
         email: user.email,
       };
 
-      const result = await axios.post(`${API_URI}auth/login`, data);
+      const result = await axios.post(`${REACT_APP_API_URL}/auth/login`, data);
       return result?.data;
     }
   } catch (error) {
@@ -57,7 +60,7 @@ export const googleSignin = async (token) => {
 
 export const emailLogin = async (data) => {
   try {
-    const result = await axios.post(`${API_URI}auth/login`, data);
+    const result = await axios.post(`${REACT_APP_API_URL}/auth/login`, data);
 
     return result?.data;
   } catch (error) {
@@ -70,7 +73,7 @@ export const emailLogin = async (data) => {
 
 export const emailSignup = async (data) => {
   try {
-    const result = await axios.post(`${API_URI}auth/register`, data);
+    const result = await axios.post(`${REACT_APP_API_URL}/auth/register`, data);
 
     return result?.data;
   } catch (error) {
@@ -83,7 +86,7 @@ export const emailSignup = async (data) => {
 
 export const getSinglePost = async (id) => {
   try {
-    const { data } = await axios.get(`${API_URI}posts/${id}`);
+    const { data } = await axios.get(`${REACT_APP_API_URL}/posts/${id}`);
 
     return data?.data;
   } catch (error) {
@@ -96,7 +99,9 @@ export const getSinglePost = async (id) => {
 
 export const getPostComments = async (id) => {
   try {
-    const { data } = await axios.get(`${API_URI}posts/comments/${id}`);
+    const { data } = await axios.get(
+      `${REACT_APP_API_URL}/posts/comments/${id}`
+    );
 
     return data?.data;
   } catch (error) {
@@ -110,11 +115,15 @@ export const getPostComments = async (id) => {
 
 export const postComments = async (id, token, data) => {
   try {
-    const result = await axios.post(`${API_URI}posts/comment/${id}`, data, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const result = await axios.post(
+      `${REACT_APP_API_URL}/posts/comment/${id}`,
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     console.log(result);
     return result?.data;
   } catch (error) {
@@ -128,7 +137,7 @@ export const postComments = async (id, token, data) => {
 export const deleteComment = async (id, token, postId) => {
   try {
     const result = await axios.delete(
-      `${API_URI}posts/comment/${id}/${postId}`,
+      `${REACT_APP_API_URL}/posts/comment/${id}/${postId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -147,7 +156,9 @@ export const deleteComment = async (id, token, postId) => {
 
 export const getWriterInfo = async (id) => {
   try {
-    const { data } = await axios.get(`${API_URI}users/get-user/${id}`);
+    const { data } = await axios.get(
+      `${REACT_APP_API_URL}/users/get-user/${id}`
+    );
 
     return data?.data;
   } catch (error) {
@@ -161,11 +172,15 @@ export const getWriterInfo = async (id) => {
 
 export const followWriter = async (id, token) => {
   try {
-    const res = await axios.post(`${API_URI}users/follower/${id}`, null, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const res = await axios.post(
+      `${REACT_APP_API_URL}/users/follower/${id}`,
+      null,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
     return res?.data;
   } catch (error) {
@@ -179,7 +194,10 @@ export const followWriter = async (id, token) => {
 
 export const forgotpassword = async (data) => {
   try {
-    const result = await axios.post(`${API_URI}auth/forgot-password`, data);
+    const result = await axios.post(
+      `${REACT_APP_API_URL}/auth/forgot-password`,
+      data
+    );
 
     return result?.data;
   } catch (error) {
@@ -192,7 +210,7 @@ export const forgotpassword = async (data) => {
 
 export const getSingleTrip = async (id) => {
   try {
-    const { data } = await axios.get(`${API_URI}trips/${id}`);
+    const { data } = await axios.get(`${REACT_APP_API_URL}/trips/${id}`);
 
     return data?.data;
   } catch (error) {
@@ -204,7 +222,7 @@ export const getSingleTrip = async (id) => {
 };
 export const getSinglePlans = async (planId) => {
   try {
-    const { data } = await axios.get(`${API_URI}plans/${planId}`);
+    const { data } = await axios.get(`${REACT_APP_API_URL}/plans/${planId}`);
     return data?.data;
   } catch (error) {
     const err = error?.response?.data || error?.response;
@@ -215,7 +233,7 @@ export const getSinglePlans = async (planId) => {
 };
 export const getPublicTrips = async (planId) => {
   try {
-    const { data } = await axios.get(`${API_URI}trips/public`);
+    const { data } = await axios.get(`${REACT_APP_API_URL}/trips/public`);
     return data?.data;
   } catch (error) {
     const err = error?.response?.data || error?.response;
@@ -226,7 +244,9 @@ export const getPublicTrips = async (planId) => {
 };
 export const getUser = async (id) => {
   try {
-    const { data } = await axios.get(`${API_URI}users/get-info/${id}`);
+    const { data } = await axios.get(
+      `${REACT_APP_API_URL}/users/get-info/${id}`
+    );
 
     return data?.data;
   } catch (error) {

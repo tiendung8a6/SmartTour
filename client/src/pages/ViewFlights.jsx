@@ -17,9 +17,9 @@ import QRCode from "qrcode.react";
 import moment from "moment";
 
 const ViewFlights = () => {
+  const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL;
   const { colorScheme } = useMantineColorScheme();
   const { id, planId } = useParams();
-
   const [planName, setPlanName] = useState(null);
   const [startAddress, setStartAddress] = useState(null);
   const [estimatedPrice, setEstimatedPrice] = useState(null);
@@ -194,7 +194,7 @@ const ViewFlights = () => {
             <div className="flex mx-6 py-4 flex-row flex-wrap items-center">
               <QRCode
                 id="qrCodeEl"
-                value={`http://localhost:3000/trip/${id}/flights/${planId}/view`}
+                value={`${REACT_APP_BASE_URL}/trip/${id}/flights/${planId}/view`}
                 size={100}
                 fgColor={"#000000"}
                 bgColor={"#FFFFFF"}

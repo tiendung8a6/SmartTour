@@ -5,8 +5,9 @@ import { useParams } from "react-router-dom"; // Import useParams từ React Rou
 import useStore from "../store";
 
 const Checkout = () => {
-  const { setIsLoading } = useStore();
+  const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
+  const { setIsLoading } = useStore();
   const [email, setEmail] = useState(null);
   const [phone, setPhone] = useState(null);
   const { paymentType } = useParams(); // Trích xuất paymentType từ URL
@@ -24,7 +25,7 @@ const Checkout = () => {
     setIsLoading(true);
     try {
       const response = await axios.post(
-        `http://localhost:8800/payment/${paymentMethods}/${paymentType}`,
+        `${REACT_APP_API_URL}/payment/${paymentMethods}/${paymentType}`,
         { email, phone }
       ); // Sử dụng paymentType từ useParams
       window.location.href = response.data.url;

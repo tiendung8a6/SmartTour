@@ -46,12 +46,12 @@ function SignIn() {
       if (user?.success === true) {
         saveUserInfo(user, signIn);
       } else {
-        toast.error("Something went wrong. Try signing up.");
+        toast.error("Đã xảy ra lỗi. Hãy thử đăng ký tài khoản.");
       }
     },
     onError: (error) => {
       console.log(error);
-      toast.error("Login Error, Try again!");
+      toast.error("Lỗi đăng nhập, thử lại!");
     },
   });
 
