@@ -26,7 +26,6 @@ import {
   WritePost,
 } from "../components";
 import { useAction, useTrip, useDeleteTrip } from "../hooks/trip-hook";
-// import { getWriterInfo } from "../hooks/user-hook";
 import useCommentStore from "../store/comments";
 import useStore from "../store/store";
 import { formatNumber, updateURL } from "../utils";

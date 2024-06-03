@@ -5,6 +5,8 @@ import Posts from "../models/postModel.js";
 import Users from "../models/userModel.js";
 import Views from "../models/viewsModel.js";
 import Categories from "../models/categoryModel.js";
+import Trips from "../models/tripModel.js";
+import Order from "../models/otherModel.js";
 
 export const createPost = async (req, res, next) => {
   try {
@@ -358,17 +360,16 @@ export const stats = async (req, res, next) => {
 
     const totalFollowers = await Users.findById(userId);
 
-    const viewStats = await Views.aggregate([
+    const postStats = await Posts.aggregate([
       {
         $match: {
-          // user: new mongoose.Types.ObjectId(userId),
           createdAt: { $gte: startDate, $lte: currentDate },
         },
       },
       {
         $group: {
           _id: {
-            $dateToString: { format: "%d-%m-%Y", date: "$createdAt" },
+            $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
           },
           Total: { $sum: 1 },
         },
@@ -376,19 +377,56 @@ export const stats = async (req, res, next) => {
       { $sort: { _id: 1 } },
     ]);
 
-    const followersStats = await Followers.aggregate([
+    const paymentStats = await Order.aggregate([
       {
         $match: {
-          writerId: new mongoose.Types.ObjectId(userId),
+          paymentStatus: "paid",
+        },
+      },
+      {
+        $group: {
+          _id: "$payments", // Nhóm theo phương thức thanh toán (VNPAY hoặc STRIPE)
+          Total: { $sum: "$totalPrice" }, // Tính tổng giá tiền của các đơn hàng
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          name: "$_id", // Đổi tên _id thành name
+          value: "$Total", // Đổi tên Total thành value
+        },
+      },
+    ]);
+
+    const tripsStats = await Trips.aggregate([
+      {
+        $match: {
           createdAt: { $gte: startDate, $lte: currentDate },
         },
       },
       {
         $group: {
           _id: {
-            $dateToString: { format: "%d-%m-%Y", date: "$createdAt" },
+            $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
           },
           Total: { $sum: 1 },
+        },
+      },
+      { $sort: { _id: 1 } },
+    ]);
+    const orderStats = await Order.aggregate([
+      {
+        $match: {
+          createdAt: { $gte: startDate, $lte: currentDate },
+          paymentStatus: "paid",
+        },
+      },
+      {
+        $group: {
+          _id: {
+            $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
+          },
+          Total: { $sum: "$totalPrice" },
         },
       },
       { $sort: { _id: 1 } },
@@ -407,7 +445,7 @@ export const stats = async (req, res, next) => {
     const last5Posts = await Posts.find()
       .populate({
         path: "user",
-        select: "name image -password",
+        select: "-password",
       })
       .populate({
         path: "cat",
@@ -423,8 +461,10 @@ export const stats = async (req, res, next) => {
       totalViews,
       totalWriters,
       followers: totalFollowers?.followers?.length,
-      viewStats,
-      followersStats,
+      orderStats,
+      postStats,
+      tripsStats,
+      paymentStats,
       last5Followers: last5Followers?.followers,
       last5Posts,
     });
@@ -477,6 +517,10 @@ export const getPostContent = async (req, res, next) => {
       .populate({
         path: "cat",
         select: "label color",
+      })
+      .populate({
+        path: "user",
+        select: "name image -password",
       });
 
     // pagination

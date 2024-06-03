@@ -1,4 +1,4 @@
-import { Table } from "@mantine/core";
+import { Table, Badge } from "@mantine/core";
 import moment from "moment";
 import "moment/locale/vi";
 import { formatNumber, getInitials } from "../utils";
@@ -37,11 +37,15 @@ export const RecentPostTable = ({ data, theme }) => {
           />
         }
         <div>
-          <p className="text-base">{el?.title}</p>
-          <span className="text-[10px] text-sky-600">{el?.cat?.label}</span>
+          <p className="text-base text-black">{el?.title}</p>
+          <span className="text-[10px] text-sky-600">
+            <Badge w="fit-content" variant="light" size="md" color="blue">
+              {el?.cat?.label}
+            </Badge>
+          </span>
         </div>
       </Table.Td>
-      <Table.Td>{formatNumber(el?.views.length)}</Table.Td>
+      <Table.Td>{el?.user?.email}</Table.Td>
       <Table.Td>{moment(el?.createdAt).fromNow()}</Table.Td>
     </Table.Tr>
   ));
@@ -49,9 +53,9 @@ export const RecentPostTable = ({ data, theme }) => {
   return (
     <Table highlightOnHover withTableBorder>
       <Table.Thead>
-        <Table.Tr>
+        <Table.Tr className="bg-gray-600 text-white">
           <Table.Th>Tiêu đề</Table.Th>
-          <Table.Th>Lượt xem</Table.Th>
+          <Table.Th>Tác giả</Table.Th>
           <Table.Th>Ngày đăng</Table.Th>
         </Table.Tr>
       </Table.Thead>
@@ -97,7 +101,7 @@ export const RecentFollowersTable = ({ data, theme }) => {
   return (
     <Table highlightOnHover withTableBorder>
       <Table.Thead>
-        <Table.Tr>
+        <Table.Tr className="bg-gray-600 text-white">
           <Table.Th>Tên</Table.Th>
           <Table.Th>Ngày theo dõi</Table.Th>
         </Table.Tr>

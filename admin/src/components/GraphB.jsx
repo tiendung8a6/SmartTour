@@ -1,28 +1,41 @@
-import React from "react";
+// import React from "react";
+// import {
+//   Area,
+//   AreaChart,
+//   ResponsiveContainer,
+//   Tooltip,
+//   XAxis,
+//   YAxis,
+// } from "recharts";
+
+import React, { PureComponent } from "react";
 import {
-  Area,
-  AreaChart,
-  ResponsiveContainer,
-  Tooltip,
+  BarChart,
+  Bar,
   XAxis,
   YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
 } from "recharts";
 
-const Graph = ({ dt }) => {
+const GraphB = ({ dt }) => {
   return (
     <ResponsiveContainer width="100%" height={400}>
       {dt?.length > 0 ? (
-        <AreaChart data={dt}>
+        <BarChart data={dt}>
           <XAxis dataKey="_id" />
           <YAxis />
           <Tooltip />
-          <Area
+          <Legend />
+          <Bar
             type="monotone"
             dataKey="Total"
-            stroke="#8884d8"
-            fill="#8884d8"
+            stroke="#82ca9d"
+            fill="#82ca9d"
           />
-        </AreaChart>
+        </BarChart>
       ) : (
         <img
           src="https://user-images.githubusercontent.com/15953522/49493502-63e21d00-f882-11e8-911c-1d7655f393e8.png"
@@ -34,4 +47,4 @@ const Graph = ({ dt }) => {
   );
 };
 
-export default Graph;
+export default GraphB;

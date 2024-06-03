@@ -25,7 +25,6 @@ import {
   WritePost,
 } from "../components";
 import { useAction, useContent, useDeletePost } from "../hooks/post-hook";
-import { getWriterInfo } from "../hooks/user-hook";
 import useCommentStore from "../store/comments";
 import useStore from "../store/store";
 import { formatNumber, updateURL } from "../utils";
@@ -68,8 +67,6 @@ const Contents = () => {
 
   const [selected, setSelected] = useState("");
   const [editPost, setEditPost] = useState(false);
-
-  const [writerNames, setWriterNames] = useState({}); // State to store writer names
 
   const [type, setType] = useState(null);
   const [status, setStatus] = useState(null);
@@ -127,23 +124,6 @@ const Contents = () => {
   useEffect(() => {
     fetchData();
   }, [page]);
-
-  // Function to fetch writer names based on IDs
-  const fetchWriterNames = async (ids) => {
-    const names = {};
-    for (const id of ids) {
-      const writerInfo = await getWriterInfo(id);
-      names[id] = writerInfo?.name || "Không xác định";
-    }
-    setWriterNames(names);
-  };
-
-  useEffect(() => {
-    if (data?.data?.length > 0) {
-      const userIds = data.data.map((el) => el?.user);
-      fetchWriterNames(userIds);
-    }
-  }, [data]);
 
   // Function to remove diacritics from a string
   const removeDiacritics = (str) => {
@@ -249,7 +229,8 @@ const Contents = () => {
                   <Table.Td>{moment(el?.createdAt).fromNow()}</Table.Td>
                   <Table.Td>{moment(el?.updatedAt).fromNow()}</Table.Td>
 
-                  <Table.Td>{writerNames[el?.user] || "Đang tải..."}</Table.Td>
+                  <Table.Td>{el?.user?.name || "Đang tải..."}</Table.Td>
+
                   <Table.Td className="text-justify whitespace-nowrap">
                     <span
                       className={`${

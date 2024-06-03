@@ -2,7 +2,7 @@ import { useMantineColorScheme } from "@mantine/core";
 import React, { useEffect } from "react";
 import { Toaster, toast } from "sonner";
 import {
-  Graph,
+  GraphA,
   Loading,
   RecentFollowersTable,
   RecentPostTable,
@@ -28,19 +28,19 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className='w-full'>
+    <div className="w-full">
       <Stats dt={data} />
 
-      <div className='w-full py-8'>
-        <p className='py-5 text-base font-medium '>
+      <div className="w-full py-8">
+        <p className="py-5 text-base font-medium ">
           View Stats for last 28 days
         </p>
-        <Graph dt={data?.viewStats} />
+        <GraphA dt={data?.viewStats} />
       </div>
 
-      <div className='flex gap-6 flex-col md:flex-row py-5'>
+      <div className="flex gap-6 flex-col md:flex-row py-5">
         {/* Recent Followerst */}{" "}
-        <div className='w-full md:w-1/3 flex flex-col'>
+        <div className="w-full md:w-1/3 flex flex-col">
           <span
             className={`${
               theme ? "text-white" : "text-slate-600"
@@ -51,7 +51,7 @@ const Dashboard = () => {
           <RecentFollowersTable data={data?.last5Followers} theme={theme} />
         </div>
         {/* TopFiveContent */}
-        <div className='w-full md:w-2/3 flex flex-col '>
+        <div className="w-full md:w-2/3 flex flex-col ">
           <span
             className={`${
               theme ? "text-white" : "text-slate-600"
