@@ -28,6 +28,7 @@ const GraphB = ({ dt }) => {
           <XAxis dataKey="_id" />
           <YAxis />
           <Tooltip />
+          <Legend />
           <Bar
             type="monotone"
             dataKey="Total"

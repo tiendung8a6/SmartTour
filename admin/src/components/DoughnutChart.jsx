@@ -13,21 +13,22 @@ const data = [
   { name: "Expense", value: 50010 },
 ];
 
-const COLORS = ["#0088FE", "#FFBB28", "#FF8042", "#00C49F"];
+const COLORS = ["#8884d8", "#0088FE", "#FFBB28", "#00C49F"];
 
-const DoughnutChart = () => {
+const DoughnutChart = ({ dt }) => {
   return (
-    <ResponsiveContainer width={"100%"} height={500}>
+    <ResponsiveContainer width={"100%"} height={500} className="mt-5">
       <PieChart width={500} height={400}>
         <Tooltip />
         <Legend />
         <Pie
-          data={data}
+          data={dt}
           innerRadius={110}
           outerRadius={180}
           fill="#8884d8"
           paddingAngle={5}
           dataKey={"value"}
+          label
         >
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />

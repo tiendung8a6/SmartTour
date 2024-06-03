@@ -6,6 +6,7 @@ import {
   Tooltip,
   XAxis,
   YAxis,
+  Legend,
 } from "recharts";
 
 const GraphA = ({ dt }) => {
@@ -16,6 +17,7 @@ const GraphA = ({ dt }) => {
           <XAxis dataKey="_id" />
           <YAxis />
           <Tooltip />
+          <Legend />
           <Area
             type="monotone"
             dataKey="Total"

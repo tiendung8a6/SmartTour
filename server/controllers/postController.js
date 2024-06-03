@@ -6,6 +6,7 @@ import Users from "../models/userModel.js";
 import Views from "../models/viewsModel.js";
 import Categories from "../models/categoryModel.js";
 import Trips from "../models/tripModel.js";
+import Order from "../models/otherModel.js";
 
 export const createPost = async (req, res, next) => {
   try {
@@ -376,6 +377,27 @@ export const stats = async (req, res, next) => {
       { $sort: { _id: 1 } },
     ]);
 
+    const paymentStats = await Order.aggregate([
+      {
+        $match: {
+          paymentStatus: "paid",
+        },
+      },
+      {
+        $group: {
+          _id: "$payments", // Nhóm theo phương thức thanh toán (VNPAY hoặc STRIPE)
+          Total: { $sum: "$totalPrice" }, // Tính tổng giá tiền của các đơn hàng
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          name: "$_id", // Đổi tên _id thành name
+          value: "$Total", // Đổi tên Total thành value
+        },
+      },
+    ]);
+
     const tripsStats = await Trips.aggregate([
       {
         $match: {
@@ -388,6 +410,23 @@ export const stats = async (req, res, next) => {
             $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
           },
           Total: { $sum: 1 },
+        },
+      },
+      { $sort: { _id: 1 } },
+    ]);
+    const orderStats = await Order.aggregate([
+      {
+        $match: {
+          createdAt: { $gte: startDate, $lte: currentDate },
+          paymentStatus: "paid",
+        },
+      },
+      {
+        $group: {
+          _id: {
+            $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
+          },
+          Total: { $sum: "$totalPrice" },
         },
       },
       { $sort: { _id: 1 } },
@@ -422,8 +461,10 @@ export const stats = async (req, res, next) => {
       totalViews,
       totalWriters,
       followers: totalFollowers?.followers?.length,
+      orderStats,
       postStats,
       tripsStats,
+      paymentStats,
       last5Followers: last5Followers?.followers,
       last5Posts,
     });

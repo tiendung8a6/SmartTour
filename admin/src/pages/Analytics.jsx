@@ -56,18 +56,18 @@ const Analytics = () => {
       <Stats dt={data} />
 
       <div className="w-full flex flex-col-reverse md:flex-row items-center gap-10 py-8">
-        <div className="w-full md:w-2/3">
-          <p className="py-5 text-base font-medium">
-            Thống kê {numOfDays} ngày qua
+        <div className="w-full md:w-1/3 flex flex-col items-center ">
+          <p className="py-5 text-base font-medium ">
+            Tổng phương thức thanh toán {numOfDays} ngày qua
           </p>
-          <Chart />
+          <DoughnutChart dt={data?.paymentStats} />
         </div>
 
-        <div className="w-full md:w-1/3 flex flex-col items-center ">
-          <p className="py-5 text-base font-medium">
-            Thống kê {numOfDays} ngày qua
+        <div className="w-full md:w-2/3">
+          <p className="py-5 text-base font-medium text-center">
+            Tổng thanh toán {numOfDays} ngày qua
           </p>
-          <DoughnutChart />
+          <Chart dt={data?.orderStats} />
         </div>
       </div>
 
