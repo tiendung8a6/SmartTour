@@ -3,15 +3,20 @@ import { useMediaQuery } from "@mantine/hooks";
 import React, { useEffect, useState } from "react";
 import { Toaster, toast } from "sonner";
 import {
-  Graph,
+  GraphA,
+  GraphB,
   Loading,
   Stats,
   RecentFollowersTable,
   RecentPostTable,
+  Chart,
+  DoughnutChart,
+  Transactions,
+  Accounts,
 } from "../components";
 import { useAnalytics } from "../hooks/post-hook";
 import useStore from "../store/store";
-
+import { IconFilterShare } from "@tabler/icons-react";
 const Analytics = () => {
   const isMobile = useMediaQuery("(max-width: 50em)");
 
@@ -50,32 +55,60 @@ const Analytics = () => {
 
       <Stats dt={data} />
 
-      <div className="w-full py-8">
-        <p className="py-5 text-base font-medium ">
-          Thống kê bài viết trong {numOfDays} ngày qua
-        </p>
-        <Graph dt={data?.viewStats} />
+      <div className="w-full flex flex-col-reverse md:flex-row items-center gap-10 py-8">
+        <div className="w-full md:w-2/3">
+          <p className="py-5 text-base font-medium">
+            Thống kê {numOfDays} ngày qua
+          </p>
+          <Chart />
+        </div>
+
+        <div className="w-full md:w-1/3 flex flex-col items-center ">
+          <p className="py-5 text-base font-medium">
+            Thống kê {numOfDays} ngày qua
+          </p>
+          <DoughnutChart />
+        </div>
       </div>
 
       <div className="w-full py-8">
         <p className="py-5 text-base font-medium ">
-          Thống kê người theo dõi trong {numOfDays} ngày qua
+          Bài viết đã đăng trong {numOfDays} ngày qua
         </p>
-        <Graph dt={data?.followersStats} />
+        <GraphA dt={data?.postStats} />
+      </div>
+
+      <div className="w-full py-8">
+        <p className="py-5 text-base font-medium ">
+          Kế hoạch đã lập trong {numOfDays} ngày qua
+        </p>
+        <GraphB dt={data?.tripsStats} />
+      </div>
+
+      <div className="flex flex-col-reverse md:flex-row gap-0 md:gap-10 2xl:gap-10">
+        <div className="py-8 w-full md:w-2/3">
+          <p
+            className={`${
+              theme ? "text-white" : "text-gray-600"
+            } text-2xl 2xl:text-3xl font-semibold`}
+          >
+            Latest Transactions
+          </p>
+          <Transactions />
+        </div>
+
+        <div className="mt-20 md:mt-0 py-5 md:py-8 md:w-1/3">
+          <p className="text-2xl 2xl:text-3xl font-semibold text-gray-600 dark:text-gray-500">
+            Accounts
+          </p>
+          {/* <span className="text-sm text-gray-600 dark:text-gray-500">
+            View all your accounts
+          </span> */}
+          <Accounts />
+        </div>
       </div>
 
       <div className="flex gap-6 flex-col md:flex-row py-5">
-        {/* Recent Followerst */}{" "}
-        <div className="w-full md:w-1/3 flex flex-col">
-          <span
-            className={`${
-              theme ? "text-white" : "text-slate-600"
-            } py-5 text-base font-medium`}
-          >
-            Người theo dõi gần đây
-          </span>
-          <RecentFollowersTable data={data?.last5Followers} theme={theme} />
-        </div>
         {/* TopFiveContent */}
         <div className="w-full md:w-2/3 flex flex-col ">
           <span
@@ -86,6 +119,18 @@ const Analytics = () => {
             Bài viết gần đây
           </span>
           <RecentPostTable data={data?.last5Posts} theme={theme} />
+        </div>
+
+        {/* Recent Followerst */}
+        <div className="w-full md:w-1/3 flex flex-col">
+          <span
+            className={`${
+              theme ? "text-white" : "text-slate-600"
+            } py-5 text-base font-medium`}
+          >
+            Người theo dõi gần đây
+          </span>
+          <RecentFollowersTable data={data?.last5Followers} theme={theme} />
         </div>
       </div>
 

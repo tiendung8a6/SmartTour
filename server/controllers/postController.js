@@ -5,6 +5,7 @@ import Posts from "../models/postModel.js";
 import Users from "../models/userModel.js";
 import Views from "../models/viewsModel.js";
 import Categories from "../models/categoryModel.js";
+import Trips from "../models/tripModel.js";
 
 export const createPost = async (req, res, next) => {
   try {
@@ -358,17 +359,16 @@ export const stats = async (req, res, next) => {
 
     const totalFollowers = await Users.findById(userId);
 
-    const viewStats = await Views.aggregate([
+    const postStats = await Posts.aggregate([
       {
         $match: {
-          // user: new mongoose.Types.ObjectId(userId),
           createdAt: { $gte: startDate, $lte: currentDate },
         },
       },
       {
         $group: {
           _id: {
-            $dateToString: { format: "%d-%m-%Y", date: "$createdAt" },
+            $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
           },
           Total: { $sum: 1 },
         },
@@ -376,17 +376,16 @@ export const stats = async (req, res, next) => {
       { $sort: { _id: 1 } },
     ]);
 
-    const followersStats = await Followers.aggregate([
+    const tripsStats = await Trips.aggregate([
       {
         $match: {
-          writerId: new mongoose.Types.ObjectId(userId),
           createdAt: { $gte: startDate, $lte: currentDate },
         },
       },
       {
         $group: {
           _id: {
-            $dateToString: { format: "%d-%m-%Y", date: "$createdAt" },
+            $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
           },
           Total: { $sum: 1 },
         },
@@ -407,7 +406,7 @@ export const stats = async (req, res, next) => {
     const last5Posts = await Posts.find()
       .populate({
         path: "user",
-        select: "name image -password",
+        select: "-password",
       })
       .populate({
         path: "cat",
@@ -423,8 +422,8 @@ export const stats = async (req, res, next) => {
       totalViews,
       totalWriters,
       followers: totalFollowers?.followers?.length,
-      viewStats,
-      followersStats,
+      postStats,
+      tripsStats,
       last5Followers: last5Followers?.followers,
       last5Posts,
     });
