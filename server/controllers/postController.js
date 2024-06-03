@@ -477,6 +477,10 @@ export const getPostContent = async (req, res, next) => {
       .populate({
         path: "cat",
         select: "label color",
+      })
+      .populate({
+        path: "user",
+        select: "name image -password",
       });
 
     // pagination

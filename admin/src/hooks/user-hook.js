@@ -2,22 +2,6 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { REACT_APP_API_URL } from "../utils";
 
-export const getWriterInfo = async (id) => {
-  try {
-    const { data } = await axios.get(
-      `${REACT_APP_API_URL}/users/get-user/${id}`
-    );
-
-    return data?.data;
-  } catch (error) {
-    const err = error?.response?.data || error?.response;
-
-    console.log(error);
-
-    return err;
-  }
-};
-
 export const useUsers = (toast, token) => {
   return useMutation({
     mutationFn: async (page) => {

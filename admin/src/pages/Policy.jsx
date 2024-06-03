@@ -19,7 +19,6 @@ import { Comments, ConfirmDialog, EditPolicy, Loading } from "../components";
 // import { useAction, useContent, useDeletePost } from "../hooks/post-hook";
 import { useContent } from "../hooks/policy-hook";
 
-import { getWriterInfo } from "../hooks/user-hook";
 import useCommentStore from "../store/comments";
 import useStore from "../store/store";
 import { formatNumber, updateURL } from "../utils";
