@@ -81,10 +81,10 @@ const Sidebar = ({ close = () => {} }) => {
   return (
     <nav
       className="h-full flex flex-col gap-1 md:border-r border-slate-700 px-6 2xl:px-14 bg-cover bg-local"
-      style={{
-        backgroundImage:
-          'linear-gradient(to right, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3)), url("https://img.freepik.com/free-vector/white-abstract-background-design_23-2148825582.jpg?w=996&t=st=1713022127~exp=1713022727~hmac=fb5f25de56e2b7eb4074283652119e107e7d6089e4a16bac769ae610a8e1b466")',
-      }}
+      // style={{
+      //   backgroundImage:
+      //     'linear-gradient(to right, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3)), url("https://img.freepik.com/free-vector/white-abstract-background-design_23-2148825582.jpg?w=996&t=st=1713022127~exp=1713022727~hmac=fb5f25de56e2b7eb4074283652119e107e7d6089e4a16bac769ae610a8e1b466")',
+      // }}
     >
       <p className="py-2 pt-6 text-lg font-semibold ">Quản lý</p>
       <div className={""}>

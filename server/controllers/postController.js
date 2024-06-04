@@ -6,7 +6,7 @@ import Users from "../models/userModel.js";
 import Views from "../models/viewsModel.js";
 import Categories from "../models/categoryModel.js";
 import Trips from "../models/tripModel.js";
-import Order from "../models/otherModel.js";
+import Order from "../models/orderModel.js";
 
 export const createPost = async (req, res, next) => {
   try {
@@ -336,7 +336,7 @@ export const deleteComment = async (req, res, next) => {
 export const stats = async (req, res, next) => {
   try {
     const { query } = req.query;
-    const { userId } = req.body.user;
+    // const { userId } = req.body.user;
 
     const numofDays = Number(query) || 28;
 
@@ -345,12 +345,11 @@ export const stats = async (req, res, next) => {
     startDate.setDate(currentDate.getDate() - numofDays);
 
     const totalPosts = await Posts.find({
-      // user: userId,
       createdAt: { $gte: startDate, $lte: currentDate },
     }).countDocuments();
 
     const totalViews = await Views.find({
-      user: userId,
+      // user: userId,
       createdAt: { $gte: startDate, $lte: currentDate },
     }).countDocuments();
 
@@ -358,7 +357,7 @@ export const stats = async (req, res, next) => {
       accountType: "Writer",
     }).countDocuments();
 
-    const totalFollowers = await Users.findById(userId);
+    const totalFollowers = await Users.find();
 
     const postStats = await Posts.aggregate([
       {
@@ -414,6 +413,7 @@ export const stats = async (req, res, next) => {
       },
       { $sort: { _id: 1 } },
     ]);
+
     const orderStats = await Order.aggregate([
       {
         $match: {
@@ -432,15 +432,23 @@ export const stats = async (req, res, next) => {
       { $sort: { _id: 1 } },
     ]);
 
-    const last5Followers = await Users.findById(userId).populate({
-      path: "followers",
-      options: { sort: { _id: -1 } },
-      perDocumentLimit: 5,
-      populate: {
-        path: "followerId",
-        select: "name email image accountType followers -password",
-      },
-    });
+    const last5Trips = await Trips.find()
+      .populate({
+        path: "user",
+        select: "-password",
+      })
+      .limit(5)
+      .sort({ createdAt: -1 });
+
+    const last5Orders = await Order.find({ paymentStatus: "paid" })
+      .populate({
+        path: "user",
+        select: "-password",
+      })
+      .sort({ createdAt: -1 })
+      .limit(5);
+
+    const top5UsersByPoints = await Users.find().sort({ points: -1 }).limit(5);
 
     const last5Posts = await Posts.find()
       .populate({
@@ -452,7 +460,7 @@ export const stats = async (req, res, next) => {
         select: "label color",
       })
       .limit(5)
-      .sort({ _id: -1 });
+      .sort({ createdAt: -1 });
 
     res.status(200).json({
       success: true,
@@ -465,8 +473,10 @@ export const stats = async (req, res, next) => {
       postStats,
       tripsStats,
       paymentStats,
-      last5Followers: last5Followers?.followers,
+      last5Trips,
+      last5Orders,
       last5Posts,
+      top5UsersByPoints,
     });
   } catch (error) {
     console.log(error);

@@ -13,7 +13,12 @@ import EditContact from "./EditContact";
 import Sidebar from "./Sidebar";
 import SignUpForm from "./SignUp";
 import { Stats } from "./Stats";
-import { RecentFollowersTable, RecentPostTable } from "./Table";
+import {
+  RecentFollowersTable,
+  RecentPostsTable,
+  RecentTripsTable,
+  RecentOrdersTable,
+} from "./Table";
 import UpdateProfile from "./UpdateProfile";
 import EditPolicy from "./EditPolicy";
 import Followers from "./Followers";
@@ -24,8 +29,6 @@ import PostCategory from "./PostCategory";
 import EditCategory from "./EditCategory";
 import Chart from "./Chart";
 import DoughnutChart from "./DoughnutChart";
-import Transactions from "./Transactions";
-import Accounts from "./Accounts";
 export {
   Comments,
   ConfirmDialog,
@@ -39,7 +42,7 @@ export {
   Navbar,
   PasswordStrength,
   RecentFollowersTable,
-  RecentPostTable,
+  RecentPostsTable,
   Sidebar,
   SignUpForm,
   Stats,
@@ -54,6 +57,6 @@ export {
   EditCategory,
   Chart,
   DoughnutChart,
-  Transactions,
-  Accounts,
+  RecentTripsTable,
+  RecentOrdersTable,
 };

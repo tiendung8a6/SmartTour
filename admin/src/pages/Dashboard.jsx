@@ -5,7 +5,7 @@ import {
   GraphA,
   Loading,
   RecentFollowersTable,
-  RecentPostTable,
+  RecentPostsTable,
   Stats,
 } from "../components";
 
@@ -59,7 +59,7 @@ const Dashboard = () => {
           >
             Recent 5 Content
           </span>
-          <RecentPostTable data={data?.last5Posts} theme={theme} />
+          <RecentPostsTable data={data?.last5Posts} theme={theme} />
         </div>
       </div>
 

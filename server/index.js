@@ -10,7 +10,7 @@ import dbConnection from "./dbConfig/index.js";
 import errorMiddleware from "./middleware/errorMiddleware.js";
 import router from "./routes/index.js";
 import Users from "./models/userModel.js";
-import Order from "./models/otherModel.js";
+import Order from "./models/orderModel.js";
 
 dotenv.config();
 

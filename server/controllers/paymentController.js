@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import Stripe from "stripe";
 import Users from "../models/userModel.js";
-import Order from "../models/otherModel.js";
+import Order from "../models/orderModel.js";
 import crypto from "crypto";
 import querystring from "qs";
 import moment from "moment";
