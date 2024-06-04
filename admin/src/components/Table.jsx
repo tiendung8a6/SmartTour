@@ -160,7 +160,7 @@ export const RecentPostsTable = ({ data, theme }) => {
         }
         <div>
           <p>{el?.title}</p>
-          <span className="text-[10px] text-sky-600 ">
+          <span className="text-[10px] text-sky-600">
             <Badge w="fit-content" variant="light" size="md" color="blue">
               {el?.cat?.label}
             </Badge>
@@ -232,7 +232,9 @@ export const RecentFollowersTable = ({ data, theme }) => {
           </div>
         </div>
       </Table.Td>
-      <Table.Td>{moment(el.createdAt).fromNow()}</Table.Td>
+      <Table.Td className="text-center">
+        {moment(el.createdAt).fromNow()}
+      </Table.Td>
     </Table.Tr>
   ));
 
@@ -241,7 +243,7 @@ export const RecentFollowersTable = ({ data, theme }) => {
       <Table.Thead>
         <Table.Tr className="bg-black text-white">
           <Table.Th>Tên</Table.Th>
-          <Table.Th>Ngày Tạo</Table.Th>
+          <Table.Th>Ngày Lập Tài Khoản</Table.Th>
         </Table.Tr>
       </Table.Thead>
       {data?.length === 0 && (
