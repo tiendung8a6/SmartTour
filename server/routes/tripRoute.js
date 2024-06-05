@@ -8,6 +8,7 @@ import {
   deleteTrip,
   updateTripStatus,
   getPublicTrips,
+  activateTrip,
 } from "../controllers/tripController.js";
 import userAuth from "../middleware/authMiddleware.js";
 
@@ -22,5 +23,7 @@ router.delete("/:id", userAuth, deleteTrip);
 router.patch("/update-status/:id", userAuth, updateTripStatus);
 router.get("/:tripId", getTrip);
 router.patch("/update/:id", userAuth, updateTrip);
+
+router.post("/activate/:id", userAuth, activateTrip);
 
 export default router;

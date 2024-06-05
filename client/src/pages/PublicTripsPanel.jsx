@@ -1,17 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { TripCard, Pagination } from "../components";
+import { Pagination } from "../components";
 import { useTrips } from "../hooks/trip_hooks";
 import {
-  Tabs,
   TextInput,
   rem,
-  Grid,
-  Button,
   ActionIcon,
   Badge,
   Card,
-  Image,
   Avatar,
   Text,
   Group,
@@ -20,28 +16,26 @@ import classes from "./PublicTripCard.module.css";
 import { getPublicTrips } from "../utils/apiCalls";
 import { useEffect, useState } from "react";
 import moment from "moment";
+import { useActivateTrip } from "../hooks/client-hook";
+import { ConfirmDialog, LoadingClient } from "../components";
+import { useDisclosure } from "@mantine/hooks";
+import { Toaster, toast } from "sonner";
+import useStore from "../store";
 
 // Icon
-import {
-  IconPlus,
-  IconSearch,
-  IconPlaneTilt,
-  IconBed,
-  IconCar,
-  IconSoup,
-  IconCalendarStats,
-  IconMapPinCheck,
-  IconShip,
-  IconWalk,
-  IconParkingCircle,
-  IconTrain,
-  IconLuggage,
-  IconAirBalloon,
-  IconArrowRight,
-} from "@tabler/icons-react";
-import {} from "@tabler/icons-react";
+import { IconSearch, IconArrowRight } from "@tabler/icons-react";
 const PublicTripsPanel = () => {
+  const { user } = useStore();
+
   const { trips, numOfPages, setPage } = useTrips();
+  const [editPost, setEditPost] = useState(false);
+  const [selected, setSelected] = useState("");
+  const [type, setType] = useState(null);
+  const [status, setStatus] = useState(null);
+  const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
+  const [opened, { open, close }] = useDisclosure(false);
+  const activateTrip = useActivateTrip(toast, user?.token);
+  console.log("===========user?.token", user?.token);
 
   const handlePageChange = (val) => {
     setPage(val);
@@ -74,7 +68,28 @@ const PublicTripsPanel = () => {
     fetchPublicTrip();
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, []);
-  // console.log("publicTrip", publicTrip);
+  console.log("publicTrip", publicTrip);
+
+  const handleActions = () => {
+    switch (type) {
+      case "delete":
+        activateTrip.mutate(selected);
+        break;
+
+      default:
+        break;
+    }
+    // fetchData();
+    setIsConfirmDialogOpen(false);
+  };
+
+  const handlePerformAction = (val, id, status) => {
+    setEditPost(false);
+    setSelected(id);
+    setType(val);
+    setStatus(status);
+    setIsConfirmDialogOpen(true);
+  };
 
   if (publicTrip?.length < 1)
     return (
@@ -143,7 +158,12 @@ const PublicTripsPanel = () => {
                 <Badge w="fit-content" variant="light" size="md">
                   {publicTrip?.city}
                 </Badge>
-                <Text className={classes.title} mt="xs" mb="md">
+                <Text
+                  className={classes.title}
+                  mt="xs"
+                  mb="md"
+                  onClick={() => handlePerformAction("delete", publicTrip?._id)}
+                >
                   {publicTrip?.tripName}
                 </Text>
                 <Group wrap="nowrap" gap="xs">
@@ -166,7 +186,16 @@ const PublicTripsPanel = () => {
             </Group>
           </Card>
         ))}
-
+        {!editPost && !opened && (
+          <ConfirmDialog
+            message="Bạn có chắc muốn thực hiện hành động này?"
+            opened={isConfirmDialogOpen}
+            close={() => setIsConfirmDialogOpen(false)}
+            handleClick={handleActions}
+          />
+        )}
+        {/* <LoadingClient visible={isPending} /> */}
+        <Toaster richColors />
         <div className="w-full flex items-center justify-center">
           <Pagination totalPages={numOfPages} onPageChange={handlePageChange} />
         </div>

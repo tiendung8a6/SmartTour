@@ -43,7 +43,7 @@ export const RecentTripsTable = ({ data, theme }) => {
       <Table.Td>{el?.city}</Table.Td>
 
       <Table.Td>
-        {el?.status === false ? (
+        {el?.status === true ? (
           <Badge fullWidth color="teal" size="lg">
             Công khai
           </Badge>

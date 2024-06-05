@@ -14,9 +14,7 @@ const userSchema = new mongoose.Schema(
     isAdmin: { type: Boolean, default: false },
     //Thêm mới
     points: { type: Number, default: 0 },
-    viewedTrips: [
-      { type: Schema.Types.ObjectId, ref: "Trips", default: false },
-    ],
+    viewedTrips: [{ type: mongoose.Schema.Types.ObjectId, ref: "Trips" }],
     orders: [
       {
         type: mongoose.Schema.Types.ObjectId,

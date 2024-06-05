@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import Trips from "../models/tripModel.js";
 import Plans from "../models/planModel.js";
+import Users from "../models/userModel.js";
 
 export const createTrip = async (req, res, next) => {
   try {
@@ -263,6 +264,77 @@ export const getPublicTrips = async (req, res, next) => {
       data: trips,
       page,
       numOfPage,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const activateTrip = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { userId } = req.body.user;
+
+    const trip = await Trips.findById(id);
+
+    // Kiểm tra xem chuyến đi
+    if (trip.status === false) {
+      return res.status(400).json({
+        success: false,
+        message: "Chuyến đi chưa được công khai",
+      });
+    }
+
+    // Kiểm tra xem user đã xem chuyến đi
+    const user = await Users.findById(userId);
+    if (user.viewedTrips.includes(id)) {
+      return res.status(400).json({
+        success: false,
+        message: "Bạn đã kích hoạt xem chuyến đi này trước đó.",
+      });
+    }
+
+    // Trừ 20 điểm nếu người dùng không phải là chủ sở hữu của chuyến đi
+    if (trip.user.toString() !== userId) {
+      const userPoints = user.points || 0;
+      if (userPoints < 20) {
+        return res.status(400).json({
+          success: false,
+          message: "Bạn không có đủ điểm để kích hoạt chuyến đi.",
+        });
+      }
+      await Users.findByIdAndUpdate(
+        userId,
+        { $inc: { points: -20 } }, // Trừ 20 điểm
+        { new: true }
+      );
+    }
+
+    // Lưu thông tin chuyến đi
+    if (trip.user.toString() !== userId) {
+      await Users.findByIdAndUpdate(
+        userId,
+        { $addToSet: { viewedTrips: id } }, // Thêm trip vào mảng viewedTrips
+        { new: true }
+      );
+    }
+
+    // Cập nhật 5 điểm thưởng points của user
+    if (trip.user.toString() !== userId) {
+      await Users.findByIdAndUpdate(
+        trip.user,
+        { $inc: { points: 5 } },
+        { new: true }
+      );
+    }
+
+    // Cập nhật trường receivedPoints thành true
+    await Trips.findByIdAndUpdate(id, { receivedPoints: true });
+
+    res.status(200).json({
+      success: true,
+      message: "Kích hoạt xem chuyến đi công khai thành công",
     });
   } catch (error) {
     console.log(error);

@@ -779,3 +779,30 @@ export const useDeleteComment = (token) => {
     },
   });
 };
+export const useActivateTrip = (toast, token) => {
+  return useMutation({
+    mutationFn: async (id) => {
+      const { data } = await axios.post(
+        `${REACT_APP_API_URL}/trips/activate/${id}`,
+        {}, // Ensure the payload is an empty object if no body data is needed
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Correctly set the token
+          },
+        }
+      );
+      console.log("DATAA", data);
+      return data;
+    },
+    onError: (error) => {
+      toast.error(error?.response?.data?.message ?? error.message);
+    },
+    onSuccess: async (data) => {
+      toast.success(data?.message);
+
+      setTimeout(() => {
+        window.location.replace(`/trip/`);
+      }, 1000);
+    },
+  });
+};
