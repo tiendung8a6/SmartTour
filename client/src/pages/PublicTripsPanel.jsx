@@ -21,6 +21,7 @@ import { ConfirmDialog, LoadingClient } from "../components";
 import { useDisclosure } from "@mantine/hooks";
 import { Toaster, toast } from "sonner";
 import useStore from "../store";
+import { getUser } from "../utils/apiCalls";
 
 // Icon
 import { IconSearch, IconArrowRight } from "@tabler/icons-react";
@@ -28,20 +29,18 @@ const PublicTripsPanel = () => {
   const { user } = useStore();
 
   const { trips, numOfPages, setPage } = useTrips();
-  const [editPost, setEditPost] = useState(false);
+  const [confirmActivation, setConfirmActivation] = useState(false);
   const [selected, setSelected] = useState("");
   const [type, setType] = useState(null);
-  const [status, setStatus] = useState(null);
   const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
   const [opened, { open, close }] = useDisclosure(false);
   const activateTrip = useActivateTrip(toast, user?.token);
-  console.log("===========user?.token", user?.token);
+  const [publicTrip, setPublicTrip] = useState(null);
+  const [userInfo, setUserInfo] = useState(null);
 
   const handlePageChange = (val) => {
     setPage(val);
   };
-
-  const [publicTrip, setPublicTrip] = useState(null);
 
   const fetchPublicTrip = async () => {
     try {
@@ -69,10 +68,29 @@ const PublicTripsPanel = () => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, []);
   console.log("publicTrip", publicTrip);
+  console.log("getUser", userInfo);
+
+  //TRUY VẤN DỮ NGƯỜI DÙNG --> Cập nhật Real-Time
+  const fetchUser = async () => {
+    try {
+      const data = await getUser(user?.user?._id);
+
+      setUserInfo(data || []);
+    } catch (error) {
+      console.error("Error fetching trip or popular content:", error);
+    } finally {
+    }
+  };
+  useEffect(() => {
+    if (user?.user?._id) {
+      fetchUser();
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }
+  }, [user?.user?._id]);
 
   const handleActions = () => {
     switch (type) {
-      case "delete":
+      case "activate":
         activateTrip.mutate(selected);
         break;
 
@@ -83,11 +101,10 @@ const PublicTripsPanel = () => {
     setIsConfirmDialogOpen(false);
   };
 
-  const handlePerformAction = (val, id, status) => {
-    setEditPost(false);
+  const handlePerformAction = (val, id) => {
+    setConfirmActivation(false);
     setSelected(id);
     setType(val);
-    setStatus(status);
     setIsConfirmDialogOpen(true);
   };
 
@@ -141,16 +158,14 @@ const PublicTripsPanel = () => {
         {publicTrip?.map((publicTrip, index) => (
           <Card withBorder radius="md" p={0} className={classes.card}>
             <Group wrap="nowrap" gap={0}>
-              <Link
-                to={`/trip/${publicTrip._id}`}
-                className="w-full h-auto md:h-64 md:w-1/4 lg:w-[380px] hidden md:block "
-              >
+              <div className="w-full h-auto md:h-64 md:w-1/4 lg:w-[380px] hidden md:block ">
                 <img
                   src={publicTrip?.image}
                   alt={publicTrip?.image}
                   className="object-cover w-full md:h-[100%] rounded"
                 />
-              </Link>
+              </div>
+
               <div className={classes.body}>
                 {/* <Text tt="uppercase" c="dimmed" fw={700} size="xs">
                   
@@ -162,7 +177,16 @@ const PublicTripsPanel = () => {
                   className={classes.title}
                   mt="xs"
                   mb="md"
-                  onClick={() => handlePerformAction("delete", publicTrip?._id)}
+                  onClick={() => {
+                    const isViewed = userInfo?.viewedTrips.includes(
+                      publicTrip?._id
+                    );
+                    if (isViewed) {
+                      window.location.href = `/trip/${publicTrip._id}`;
+                    } else {
+                      handlePerformAction("activate", publicTrip?._id);
+                    }
+                  }}
                 >
                   {publicTrip?.tripName}
                 </Text>
@@ -186,7 +210,7 @@ const PublicTripsPanel = () => {
             </Group>
           </Card>
         ))}
-        {!editPost && !opened && (
+        {!confirmActivation && !opened && (
           <ConfirmDialog
             message="Bạn có chắc muốn thực hiện hành động này?"
             opened={isConfirmDialogOpen}

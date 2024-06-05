@@ -784,25 +784,24 @@ export const useActivateTrip = (toast, token) => {
     mutationFn: async (id) => {
       const { data } = await axios.post(
         `${REACT_APP_API_URL}/trips/activate/${id}`,
-        {}, // Ensure the payload is an empty object if no body data is needed
+        {},
         {
           headers: {
-            Authorization: `Bearer ${token}`, // Correctly set the token
+            Authorization: `Bearer ${token}`,
           },
         }
       );
-      console.log("DATAA", data);
       return data;
     },
     onError: (error) => {
       toast.error(error?.response?.data?.message ?? error.message);
     },
-    onSuccess: async (data) => {
+    onSuccess: async (data, id) => {
       toast.success(data?.message);
 
       setTimeout(() => {
-        window.location.replace(`/trip/`);
-      }, 1000);
+        window.location.replace(`/trip/${id}`);
+      }, 500);
     },
   });
 };
