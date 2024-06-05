@@ -350,10 +350,13 @@ export const stats = async (req, res, next) => {
     }).countDocuments();
 
     const totalUsers = await Users.find({
-      // accountType: "Writer",
+      createdAt: { $gte: startDate, $lte: currentDate },
     }).countDocuments();
 
     const totalOrder = await Order.aggregate([
+      {
+        $match: { createdAt: { $gte: startDate, $lte: currentDate } },
+      },
       {
         $group: {
           _id: null,

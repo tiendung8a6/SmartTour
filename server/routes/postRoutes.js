@@ -23,7 +23,7 @@ import userAuth from "../middleware/authMiddleware.js";
 const router = express.Router();
 
 // ADMIN ROUTES
-router.post("/admin-analytics", userAuth, stats);
+router.post("/admin-analytics", userAuth, stats); //Thống kê
 router.post("/admin-followers", userAuth, getFollowers);
 router.post("/admin-content", userAuth, getPostContent);
 router.post("/client-content", userAuth, getMyPost);
