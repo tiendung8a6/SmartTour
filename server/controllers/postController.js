@@ -334,7 +334,6 @@ export const deleteComment = async (req, res, next) => {
 export const stats = async (req, res, next) => {
   try {
     const { query } = req.query;
-    // const { userId } = req.body.user;
 
     const numofDays = Number(query) || 28;
 
@@ -346,16 +345,29 @@ export const stats = async (req, res, next) => {
       createdAt: { $gte: startDate, $lte: currentDate },
     }).countDocuments();
 
-    const totalViews = await Views.find({
-      // user: userId,
+    const totalTrips = await Trips.find({
       createdAt: { $gte: startDate, $lte: currentDate },
     }).countDocuments();
 
-    const totalWriters = await Users.find({
-      accountType: "Writer",
+    const totalUsers = await Users.find({
+      // accountType: "Writer",
     }).countDocuments();
 
-    const totalFollowers = await Users.find();
+    const totalOrder = await Order.aggregate([
+      {
+        $group: {
+          _id: null,
+          total: {
+            $sum: "$totalPrice",
+          },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+        },
+      },
+    ]);
 
     const postStats = await Posts.aggregate([
       {
@@ -377,6 +389,7 @@ export const stats = async (req, res, next) => {
     const paymentStats = await Order.aggregate([
       {
         $match: {
+          createdAt: { $gte: startDate, $lte: currentDate },
           paymentStatus: "paid",
         },
       },
@@ -464,9 +477,9 @@ export const stats = async (req, res, next) => {
       success: true,
       message: "Dữ liệu thống kê được tải thành công",
       totalPosts,
-      totalViews,
-      totalWriters,
-      followers: totalFollowers?.followers?.length,
+      totalTrips,
+      totalUsers,
+      totalOrder: totalOrder[0].total,
       orderStats,
       postStats,
       tripsStats,
@@ -488,7 +501,7 @@ export const getFollowers = async (req, res, next) => {
   try {
     // pagination
     const page = Number(req.query.page) || 1;
-    const limit = Number(req.query.limit) || 8;
+    const limit = Number(req.query.limit) || 10;
     const skip = (page - 1) * limit;
 
     const result = await Users.findById(userId).populate({
@@ -496,7 +509,7 @@ export const getFollowers = async (req, res, next) => {
       options: { sort: { _id: -1 }, limit: limit, skip: skip },
       populate: {
         path: "followerId",
-        select: "name email image accountType followers -password",
+        select: "-password",
       },
     });
 
@@ -528,7 +541,7 @@ export const getPostContent = async (req, res, next) => {
       })
       .populate({
         path: "user",
-        select: "name image -password",
+        select: "-password",
       });
 
     // pagination
@@ -541,7 +554,6 @@ export const getPostContent = async (req, res, next) => {
     const numOfPage = Math.ceil(totalPost / limit);
 
     queryResult = queryResult.skip(skip).limit(limit);
-
     const posts = await queryResult;
 
     res.status(200).json({

@@ -44,7 +44,7 @@ const Analytics = () => {
           Thống kê
         </p>
         <Select
-          // label='Range'
+          // label=""
           defaultValue="28 ngày"
           placeholder="Filter"
           data={["7 ngày", "28 ngày", "90 ngày", "365 ngày"]}
@@ -58,14 +58,14 @@ const Analytics = () => {
       <div className="w-full flex flex-col-reverse md:flex-row items-center gap-10 py-8">
         <div className="w-full md:w-1/3 flex flex-col items-center ">
           <p className="py-5 text-base font-medium ">
-            Tổng phương thức thanh toán {numOfDays} ngày qua
+            Tổng tiền thanh toán trong {numOfDays} ngày qua
           </p>
           <DoughnutChart dt={data?.paymentStats} />
         </div>
 
         <div className="w-full md:w-2/3">
           <p className="py-5 text-base font-medium text-center">
-            Tổng thanh toán {numOfDays} ngày qua
+            Thanh toán thành công trong {numOfDays} ngày qua
           </p>
           <Chart dt={data?.orderStats} />
         </div>

@@ -14,6 +14,7 @@ export const useFollowers = (toast, token) => {
           },
         }
       );
+      console.log("data", data);
       return data;
     },
     onError: (error) => {

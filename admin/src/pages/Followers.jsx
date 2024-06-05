@@ -7,6 +7,7 @@ import { Toaster, toast } from "sonner";
 import { Loading } from "../components";
 import { useFollowers } from "../hooks/followers_hook";
 import useStore from "../store/store";
+import { IconCoinBitcoin } from "@tabler/icons-react";
 import { formatNumber, getInitials, updateURL } from "../utils";
 
 const Followers = () => {
@@ -70,6 +71,7 @@ const Followers = () => {
           <Table.Tr className="bg-black text-white">
             <Table.Th>Tên</Table.Th>
             <Table.Th>Email</Table.Th>
+            <Table.Th>Điểm Thưởng</Table.Th>
             <Table.Th>Người Theo Dõi</Table.Th>
             <Table.Th>Ngày Theo Dõi</Table.Th>
           </Table.Tr>
@@ -107,13 +109,20 @@ const Followers = () => {
                   {followerId?.email}
                 </p>
               </Table.Td>
-
+              <Table.Td>
+                <div class="flex justify-start space-x-1 font-semibold">
+                  <div className="flex items-center text-yellow-500">
+                    <IconCoinBitcoin size="1rem" stroke={2} />
+                  </div>
+                  <div>{followerId?.points}</div>
+                  <div>Điểm</div>
+                </div>
+              </Table.Td>
               <Table.Td>
                 <div className="flex gap-1 items-center">
                   {formatNumber(followerId?.followers.length ?? 0)}
                 </div>
               </Table.Td>
-
               <Table.Td>{moment(createdAt).fromNow()}</Table.Td>
             </Table.Tr>
           ))}

@@ -102,7 +102,7 @@ const MobileMenu = ({ user, signOut }) => {
                   to="/profile"
                   className="text-base text-center text-black dark:text-gray-300"
                 >
-                  Tài Khoản Của Tôi
+                  Tài khoản của tôi
                 </Link>
                 <hr />
                 <button
@@ -270,7 +270,7 @@ const Navbar = () => {
                     to="/profile"
                     className="dark:text-white text-gray-500 text-sm"
                   >
-                    Tài Khoản Của Tôi
+                    Tài khoản của tôi
                   </Link>
                   <hr />
                   {/* <Link className="text-gray-500 text-sm" to="/profile">
