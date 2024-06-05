@@ -152,12 +152,10 @@ export const getPost = async (req, res, next) => {
         select: "label color",
       });
 
-    const newView = await Views.create({
+    await Views.create({
       user: post?.user,
       post: postId,
     });
-
-    post.views.push(newView?._id);
 
     await Posts.findByIdAndUpdate(postId, post);
 
