@@ -12,8 +12,8 @@ const tripSchema = new mongoose.Schema(
     status: { type: Boolean, required: true, default: true },
     total: { type: String, required: true },
     description: { type: String, default: false },
-    hashtag: [{ type: String, default: false }],
-    receivedPoints: { type: Boolean, default: false },
+    hashtag: [{ type: String, required: false }],
+    receivedPoints: { type: Boolean, required: false },
   },
   { timestamps: true }
 );
