@@ -153,6 +153,15 @@ const PublicTripsPanel = () => {
       <div className="w-full lg:w-full md:w-full flex flex-col gap-y-28 md:gap-y-14">
         {publicTrip?.map((publicTrip, index) => (
           <Card withBorder radius="md" p={0} className={classes.card}>
+            {userInfo?.viewedTrips.includes(publicTrip?._id) && (
+              <div className="absolute top-0 right-0">
+                <div className="w-32 h-8 absolute top-4 -right-8">
+                  <div className="h-full w-full bg-sky-600 text-white text-base text-center leading-8 font-semibold transform rotate-45">
+                    SỠ HỮU
+                  </div>
+                </div>
+              </div>
+            )}
             <Group wrap="nowrap" gap={0}>
               <div className="w-full h-auto md:h-[275px] md:w-1/4 lg:w-[380px] hidden md:block ">
                 <Image
