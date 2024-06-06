@@ -6,24 +6,24 @@ import Users from "../models/userModel.js";
 export const createTrip = async (req, res, next) => {
   try {
     const { userId } = req.body.user;
-    const { tripName, city, startDate, endDate, image, status, total } =
-      req.body;
+    const {
+      tripName,
+      city,
+      startDate,
+      endDate,
+      image,
+      status,
+      total,
+      description,
+      hashtag,
+    } = req.body;
 
-    if (!(tripName && city && startDate && endDate && image)) {
+    if (!(tripName && city && startDate && endDate && image && total)) {
       return res.status(400).json({
         success: false,
         message: "Vui lòng nhập các trường bắt buộc",
       });
     }
-
-    // // Kiểm tra xem plans có tồn tại không
-    // const plan = await Plans.findById(plans);
-    // if (!plan) {
-    //   return res.status(404).json({
-    //     success: false,
-    //     message: "Plan not found",
-    //   });
-    // }
 
     // Tạo trip mới
     const trip = await Trips.create({
@@ -35,7 +35,8 @@ export const createTrip = async (req, res, next) => {
       image,
       status,
       total,
-      // plans: plan._id, // Gán ID của plan đã tìm thấy
+      description,
+      hashtag,
     });
 
     res.status(200).json({
@@ -170,8 +171,17 @@ export const getTrip = async (req, res, next) => {
 export const updateTrip = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { tripName, city, startDate, endDate, image, status, total } =
-      req.body;
+    const {
+      tripName,
+      city,
+      startDate,
+      endDate,
+      image,
+      status,
+      total,
+      description,
+      hashtag,
+    } = req.body;
 
     const updatedFields = {};
     if (tripName) updatedFields.tripName = tripName;
@@ -181,6 +191,8 @@ export const updateTrip = async (req, res, next) => {
     if (image) updatedFields.image = image;
     updatedFields.status = status; // Change the way of checking status
     if (total) updatedFields.total = total;
+    if (description) updatedFields.description = description;
+    if (hashtag) updatedFields.hashtag = hashtag;
 
     const trip = await Trips.findByIdAndUpdate(id, updatedFields, {
       new: true,

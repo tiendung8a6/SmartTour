@@ -11,6 +11,8 @@ const tripSchema = new mongoose.Schema(
     user: { type: Schema.Types.ObjectId, ref: "Users" },
     status: { type: Boolean, required: true, default: true },
     total: { type: String, required: true },
+    description: { type: String, default: false },
+    hashtag: [{ type: String, default: false }],
     receivedPoints: { type: Boolean, default: false },
   },
   { timestamps: true }
