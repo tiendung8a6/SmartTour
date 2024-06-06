@@ -218,7 +218,7 @@ const TripSummary = () => {
             </span>
 
             <span className="text-sm text-gray-600">
-              {new Date(trip?.startDate).toLocaleDateString("vi-VN")} -
+              {new Date(trip?.startDate).toLocaleDateString("vi-VN")} -{" "}
               {new Date(trip?.endDate).toLocaleDateString("vi-VN")} (
               {diffDays === 0 ? "1 ngày" : `${diffDays} ngày`})
             </span>
