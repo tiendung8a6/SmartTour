@@ -37,7 +37,12 @@ export const createTrip = async (req, res, next) => {
       total,
       description,
       hashtag,
+      receivedPoints: status,
     });
+
+    if (status) {
+      await Users.findByIdAndUpdate(userId, { $inc: { points: 10 } });
+    }
 
     await Users.findByIdAndUpdate(userId, { $push: { viewedTrips: trip._id } });
 
@@ -191,21 +196,36 @@ export const updateTrip = async (req, res, next) => {
     if (startDate) updatedFields.startDate = startDate;
     if (endDate) updatedFields.endDate = endDate;
     if (image) updatedFields.image = image;
-    updatedFields.status = status; // Change the way of checking status
+    if (status !== undefined) updatedFields.status = status; // Change the way of checking status
     if (total) updatedFields.total = total;
     if (description) updatedFields.description = description;
     if (hashtag) updatedFields.hashtag = hashtag;
 
-    const trip = await Trips.findByIdAndUpdate(id, updatedFields, {
+    const trip = await Trips.findById(id);
+
+    // Cập nhật điểm thưởng nếu cập nhật status là true và receivedPoints là false
+    if (status && !trip.receivedPoints) {
+      await Users.findByIdAndUpdate(req.body.user.userId, {
+        $inc: { points: 10 },
+      });
+    }
+
+    // Cập nhật receivedPoints nếu status là true
+    if (status && !trip.receivedPoints) {
+      updatedFields.receivedPoints = true;
+    }
+
+    const updatedTrip = await Trips.findByIdAndUpdate(id, updatedFields, {
       new: true,
     });
+
     res.status(200).json({
       success: true,
       message: "Chuyến đi được cập nhật thành công",
-      data: trip,
+      data: updatedTrip,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.status(404).json({ message: error.message });
   }
 };
@@ -309,18 +329,18 @@ export const activateTrip = async (req, res, next) => {
       });
     }
 
-    // Trừ 20 điểm nếu người dùng không phải là chủ sở hữu của chuyến đi
+    // Trừ 10 điểm nếu người dùng không phải là chủ sở hữu của chuyến đi
     if (trip.user.toString() !== userId) {
       const userPoints = user.points || 0;
-      if (userPoints < 20) {
+      if (userPoints < 10) {
         return res.status(400).json({
           success: false,
-          message: "Bạn không có đủ điểm để kích hoạt chuyến đi.",
+          message: "Bạn không có đủ điểm để xem chuyến đi.",
         });
       }
       await Users.findByIdAndUpdate(
         userId,
-        { $inc: { points: -20 } }, // Trừ 20 điểm
+        { $inc: { points: -10 } }, // Trừ 10 điểm
         { new: true }
       );
     }
@@ -343,8 +363,8 @@ export const activateTrip = async (req, res, next) => {
       );
     }
 
-    // Cập nhật trường receivedPoints thành true
-    await Trips.findByIdAndUpdate(id, { receivedPoints: true });
+    // // Cập nhật trường receivedPoints thành true
+    // await Trips.findByIdAndUpdate(id, { receivedPoints: true });
 
     res.status(200).json({
       success: true,

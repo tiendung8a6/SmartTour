@@ -254,7 +254,7 @@ const PublicTripsPanel = () => {
         ))}
         {!confirmActivation && !opened && (
           <ConfirmDialog
-            message="Để xem chuyến đi này bạn sẽ phải bị trừ 20 xu. Bạn chắc chắc muốn thực hiện việc xem nó?"
+            message="Để xem chuyến đi này bạn sẽ phải bị trừ 10 điểm. Bạn chắc chắc muốn thực hiện việc xem nó?"
             opened={isConfirmDialogOpen}
             close={() => setIsConfirmDialogOpen(false)}
             handleClick={handleActions}

@@ -55,7 +55,7 @@ export const useTrips = () => {
     if (errorOccurred) {
       signOut();
       navigate("/sign-in");
-      toast.error("Something went wrong.");
+      // toast.error("Something went wrong.");
     }
   }, [errorOccurred, navigate, signOut]);
 

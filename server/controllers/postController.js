@@ -152,10 +152,12 @@ export const getPost = async (req, res, next) => {
         select: "label color",
       });
 
-    await Views.create({
+    const newView = await Views.create({
       user: post?.user,
       post: postId,
     });
+
+    post.views.push(newView?._id);
 
     await Posts.findByIdAndUpdate(postId, post);
 
@@ -169,7 +171,6 @@ export const getPost = async (req, res, next) => {
     res.status(404).json({ message: error.message });
   }
 };
-
 export const getPopularContents = async (req, res, next) => {
   try {
     const posts = await Posts.aggregate([
