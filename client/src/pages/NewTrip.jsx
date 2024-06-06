@@ -287,7 +287,7 @@ const NewTrip = () => {
         </Grid.Col>
       </Grid>
 
-      <div className="flex justify-start gap-3">
+      <div className="flex justify-start gap-3 pt-5 mb-8 mt-[-20px]">
         <div className=" flex items-end justify-start mt-6">
           <Link to="/trip">
             <Button variant="outline" color="Red" size="md" radius="md">

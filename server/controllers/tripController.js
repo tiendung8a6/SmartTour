@@ -39,6 +39,8 @@ export const createTrip = async (req, res, next) => {
       hashtag,
     });
 
+    await Users.findByIdAndUpdate(userId, { $push: { viewedTrips: trip._id } });
+
     res.status(200).json({
       success: true,
       message: "Chuyến đi được tạo thành công",

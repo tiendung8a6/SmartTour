@@ -194,19 +194,16 @@ const PublicTripsPanel = () => {
                   fw={700}
                   size="xs"
                 >
-                  Mô tả chuyến này là chuyến đi gì, ....0000000000000 Mô tả
-                  chuyến này là chuyến đi gì, ....0000000000000 Mô tả chuyến này
-                  là chuyến đi gì, ....0000000000000
+                  {publicTrip?.description}
                 </Text>
 
                 <Space h="sm" />
                 <Group gap="xs">
-                  <Pill className="text-cyan-600">React</Pill>
-                  <Pill className="text-cyan-600">React</Pill>
-                  <Pill className="text-cyan-600">React</Pill>
-                  <Pill className="text-cyan-600">React</Pill>
-                  <Pill className="text-cyan-600">React</Pill>
-                  <Pill className="text-cyan-600">React</Pill>
+                  {publicTrip?.hashtag.map((tag, index) => (
+                    <Pill key={index} className="text-cyan-600">
+                      {tag}
+                    </Pill>
+                  ))}
                 </Group>
 
                 <Space h="sm" />
