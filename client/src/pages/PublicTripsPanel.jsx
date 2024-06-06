@@ -11,7 +11,12 @@ import {
   Avatar,
   Text,
   Group,
+  Space,
+  Center,
+  Pill,
+  Image,
 } from "@mantine/core";
+import { IconView360 } from "@tabler/icons-react";
 import classes from "./PublicTripCard.module.css";
 import { getPublicTrips } from "../utils/apiCalls";
 import { useEffect, useState } from "react";
@@ -121,15 +126,6 @@ const PublicTripsPanel = () => {
     <div>
       <div className="mt-6 md:mt-0">
         <div className="w-full flex justify-center items-center flex-wrap py-5 gap-7">
-          {/* <Link
-            to={`/trip/create`}
-            className={`flex items-center justify-center gap-3  dark:border-gray-600  text-[#0782c5] dark:text-white font-semibold text-base  mt-[-10px] cursor-pointer`}
-          >
-            <span className="border rounded-full border-[#0782c5]">
-              <IconPlus stroke={2} />
-            </span>
-            Thêm chuyến đi
-          </Link> */}
           <TextInput
             className="w-[30%]"
             placeholder="Tìm kiếm"
@@ -158,8 +154,8 @@ const PublicTripsPanel = () => {
         {publicTrip?.map((publicTrip, index) => (
           <Card withBorder radius="md" p={0} className={classes.card}>
             <Group wrap="nowrap" gap={0}>
-              <div className="w-full h-auto md:h-64 md:w-1/4 lg:w-[380px] hidden md:block ">
-                <img
+              <div className="w-full h-auto md:h-[275px] md:w-1/4 lg:w-[380px] hidden md:block ">
+                <Image
                   src={publicTrip?.image}
                   alt={publicTrip?.image}
                   className="object-cover w-full md:h-[100%] rounded"
@@ -167,27 +163,10 @@ const PublicTripsPanel = () => {
               </div>
 
               <div className={classes.body}>
-                {/* <Text tt="uppercase" c="dimmed" fw={700} size="xs">
-                  
-                </Text> */}
                 <Badge w="fit-content" variant="light" size="md">
                   {publicTrip?.city}
                 </Badge>
-                <Text
-                  className={classes.title}
-                  mt="xs"
-                  mb="md"
-                  onClick={() => {
-                    const isViewed = userInfo?.viewedTrips.includes(
-                      publicTrip?._id
-                    );
-                    if (isViewed) {
-                      window.location.href = `/trip/${publicTrip._id}`;
-                    } else {
-                      handlePerformAction("activate", publicTrip?._id);
-                    }
-                  }}
-                >
+                <Text className={classes.title} mt="xs" mb="md">
                   {publicTrip?.tripName}
                 </Text>
                 <Group wrap="nowrap" gap="xs">
@@ -206,13 +185,70 @@ const PublicTripsPanel = () => {
                     {moment(publicTrip?.createdAt).format("L")}
                   </Text>
                 </Group>
+
+                <Space h="sm" />
+                <Text
+                  lineClamp={3}
+                  tt="uppercase"
+                  c="dimmed"
+                  fw={700}
+                  size="xs"
+                >
+                  Mô tả chuyến này là chuyến đi gì, ....0000000000000 Mô tả
+                  chuyến này là chuyến đi gì, ....0000000000000 Mô tả chuyến này
+                  là chuyến đi gì, ....0000000000000
+                </Text>
+
+                <Space h="sm" />
+                <Group gap="xs">
+                  <Pill className="text-cyan-600">React</Pill>
+                  <Pill className="text-cyan-600">React</Pill>
+                  <Pill className="text-cyan-600">React</Pill>
+                  <Pill className="text-cyan-600">React</Pill>
+                  <Pill className="text-cyan-600">React</Pill>
+                  <Pill className="text-cyan-600">React</Pill>
+                </Group>
+
+                <Space h="sm" />
+
+                <Group gap="xs" wrap="nowrap">
+                  <ActionIcon
+                    variant="filled"
+                    radius="xl"
+                    aria-label="Settings"
+                  >
+                    <IconView360
+                      style={{ width: "80%", height: "80%" }}
+                      stroke={1.5}
+                    />
+                  </ActionIcon>
+
+                  <Text
+                    c="blue"
+                    fw={500}
+                    size="md"
+                    class="cursor-pointer"
+                    onClick={() => {
+                      const isViewed = userInfo?.viewedTrips.includes(
+                        publicTrip?._id
+                      );
+                      if (isViewed) {
+                        window.location.href = `/trip/${publicTrip._id}`;
+                      } else {
+                        handlePerformAction("activate", publicTrip?._id);
+                      }
+                    }}
+                  >
+                    Xem chuyến đi
+                  </Text>
+                </Group>
               </div>
             </Group>
           </Card>
         ))}
         {!confirmActivation && !opened && (
           <ConfirmDialog
-            message="Bạn có chắc muốn thực hiện hành động này?"
+            message="Để xem chuyến đi này bạn sẽ phải bị trừ 20 xu. Bạn chắc chắc muốn thực hiện việc xem nó?"
             opened={isConfirmDialogOpen}
             close={() => setIsConfirmDialogOpen(false)}
             handleClick={handleActions}
