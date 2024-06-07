@@ -7,6 +7,8 @@ import {
   Switch,
   Autocomplete,
   TagsInput,
+  Checkbox,
+  Tooltip,
 } from "@mantine/core";
 import { IconCalendarEvent } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
@@ -71,7 +73,7 @@ const EditTrip = () => {
   const [endDate, setEndDate] = useState(trip?.startDate);
   const [description, setDescription] = useState(trip?.description);
   const [hashtag, setHashtag] = useState(trip?.hashtag);
-
+  const [receivedPoints, setReceivedPoints] = useState(trip?.receivedPoints);
   const [fileURL, setFileURL] = useState(trip?.image);
   const { isPending, mutate } = useUpdateTrip(toast, user?.token);
   const cityOptions = cities.map((cityData) => cityData.city);
@@ -95,6 +97,7 @@ const EditTrip = () => {
       setTotal(data?.total); // Cập nhật giá trị
       setDescription(data?.description); // Cập nhật giá trị
       setHashtag(data?.hashtag); // Cập nhật giá trị
+      setReceivedPoints(data?.receivedPoints); // Cập nhật giá trị
       let startDateObject = new Date(data?.startDate);
       setStartDate(startDateObject);
       let setEndDateObject = new Date(data?.endDate);
@@ -346,6 +349,22 @@ const EditTrip = () => {
                   value={hashtag}
                   onChange={handHashtagChange}
                 />
+              </div>
+
+              <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
+                <Tooltip
+                  multiline
+                  w={220}
+                  withArrow
+                  transitionProps={{ duration: 200 }}
+                  label="Tự động cập nhật khi chuyến đi này được công khai"
+                >
+                  <Checkbox
+                    checked={receivedPoints}
+                    disabled
+                    label="Nhận điểm thưởng công khai chuyến đi"
+                  />
+                </Tooltip>
               </div>
             </>
           )}
