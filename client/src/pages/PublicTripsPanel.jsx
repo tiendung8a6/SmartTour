@@ -232,8 +232,8 @@ const PublicTripsPanel = () => {
                   <Text
                     c="blue"
                     fw={500}
-                    size="md"
-                    class="cursor-pointer"
+                    // size="sm"
+                    class="cursor-pointer text-base"
                     onClick={() => {
                       const isViewed = userInfo?.viewedTrips.includes(
                         publicTrip?._id

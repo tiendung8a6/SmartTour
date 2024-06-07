@@ -252,6 +252,7 @@ const NewTrip = () => {
                   label="Tag nổi bật"
                   className="w-full flex-1"
                   placeholder="Nhấn Enter để xác nhận"
+                  splitChars={[",", " ", "|"]}
                   value={hashtag}
                   onChange={setHashtag}
                 />
