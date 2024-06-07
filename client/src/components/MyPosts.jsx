@@ -186,12 +186,16 @@ const MyPosts = () => {
             </Table.Tr>
           </Table.Thead>
 
-          <Table.Tbody className="hover:bg-gray-100">
+          <Table.Tbody>
             {filteredContents?.length > 0 &&
               filteredContents?.map((el) => (
                 <Table.Tr
                   key={el?._id}
-                  className={theme ? "text-gray-400" : `text-slate-600`}
+                  className={
+                    theme
+                      ? "text-gray-400 hover:bg-gray-100"
+                      : `text-slate-600 hover:bg-gray-100`
+                  }
                 >
                   <Table.Td className="flex gap-2 items-center">
                     <img
