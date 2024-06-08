@@ -358,7 +358,7 @@ export const activateTrip = async (req, res, next) => {
       await Notifications.create({
         user: userId,
         pointsDeducted: -10,
-        reason: `Bị trừ 10 điểm vì kích hoạt xem chuyến đi không khai ${trip.tripName}`,
+        reason: `Trừ 10 điểm kích hoạt xem chuyến đi công khai ${trip.tripName}`,
       });
     }
 
