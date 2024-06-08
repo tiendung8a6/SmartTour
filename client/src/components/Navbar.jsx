@@ -73,6 +73,9 @@ const MobileMenu = ({ user, signOut }) => {
             <li onClick={toggleMenu}>
               <Link to="/contact">Liên Hệ</Link>
             </li>
+            <li onClick={toggleMenu}>
+              <Link to="/notification">Thông báo</Link>
+            </li>
           </ul>
           <div className="flex gap-2 items-center">
             {user?.token ? (
