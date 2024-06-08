@@ -256,3 +256,14 @@ export const getUser = async (id) => {
     return err;
   }
 };
+
+export const getNotification = async (id) => {
+  try {
+    const { data } = await axios.get(`${REACT_APP_API_URL}/notification/${id}`);
+    return data?.data;
+  } catch (error) {
+    const err = error?.response?.data || error?.response;
+    console.log(error);
+    return err;
+  }
+};

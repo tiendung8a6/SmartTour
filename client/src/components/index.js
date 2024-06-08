@@ -31,6 +31,7 @@ import EditPost from "./EditPost";
 import NewPost from "./NewPost";
 import MyPosts from "./MyPosts";
 import CommentMyPost from "./CommentMyPost";
+import Notifications from "./Notifications";
 export {
   Banner,
   Button,
@@ -65,4 +66,5 @@ export {
   NewPost,
   MyPosts,
   CommentMyPost,
+  Notifications,
 };
