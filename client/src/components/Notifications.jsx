@@ -61,7 +61,7 @@ const Notifications = () => {
                   className="flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2"
                 >
                   <img
-                    alt="avatar"
+                    alt="Thông báo"
                     className="h-8 w-8 rounded-full object-cover mx-1"
                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRX2Ycbywy8vTtHVpMRpvzLVDhB1ohFUeuOJg&s"
                   />
@@ -93,11 +93,18 @@ const Notifications = () => {
           )}
           {notifications.length > 0 && (
             <Link
-              to="/notifications"
+              to="/notification"
               className="block bg-sky-800 text-white hover:bg-sky-700 text-center font-bold py-2"
             >
               Xem tất cả thông báo
             </Link>
+
+            // <a
+            //   href="/notification"
+            //   className="block bg-sky-800 text-white hover:bg-sky-700 text-center font-bold py-2"
+            // >
+            //   Xem tất cả thông báo
+            // </a>
           )}
         </div>
       </Menu.Dropdown>
