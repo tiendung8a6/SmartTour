@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import Trips from "../models/tripModel.js";
 import Plans from "../models/planModel.js";
 import Users from "../models/userModel.js";
+import Notifications from "../models/notificationModel.js";
 
 export const createTrip = async (req, res, next) => {
   try {
@@ -42,6 +43,11 @@ export const createTrip = async (req, res, next) => {
 
     if (status) {
       await Users.findByIdAndUpdate(userId, { $inc: { points: 10 } });
+      await Notifications.create({
+        user: userId,
+        pointsDeducted: 10,
+        reason: `Nhận được 10 điểm vì đã công khai chuyến đi ${trip.tripName}`,
+      });
     }
 
     await Users.findByIdAndUpdate(userId, { $push: { viewedTrips: trip._id } });
@@ -208,6 +214,11 @@ export const updateTrip = async (req, res, next) => {
       await Users.findByIdAndUpdate(req.body.user.userId, {
         $inc: { points: 10 },
       });
+      await Notifications.create({
+        user: req.body.user.userId,
+        pointsDeducted: +10,
+        reason: `Nhận được 10 điểm vì đã công khai chuyến đi ${trip.tripName}`,
+      });
     }
 
     // Cập nhật receivedPoints nếu status là true
@@ -343,6 +354,12 @@ export const activateTrip = async (req, res, next) => {
         { $inc: { points: -10 } }, // Trừ 10 điểm
         { new: true }
       );
+
+      await Notifications.create({
+        user: userId,
+        pointsDeducted: -10,
+        reason: `Bị trừ 10 điểm vì kích hoạt xem chuyến đi không khai ${trip.tripName}`,
+      });
     }
 
     // Lưu thông tin chuyến đi
@@ -354,17 +371,20 @@ export const activateTrip = async (req, res, next) => {
       );
     }
 
-    // Cập nhật 5 điểm thưởng points của user
+    // Cập nhật 5 điểm thưởng
     if (trip.user.toString() !== userId) {
       await Users.findByIdAndUpdate(
         trip.user,
         { $inc: { points: 5 } },
         { new: true }
       );
+      // Ghi lại thông báo vào bảng Notifications
+      await Notifications.create({
+        user: trip.user,
+        pointsDeducted: 5,
+        reason: `Nhận được 5 điểm vì có người dùng xem chuyến đi ${trip.tripName}`,
+      });
     }
-
-    // // Cập nhật trường receivedPoints thành true
-    // await Trips.findByIdAndUpdate(id, { receivedPoints: true });
 
     res.status(200).json({
       success: true,
