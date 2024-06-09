@@ -172,7 +172,15 @@ const Notifications = () => {
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
             />
-            <Button onClick={() => setSearchTerm("")} variant="light">
+            <Button
+              className={`${
+                colorScheme === "dark"
+                  ? "hover:text-sky-700"
+                  : "hover:text-blue-600"
+              } text-sky-600`}
+              onClick={() => setSearchTerm("")}
+              variant="light"
+            >
               Xóa
             </Button>
           </div>
@@ -184,8 +192,11 @@ const Notifications = () => {
               <Button
                 leftSection={<IconBellPlus size={15} />}
                 radius="xl"
-                className={theme ? "bg-blue-600" : "bg-black"}
-                // onClick={() => handleSubmit()}
+                className={
+                  theme
+                    ? "bg-sky-600 hover:bg-sky-500 "
+                    : "bg-black hover:bg-neutral-800"
+                } // onClick={() => handleSubmit()}
               >
                 Gửi Thông Báo
               </Button>
@@ -299,6 +310,11 @@ const Notifications = () => {
                         <Menu.Label>Thao tác nguy hiểm</Menu.Label>
 
                         <Menu.Item
+                          className={
+                            colorScheme === "dark"
+                              ? "hover:text-rose-500 hover:bg-gray-600 "
+                              : "hover:bg-gray-100"
+                          }
                           color="red"
                           leftSection={<MdOutlineDeleteOutline />}
                           onClick={() => handlePerformAction("delete", el?._id)}

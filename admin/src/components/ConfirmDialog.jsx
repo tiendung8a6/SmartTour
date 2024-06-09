@@ -7,7 +7,7 @@ const ConfirmDialog = ({ message, opened, close, handleClick }) => {
 
       <div className="w-full flex gap-4 justify-end mt-8">
         <Button
-          className="border border-slate-300 text-slate-600 hover:bg-gray-100 hover:text-black text-sm"
+          className="border bg-gray-50 text-black border-slate-300 hover:bg-gray-200 hover:text-black text-sm"
           onClick={close}
         >
           Hủy

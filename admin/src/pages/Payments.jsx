@@ -172,7 +172,15 @@ const Payments = () => {
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
             />
-            <Button onClick={() => setSearchTerm("")} variant="light">
+            <Button
+              className={`${
+                colorScheme === "dark"
+                  ? "hover:text-sky-700"
+                  : "hover:text-blue-600"
+              } text-sky-600`}
+              onClick={() => setSearchTerm("")}
+              variant="light"
+            >
               Xóa
             </Button>
           </div>

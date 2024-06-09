@@ -157,7 +157,15 @@ const Users = () => {
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
             />
-            <Button onClick={() => setSearchTerm("")} variant="light">
+            <Button
+              className={`${
+                colorScheme === "dark"
+                  ? "hover:text-sky-700"
+                  : "hover:text-blue-600"
+              } text-sky-600`}
+              onClick={() => setSearchTerm("")}
+              variant="light"
+            >
               Xóa
             </Button>
           </div>
@@ -166,7 +174,11 @@ const Users = () => {
           <Button
             leftSection={<IconUserPlus size={15} />}
             radius="xl"
-            className={theme ? "bg-blue-600" : "bg-black"}
+            className={
+              theme
+                ? "bg-sky-600 hover:bg-sky-500 "
+                : "bg-black hover:bg-neutral-800"
+            }
             onClick={() => handleSubmit()}
           >
             Tạo Tài Khoản
@@ -190,7 +202,7 @@ const Users = () => {
             </Table.Tr>
           </Table.Thead>
 
-          <Table.Tbody className="">
+          <Table.Tbody>
             {filteredUsers?.length > 0 &&
               filteredUsers?.map((el) => (
                 <Table.Tr
@@ -298,6 +310,11 @@ const Users = () => {
 
                       <Menu.Dropdown>
                         <Menu.Item
+                          className={
+                            colorScheme === "dark"
+                              ? "hover:text-white hover:bg-gray-600 "
+                              : "hover:bg-gray-100"
+                          }
                           leftSection={<AiFillLock />}
                           onClick={() =>
                             handlePerformAction("isLock", el?._id, !el?.isLock)
@@ -311,6 +328,11 @@ const Users = () => {
                         <Menu.Label>Thao tác nguy hiểm</Menu.Label>
 
                         <Menu.Item
+                          className={
+                            colorScheme === "dark"
+                              ? "hover:text-rose-500 hover:bg-gray-600 "
+                              : "hover:bg-gray-100"
+                          }
                           color="red"
                           leftSection={<MdOutlineDeleteOutline />}
                           onClick={() => handlePerformAction("delete", el?._id)}

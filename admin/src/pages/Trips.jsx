@@ -168,7 +168,15 @@ const Trips = () => {
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
             />
-            <Button onClick={() => setSearchTerm("")} variant="light">
+            <Button
+              className={`${
+                colorScheme === "dark"
+                  ? "hover:text-sky-700"
+                  : "hover:text-blue-600"
+              } text-sky-600`}
+              onClick={() => setSearchTerm("")}
+              variant="light"
+            >
               Xóa
             </Button>
           </div>
@@ -259,6 +267,11 @@ const Trips = () => {
 
                       <Menu.Dropdown>
                         <Menu.Item
+                          className={
+                            colorScheme === "dark"
+                              ? "hover:text-white hover:bg-gray-600 "
+                              : "hover:bg-gray-100"
+                          }
                           leftSection={<AiOutlineEye />}
                           onClick={() => handleEdit(el)}
                         >
@@ -268,6 +281,11 @@ const Trips = () => {
                         </Menu.Item>
 
                         <Menu.Item
+                          className={
+                            colorScheme === "dark"
+                              ? "hover:text-white hover:bg-gray-600 "
+                              : "hover:bg-gray-100"
+                          }
                           leftSection={<AiOutlineSetting />}
                           onClick={() =>
                             handlePerformAction("status", el?._id, !el?.status)
@@ -281,6 +299,11 @@ const Trips = () => {
                         <Menu.Label>Thao tác nguy hiểm</Menu.Label>
 
                         <Menu.Item
+                          className={
+                            colorScheme === "dark"
+                              ? "hover:text-rose-500 hover:bg-gray-600 "
+                              : "hover:bg-gray-100"
+                          }
                           color="red"
                           leftSection={<MdOutlineDeleteOutline />}
                           onClick={() => handlePerformAction("delete", el?._id)}
