@@ -1,5 +1,114 @@
 import Notifications from "../models/notificationModel.js";
 import Users from "../models/userModel.js";
+import mongoose from "mongoose";
+import nodemailer from "nodemailer";
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.AUTH_EMAIL,
+    pass: process.env.AUTH_PASSWORD,
+  },
+});
+
+export const createNotificationEmail = async (req, res, next) => {
+  try {
+    const { users, reason } = req.body;
+
+    if (!reason) {
+      return res.status(400).json({
+        success: false,
+        message: "Vui lòng cung cấp lý do (reason) cho thông báo.",
+      });
+    }
+
+    let userIds = [];
+
+    // Nếu users được chỉ định, lấy userIds từ users
+    if (users && users.length > 0) {
+      userIds = users.map((user) => user._id);
+    } else {
+      // Nếu users là null, lấy danh sách userIds từ tất cả người dùng
+      const allUsers = await Users.find({}, "_id");
+      userIds = allUsers.map((user) => user._id);
+    }
+
+    // Gửi email cho từng user
+    await Promise.all(
+      userIds.map(async (userId) => {
+        const user = await Users.findById(userId);
+        if (user && user.email) {
+          const mailOptions = {
+            from: process.env.AUTH_EMAIL,
+            to: user.email,
+            subject: "Thông báo từ SmartTour",
+            html: `<p>${reason}</p>`,
+          };
+          await transporter.sendMail(mailOptions);
+        }
+      })
+    );
+
+    const notification = await Notifications.create({
+      user: userIds,
+      reason: reason,
+      sender: "admin",
+    });
+    res.status(200).json({
+      success: true,
+      message: "Thông báo đã được gửi thành công qua email.",
+      data: notification,
+    });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ success: false, message: "Không thể gửi thông báo qua email." });
+  }
+};
+
+export const createNotification = async (req, res, next) => {
+  try {
+    const { users, reason } = req.body;
+
+    if (!reason) {
+      return res.status(400).json({
+        success: false,
+        message: "Vui lòng cung cấp lý do cho thông báo.",
+      });
+    }
+
+    let notificationUsers = [];
+
+    if (users && users.length > 0) {
+      for (const userId of users) {
+        const user = await Users.findById(userId);
+        if (user) {
+          notificationUsers.push(userId);
+        }
+      }
+    } else {
+      // gửi cho tất cả người dùng
+      const allUsers = await Users.find({}, "_id");
+      notificationUsers = allUsers.map((user) => user._id);
+    }
+
+    const notification = await Notifications.create({
+      user: notificationUsers,
+      reason: reason,
+      sender: "system",
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Thông báo đã được gửi thành công",
+      data: notification,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Lỗi máy chủ" });
+  }
+};
 
 export const getNotificationById = async (req, res) => {
   try {
@@ -11,7 +120,10 @@ export const getNotificationById = async (req, res) => {
       return res.status(404).json({ message: "Không tìm thấy người dùng" });
     }
 
-    const notifications = await Notifications.find({ user: id }).sort({
+    const notifications = await Notifications.find({
+      user: id,
+      sender: "system",
+    }).sort({
       createdAt: -1,
     });
 
