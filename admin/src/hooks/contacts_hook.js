@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { REACT_APP_API_URL } from "../utils";
 
-export const useContent = (toast, token) => {
+export const useContacts = (toast, token) => {
   return useMutation({
     mutationFn: async (page) => {
       const { data } = await axios.post(
@@ -37,6 +37,33 @@ export const useUpdateContact = (toast, token) => {
       const { data } = await axios.patch(
         `${REACT_APP_API_URL}/users/contact/${id}`,
         { content },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return data;
+    },
+    onError: (error) => {
+      toast.error(error?.response?.data?.message ?? error.message);
+    },
+    onSuccess: (data) => {
+      toast.success(data?.message);
+
+      window.location.reload();
+    },
+  });
+};
+
+export const usePostNotificationEmail = (toast, token) => {
+  return useMutation({
+    mutationFn: async ({ id, reason }) => {
+      console.log(token);
+      const { data } = await axios.patch(
+        `${REACT_APP_API_URL}/notification/create/email/${id}`,
+        { reason },
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -15,7 +15,7 @@ import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Toaster, toast } from "sonner";
 import { IconSearch } from "@tabler/icons-react";
 import { Comments, ConfirmDialog, EditContact, Loading } from "../components";
-import { useContent } from "../hooks/contacts_hook";
+import { useContacts } from "../hooks/contacts_hook";
 
 import useCommentStore from "../store/comments";
 import useStore from "../store/store";
@@ -52,7 +52,7 @@ const Contacts = () => {
   const { setOpen, commentId, setCommentId, setContact } = useCommentStore();
   const [opened, { open, close }] = useDisclosure(false);
 
-  const { data, isPending, mutate } = useContent(toast, user?.token);
+  const { data, isPending, mutate } = useContacts(toast, user?.token);
   // const useDelete = useDeletePost(toast, user?.token);
   // const useActions = useAction(toast, user?.token);
 

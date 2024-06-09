@@ -6,6 +6,7 @@ import {
   Table,
   TextInput,
   useMantineColorScheme,
+  rem,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import moment from "moment";
@@ -19,6 +20,8 @@ import {
   IconSearch,
   IconSquarePlus,
   IconBlockquote,
+  IconBellPlus,
+  IconMailPlus,
 } from "@tabler/icons-react";
 
 import {
@@ -30,17 +33,12 @@ import {
   PostCategory,
   EditCategory,
 } from "../components";
-import {
-  useAction,
-  useCategory,
-  useDeleteCategory,
-  getPostsByCategory,
-} from "../hooks/category-hook";
+import { useNotifications } from "../hooks/notifications_hook";
 import useCommentStore from "../store/comments";
 import useStore from "../store/store";
 import { formatNumber, updateURL } from "../utils";
 
-const Categories = () => {
+const Notifications = () => {
   moment.updateLocale("vi", {
     relativeTime: {
       future: "trong %s",
@@ -71,9 +69,9 @@ const Categories = () => {
   const { setOpen, commentId, setCommentId, setPost } = useCommentStore();
   const [opened, { open, close }] = useDisclosure(false);
 
-  const { data, isPending, mutate } = useCategory(toast, user?.token);
-  const useDelete = useDeleteCategory(toast, user?.token, mutate);
-  const useActions = useAction(toast, user?.token);
+  const { data, isPending, mutate } = useNotifications(toast, user?.token);
+  // const useDelete = useDeleteCategory(toast, user?.token, mutate);
+  // const useActions = useAction(toast, user?.token);
 
   const [selected, setSelected] = useState("");
   const [editPost, setEditPost] = useState(false);
@@ -87,35 +85,6 @@ const Categories = () => {
 
   const theme = colorScheme === "dark";
 
-  const handleComment = async (id) => {
-    const postCount = await getPostsCountByCategory(id);
-    setCommentId(id);
-    setOpen(true);
-  };
-
-  // Lấy số lượng bài post cho mỗi category khi dữ liệu category thay đổi
-  useEffect(() => {
-    const fetchPostCounts = async () => {
-      const counts = {};
-      for (const category of data?.data || []) {
-        const count = await getPostsCountByCategory(category._id);
-        counts[category._id] = count;
-      }
-      setPostCounts(counts);
-    };
-    fetchPostCounts();
-  }, [data]);
-
-  const getPostsCountByCategory = async (categoryId) => {
-    try {
-      const posts = await getPostsByCategory(categoryId);
-      return posts.length;
-    } catch (error) {
-      console.error("Error getting posts count for category:", error);
-      return 0;
-    }
-  };
-
   const handleSubmit = () => {
     open();
   };
@@ -123,10 +92,10 @@ const Categories = () => {
   const handleActions = () => {
     switch (type) {
       case "delete":
-        useDelete.mutate(selected);
+        // useDelete.mutate(selected);
         break;
       case "status":
-        useActions.mutate({ id: selected, status: status });
+        // useActions.mutate({ id: selected, status: status });
         break;
       default:
         break;
@@ -159,6 +128,7 @@ const Categories = () => {
     fetchData();
   }, [page]);
 
+  //TÌM KIẾM BỎ QUA DẤU
   // Function to remove diacritics from a string
   const removeDiacritics = (str) => {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -171,10 +141,13 @@ const Categories = () => {
       .includes(removeDiacritics(substr).toLowerCase());
   };
 
-  // Filter content based on search term
-  const filteredCategories = data?.data?.filter((el) => {
-    return containsString(el.label, searchTerm);
+  const filteredNotifications = data?.data?.filter((contact) => {
+    return (
+      // containsString(contact.user, searchTerm) ||
+      containsString(contact.reason, searchTerm)
+    );
   });
+  console.log("....", filteredNotifications);
 
   return (
     <>
@@ -204,68 +177,83 @@ const Categories = () => {
             </Button>
           </div>
         </div>
+
         <div className="flex justify-end items-center mb-4 ">
-          <Button
-            leftSection={<IconSquarePlus size={15} />}
-            radius="xl"
-            className={theme ? "bg-blue-600" : "bg-black"}
-            onClick={() => handleSubmit()}
-          >
-            Tạo Danh Mục
-          </Button>
+          <Menu shadow="md" width={200}>
+            <Menu.Target>
+              <Button
+                leftSection={<IconBellPlus size={15} />}
+                radius="xl"
+                className={theme ? "bg-blue-600" : "bg-black"}
+                // onClick={() => handleSubmit()}
+              >
+                Gửi Thông Báo
+              </Button>
+            </Menu.Target>
+
+            <Menu.Dropdown>
+              <Menu.Label>Cách thức</Menu.Label>
+              <Menu.Item
+                className="hover:bg-slate-100"
+                leftSection={
+                  <IconMailPlus style={{ width: rem(14), height: rem(14) }} />
+                }
+                // onClick={() => handleSubmit()}
+              >
+                Gửi Qua Hệ Thống
+              </Menu.Item>
+              {/* <Menu.Divider /> */}
+              <Menu.Item
+                className="hover:bg-slate-100"
+                leftSection={
+                  <IconMailPlus style={{ width: rem(14), height: rem(14) }} />
+                }
+                onClick={() => handleSubmit()}
+              >
+                Gửi Qua Email
+              </Menu.Item>
+            </Menu.Dropdown>
+          </Menu>
         </div>
         <Table highlightOnHover withTableBorder>
           <Table.Thead>
             <Table.Tr className="bg-black text-white">
-              <Table.Th>Tên</Table.Th>
-              <Table.Th>Bài Viết</Table.Th>
-              <Table.Th>Màu Sắc</Table.Th>
-              <Table.Th>Ngày Tạo</Table.Th>
-              <Table.Th>Ngày Chỉnh Sửa</Table.Th>
-              <Table.Th>Trạng Thái</Table.Th>
+              <Table.Th>Email</Table.Th>
+              <Table.Th>Nội dung</Table.Th>
+              <Table.Th>Ngày gửi</Table.Th>
+              <Table.Th>Hình thức</Table.Th>
               <Table.Th>Hành Động</Table.Th>
             </Table.Tr>
           </Table.Thead>
 
           <Table.Tbody className="">
-            {filteredCategories?.length > 0 &&
-              filteredCategories?.map((el) => (
+            {filteredNotifications?.length > 0 &&
+              filteredNotifications?.map((el) => (
                 <Table.Tr
                   key={el?._id}
                   className={theme ? "text-gray-400" : `text-slate-600`}
                 >
                   <Table.Td>
-                    <p
-                      style={{ backgroundColor: `${el?.color}` }}
-                      className="w-fit rounded-full px-2 py-0.5 text-white text-[12px] 2xl:text-sm"
-                    >
-                      {el?.label}
-                    </p>
+                    {el?.user?.map((user) => (
+                      <div key={user?._id}>{user?.email}</div>
+                    ))}
                   </Table.Td>
 
-                  <Table.Td onClick={() => handleComment(el?._id)}>
-                    <div className="flex gap-1 items-center cursor-pointer">
-                      <IconBlockquote size={18} className="text-slate-500" />
-                      {postCounts[el._id]?.toString() || "N/A"}
-                    </div>
-                  </Table.Td>
-
-                  <Table.Td>{el?.color}</Table.Td>
+                  <Table.Td className="text-justify">{el?.reason}</Table.Td>
                   <Table.Td>{moment(el?.createdAt).fromNow()}</Table.Td>
-                  <Table.Td>{moment(el?.updatedAt).fromNow()}</Table.Td>
                   <Table.Td className="text-justify whitespace-nowrap">
                     <span
                       className={`${
-                        el?.status
-                          ? "bg-green-700 text-white"
-                          : "bg-red-700 text-white"
+                        el?.type === "system"
+                          ? "bg-sky-800 text-white"
+                          : "bg-pink-600 text-white"
                       } ${
                         colorScheme === "dark"
                           ? "bg-opacity-30"
                           : "bg-opacity-70"
                       } rounded-full font-semibold px-4 py-1.5`}
                     >
-                      {el?.status === true ? "Công Khai" : "Đã Ẩn"}
+                      {el?.type === "system" ? "Hệ thống" : "Email"}
                     </span>
                   </Table.Td>
                   <Table.Td width={5}>
@@ -324,7 +312,7 @@ const Categories = () => {
               ))}
           </Table.Tbody>
 
-          {filteredCategories?.length < 1 && (
+          {filteredNotifications?.length < 1 && (
             <Table.Caption>Không tìm thấy dữ liệu nào.</Table.Caption>
           )}
         </Table>
@@ -372,4 +360,4 @@ const Categories = () => {
   );
 };
 
-export default Categories;
+export default Notifications;
