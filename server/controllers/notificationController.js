@@ -139,7 +139,7 @@ export const getAdminNotifications = async (req, res, next) => {
     let queryResult = Notifications.find()
       .populate({
         path: "user",
-        select: "name image -password",
+        select: "name image email -password",
       })
       .sort({ createdAt: -1 });
 

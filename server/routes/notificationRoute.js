@@ -13,6 +13,6 @@ const router = express.Router();
 router.get("/:id", getNotificationById);
 router.post("/create", userAuth, createNotification);
 router.post("/create/email", userAuth, createNotificationEmail);
-router.post("/admin-notification", userAuth, getAdminNotifications); //ADMIN - Lấy Toàn bộ
+router.post("/admin-notifications", userAuth, getAdminNotifications);
 
 export default router;
