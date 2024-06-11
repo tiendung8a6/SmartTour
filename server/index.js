@@ -92,7 +92,7 @@ app.post(
           await Notifications.create({
             user: order.user,
             pointsAdded: points,
-            reason: `Nhận thành công ${points} điểm với phương thức toán bằng Stripe`,
+            reason: `Nhận thành công ${points} điểm với phương thức toán bằng Stripe với ID: ${order.orderNumber} `,
           });
         } else {
           console.error("Không thể cập nhật điểm người dùng");

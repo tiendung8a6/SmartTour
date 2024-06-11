@@ -269,7 +269,7 @@ export const vnpayReturn = asyncHandler(async (req, res) => {
           await Notifications.create({
             user: order.user,
             pointsDeducted: points,
-            reason: `Nhận thành công ${points} điểm với phương thức toán bằng VNPAY`,
+            reason: `Nhận thành công ${points} điểm với phương thức toán bằng VNPAY với ID: ${order.orderNumber} `,
           });
         } else {
           console.error("Không thể cập nhật điểm người dùng");

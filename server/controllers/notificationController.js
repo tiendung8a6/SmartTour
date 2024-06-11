@@ -14,7 +14,6 @@ const transporter = nodemailer.createTransport({
 export const createNotificationEmail = async (req, res, next) => {
   try {
     const { users, reason } = req.body;
-
     if (!reason) {
       return res.status(400).json({
         success: false,
@@ -24,13 +23,16 @@ export const createNotificationEmail = async (req, res, next) => {
 
     let userIds = [];
 
-    // Nếu users được chỉ định, lấy userIds từ users
-    if (users && users.length > 0) {
-      userIds = users.map((user) => user._id);
-    } else {
-      // Nếu users là null, lấy danh sách userIds từ tất cả người dùng
-      const allUsers = await Users.find({}, "_id");
+    // Nếu users là "all", lấy danh sách userIds từ tất cả người dùng
+    if (users === "all") {
+      const allUsers = await Users.find(
+        { isLock: false, emailVerified: true, isAdmin: false }, //ĐK
+        "_id"
+      );
       userIds = allUsers.map((user) => user._id);
+    } else {
+      // Nếu users được chỉ định, lấy userIds từ users
+      userIds = users.map((user) => user._id);
     }
 
     // Gửi email cho từng user
@@ -80,17 +82,21 @@ export const createNotification = async (req, res, next) => {
 
     let notificationUsers = [];
 
-    if (users && users.length > 0) {
-      for (const userId of users) {
-        const user = await Users.findById(userId);
-        if (user) {
-          notificationUsers.push(userId);
+    if (users === "all") {
+      const allUsers = await Users.find(
+        { isLock: false, emailVerified: true, isAdmin: false },
+        "_id"
+      );
+      notificationUsers = allUsers.map((user) => user._id);
+    } else {
+      if (users && users.length > 0) {
+        for (const userId of users) {
+          const user = await Users.findById(userId);
+          if (user) {
+            notificationUsers.push(userId);
+          }
         }
       }
-    } else {
-      // gửi cho tất cả người dùng
-      const allUsers = await Users.find({}, "_id");
-      notificationUsers = allUsers.map((user) => user._id);
     }
 
     const notification = await Notifications.create({
