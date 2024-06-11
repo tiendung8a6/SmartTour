@@ -254,7 +254,9 @@ const Notifications = () => {
                     ))}
                   </Table.Td>
 
-                  <Table.Td className="text-justify">{el?.reason}</Table.Td>
+                  <Table.Td className="text-justify">
+                    <div dangerouslySetInnerHTML={{ __html: el?.reason }} />
+                  </Table.Td>
                   <Table.Td>{moment(el?.createdAt).fromNow()}</Table.Td>
                   <Table.Td className="text-justify whitespace-nowrap">
                     <span
