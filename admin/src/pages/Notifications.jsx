@@ -20,11 +20,13 @@ import {
   IconSearch,
   IconSquarePlus,
   IconBlockquote,
+  IconNotification,
   IconBellPlus,
   IconMailPlus,
 } from "@tabler/icons-react";
 
 import {
+  EmailNotifications,
   Comments,
   ConfirmDialog,
   EditPost,
@@ -159,9 +161,9 @@ const Notifications = () => {
                 colorScheme === "dark" ? "text-white" : "text-black"
               } text-lg pb-1 font-semibold`}
           >
-            Danh mục (
+            Thông báo (
             <span className="text-sm">
-              {"Danh sách: " + data?.totalCategories + " danh mục "}
+              {"Danh sách: " + data?.totalNotifications + " thông báo "}
             </span>
             )
           </p>
@@ -207,7 +209,9 @@ const Notifications = () => {
               <Menu.Item
                 className="hover:bg-slate-100"
                 leftSection={
-                  <IconMailPlus style={{ width: rem(14), height: rem(14) }} />
+                  <IconNotification
+                    style={{ width: rem(14), height: rem(14) }}
+                  />
                 }
                 // onClick={() => handleSubmit()}
               >
@@ -255,7 +259,7 @@ const Notifications = () => {
                   <Table.Td className="text-justify whitespace-nowrap">
                     <span
                       className={`${
-                        el?.type === "system"
+                        el?.sender === "system"
                           ? "bg-sky-800 text-white"
                           : "bg-pink-600 text-white"
                       } ${
@@ -264,7 +268,7 @@ const Notifications = () => {
                           : "bg-opacity-70"
                       } rounded-full font-semibold px-4 py-1.5`}
                     >
-                      {el?.type === "system" ? "Hệ thống" : "Email"}
+                      {el?.sender === "system" ? "Hệ thống" : "Email"}
                     </span>
                   </Table.Td>
                   <Table.Td width={5}>
@@ -371,7 +375,7 @@ const Notifications = () => {
 
       {commentId && <PostCategory />}
 
-      {<CreateCategory opened={opened} close={close} />}
+      {<EmailNotifications opened={opened} close={close} />}
     </>
   );
 };

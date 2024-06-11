@@ -29,6 +29,7 @@ import PostCategory from "./PostCategory";
 import EditCategory from "./EditCategory";
 import Chart from "./Chart";
 import DoughnutChart from "./DoughnutChart";
+import EmailNotifications from "./EmailNotifications";
 export {
   Comments,
   ConfirmDialog,
@@ -59,4 +60,5 @@ export {
   DoughnutChart,
   RecentTripsTable,
   RecentOrdersTable,
+  EmailNotifications,
 };
