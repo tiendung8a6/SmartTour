@@ -197,7 +197,7 @@ const Navbar = () => {
         </ul>
 
         {/* Thông báo */}
-        <Notifications />
+        {user?.token && <Notifications />}
 
         {/* Sáng tối */}
         <ThemeSwitch />

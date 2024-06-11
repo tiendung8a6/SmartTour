@@ -45,7 +45,11 @@ const Notification = () => {
                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRX2Ycbywy8vTtHVpMRpvzLVDhB1ohFUeuOJg&s"
                   />
                   <div className="ml-4 flex flex-col sm:w-96">
-                    <p className="mb-1 font-bold text-gray-800">Hệ thống</p>
+                    <p className="mb-1 font-bold text-gray-800">
+                      {notification.sender === "system"
+                        ? "Hệ thống"
+                        : "Quản trị viên"}
+                    </p>
                     <div className="text-sm text-gray-400 ">
                       {/* <span className="shrink-0 mr-1 text-rose-500">
                         <svg
