@@ -55,6 +55,7 @@ export const createNotificationEmail = async (req, res, next) => {
       user: userIds,
       reason: reason,
       sender: "admin",
+      method: "email",
     });
     res.status(200).json({
       success: true,
@@ -102,7 +103,7 @@ export const createNotification = async (req, res, next) => {
     const notification = await Notifications.create({
       user: notificationUsers,
       reason: reason,
-      sender: "system",
+      sender: "admin",
     });
 
     res.status(200).json({
@@ -128,7 +129,7 @@ export const getNotificationById = async (req, res) => {
 
     const notifications = await Notifications.find({
       user: id,
-      sender: "system",
+      method: "automatic",
     }).sort({
       createdAt: -1,
     });
@@ -170,6 +171,21 @@ export const getAdminNotifications = async (req, res, next) => {
       data: notifications,
       page,
       numOfPage,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: error.message });
+  }
+};
+export const deleteNotifications = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    await Notifications.findOneAndDelete({ _id: id });
+
+    res.status(200).json({
+      success: true,
+      message: "Đã xóa thông báo thành công",
     });
   } catch (error) {
     console.log(error);
