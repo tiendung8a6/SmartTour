@@ -75,11 +75,9 @@ const Contents = () => {
 
   const theme = colorScheme === "dark";
 
-  const handleComment = (id, size) => {
-    if (size > 0) {
-      setCommentId(id);
-      setOpen(true);
-    }
+  const handleComment = (id) => {
+    setCommentId(id);
+    setOpen(true);
   };
 
   const handleSubmit = () => {
@@ -280,6 +278,20 @@ const Contents = () => {
                       </Menu.Target>
 
                       <Menu.Dropdown>
+                        <Menu.Item
+                          className={
+                            colorScheme === "dark"
+                              ? "hover:text-white hover:bg-gray-600 "
+                              : "hover:bg-gray-100"
+                          }
+                          leftSection={<MdMessage />}
+                          onClick={() =>
+                            handleComment(el?._id, el?.comments?.length)
+                          }
+                        >
+                          Xem Bình Luận
+                        </Menu.Item>
+
                         <Menu.Item
                           className={
                             colorScheme === "dark"

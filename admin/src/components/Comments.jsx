@@ -67,7 +67,7 @@ const Comments = () => {
       >
         <div className="w-full h-full pb-6">
           {data?.data?.length === 0 ? (
-            <p className="text-sm text-gray-700">Không Có Bình Luận</p>
+            <p className="text-sm text-gray-700">Chưa Có Bình Luận</p>
           ) : (
             <div className="w-full h-full flex flex-col gap-6 px-2">
               {data?.data?.map(({ _id, user, desc, post, createdAt }) => (
