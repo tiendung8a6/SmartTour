@@ -11,31 +11,28 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import moment from "moment";
 import "moment/locale/vi";
-import { AiOutlineEye, AiOutlineSetting } from "react-icons/ai";
+import { AiOutlineSetting } from "react-icons/ai";
 import { BiDotsVerticalRounded, BiSolidEdit } from "react-icons/bi";
-import { MdMessage, MdOutlineDeleteOutline } from "react-icons/md";
+import { MdOutlineDeleteOutline } from "react-icons/md";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Toaster, toast } from "sonner";
 import {
   IconSearch,
-  IconSquarePlus,
-  IconBlockquote,
   IconNotification,
   IconBellPlus,
   IconMailPlus,
 } from "@tabler/icons-react";
 
 import {
+  WebNotifications,
   EmailNotifications,
-  Comments,
   ConfirmDialog,
-  EditPost,
   Loading,
-  CreateCategory,
-  PostCategory,
-  EditCategory,
 } from "../components";
-import { useNotifications } from "../hooks/notifications_hook";
+import {
+  useNotifications,
+  useDeleteNotification,
+} from "../hooks/notifications_hook";
 import useCommentStore from "../store/comments";
 import useStore from "../store/store";
 import { formatNumber, updateURL } from "../utils";
@@ -68,21 +65,16 @@ const Notifications = () => {
   const [searchParams] = useSearchParams();
 
   const { user } = useStore();
-  const { setOpen, commentId, setCommentId, setPost } = useCommentStore();
   const [opened, { open, close }] = useDisclosure(false);
+  const [isOpening, setIsOpening] = useState(false);
 
   const { data, isPending, mutate } = useNotifications(toast, user?.token);
-  // const useDelete = useDeleteCategory(toast, user?.token, mutate);
+  const useDelete = useDeleteNotification(toast, user?.token, mutate);
   // const useActions = useAction(toast, user?.token);
-
   const [selected, setSelected] = useState("");
-  const [editPost, setEditPost] = useState(false);
-
   const [type, setType] = useState(null);
-  const [status, setStatus] = useState(null);
   const [page, setPage] = useState(searchParams.get("page") || 1);
   const [searchTerm, setSearchTerm] = useState("");
-  const [postCounts, setPostCounts] = useState({});
   const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
 
   const theme = colorScheme === "dark";
@@ -94,11 +86,11 @@ const Notifications = () => {
   const handleActions = () => {
     switch (type) {
       case "delete":
-        // useDelete.mutate(selected);
+        useDelete.mutate(selected);
         break;
-      case "status":
-        // useActions.mutate({ id: selected, status: status });
-        break;
+      // case "status":
+      //   useActions.mutate({ id: selected, status: status });
+      //   break;
       default:
         break;
     }
@@ -107,17 +99,13 @@ const Notifications = () => {
   };
 
   const handlePerformAction = (val, id, status) => {
-    setEditPost(false);
     setSelected(id);
     setType(val);
-    setStatus(status);
     setIsConfirmDialogOpen(true);
   };
 
-  const handleEdit = (el) => {
-    setSelected(el._id);
-    setPost(el);
-    setEditPost(true);
+  const handleNotification = () => {
+    setIsOpening(true);
     open();
   };
 
@@ -131,25 +119,21 @@ const Notifications = () => {
   }, [page]);
 
   //TÌM KIẾM BỎ QUA DẤU
-  // Function to remove diacritics from a string
   const removeDiacritics = (str) => {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   };
 
-  // Function to check if a string contains another string (case-insensitive, diacritic-insensitive)
   const containsString = (str, substr) => {
     return removeDiacritics(str)
       .toLowerCase()
       .includes(removeDiacritics(substr).toLowerCase());
   };
 
-  const filteredNotifications = data?.data?.filter((contact) => {
-    return (
-      // containsString(contact.user, searchTerm) ||
-      containsString(contact.reason, searchTerm)
+  const filteredNotifications = data?.data?.filter((notification) => {
+    return notification?.user?.some((user) =>
+      containsString(user?.email, searchTerm)
     );
   });
-  console.log("....", filteredNotifications);
 
   return (
     <>
@@ -170,7 +154,7 @@ const Notifications = () => {
           <div className="flex items-center">
             <TextInput
               leftSection={<IconSearch size={15} />}
-              placeholder="Tìm kiếm theo Tên"
+              placeholder="Tìm kiếm theo Email"
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
             />
@@ -207,19 +191,27 @@ const Notifications = () => {
             <Menu.Dropdown>
               <Menu.Label>Cách thức</Menu.Label>
               <Menu.Item
-                className="hover:bg-slate-100"
+                className={
+                  colorScheme === "dark"
+                    ? "hover:text-white hover:bg-gray-600 "
+                    : "hover:bg-gray-100"
+                }
                 leftSection={
                   <IconNotification
                     style={{ width: rem(14), height: rem(14) }}
                   />
                 }
-                // onClick={() => handleSubmit()}
+                onClick={() => handleNotification()}
               >
                 Gửi Qua Hệ Thống
               </Menu.Item>
               {/* <Menu.Divider /> */}
               <Menu.Item
-                className="hover:bg-slate-100"
+                className={
+                  colorScheme === "dark"
+                    ? "hover:text-white hover:bg-gray-600 "
+                    : "hover:bg-gray-100"
+                }
                 leftSection={
                   <IconMailPlus style={{ width: rem(14), height: rem(14) }} />
                 }
@@ -235,8 +227,9 @@ const Notifications = () => {
             <Table.Tr className="bg-black text-white">
               <Table.Th>Email</Table.Th>
               <Table.Th>Nội dung</Table.Th>
-              <Table.Th>Ngày gửi</Table.Th>
               <Table.Th>Hình thức</Table.Th>
+              <Table.Th>Ngày gửi</Table.Th>
+              <Table.Th>Người gửi</Table.Th>
               <Table.Th>Hành Động</Table.Th>
             </Table.Tr>
           </Table.Thead>
@@ -257,12 +250,27 @@ const Notifications = () => {
                   <Table.Td className="text-justify">
                     <div dangerouslySetInnerHTML={{ __html: el?.reason }} />
                   </Table.Td>
+                  <Table.Td className="text-justify whitespace-nowrap">
+                    <span
+                      className={`${
+                        el?.method === "automatic"
+                          ? "bg-sky-800 text-white"
+                          : "bg-green-600 text-white"
+                      } ${
+                        colorScheme === "dark"
+                          ? "bg-opacity-30"
+                          : "bg-opacity-70"
+                      } rounded-full font-semibold px-4 py-1.5`}
+                    >
+                      {el?.method === "automatic" ? "Hệ thống" : "Email"}
+                    </span>
+                  </Table.Td>
                   <Table.Td>{moment(el?.createdAt).fromNow()}</Table.Td>
                   <Table.Td className="text-justify whitespace-nowrap">
                     <span
                       className={`${
                         el?.sender === "system"
-                          ? "bg-sky-800 text-white"
+                          ? "bg-lime-800 text-white"
                           : "bg-pink-600 text-white"
                       } ${
                         colorScheme === "dark"
@@ -270,7 +278,7 @@ const Notifications = () => {
                           : "bg-opacity-70"
                       } rounded-full font-semibold px-4 py-1.5`}
                     >
-                      {el?.sender === "system" ? "Hệ thống" : "Email"}
+                      {el?.sender === "system" ? "Tự động" : "Quản trị viên"}
                     </span>
                   </Table.Td>
                   <Table.Td width={5}>
@@ -295,13 +303,12 @@ const Notifications = () => {
                       </Menu.Target>
 
                       <Menu.Dropdown>
-                        <Menu.Item
+                        {/* <Menu.Item
                           leftSection={<BiSolidEdit />}
                           onClick={() => handleEdit(el)}
                         >
                           Chỉnh Sửa
                         </Menu.Item>
-
                         <Menu.Item
                           leftSection={<AiOutlineSetting />}
                           onClick={() =>
@@ -310,8 +317,7 @@ const Notifications = () => {
                         >
                           {el?.status ? "Ẩn Danh Mục " : "Hiện Danh Mục"}
                         </Menu.Item>
-
-                        <Menu.Divider />
+                        <Menu.Divider /> */}
 
                         <Menu.Label>Thao tác nguy hiểm</Menu.Label>
 
@@ -355,7 +361,18 @@ const Notifications = () => {
         <Toaster richColors />
       </div>
 
-      {!editPost && !opened && (
+      {isOpening && (
+        <WebNotifications
+          key={selected}
+          opened={opened}
+          close={() => {
+            close();
+            setIsOpening(false);
+          }}
+        />
+      )}
+
+      {!isOpening && !opened && (
         <ConfirmDialog
           message="Bạn có chắc muốn thực hiện hành động này?"
           opened={isConfirmDialogOpen}
@@ -364,20 +381,7 @@ const Notifications = () => {
         />
       )}
 
-      {editPost && (
-        <EditCategory
-          key={selected}
-          opened={opened}
-          close={() => {
-            close();
-            setEditPost(false);
-          }}
-        />
-      )}
-
-      {commentId && <PostCategory />}
-
-      {<EmailNotifications opened={opened} close={close} />}
+      {!isOpening && <EmailNotifications opened={opened} close={close} />}
     </>
   );
 };

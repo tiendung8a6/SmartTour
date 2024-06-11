@@ -57,7 +57,34 @@ export const useCreateNotificationEmail = (toast, token) => {
     },
   });
 };
+export const useCreateNotificationWeb = (toast, token) => {
+  return useMutation({
+    mutationFn: async (formData) => {
+      const { data } = await axios.post(
+        `${REACT_APP_API_URL}/notification/create`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return data;
+    },
 
+    onError: async (error) => {
+      toast.error(error?.response?.data?.message ?? error.message);
+    },
+
+    onSuccess: async (data) => {
+      toast.success(data?.message);
+
+      setTimeout(() => {
+        window.location.replace("/notifications");
+      }, 500);
+    },
+  });
+};
 export const useUsers = () => {
   return useQuery({
     queryKey: "users",
@@ -66,6 +93,28 @@ export const useUsers = () => {
         `${REACT_APP_API_URL}/users/notifications`
       );
       return data;
+    },
+  });
+};
+export const useDeleteNotification = (toast, token, mutate) => {
+  return useMutation({
+    mutationFn: async (id) => {
+      const { data } = await axios.delete(
+        `${REACT_APP_API_URL}/notification/` + id,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return data;
+    },
+    onError: (error) => {
+      toast.error(error?.response?.data?.message ?? error.message);
+    },
+    onSuccess: (data) => {
+      toast.success(data?.message);
+      mutate();
     },
   });
 };

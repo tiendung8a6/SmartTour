@@ -30,6 +30,7 @@ import EditCategory from "./EditCategory";
 import Chart from "./Chart";
 import DoughnutChart from "./DoughnutChart";
 import EmailNotifications from "./EmailNotifications";
+import WebNotifications from "./WebNotifications";
 export {
   Comments,
   ConfirmDialog,
@@ -61,4 +62,5 @@ export {
   RecentTripsTable,
   RecentOrdersTable,
   EmailNotifications,
+  WebNotifications,
 };

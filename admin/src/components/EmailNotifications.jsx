@@ -8,7 +8,7 @@ import {
   MultiSelect,
 } from "@mantine/core";
 import { Link, RichTextEditor } from "@mantine/tiptap";
-import { IconColorPicker } from "@tabler/icons-react";
+import { IconColorPicker, IconBan } from "@tabler/icons-react";
 import { Color } from "@tiptap/extension-color";
 import Highlight from "@tiptap/extension-highlight";
 import Placeholder from "@tiptap/extension-placeholder";
@@ -211,6 +211,19 @@ const EmailNotifications = ({ opened, close }) => {
 
           <RichTextEditor.Content className="py-8" />
         </RichTextEditor>
+
+        <div className="flex justify-start items-center text-sm text-gray-500 pt-6">
+          <span className="shrink-0 mr-1 text-rose-500 flex items-center">
+            <IconBan size="1rem" stroke={2} />
+          </span>
+          <span className="mr-1 font-medium text-rose-500 flex items-center">
+            Lưu ý:
+          </span>
+          <span className="flex items-center">
+            Email chưa xác thực OTP, bị khóa và admin sẽ không nhận được thông
+            báo.
+          </span>
+        </div>
 
         <div className="w-full flex items-end justify-end mt-6">
           <Button
