@@ -51,8 +51,9 @@ export const useUpdateContact = (toast, token) => {
     },
     onSuccess: (data) => {
       toast.success(data?.message);
-
-      window.location.reload();
+      setTimeout(() => {
+        window.location.replace("/contacts");
+      }, 500);
     },
   });
 };

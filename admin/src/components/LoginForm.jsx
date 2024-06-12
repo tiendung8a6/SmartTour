@@ -40,7 +40,7 @@ const LoginForm = ({ toast, isSignin, setIsSignin, setFormClose, toggle }) => {
       setTimeout(() => {
         signIn(data);
         navigate("/dashboard");
-      }, 2000);
+      }, 1000);
     }
   };
 

@@ -220,8 +220,8 @@ const EmailNotifications = ({ opened, close }) => {
             Lưu ý:
           </span>
           <span className="flex items-center">
-            Email chưa xác thực OTP, bị khóa và admin sẽ không nhận được thông
-            báo.
+            Email chưa xác thực OTP, không bị khóa và admin sẽ không nhận được
+            thông báo.
           </span>
         </div>
 

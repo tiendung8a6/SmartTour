@@ -36,7 +36,7 @@ export const useCreatePost = (toast, token) => {
 
       setTimeout(() => {
         window.location.replace("/contents");
-      }, 2000);
+      }, 500);
     },
   });
 };

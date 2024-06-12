@@ -167,7 +167,7 @@ export const useCreateAdmin = (toast, token) => {
 
       setTimeout(() => {
         window.location.replace("/users");
-      }, 2000);
+      }, 500);
     },
   });
 };

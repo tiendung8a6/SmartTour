@@ -78,7 +78,6 @@ export const useCreateNotificationWeb = (toast, token) => {
 
     onSuccess: async (data) => {
       toast.success(data?.message);
-
       setTimeout(() => {
         window.location.replace("/notifications");
       }, 500);

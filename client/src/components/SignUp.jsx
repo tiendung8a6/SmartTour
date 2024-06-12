@@ -46,7 +46,7 @@ const SignUpForm = ({ toast }) => {
     } finally {
       setTimeout(() => {
         setIsLoading(false);
-      }, 2000);
+      }, 1000);
     }
   };
 
