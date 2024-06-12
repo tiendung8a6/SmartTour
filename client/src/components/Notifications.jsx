@@ -66,7 +66,11 @@ const Notifications = () => {
                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRX2Ycbywy8vTtHVpMRpvzLVDhB1ohFUeuOJg&s"
                   />
                   <p className="text-gray-600 text-sm mx-2">
-                    <span className="font-bold text-sm">Hệ thống:</span>{" "}
+                    <span className="font-bold text-sm">
+                      {notification.sender === "system"
+                        ? "Hệ thống: "
+                        : "Quản trị viên: "}
+                    </span>{" "}
                     {notification.reason}{" "}
                     <span className="text-sky-600 font-bold text-xs">
                       · {moment(notification?.createdAt).fromNow()}
