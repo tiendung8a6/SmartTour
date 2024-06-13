@@ -5,12 +5,9 @@ import useStore from "../store";
 import Button from "./Button";
 import Logo from "./Logo";
 import ThemeSwitch from "./Switch";
+import Notifications from "./Notifications";
 import { Grid, Avatar } from "@mantine/core";
-import {
-  IconChevronDown,
-  IconCoinBitcoin,
-  IconChevronRight,
-} from "@tabler/icons-react";
+import { IconChevronDown, IconCoinBitcoin } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
 import { getUser } from "../utils/apiCalls";
 
@@ -76,6 +73,9 @@ const MobileMenu = ({ user, signOut }) => {
             <li onClick={toggleMenu}>
               <Link to="/contact">Liên Hệ</Link>
             </li>
+            <li onClick={toggleMenu}>
+              <Link to="/notification">Thông báo</Link>
+            </li>
           </ul>
           <div className="flex gap-2 items-center">
             {user?.token ? (
@@ -102,7 +102,7 @@ const MobileMenu = ({ user, signOut }) => {
                   to="/profile"
                   className="text-base text-center text-black dark:text-gray-300"
                 >
-                  Tài Khoản Của Tôi
+                  Tài khoản của tôi
                 </Link>
                 <hr />
                 <button
@@ -122,7 +122,7 @@ const MobileMenu = ({ user, signOut }) => {
             )}
           </div>
 
-          {/* theme switch */}
+          {/* Sáng tối */}
           <ThemeSwitch />
 
           <span
@@ -186,7 +186,7 @@ const Navbar = () => {
   return (
     <nav className="flex flex-col md:flex-row w-full py-5  items-center justify-between gap-4 md:gap-0">
       <Logo />
-      <div className="hidden md:flex gap-14 items-center">
+      <div className="hidden md:flex gap-12 items-center">
         <ul className="flex gap-8 text-base text-black dark:text-white">
           <Link to="/">Trang Chủ</Link>
           <Link to="/trip">Chuyến Đi</Link>
@@ -196,7 +196,10 @@ const Navbar = () => {
           <Link to="/contact">Liên Hệ</Link>
         </ul>
 
-        {/* theme switch */}
+        {/* Thông báo */}
+        {user?.token && <Notifications />}
+
+        {/* Sáng tối */}
         <ThemeSwitch />
 
         <div className="flex gap-2 items-center cursor-pointer">
@@ -270,7 +273,7 @@ const Navbar = () => {
                     to="/profile"
                     className="dark:text-white text-gray-500 text-sm"
                   >
-                    Tài Khoản Của Tôi
+                    Tài khoản của tôi
                   </Link>
                   <hr />
                   {/* <Link className="text-gray-500 text-sm" to="/profile">

@@ -55,7 +55,7 @@ const PostComments = ({ postId }) => {
 
       toast.success("Bình luận bài viết thành công");
     } else {
-      toast.error("Đã xảy ra lỗi. Vui lòng thử lại");
+      toast.error("Phiên đăng nhập của bạn đã hết hạn. Vui lòng đăng nhập lại");
     }
   };
 

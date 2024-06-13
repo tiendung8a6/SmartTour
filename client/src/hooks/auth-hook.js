@@ -29,7 +29,7 @@ export const useSignUp = (toast, toggle) => {
       );
       setTimeout(() => {
         window.location.replace("/otp-verification");
-      }, 3000);
+      }, 1000);
     },
   });
 };

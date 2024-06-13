@@ -18,7 +18,12 @@ export function formatNumber(num) {
 
   return num.toString();
 }
-
+export function formatCurrency(value) {
+  return value.toLocaleString("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  });
+}
 export const createSlug = (str) =>
   str
     ?.toLowerCase()

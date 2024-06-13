@@ -6,6 +6,7 @@ import {
   Grid,
   Switch,
   Autocomplete,
+  TagsInput,
 } from "@mantine/core";
 import { IconCalendarEvent } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
@@ -67,6 +68,8 @@ const NewTrip = () => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [status, setStatus] = useState(false);
+  const [description, setDescription] = useState(null);
+  const [hashtag, setHashtag] = useState([]);
 
   const [fileURL, setFileURL] = useState(null);
 
@@ -105,8 +108,18 @@ const NewTrip = () => {
       return;
     }
     if (!fileURL) {
-      toast.error("Please upload an image.");
+      toast.error("Vui lòng tải lên hình ảnh.");
       return;
+    }
+    if (status) {
+      if (!description) {
+        toast.error("Vui lòng nhập mô tả cho chuyến đi.");
+        return;
+      }
+      if (!hashtag.length) {
+        toast.error("Vui lòng nhập tag nổi bật.");
+        return;
+      }
     }
     setIsLoading(true);
     mutate({
@@ -117,6 +130,8 @@ const NewTrip = () => {
       endDate,
       status,
       total,
+      description,
+      hashtag,
     });
   };
 
@@ -211,6 +226,39 @@ const NewTrip = () => {
               </div>
             </Grid.Col>
           </Grid>
+          <div className="w-full flex items-end justify-start mt-2">
+            <Switch
+              color="indigo"
+              label="Công khai chuyển đi"
+              checked={status}
+              onChange={(e) => setStatus(e.target.checked ? true : false)}
+            />
+          </div>
+          {status && (
+            <>
+              <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
+                <TextInput
+                  withAsterisk
+                  label="Mô tả"
+                  className="w-full flex-1"
+                  placeholder="Nhập mô tả cho chuyến đi"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+              </div>
+              <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
+                <TagsInput
+                  withAsterisk
+                  label="Tag nổi bật"
+                  className="w-full flex-1"
+                  placeholder="Nhấn Enter để xác nhận"
+                  splitChars={[",", " ", "|"]}
+                  value={hashtag}
+                  onChange={setHashtag}
+                />
+              </div>
+            </>
+          )}
         </Grid.Col>
 
         <Grid.Col span={{ base: 12, md: 3, lg: 3 }} offset={0.5}>
@@ -240,15 +288,7 @@ const NewTrip = () => {
         </Grid.Col>
       </Grid>
 
-      <div className="w-full flex items-end justify-start mt-6">
-        <Switch
-          color="indigo"
-          label="Công khai chuyển đi"
-          checked={status}
-          onChange={(e) => setStatus(e.target.checked ? true : false)}
-        />
-      </div>
-      <div className="flex justify-start gap-3">
+      <div className="flex justify-start gap-3 pt-5 mb-8 mt-[-20px]">
         <div className=" flex items-end justify-start mt-6">
           <Link to="/trip">
             <Button variant="outline" color="Red" size="md" radius="md">

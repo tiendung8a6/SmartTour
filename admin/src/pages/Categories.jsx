@@ -199,7 +199,15 @@ const Categories = () => {
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
             />
-            <Button onClick={() => setSearchTerm("")} variant="light">
+            <Button
+              className={`${
+                colorScheme === "dark"
+                  ? "hover:text-sky-700"
+                  : "hover:text-blue-600"
+              } text-sky-600`}
+              onClick={() => setSearchTerm("")}
+              variant="light"
+            >
               Xóa
             </Button>
           </div>
@@ -208,7 +216,11 @@ const Categories = () => {
           <Button
             leftSection={<IconSquarePlus size={15} />}
             radius="xl"
-            className={theme ? "bg-blue-600" : "bg-black"}
+            className={
+              theme
+                ? "bg-sky-600 hover:bg-sky-500 "
+                : "bg-black hover:bg-neutral-800"
+            }
             onClick={() => handleSubmit()}
           >
             Tạo Danh Mục
@@ -246,7 +258,7 @@ const Categories = () => {
                   <Table.Td onClick={() => handleComment(el?._id)}>
                     <div className="flex gap-1 items-center cursor-pointer">
                       <IconBlockquote size={18} className="text-slate-500" />
-                      {postCounts[el._id]?.toString() || "Đang tải..."}
+                      {postCounts[el._id]?.toString() || "N/A"}
                     </div>
                   </Table.Td>
 
@@ -291,6 +303,11 @@ const Categories = () => {
 
                       <Menu.Dropdown>
                         <Menu.Item
+                          className={
+                            colorScheme === "dark"
+                              ? "hover:text-white hover:bg-gray-600 "
+                              : "hover:bg-gray-100"
+                          }
                           leftSection={<BiSolidEdit />}
                           onClick={() => handleEdit(el)}
                         >
@@ -298,6 +315,11 @@ const Categories = () => {
                         </Menu.Item>
 
                         <Menu.Item
+                          className={
+                            colorScheme === "dark"
+                              ? "hover:text-white hover:bg-gray-600 "
+                              : "hover:bg-gray-100"
+                          }
                           leftSection={<AiOutlineSetting />}
                           onClick={() =>
                             handlePerformAction("status", el?._id, !el?.status)
@@ -311,6 +333,11 @@ const Categories = () => {
                         <Menu.Label>Thao tác nguy hiểm</Menu.Label>
 
                         <Menu.Item
+                          className={
+                            colorScheme === "dark"
+                              ? "hover:text-rose-500 hover:bg-gray-600 "
+                              : "hover:bg-gray-100"
+                          }
                           color="red"
                           leftSection={<MdOutlineDeleteOutline />}
                           onClick={() => handlePerformAction("delete", el?._id)}

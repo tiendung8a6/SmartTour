@@ -6,7 +6,7 @@ import Users from "../models/userModel.js";
 import Views from "../models/viewsModel.js";
 import Categories from "../models/categoryModel.js";
 import Trips from "../models/tripModel.js";
-import Order from "../models/otherModel.js";
+import Order from "../models/orderModel.js";
 
 export const createPost = async (req, res, next) => {
   try {
@@ -171,7 +171,6 @@ export const getPost = async (req, res, next) => {
     res.status(404).json({ message: error.message });
   }
 };
-
 export const getPopularContents = async (req, res, next) => {
   try {
     const posts = await Posts.aggregate([
@@ -336,7 +335,6 @@ export const deleteComment = async (req, res, next) => {
 export const stats = async (req, res, next) => {
   try {
     const { query } = req.query;
-    const { userId } = req.body.user;
 
     const numofDays = Number(query) || 28;
 
@@ -345,20 +343,35 @@ export const stats = async (req, res, next) => {
     startDate.setDate(currentDate.getDate() - numofDays);
 
     const totalPosts = await Posts.find({
-      // user: userId,
       createdAt: { $gte: startDate, $lte: currentDate },
     }).countDocuments();
 
-    const totalViews = await Views.find({
-      user: userId,
+    const totalTrips = await Trips.find({
       createdAt: { $gte: startDate, $lte: currentDate },
     }).countDocuments();
 
-    const totalWriters = await Users.find({
-      accountType: "Writer",
+    const totalUsers = await Users.find({
+      createdAt: { $gte: startDate, $lte: currentDate },
     }).countDocuments();
 
-    const totalFollowers = await Users.findById(userId);
+    const totalOrder = await Order.aggregate([
+      {
+        $match: { createdAt: { $gte: startDate, $lte: currentDate } },
+      },
+      {
+        $group: {
+          _id: null,
+          total: {
+            $sum: "$totalPrice",
+          },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+        },
+      },
+    ]);
 
     const postStats = await Posts.aggregate([
       {
@@ -380,6 +393,7 @@ export const stats = async (req, res, next) => {
     const paymentStats = await Order.aggregate([
       {
         $match: {
+          createdAt: { $gte: startDate, $lte: currentDate },
           paymentStatus: "paid",
         },
       },
@@ -414,6 +428,7 @@ export const stats = async (req, res, next) => {
       },
       { $sort: { _id: 1 } },
     ]);
+
     const orderStats = await Order.aggregate([
       {
         $match: {
@@ -432,15 +447,23 @@ export const stats = async (req, res, next) => {
       { $sort: { _id: 1 } },
     ]);
 
-    const last5Followers = await Users.findById(userId).populate({
-      path: "followers",
-      options: { sort: { _id: -1 } },
-      perDocumentLimit: 5,
-      populate: {
-        path: "followerId",
-        select: "name email image accountType followers -password",
-      },
-    });
+    const last5Trips = await Trips.find()
+      .populate({
+        path: "user",
+        select: "-password",
+      })
+      .limit(5)
+      .sort({ createdAt: -1 });
+
+    const last5Orders = await Order.find({ paymentStatus: "paid" })
+      .populate({
+        path: "user",
+        select: "-password",
+      })
+      .sort({ createdAt: -1 })
+      .limit(5);
+
+    const top5UsersByPoints = await Users.find().sort({ points: -1 }).limit(5);
 
     const last5Posts = await Posts.find()
       .populate({
@@ -452,21 +475,23 @@ export const stats = async (req, res, next) => {
         select: "label color",
       })
       .limit(5)
-      .sort({ _id: -1 });
+      .sort({ createdAt: -1 });
 
     res.status(200).json({
       success: true,
       message: "Dữ liệu thống kê được tải thành công",
       totalPosts,
-      totalViews,
-      totalWriters,
-      followers: totalFollowers?.followers?.length,
+      totalTrips,
+      totalUsers,
+      totalOrder: totalOrder[0].total,
       orderStats,
       postStats,
       tripsStats,
       paymentStats,
-      last5Followers: last5Followers?.followers,
+      last5Trips,
+      last5Orders,
       last5Posts,
+      top5UsersByPoints,
     });
   } catch (error) {
     console.log(error);
@@ -480,7 +505,7 @@ export const getFollowers = async (req, res, next) => {
   try {
     // pagination
     const page = Number(req.query.page) || 1;
-    const limit = Number(req.query.limit) || 8;
+    const limit = Number(req.query.limit) || 10;
     const skip = (page - 1) * limit;
 
     const result = await Users.findById(userId).populate({
@@ -488,7 +513,7 @@ export const getFollowers = async (req, res, next) => {
       options: { sort: { _id: -1 }, limit: limit, skip: skip },
       populate: {
         path: "followerId",
-        select: "name email image accountType followers -password",
+        select: "-password",
       },
     });
 
@@ -520,7 +545,7 @@ export const getPostContent = async (req, res, next) => {
       })
       .populate({
         path: "user",
-        select: "name image -password",
+        select: "-password",
       });
 
     // pagination
@@ -533,7 +558,6 @@ export const getPostContent = async (req, res, next) => {
     const numOfPage = Math.ceil(totalPost / limit);
 
     queryResult = queryResult.skip(skip).limit(limit);
-
     const posts = await queryResult;
 
     res.status(200).json({

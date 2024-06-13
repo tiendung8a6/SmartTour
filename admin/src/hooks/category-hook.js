@@ -27,7 +27,7 @@ export const useCreateCategory = (toast, token) => {
 
       setTimeout(() => {
         window.location.replace("/categories");
-      }, 2000);
+      }, 500);
     },
   });
 };

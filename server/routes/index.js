@@ -7,6 +7,7 @@ import tripRoute from "./tripRoute.js";
 import planRoute from "./planRoute.js";
 import paymentRoute from "./paymentRoute.js";
 import travelAIRoute from "./travelAIRoute.js";
+import notificationRoute from "./notificationRoute.js";
 const router = express.Router();
 
 router.use(`/auth`, authRoute); //auth/register
@@ -18,5 +19,6 @@ router.use(`/trips`, tripRoute);
 router.use(`/plans`, planRoute);
 router.use(`/payment`, paymentRoute);
 router.use(`/ai`, travelAIRoute);
+router.use(`/notification`, notificationRoute);
 
 export default router;

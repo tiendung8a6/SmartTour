@@ -1,40 +1,47 @@
 import { Group, Paper, SimpleGrid, Text } from "@mantine/core";
 import { IconArrowDownRight, IconArrowUpRight } from "@tabler/icons-react";
-import { BsEye, BsPostcardHeart } from "react-icons/bs";
-import { FaUsers, FaUsersCog } from "react-icons/fa";
+import { BsPostcardHeart } from "react-icons/bs";
+import { FaUsers, FaFly } from "react-icons/fa";
+import { GiReceiveMoney } from "react-icons/gi";
+
 import { formatNumber } from "../utils";
 const icons = {
-  user: FaUsersCog,
-  view: BsEye,
   post: BsPostcardHeart,
+  trips: FaFly,
+  order: GiReceiveMoney,
   users: FaUsers,
+};
+
+const formatCurrency = (value) => {
+  const valueInMillions = value / 1000000;
+  return `${valueInMillions.toFixed(1)} triệu`;
 };
 
 export const Stats = ({ dt }) => {
   const data = [
     {
+      title: "TỔNG TIỀN GIAO DỊCH (VND)",
+      icon: "order",
+      value: formatCurrency(dt?.totalOrder ?? 0),
+      diff: formatNumber(dt?.orderChange ?? 0),
+    },
+    {
+      title: "KẾ HOẠCH",
+      icon: "trips",
+      value: formatNumber(dt?.totalTrips ?? 0),
+      diff: formatNumber(dt?.tripsChange ?? 0),
+    },
+    {
       title: "BÀI VIẾT",
       icon: "post",
       value: formatNumber(dt?.totalPosts ?? 0),
-      diff: 34,
-    },
-    {
-      title: "NGƯỜI THEO DÕI",
-      icon: "users",
-      value: formatNumber(dt?.followers ?? 0),
-      diff: -13,
-    },
-    {
-      title: "LƯỢT XEM",
-      icon: "view",
-      value: formatNumber(dt?.totalViews ?? 0),
-      diff: 18,
+      diff: formatNumber(dt?.postsChange ?? 0),
     },
     {
       title: "NGƯỜI DÙNG",
-      icon: "user",
-      value: formatNumber(dt?.totalWriters ?? 0),
-      diff: -30,
+      icon: "users",
+      value: formatNumber(dt?.totalUsers ?? 0),
+      diff: formatNumber(dt?.usersChange ?? 0),
     },
   ];
 

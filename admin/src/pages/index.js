@@ -10,6 +10,7 @@ import Policy from "./Policy";
 import Categories from "./Categories";
 import Trips from "./Trips";
 import Payments from "./Payments";
+import Notifications from "./Notifications";
 export {
   Analytics,
   Contents,
@@ -23,4 +24,5 @@ export {
   Categories,
   Trips,
   Payments,
+  Notifications,
 };

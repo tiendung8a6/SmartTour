@@ -50,6 +50,7 @@ import ViewRail from "./ViewRail";
 import ViewConcert from "./ViewConcert";
 import ViewRestaurant from "./ViewRestaurant";
 import ViewActivity from "./ViewActivity";
+import Notification from "./Notification";
 export {
   BlogDetail,
   CategoryPage,
@@ -103,4 +104,5 @@ export {
   ViewConcert,
   ViewRestaurant,
   ViewActivity,
+  Notification,
 };

@@ -6,6 +6,9 @@ import {
   Grid,
   Switch,
   Autocomplete,
+  TagsInput,
+  Checkbox,
+  Tooltip,
 } from "@mantine/core";
 import { IconCalendarEvent } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
@@ -68,7 +71,9 @@ const EditTrip = () => {
   const [total, setTotal] = useState(trip?.total);
   const [startDate, setStartDate] = useState(trip?.startDate);
   const [endDate, setEndDate] = useState(trip?.startDate);
-
+  const [description, setDescription] = useState(trip?.description);
+  const [hashtag, setHashtag] = useState(trip?.hashtag);
+  const [receivedPoints, setReceivedPoints] = useState(trip?.receivedPoints);
   const [fileURL, setFileURL] = useState(trip?.image);
   const { isPending, mutate } = useUpdateTrip(toast, user?.token);
   const cityOptions = cities.map((cityData) => cityData.city);
@@ -77,7 +82,6 @@ const EditTrip = () => {
   const [isLoadingTrip, setIsLoadingTrip] = useState(true); // Thêm biến state mới
 
   const theme = colorScheme === "dark";
-
   useEffect(() => {
     file && uploadFile(setFileURL, file);
   }, [file]);
@@ -91,6 +95,9 @@ const EditTrip = () => {
       setCity(data?.city); // Cập nhật giá trị
       setStatus(data?.status); // Cập nhật giá trị
       setTotal(data?.total); // Cập nhật giá trị
+      setDescription(data?.description); // Cập nhật giá trị
+      setHashtag(data?.hashtag); // Cập nhật giá trị
+      setReceivedPoints(data?.receivedPoints); // Cập nhật giá trị
       let startDateObject = new Date(data?.startDate);
       setStartDate(startDateObject);
       let setEndDateObject = new Date(data?.endDate);
@@ -125,6 +132,15 @@ const EditTrip = () => {
   const handStatusChange = (event) => {
     setStatus(event.target.checked);
   };
+
+  const handDescriptionChange = (event) => {
+    setDescription(event.target.value);
+  };
+
+  const handHashtagChange = (value) => {
+    setHashtag(value);
+  };
+
   const handleSubmit = async () => {
     if (!tripName) {
       toast.error("Vui lòng nhập tên chuyến đi.");
@@ -152,8 +168,18 @@ const EditTrip = () => {
     }
 
     if (!fileURL) {
-      toast.error("Please upload an image.");
+      toast.error("Vui lòng tải lên hình ảnh.");
       return;
+    }
+    if (status) {
+      if (!description) {
+        toast.error("Vui lòng nhập mô tả cho chuyến đi.");
+        return;
+      }
+      if (!hashtag.length) {
+        toast.error("Vui lòng nhập tag nổi bật.");
+        return;
+      }
     }
     setIsLoading(true);
     mutate({
@@ -165,6 +191,8 @@ const EditTrip = () => {
       status,
       startDate,
       endDate,
+      description,
+      hashtag,
     });
   };
 
@@ -292,6 +320,55 @@ const EditTrip = () => {
               </div>
             </Grid.Col>
           </Grid>
+          <div className="w-full flex items-end justify-start mt-2">
+            <Switch
+              color="indigo"
+              label="Công khai chuyển đi"
+              checked={status}
+              onChange={handStatusChange}
+            />
+          </div>
+          {status && (
+            <>
+              <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
+                <TextInput
+                  withAsterisk
+                  label="Mô tả"
+                  className="w-full flex-1"
+                  placeholder="Nhập mô tả cho chuyến đi"
+                  value={description}
+                  onChange={handDescriptionChange}
+                />
+              </div>
+              <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
+                <TagsInput
+                  withAsterisk
+                  label="Tag nổi bật"
+                  className="w-full flex-1"
+                  placeholder="Nhấn Enter để xác nhận"
+                  splitChars={[",", " ", "|"]}
+                  value={hashtag}
+                  onChange={handHashtagChange}
+                />
+              </div>
+
+              <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
+                <Tooltip
+                  multiline
+                  w={220}
+                  withArrow
+                  transitionProps={{ duration: 200 }}
+                  label="Tự động cập nhật khi chuyến đi này được công khai"
+                >
+                  <Checkbox
+                    checked={receivedPoints}
+                    disabled
+                    label="Nhận điểm thưởng công khai chuyến đi"
+                  />
+                </Tooltip>
+              </div>
+            </>
+          )}
         </Grid.Col>
 
         <Grid.Col span={{ base: 12, md: 3, lg: 3 }} offset={0.5}>
@@ -320,15 +397,8 @@ const EditTrip = () => {
           </div>
         </Grid.Col>
       </Grid>
-      <div className="w-full flex items-end justify-start mt-6">
-        <Switch
-          color="indigo"
-          label="Công khai chuyển đi"
-          checked={status}
-          onChange={handStatusChange}
-        />
-      </div>
-      <div className="flex justify-start gap-3">
+
+      <div className="flex justify-start gap-3 pt-5 mb-8 mt-[-20px]">
         <div className=" flex items-end justify-start mt-6">
           <Link to="/trip">
             <Button variant="outline" color="Red" size="md" radius="md">

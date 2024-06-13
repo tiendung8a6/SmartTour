@@ -47,16 +47,21 @@ const NewActivity = () => {
 
   const [trip, setTrip] = useState(null);
 
-  //AuTo Fill GOOGLE
-  const [autocomplete, setAutocomplete] = useState(null);
+  // AuTo Fill GOOGLE
+  const [startAutocomplete, setStartAutocomplete] = useState(null);
+  const [endAutocomplete, setEndAutocomplete] = useState(null);
 
-  const onLoad = (autocomplete) => {
-    setAutocomplete(autocomplete);
+  const onLoadStart = (autocomplete) => {
+    setStartAutocomplete(autocomplete);
   };
 
-  const handlePlaceChanged = () => {
-    if (autocomplete) {
-      const place = autocomplete.getPlace();
+  const onLoadEnd = (autocomplete) => {
+    setEndAutocomplete(autocomplete);
+  };
+
+  const handleStartPlaceChanged = () => {
+    if (startAutocomplete) {
+      const place = startAutocomplete.getPlace();
       if (place && place.formatted_address) {
         setStartAddress(place.formatted_address);
       }
@@ -95,16 +100,16 @@ const NewActivity = () => {
       toast.error("Vui lòng chọn ngày bắt đầu.");
       return;
     }
+    if (!startTime) {
+      toast.error("Vui lòng chọn thời gian bắt đầu.");
+      return;
+    }
     if (!endDate) {
       toast.error("Vui lòng chọn ngày kết thúc.");
       return;
     }
     if (endDate < startDate) {
       toast.error("Ngày kết thúc phải sau ngày bắt đầu.");
-      return;
-    }
-    if (!startTime) {
-      toast.error("Vui lòng chọn thời gian bắt đầu.");
       return;
     }
     if (!endTime) {
@@ -174,27 +179,31 @@ const NewActivity = () => {
       <p
         className={`${
           theme ? "text-white" : "text-slate-700"
-        } text-lg font-semibold mt-4`}
+        } text-2xl font-semibold mt-4`}
       >
         Thêm hoạt động
       </p>
       <br />
 
-      <Grid className="">
+      <Grid>
         <Grid.Col span={{ base: 12, md: 7, lg: 7 }}>
-          <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-[20px] mt-[-5px]">
-            <TextInput
-              withAsterisk
-              label="Tên sự kiện"
-              className="w-full flex-1"
-              placeholder="Nhập tên sự kiện"
-              onChange={(e) => setPlanName(e.target.value)}
-            />
-          </div>
+          <Grid className="mb-6 mt-1">
+            <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
+              <div className="w-full flex flex-col md:flex-row flex-wrap  ">
+                <TextInput
+                  withAsterisk
+                  label="Tên sự kiện"
+                  className="w-full flex-1"
+                  placeholder="Nhập tên sự kiện"
+                  onChange={(e) => setPlanName(e.target.value)}
+                />
+              </div>
+            </Grid.Col>
+          </Grid>
 
-          <Grid className="mt-[24px]">
+          <Grid className="my-6">
             <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
-              <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
+              <div className="w-full flex flex-col md:flex-row flex-wrap">
                 <DateInput
                   leftSection={
                     <IconCalendarEvent className="text-[#107ac5]" size={24} />
@@ -228,9 +237,9 @@ const NewActivity = () => {
             </Grid.Col>
           </Grid>
 
-          <Grid className="mt-[5px]">
+          <Grid className="my-6">
             <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
-              <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
+              <div className="w-full flex flex-col md:flex-row flex-wrap">
                 <DateInput
                   leftSection={
                     <IconCalendarEvent className="text-[#107ac5]" size={24} />
@@ -263,20 +272,27 @@ const NewActivity = () => {
             </Grid.Col>
           </Grid>
 
-          <Autocomplete onLoad={onLoad} onPlaceChanged={handlePlaceChanged}>
-            <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[5px]">
-              <TextInput
-                withAsterisk
-                label="Địa chỉ"
-                className="w-full flex-1"
-                placeholder="Nhập địa chỉ"
-                value={startAddress}
-                onChange={(e) => setStartAddress(e.target.value)}
-              />
-            </div>
-          </Autocomplete>
+          <Grid className="my-6">
+            <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
+              <Autocomplete
+                onLoad={onLoadStart}
+                onPlaceChanged={handleStartPlaceChanged}
+              >
+                <div className="w-full flex flex-col md:flex-row flex-wrap">
+                  <TextInput
+                    withAsterisk
+                    label="Địa chỉ"
+                    className="w-full flex-1"
+                    placeholder="Nhập địa chỉ"
+                    value={startAddress}
+                    onChange={(e) => setStartAddress(e.target.value)}
+                  />
+                </div>
+              </Autocomplete>
+            </Grid.Col>
+          </Grid>
 
-          <Grid className="mt-[24px]">
+          <Grid className="my-6">
             <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
               <div className="w-full">
                 <NumberInput
@@ -300,8 +316,9 @@ const NewActivity = () => {
                 />
               </div>
             </Grid.Col>
+
             <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
-              <div className="w-full ">
+              <div className="w-full">
                 <NumberInput
                   label="Tổng chi phí thực tế"
                   placeholder="Nhập tổng chi phí thực tế"
@@ -324,19 +341,23 @@ const NewActivity = () => {
             </Grid.Col>
           </Grid>
 
-          <div className="w-full flex flex-col md:flex-row flex-wrap gap-5  mb-[20px] mt-[24px]">
-            <Textarea
-              // withAsterisk
-              label="Thông tin"
-              className="w-full flex-1"
-              placeholder="Nhập thông tin"
-              autosize
-              minRows={3}
-              maxRows={6}
-              value={info}
-              onChange={(e) => setInfo(e.target.value)}
-            />
-          </div>
+          <Grid className=" my-6">
+            <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
+              <div className="w-full flex flex-col md:flex-row flex-wrap  ">
+                <Textarea
+                  // withAsterisk
+                  label="Thông tin"
+                  className="w-full flex-1"
+                  placeholder="Nhập thông tin"
+                  autosize
+                  minRows={3}
+                  maxRows={6}
+                  value={info}
+                  onChange={(e) => setInfo(e.target.value)}
+                />
+              </div>
+            </Grid.Col>
+          </Grid>
         </Grid.Col>
       </Grid>
 

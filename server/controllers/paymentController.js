@@ -4,7 +4,8 @@ import dotenv from "dotenv";
 dotenv.config();
 import Stripe from "stripe";
 import Users from "../models/userModel.js";
-import Order from "../models/otherModel.js";
+import Order from "../models/orderModel.js";
+import Notifications from "../models/notificationModel.js";
 import crypto from "crypto";
 import querystring from "qs";
 import moment from "moment";
@@ -264,6 +265,12 @@ export const vnpayReturn = asyncHandler(async (req, res) => {
 
         if (updatedUser) {
           console.log("Điểm người dùng được cập nhật thành công");
+          // Save notification
+          await Notifications.create({
+            user: order.user,
+            pointsDeducted: points,
+            reason: `Nhận thành công ${points} điểm với phương thức toán bằng VNPAY với ID: ${order.orderNumber} `,
+          });
         } else {
           console.error("Không thể cập nhật điểm người dùng");
         }

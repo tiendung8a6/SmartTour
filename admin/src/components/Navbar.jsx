@@ -51,12 +51,12 @@ function UserMenu({ user, theme }) {
       </Menu.Target>
 
       <Menu.Dropdown>
-        <Menu.Label>Settings</Menu.Label>
+        <Menu.Label>Cài đặt</Menu.Label>
         <Menu.Item
           leftSection={<FaUser style={{ width: rem(14), height: rem(14) }} />}
           onClick={() => setEditProfile(true)}
         >
-          Profile
+          Tài khoản
         </Menu.Item>
 
         <Menu.Item

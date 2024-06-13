@@ -166,10 +166,15 @@ const Policy = () => {
 
                       <Menu.Dropdown>
                         <Menu.Item
+                          className={
+                            colorScheme === "dark"
+                              ? "hover:text-white hover:bg-gray-600 "
+                              : "hover:bg-gray-100"
+                          }
                           leftSection={<BiSolidEdit />}
                           onClick={() => handleEdit(el)}
                         >
-                          Edit Policy
+                          Chỉnh Sửa
                         </Menu.Item>
                       </Menu.Dropdown>
                     </Menu>

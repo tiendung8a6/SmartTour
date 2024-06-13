@@ -538,17 +538,28 @@ export const useUpdateTrip = (toast, token) => {
       image,
       status,
       total,
+      description,
+      hashtag,
     }) => {
       const { data } = await axios.patch(
         `${REACT_APP_API_URL}/trips/update/${id}`,
-        { tripName, city, startDate, endDate, image, status, total },
+        {
+          tripName,
+          city,
+          startDate,
+          endDate,
+          image,
+          status,
+          total,
+          description,
+          hashtag,
+        },
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-      console.log("API STATUS", id);
       return data;
     },
     onError: (error) => {
@@ -776,6 +787,32 @@ export const useDeleteComment = (token) => {
         `${REACT_APP_API_URL}/posts/comment/client/${id}/${postId}`
       );
       return data;
+    },
+  });
+};
+export const useActivateTrip = (toast, token) => {
+  return useMutation({
+    mutationFn: async (id) => {
+      const { data } = await axios.post(
+        `${REACT_APP_API_URL}/trips/activate/${id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return data;
+    },
+    onError: (error) => {
+      toast.error(error?.response?.data?.message ?? error.message);
+    },
+    onSuccess: async (data, id) => {
+      toast.success(data?.message);
+
+      setTimeout(() => {
+        window.location.replace(`/trip/${id}`);
+      }, 500);
     },
   });
 };

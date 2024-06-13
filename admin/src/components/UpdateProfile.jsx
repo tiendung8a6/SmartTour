@@ -29,7 +29,7 @@ const UpdateProfile = () => {
     initialValues: {
       email: user?.user?.email,
       firstName: name?.[0],
-      lastName: name?.[1],
+      lastName: name?.slice(1)?.join(" "),
     },
     validate: {
       firstName: (value) =>
@@ -67,7 +67,7 @@ const UpdateProfile = () => {
       <Modal
         opened={editProfile}
         onClose={() => setEditProfile(false)}
-        title="Update Profile"
+        title="Cập nhật thông tin"
         centered
         size="md"
         transitionProps={{ transition: "fade", duration: 200 }}
@@ -107,14 +107,14 @@ const UpdateProfile = () => {
                 "text-xs"
               )}
             >
-              Uploading, please wait...
+              Đang tải lên, vui lòng đợi...
             </span>
           )}
 
           <TextInput
             withAsterisk
             className="w-full"
-            label="Email Address"
+            label="Email"
             placeholder="your@email.com"
             disabled
             readOnly
@@ -124,15 +124,15 @@ const UpdateProfile = () => {
           <TextInput
             className="w-full"
             withAsterisk
-            label="First Name"
-            placeholder="First Name"
+            label="Họ"
+            placeholder="Nhận họ"
             {...form.getInputProps("firstName")}
           />
           <TextInput
             className="w-full"
             withAsterisk
-            label="Last Name"
-            placeholder="Last Name"
+            label="Tên"
+            placeholder="Nhập tên"
             {...form.getInputProps("lastName")}
           />
 
@@ -140,7 +140,7 @@ const UpdateProfile = () => {
             type="submit"
             className={clsx(theme ? "bg-blue-600" : "bg-black", "w-full mt-2")}
           >
-            Update
+            Cập nhật
           </Button>
         </form>
       </Modal>

@@ -9,7 +9,7 @@ const generateOrderNumber = () => {
 const OrderSchema = new Schema(
   {
     user: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "Users",
       required: false,
     },

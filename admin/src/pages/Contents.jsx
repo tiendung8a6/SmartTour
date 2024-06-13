@@ -75,11 +75,9 @@ const Contents = () => {
 
   const theme = colorScheme === "dark";
 
-  const handleComment = (id, size) => {
-    if (size > 0) {
-      setCommentId(id);
-      setOpen(true);
-    }
+  const handleComment = (id) => {
+    setCommentId(id);
+    setOpen(true);
   };
 
   const handleSubmit = () => {
@@ -165,7 +163,15 @@ const Contents = () => {
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
             />
-            <Button onClick={() => setSearchTerm("")} variant="light">
+            <Button
+              className={`${
+                colorScheme === "dark"
+                  ? "hover:text-sky-700"
+                  : "hover:text-blue-600"
+              } text-sky-600`}
+              onClick={() => setSearchTerm("")}
+              variant="light"
+            >
               Xóa
             </Button>
           </div>
@@ -174,7 +180,11 @@ const Contents = () => {
           <Button
             leftSection={<IconPencilPlus size={15} />}
             radius="xl"
-            className={theme ? "bg-blue-600" : "bg-black"}
+            className={
+              theme
+                ? "bg-sky-600 hover:bg-sky-500 "
+                : "bg-black hover:bg-neutral-800"
+            }
             onClick={() => handleSubmit()}
           >
             Đăng Bài
@@ -269,6 +279,25 @@ const Contents = () => {
 
                       <Menu.Dropdown>
                         <Menu.Item
+                          className={
+                            colorScheme === "dark"
+                              ? "hover:text-white hover:bg-gray-600 "
+                              : "hover:bg-gray-100"
+                          }
+                          leftSection={<MdMessage />}
+                          onClick={() =>
+                            handleComment(el?._id, el?.comments?.length)
+                          }
+                        >
+                          Xem Bình Luận
+                        </Menu.Item>
+
+                        <Menu.Item
+                          className={
+                            colorScheme === "dark"
+                              ? "hover:text-white hover:bg-gray-600 "
+                              : "hover:bg-gray-100"
+                          }
                           leftSection={<BiSolidEdit />}
                           onClick={() => handleEdit(el)}
                         >
@@ -276,6 +305,11 @@ const Contents = () => {
                         </Menu.Item>
 
                         <Menu.Item
+                          className={
+                            colorScheme === "dark"
+                              ? "hover:text-white hover:bg-gray-600 "
+                              : "hover:bg-gray-100"
+                          }
                           leftSection={<AiOutlineSetting />}
                           onClick={() =>
                             handlePerformAction("status", el?._id, !el?.status)
@@ -289,6 +323,11 @@ const Contents = () => {
                         <Menu.Label>Thao tác nguy hiểm</Menu.Label>
 
                         <Menu.Item
+                          className={
+                            colorScheme === "dark"
+                              ? "hover:text-rose-500 hover:bg-gray-600 "
+                              : "hover:bg-gray-100"
+                          }
                           color="red"
                           leftSection={<MdOutlineDeleteOutline />}
                           onClick={() => handlePerformAction("delete", el?._id)}

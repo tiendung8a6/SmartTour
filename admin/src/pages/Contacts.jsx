@@ -15,7 +15,7 @@ import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Toaster, toast } from "sonner";
 import { IconSearch } from "@tabler/icons-react";
 import { Comments, ConfirmDialog, EditContact, Loading } from "../components";
-import { useContent } from "../hooks/contacts_hook";
+import { useContacts } from "../hooks/contacts_hook";
 
 import useCommentStore from "../store/comments";
 import useStore from "../store/store";
@@ -52,7 +52,7 @@ const Contacts = () => {
   const { setOpen, commentId, setCommentId, setContact } = useCommentStore();
   const [opened, { open, close }] = useDisclosure(false);
 
-  const { data, isPending, mutate } = useContent(toast, user?.token);
+  const { data, isPending, mutate } = useContacts(toast, user?.token);
   // const useDelete = useDeletePost(toast, user?.token);
   // const useActions = useAction(toast, user?.token);
 
@@ -156,7 +156,15 @@ const Contacts = () => {
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
             />
-            <Button onClick={() => setSearchTerm("")} variant="light">
+            <Button
+              className={`${
+                colorScheme === "dark"
+                  ? "hover:text-sky-700"
+                  : "hover:text-blue-600"
+              } text-sky-600`}
+              onClick={() => setSearchTerm("")}
+              variant="light"
+            >
               Xóa
             </Button>
           </div>
@@ -224,6 +232,11 @@ const Contacts = () => {
 
                       <Menu.Dropdown>
                         <Menu.Item
+                          className={
+                            colorScheme === "dark"
+                              ? "hover:text-white hover:bg-gray-600 "
+                              : "hover:bg-gray-100"
+                          }
                           leftSection={<BiMailSend />}
                           onClick={() => handleEdit(el)}
                         >

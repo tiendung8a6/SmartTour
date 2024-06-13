@@ -1,28 +1,30 @@
 import mongoose from "mongoose";
 import Trips from "../models/tripModel.js";
 import Plans from "../models/planModel.js";
+import Users from "../models/userModel.js";
+import Notifications from "../models/notificationModel.js";
 
 export const createTrip = async (req, res, next) => {
   try {
     const { userId } = req.body.user;
-    const { tripName, city, startDate, endDate, image, status, total } =
-      req.body;
+    const {
+      tripName,
+      city,
+      startDate,
+      endDate,
+      image,
+      status,
+      total,
+      description,
+      hashtag,
+    } = req.body;
 
-    if (!(tripName && city && startDate && endDate && image)) {
+    if (!(tripName && city && startDate && endDate && image && total)) {
       return res.status(400).json({
         success: false,
         message: "Vui lòng nhập các trường bắt buộc",
       });
     }
-
-    // // Kiểm tra xem plans có tồn tại không
-    // const plan = await Plans.findById(plans);
-    // if (!plan) {
-    //   return res.status(404).json({
-    //     success: false,
-    //     message: "Plan not found",
-    //   });
-    // }
 
     // Tạo trip mới
     const trip = await Trips.create({
@@ -34,8 +36,21 @@ export const createTrip = async (req, res, next) => {
       image,
       status,
       total,
-      // plans: plan._id, // Gán ID của plan đã tìm thấy
+      description,
+      hashtag,
+      receivedPoints: status,
     });
+
+    if (status) {
+      await Users.findByIdAndUpdate(userId, { $inc: { points: 10 } });
+      await Notifications.create({
+        user: userId,
+        pointsDeducted: 10,
+        reason: `Nhận được 10 điểm vì đã công khai chuyến đi ${trip.tripName}`,
+      });
+    }
+
+    await Users.findByIdAndUpdate(userId, { $push: { viewedTrips: trip._id } });
 
     res.status(200).json({
       success: true,
@@ -169,8 +184,17 @@ export const getTrip = async (req, res, next) => {
 export const updateTrip = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { tripName, city, startDate, endDate, image, status, total } =
-      req.body;
+    const {
+      tripName,
+      city,
+      startDate,
+      endDate,
+      image,
+      status,
+      total,
+      description,
+      hashtag,
+    } = req.body;
 
     const updatedFields = {};
     if (tripName) updatedFields.tripName = tripName;
@@ -178,19 +202,41 @@ export const updateTrip = async (req, res, next) => {
     if (startDate) updatedFields.startDate = startDate;
     if (endDate) updatedFields.endDate = endDate;
     if (image) updatedFields.image = image;
-    updatedFields.status = status; // Change the way of checking status
+    if (status !== undefined) updatedFields.status = status; // Change the way of checking status
     if (total) updatedFields.total = total;
+    if (description) updatedFields.description = description;
+    if (hashtag) updatedFields.hashtag = hashtag;
 
-    const trip = await Trips.findByIdAndUpdate(id, updatedFields, {
+    const trip = await Trips.findById(id);
+
+    // Cập nhật điểm thưởng nếu cập nhật status là true và receivedPoints là false
+    if (status && !trip.receivedPoints) {
+      await Users.findByIdAndUpdate(req.body.user.userId, {
+        $inc: { points: 10 },
+      });
+      await Notifications.create({
+        user: req.body.user.userId,
+        pointsDeducted: +10,
+        reason: `Nhận được 10 điểm vì đã công khai chuyến đi ${trip.tripName}`,
+      });
+    }
+
+    // Cập nhật receivedPoints nếu status là true
+    if (status && !trip.receivedPoints) {
+      updatedFields.receivedPoints = true;
+    }
+
+    const updatedTrip = await Trips.findByIdAndUpdate(id, updatedFields, {
       new: true,
     });
+
     res.status(200).json({
       success: true,
       message: "Chuyến đi được cập nhật thành công",
-      data: trip,
+      data: updatedTrip,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.status(404).json({ message: error.message });
   }
 };
@@ -263,6 +309,86 @@ export const getPublicTrips = async (req, res, next) => {
       data: trips,
       page,
       numOfPage,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const activateTrip = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { userId } = req.body.user;
+
+    const trip = await Trips.findById(id);
+
+    // Kiểm tra xem chuyến đi
+    if (trip.status === false) {
+      return res.status(400).json({
+        success: false,
+        message: "Chuyến đi chưa được công khai",
+      });
+    }
+
+    // Kiểm tra xem user đã xem chuyến đi
+    const user = await Users.findById(userId);
+    if (user.viewedTrips.includes(id)) {
+      return res.status(400).json({
+        success: false,
+        message: "Bạn đã kích hoạt xem chuyến đi này trước đó.",
+      });
+    }
+
+    // Trừ 10 điểm nếu người dùng không phải là chủ sở hữu của chuyến đi
+    if (trip.user.toString() !== userId) {
+      const userPoints = user.points || 0;
+      if (userPoints < 10) {
+        return res.status(400).json({
+          success: false,
+          message: "Bạn không có đủ điểm để xem chuyến đi.",
+        });
+      }
+      await Users.findByIdAndUpdate(
+        userId,
+        { $inc: { points: -10 } }, // Trừ 10 điểm
+        { new: true }
+      );
+
+      await Notifications.create({
+        user: userId,
+        pointsDeducted: -10,
+        reason: `Trừ 10 điểm kích hoạt xem chuyến đi công khai ${trip.tripName}`,
+      });
+    }
+
+    // Lưu thông tin chuyến đi
+    if (trip.user.toString() !== userId) {
+      await Users.findByIdAndUpdate(
+        userId,
+        { $addToSet: { viewedTrips: id } }, // Thêm trip vào mảng viewedTrips
+        { new: true }
+      );
+    }
+
+    // Cập nhật 5 điểm thưởng
+    if (trip.user.toString() !== userId) {
+      await Users.findByIdAndUpdate(
+        trip.user,
+        { $inc: { points: 5 } },
+        { new: true }
+      );
+      // Ghi lại thông báo vào bảng Notifications
+      await Notifications.create({
+        user: trip.user,
+        pointsDeducted: 5,
+        reason: `Nhận được 5 điểm vì có người dùng xem chuyến đi ${trip.tripName}`,
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Kích hoạt xem chuyến đi công khai thành công",
     });
   } catch (error) {
     console.log(error);

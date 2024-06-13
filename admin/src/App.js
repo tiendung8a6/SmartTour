@@ -2,19 +2,20 @@ import { Navigate, Outlet, Route, Routes, useLocation } from "react-router-dom";
 
 import { Footer, Navbar, Sidebar, UpdateProfile } from "./components";
 import {
+  // OTPVerification,
+  // WritePost,
   Analytics,
   Contents,
   Dashboard,
   Followers,
-  // OTPVerification,
   StartPage,
   Users,
-  // WritePost,
   Contacts,
   Policy,
   Categories,
   Trips,
   Payments,
+  Notifications,
 } from "./pages";
 import useStore from "./store/store";
 
@@ -61,6 +62,7 @@ function App() {
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/trips" element={<Trips />} />
           <Route path="/payments" element={<Payments />} />
+          <Route path="/notifications" element={<Notifications />} />
         </Route>
 
         <Route path="/auth" element={<StartPage />} />

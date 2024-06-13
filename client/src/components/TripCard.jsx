@@ -192,7 +192,7 @@ const TripCard = ({ trip, index }) => {
 
       <Link
         to={`/trip/${trip._id}`}
-        className="w-full h-auto md:h-64 md:w-1/4 lg:w-[380px] hidden md:block "
+        className="w-full h-auto md:h-[265px] md:w-1/4 lg:w-[380px] hidden md:block "
       >
         <img
           src={trip?.image}

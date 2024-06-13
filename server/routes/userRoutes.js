@@ -14,6 +14,7 @@ import {
   getContactsContent,
   sendReplyEmail,
   getUserById,
+  getUsersNotifications,
 } from "../controllers/userController.js";
 import userAuth from "../middleware/authMiddleware.js";
 
@@ -43,5 +44,8 @@ router.post("/admin-contacts", userAuth, getContactsContent);
 //Policy
 router.patch("/policy/:id", userAuth, updatePolicy);
 router.post("/admin-policy", userAuth, getPolicyContent);
+
+//Notification
+router.get("/notifications", getUsersNotifications);
 
 export default router;

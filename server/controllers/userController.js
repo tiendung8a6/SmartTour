@@ -445,3 +445,24 @@ export const getUserById = async (req, res) => {
     res.status(500).json({ message: "Không lấy được thông tin người dùng" });
   }
 };
+export const getUsersNotifications = async (req, res, next) => {
+  try {
+    // Truy vấn tất cả và sắp xếp theo thời gian tạo
+    const users = await Users.find({
+      isAdmin: false,
+      emailVerified: true,
+      isLock: false,
+    }).sort({
+      createdAt: -1,
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Người dùng được truy xuất thành công",
+      data: users,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+};
