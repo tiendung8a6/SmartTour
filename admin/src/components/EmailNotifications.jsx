@@ -93,36 +93,32 @@ const EmailNotifications = ({ opened, close }) => {
         >
           Thông báo bằng Email
         </p>
-        <div className="w-full flex flex-col md:flex-row gap-5 mb-5 pt-4">
-          <TextInput
-            withAsterisk
-            label="Người gửi"
-            className="w-[50%]"
-            placeholder="engma@gmail.com"
-            disabled
-          />
-          <MultiSelect
-            withAsterisk
-            label="Email người nhận"
-            className="w-[50%]"
-            placeholder="Chọn người nhận"
-            clearable
-            searchable
-            data={[
-              {
-                value: "all",
-                label: "Tất cả người dùng",
-              },
-              ...(usersData?.data?.map((user) => ({
-                value: user._id,
-                label: user.email,
-              })) || []),
-            ]}
-            onChange={(val) => {
-              setUsers(val);
-            }}
-          />
-        </div>
+        <TextInput
+          withAsterisk
+          label="Email người gửi"
+          placeholder="engma@gmail.com"
+          disabled
+        />
+        <MultiSelect
+          withAsterisk
+          label="Email người nhận"
+          placeholder="Chọn người nhận"
+          clearable
+          searchable
+          data={[
+            {
+              value: "all",
+              label: "Tất cả người dùng",
+            },
+            ...(usersData?.data?.map((user) => ({
+              value: user._id,
+              label: user.email,
+            })) || []),
+          ]}
+          onChange={(val) => {
+            setUsers(val);
+          }}
+        />
 
         <span className="font-medium text-sm">Nội Dung</span>
         <span className="text-rose-500 mr-[10px] ml-1">*</span>

@@ -68,38 +68,34 @@ const WebNotifications = ({ opened, close }) => {
         >
           Thông báo bằng Hệ thống
         </p>
-        <div className="w-full flex flex-col md:flex-row gap-5 mb-5 pt-4">
-          <TextInput
-            withAsterisk
-            label="Người gửi"
-            className="w-[50%]"
-            placeholder="Quản trị viên"
-            disabled
-          />
-          <MultiSelect
-            withAsterisk
-            label="Email người nhận"
-            className="w-[50%]"
-            placeholder="Chọn người nhận"
-            clearable
-            searchable
-            data={[
-              {
-                value: "all",
-                label: "Tất cả người dùng",
-              },
-              ...(usersData?.data?.map((user) => ({
-                value: user._id,
-                label: user.email,
-              })) || []),
-            ]}
-            onChange={(val) => {
-              setUsers(val);
-            }}
-          />
-        </div>
-
+        <TextInput
+          withAsterisk
+          label="Người gửi"
+          placeholder="Quản trị viên"
+          disabled
+        />
+        <MultiSelect
+          withAsterisk
+          label="Email người nhận"
+          placeholder="Chọn người nhận"
+          clearable
+          searchable
+          data={[
+            {
+              value: "all",
+              label: "Tất cả người dùng",
+            },
+            ...(usersData?.data?.map((user) => ({
+              value: user._id,
+              label: user.email,
+            })) || []),
+          ]}
+          onChange={(val) => {
+            setUsers(val);
+          }}
+        />
         <Textarea
+          withAsterisk
           label="Nội dung"
           placeholder="Nhập nội dung"
           autosize

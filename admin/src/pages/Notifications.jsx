@@ -331,7 +331,7 @@ const Notifications = () => {
                           leftSection={<MdOutlineDeleteOutline />}
                           onClick={() => handlePerformAction("delete", el?._id)}
                         >
-                          Xóa Danh Mục
+                          Xóa Thông Báo
                         </Menu.Item>
                       </Menu.Dropdown>
                     </Menu>
