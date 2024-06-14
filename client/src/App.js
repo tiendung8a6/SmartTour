@@ -53,6 +53,7 @@ import {
   ViewRestaurant,
   ViewActivity,
   Notification,
+  TripSummaryPublic,
 } from "./pages";
 import { Footer, Loading, Navbar } from "./components";
 import useStore from "./store";
@@ -97,6 +98,7 @@ function App() {
             <Route path="/my-trips" element={<MyTripsPanel />} />
             <Route path="/public-trips" element={<PublicTripsPanel />} />
             <Route path="/trip/:id" element={<TripSummary />} />
+            <Route path="/trip/:id/public" element={<TripSummaryPublic />} />
             <Route path="/trip/create" element={<NewTrip />} />
             <Route path="/trip/:id/edit" element={<EditTrip />} />
             <Route path="/trip/:id/print" element={<PrintTrip />} />

@@ -239,7 +239,7 @@ const PublicTripsPanel = () => {
                         publicTrip?._id
                       );
                       if (isViewed) {
-                        window.location.href = `/trip/${publicTrip._id}`;
+                        window.location.href = `/trip/${publicTrip._id}/public`;
                       } else {
                         handlePerformAction("activate", publicTrip?._id);
                       }

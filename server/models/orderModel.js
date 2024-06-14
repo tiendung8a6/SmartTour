@@ -29,14 +29,6 @@ const OrderSchema = new Schema(
     paymentMethod: { type: String, default: "Chưa cập nhật" },
     totalPrice: { type: Number, default: 0 },
     currency: { type: String, default: "Not specified" },
-
-    //For admin
-    status: {
-      type: String,
-      default: "pending",
-      enum: ["pending", "processing", "shipped", "delivered"],
-    },
-    deliveredAt: { type: Date },
   },
   {
     timestamps: true,

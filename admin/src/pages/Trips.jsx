@@ -164,7 +164,7 @@ const Trips = () => {
           <div className="flex items-center">
             <TextInput
               leftSection={<IconSearch size={15} />}
-              placeholder="Tìm kiếm theo tiêu đề"
+              placeholder="Tìm kiếm theo tên chuyến đi"
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
             />

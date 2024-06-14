@@ -39,7 +39,7 @@ const EmailNotifications = ({ opened, close }) => {
   let editor = useEditor({
     extensions: [
       StarterKit,
-      Placeholder.configure({ placeholder: "Write article here...." }),
+      Placeholder.configure({ placeholder: "Nhập nội dung...." }),
       Underline,
       Link,
       Superscript,
