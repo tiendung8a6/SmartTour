@@ -51,6 +51,7 @@ import ViewConcert from "./ViewConcert";
 import ViewRestaurant from "./ViewRestaurant";
 import ViewActivity from "./ViewActivity";
 import Notification from "./Notification";
+import TripSummaryPublic from "./TripSummaryPublic";
 export {
   BlogDetail,
   CategoryPage,
@@ -105,4 +106,5 @@ export {
   ViewRestaurant,
   ViewActivity,
   Notification,
+  TripSummaryPublic,
 };
