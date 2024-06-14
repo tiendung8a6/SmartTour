@@ -41,7 +41,7 @@ const WritePost = () => {
   let editor = useEditor({
     extensions: [
       StarterKit,
-      Placeholder.configure({ placeholder: "Write article here...." }),
+      Placeholder.configure({ placeholder: "Nhập nội dung...." }),
       Underline,
       Link,
       Superscript,
@@ -100,7 +100,7 @@ const WritePost = () => {
           withAsterisk
           label="Title"
           className="w-full flex-1"
-          placeholder="Post title"
+          placeholder="Nhập tiêu đề"
           defaultValue={title}
           onChange={(e) => setTitle(e.target.value)}
         />

@@ -23,25 +23,25 @@ export const Stats = ({ dt }) => {
       title: "TỔNG TIỀN GIAO DỊCH (VND)",
       icon: "order",
       value: formatCurrency(dt?.totalOrder ?? 0),
-      diff: formatNumber(dt?.orderChange ?? 0),
+      diff: +39,
     },
     {
       title: "KẾ HOẠCH",
       icon: "trips",
       value: formatNumber(dt?.totalTrips ?? 0),
-      diff: formatNumber(dt?.tripsChange ?? 0),
+      diff: +26,
     },
     {
       title: "BÀI VIẾT",
       icon: "post",
       value: formatNumber(dt?.totalPosts ?? 0),
-      diff: formatNumber(dt?.postsChange ?? 0),
+      diff: +15,
     },
     {
       title: "NGƯỜI DÙNG",
       icon: "users",
       value: formatNumber(dt?.totalUsers ?? 0),
-      diff: formatNumber(dt?.usersChange ?? 0),
+      diff: -5,
     },
   ];
 

@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
-import { Button, Modal, TextInput, useMantineColorScheme } from "@mantine/core";
+import {
+  Button,
+  Modal,
+  TextInput,
+  useMantineColorScheme,
+  PasswordInput,
+} from "@mantine/core";
 import { useForm } from "@mantine/form";
 import clsx from "clsx";
 import { Toaster, toast } from "sonner";
@@ -74,9 +80,9 @@ const UpdateProfile = () => {
       >
         <form
           onSubmit={form.onSubmit(handleSubmit)}
-          className="flex flex-col items-center gap-5 px-5 pb-5"
+          className="flex flex-col items-center gap-4 px-4 pb-4"
         >
-          <div className="relative flex w-20 h-20  justify-center">
+          <div className="relative flex w-25 h-25  justify-center">
             <img
               src={fileURL}
               alt="Profile"
@@ -135,7 +141,20 @@ const UpdateProfile = () => {
             placeholder="Nhập tên"
             {...form.getInputProps("lastName")}
           />
-
+          <PasswordInput
+            className="w-full"
+            // withAsterisk
+            label="Mật khẩu cũ"
+            placeholder="Nhập mật khẩu cũ"
+            // {...form.getInputProps("lastName")}
+          />
+          <PasswordInput
+            className="w-full"
+            // withAsterisk
+            label="Mật khẩu mới"
+            placeholder="Nhập mật khẩu mới"
+            // {...form.getInputProps("lastName")}
+          />
           <Button
             type="submit"
             className={clsx(theme ? "bg-blue-600" : "bg-black", "w-full mt-2")}
