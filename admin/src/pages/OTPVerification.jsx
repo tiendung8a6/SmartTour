@@ -51,12 +51,12 @@ const OTPVerification = () => {
     resend.mutate(otpData.id);
   };
 
-  if (!otpData?.otpLevel) navigate("/auth");
+  if (!otpData?.otpLevel) navigate("/admin");
   if (user?.emailVerified) navigate("/");
 
   useEffect(() => {
     alert("Account has automatically been activated. Try login");
-    navigate("/auth");
+    navigate("/admin");
     localStorage.removeItem("otp_data");
   }, []);
 
