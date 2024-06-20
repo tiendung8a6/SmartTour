@@ -55,8 +55,8 @@ export const useSignin = (toast, toggle) => {
       toast.success(data?.message);
 
       setTimeout(() => {
-        window.location.replace("/");
-      }, 1000);
+        window.location.replace("/analytics");
+      }, 500);
     },
   });
 };
@@ -77,7 +77,7 @@ export const useVerification = (toast) => {
 
       setTimeout(() => {
         localStorage.removeItem("otp_data");
-        window.location.replace("/admin");
+        window.location.replace("/");
       }, 1000);
     },
   });

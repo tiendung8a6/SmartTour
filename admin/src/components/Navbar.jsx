@@ -117,7 +117,7 @@ const Navbar = () => {
   const theme = colorScheme === "dark";
 
   const handleLogin = () => {
-    location?.pathname === "/admin" && setSignInModal(!signInModal);
+    location?.pathname === "/" && setSignInModal(!signInModal);
   };
 
   return (
@@ -137,7 +137,7 @@ const Navbar = () => {
             <UserMenu user={user?.user} theme={theme} />
           ) : (
             <Link
-              to="/admin"
+              to="/"
               onClick={handleLogin}
               className={clsx(
                 `flex items-center gap-2 rounded-full 2xl:mr-10 text-base`,
