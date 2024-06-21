@@ -54,6 +54,7 @@ import {
   ViewActivity,
   Notification,
   TripSummaryPublic,
+  MapPage,
 } from "./pages";
 import { Footer, Loading, Navbar } from "./components";
 import useStore from "./store";
@@ -83,6 +84,8 @@ function App() {
           <Route element={<Layout />}>
             {/* <Route path="/" /> */}
             <Route path="/" element={<Home />} />
+            <Route path="/map/:id" element={<MapPage />}></Route>
+
             <Route path="/contact" element={<Contact />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/pricing" element={<Pricing />} />
