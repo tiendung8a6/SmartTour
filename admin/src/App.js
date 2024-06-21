@@ -1,5 +1,4 @@
 import { Navigate, Outlet, Route, Routes, useLocation } from "react-router-dom";
-
 import { Footer, Navbar, Sidebar, UpdateProfile } from "./components";
 import {
   // OTPVerification,
@@ -21,28 +20,25 @@ import useStore from "./store/store";
 
 function Layout() {
   const { user } = useStore((state) => state);
-
   const location = useLocation();
 
   return user?.token ? (
     <div className="w-full h-screen">
       <Navbar />
       <div className="w-full h-full flex border-t pt-[76px]">
-        <div className="hidden lg:flex ">
+        <div className="hidden lg:flex">
           <Sidebar />
         </div>
 
         <div className="w-full flex-1 px-4 md:px-8 py-6 overflow-y-auto">
           <Outlet />
-
           {/* <Footer /> */}
         </div>
       </div>
-
       <UpdateProfile key={new Date()} />
     </div>
   ) : (
-    <Navigate to="/admin" state={{ from: location }} replace />
+    <Navigate to="/" state={{ from: location }} replace />
   );
 }
 
@@ -50,9 +46,9 @@ function App() {
   return (
     <main className="w-full min-h-screen">
       <Routes>
+        <Route index path="/" element={<StartPage />} />
         <Route element={<Layout />}>
-          <Route index path="/" element={<Navigate to="/analytics" />} />
-          {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+          {/* <Route index path="/" element={<Navigate to="/analytics" />} /> */}
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/policy" element={<Policy />} />
           <Route path="/categories" element={<Categories />} />
@@ -64,8 +60,6 @@ function App() {
           <Route path="/payments" element={<Payments />} />
           <Route path="/notifications" element={<Notifications />} />
         </Route>
-
-        <Route path="/admin" element={<StartPage />} />
         {/* <Route path="/otp-verification" element={<OTPVerification />} /> */}
       </Routes>
     </main>

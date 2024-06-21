@@ -52,7 +52,9 @@ import ViewRestaurant from "./ViewRestaurant";
 import ViewActivity from "./ViewActivity";
 import Notification from "./Notification";
 import TripSummaryPublic from "./TripSummaryPublic";
+import MapPage from "./MapPage";
 export {
+  MapPage,
   BlogDetail,
   CategoryPage,
   Home,

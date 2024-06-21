@@ -65,6 +65,9 @@ const MobileMenu = ({ user, signOut }) => {
               <Link to="/travel-guide">Hướng Dẫn Viên AI</Link>
             </li>
             <li onClick={toggleMenu}>
+              <Link to="/map/restaurants">Điểm Đến</Link>
+            </li>
+            <li onClick={toggleMenu}>
               <Link to="/blog">Blog</Link>
             </li>
             <li onClick={toggleMenu}>
@@ -191,6 +194,7 @@ const Navbar = () => {
           <Link to="/">Trang Chủ</Link>
           <Link to="/trip">Chuyến Đi</Link>
           <Link to="/travel-guide">Hướng Dẫn Viên AI</Link>
+          <Link to="/map/restaurants">Điểm Đến</Link>
           <Link to="/blog">Blog</Link>
           <Link to="/pricing">Mua Điểm</Link>
           <Link to="/contact">Liên Hệ</Link>

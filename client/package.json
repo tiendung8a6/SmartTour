@@ -44,6 +44,7 @@
     "dayjs": "^1.11.11",
     "embla-carousel-react": "^8.0.4",
     "firebase": "^10.12.0",
+    "google-map-react": "^2.2.1",
     "lowlight": "^3.1.0",
     "markdown-to-jsx": "^7.4.7",
     "moment": "^2.30.1",

@@ -54,10 +54,10 @@ export const useTrips = () => {
   useEffect(() => {
     if (errorOccurred) {
       signOut();
-      navigate("/sign-in");
+      // navigate("/sign-in"); //NEW --Ver2 (fix)
       // toast.error("Something went wrong.");
     }
-  }, [errorOccurred, navigate, signOut]);
+  }, [errorOccurred, signOut]);
 
   return {
     trips,

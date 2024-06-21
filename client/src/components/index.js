@@ -32,7 +32,15 @@ import NewPost from "./NewPost";
 import MyPosts from "./MyPosts";
 import CommentMyPost from "./CommentMyPost";
 import Notifications from "./Notifications";
+import Map from "./Map";
+import List from "./List";
+import MainList from "./MainList";
+import Loader from "./Loader";
 export {
+  Loader,
+  MainList,
+  Map,
+  List,
   Banner,
   Button,
   Card,
