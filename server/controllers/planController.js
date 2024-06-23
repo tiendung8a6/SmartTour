@@ -1172,3 +1172,18 @@ export const updatePlanRestaurant = async (req, res, next) => {
     res.status(500).json({ success: false, message: "Lỗi máy chủ" });
   }
 };
+
+export const deletePlan = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    await Plans.findOneAndDelete({ _id: id });
+
+    res.status(200).json({
+      success: true,
+      message: "Xóa kế hoạch thành công",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: error.message });
+  }
+};
