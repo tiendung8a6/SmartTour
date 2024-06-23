@@ -14,7 +14,7 @@ const Card = ({ post, index }) => {
       //  ${index / 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}
     >
       <Link
-        to={`/${post?.slug}/${post._id}`}
+        to={`/blog/${post?.slug}/${post._id}`}
         className="w-full h-auto md:h-64 md:w-2/4 "
       >
         <img
@@ -26,7 +26,7 @@ const Card = ({ post, index }) => {
 
       <div className="w-full md:w-2/4 flex flex-col gap-3">
         <div className="flex gap-2">
-          <span className="text-sm text-gray-600">
+          <span className="text-sm text-gray-600 dark:text-slate-400">
             Ngày {moment(post?.createdAt).format("LL")}
           </span>
           <span
@@ -41,14 +41,14 @@ const Card = ({ post, index }) => {
           {post?.title.slice(0, 60) + "..."}
         </h6>
 
-        <div className="flex-1 overflow-hidden text-gray-600 dark:text-slate-500 text-sm text-justify">
+        <div className="flex-1 overflow-hidden text-gray-600 dark:text-gray-400 text-sm text-justify">
           <Markdown options={{ wrapper: "article" }}>
             {post?.desc?.slice(0, 200) + "..."}
           </Markdown>
         </div>
 
         <Link
-          to={`/${post?.slug}/${post._id}`}
+          to={`/blog/${post?.slug}/${post._id}`}
           className="flex items-center gap-2 text-black dark:text-white"
         >
           <span className="underline">Đọc thêm</span> <AiOutlineArrowRight />

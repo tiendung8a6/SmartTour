@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { AiOutlineClose } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import useStore from "../store";
 import Button from "./Button";
 import Logo from "./Logo";
@@ -144,12 +144,12 @@ const Navbar = () => {
   const { user, signOut } = useStore();
   const [showProfile, setShowProfile] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
+  const location = useLocation(); // Get the current path
 
   //TRUY VẤN DỮ NGƯỜI DÙNG --> Cập nhật Real-Time POINT
   const fetchUser = async () => {
     try {
       const data = await getUser(user?.user?._id);
-
       setUserInfo(data || []);
     } catch (error) {
       console.error("Error fetching trip or popular content:", error);
@@ -165,7 +165,6 @@ const Navbar = () => {
 
   const handleSignOut = () => {
     localStorage.removeItem("userInfo");
-    // localStorage.removeItem("user");
     signOut();
   };
   const userEmail = user?.user?.email;
@@ -186,18 +185,47 @@ const Navbar = () => {
     };
   }, []);
 
+  const getNavLinkClass = (path) => {
+    if (path === "/") {
+      return location.pathname === "/"
+        ? "text-sky-600 font-bold underline"
+        : "text-black dark:text-white";
+    } else {
+      return location.pathname.startsWith(path)
+        ? "text-sky-600 font-bold underline"
+        : "text-black dark:text-white";
+    }
+  };
+
   return (
     <nav className="flex flex-col md:flex-row w-full py-5  items-center justify-between gap-4 md:gap-0">
       <Logo />
       <div className="hidden md:flex gap-12 items-center">
-        <ul className="flex gap-8 text-base text-black dark:text-white">
-          <Link to="/">Trang Chủ</Link>
-          <Link to="/trip">Chuyến Đi</Link>
-          <Link to="/travel-guide">Hướng Dẫn Viên AI</Link>
-          <Link to="/map/restaurants">Điểm Đến</Link>
-          <Link to="/blog">Blog</Link>
-          <Link to="/pricing">Mua Điểm</Link>
-          <Link to="/contact">Liên Hệ</Link>
+        <ul className="flex gap-8 text-base">
+          <Link to="/" className={getNavLinkClass("/")}>
+            Trang Chủ
+          </Link>
+          <Link to="/trip" className={getNavLinkClass("/trip")}>
+            Chuyến Đi
+          </Link>
+          <Link to="/travel-guide" className={getNavLinkClass("/travel-guide")}>
+            Hướng Dẫn Viên AI
+          </Link>
+          <Link
+            to="/map/restaurants"
+            className={getNavLinkClass("/map/restaurants")}
+          >
+            Điểm Đến
+          </Link>
+          <Link to="/blog" className={getNavLinkClass("/blog")}>
+            Blog
+          </Link>
+          <Link to="/pricing" className={getNavLinkClass("/pricing")}>
+            Mua Điểm
+          </Link>
+          <Link to="/contact" className={getNavLinkClass("/contact")}>
+            Liên Hệ
+          </Link>
         </ul>
 
         {/* Thông báo */}
@@ -280,20 +308,6 @@ const Navbar = () => {
                     Tài khoản của tôi
                   </Link>
                   <hr />
-                  {/* <Link className="text-gray-500 text-sm" to="/profile">
-                    Viết blog
-                  </Link>
-                  <Link className="text-gray-500 text-sm" to="/new-post">
-                    Bài viết của tôi
-                  </Link>
-                  <hr />
-                  <Link className="text-gray-500 text-sm" to="/my-post">
-                    Bài viết đã lưu
-                  </Link>
-                  <hr />
-                  <Link className="text-gray-500 text-sm" to="/new-post">
-                    Cài đặt
-                  </Link> */}
                   <span
                     className="text-gray-500 text-sm"
                     onClick={handleSignOut}

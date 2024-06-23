@@ -91,7 +91,7 @@ const NewPost = () => {
       <p
         className={`${
           theme ? "text-white" : "text-slate-700"
-        } text-lg pb-1 font-semibold `}
+        } text-xl pb-1 font-semibold text-center `}
       >
         Đăng Bài Viết Mới
       </p>
@@ -255,7 +255,7 @@ const NewPost = () => {
 
       <div className="w-full flex items-end justify-end mt-6">
         <Button
-          className={theme ? "bg-blue-600" : "bg-black"}
+          className={theme ? "bg-sky-600" : "bg-sky-600"}
           onClick={() => handleSubmit()}
         >
           Đăng bài

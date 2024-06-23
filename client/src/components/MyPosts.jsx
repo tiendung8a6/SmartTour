@@ -81,7 +81,7 @@ const MyPosts = () => {
   const theme = colorScheme === "dark";
 
   const handleGoToPost = (post) => {
-    navigate(`/${post?.slug}/${post?._id}`);
+    navigate(`/blog/${post?.slug}/${post?._id}`);
   };
   const handleComment = (id) => {
     setCommentId(id);

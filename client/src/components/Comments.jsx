@@ -37,7 +37,7 @@ const PostComments = ({ postId }) => {
   const [comments, setComments] = useState([]);
   const [desc, setDesc] = useState("");
 
-  const fetchCommetns = async () => {
+  const fetchComments = async () => {
     const res = await getPostComments(postId);
     setComments(res);
   };
@@ -51,7 +51,7 @@ const PostComments = ({ postId }) => {
 
     if (res?.success === true) {
       setDesc("");
-      fetchCommetns();
+      fetchComments();
 
       toast.success("Bình luận bài viết thành công");
     } else {
@@ -63,17 +63,17 @@ const PostComments = ({ postId }) => {
     const res = await deleteComment(id, user?.token, postId);
 
     if (res?.success === true) {
-      fetchCommetns();
+      fetchComments();
     }
   };
 
   useEffect(() => {
-    fetchCommetns();
+    fetchComments();
   }, [postId]);
 
   return (
     <div className="w-full py-10">
-      <p className="text-lg text-slate-700 dark:text-slate-500 mb-6">
+      <p className="text-lg text-slate-700 dark:text-slate-400 mb-6">
         Bình luận bài viết
       </p>
 
@@ -85,7 +85,7 @@ const PostComments = ({ postId }) => {
             value={desc}
             required={true}
             placeholder="Nhập bình luận..."
-            className="bg-transparent w-full p-2 border border-gray-300 focus:outline-none focus:border-blue-600  focus:ring-blue-600 rounded"
+            className="dark:text-gray-500 bg-transparent w-full p-2 border border-gray-300 focus:outline-none focus:border-blue-600  focus:ring-blue-600 rounded"
           ></textarea>
 
           <div className="w-full flex justify-end mt-2">
@@ -98,10 +98,10 @@ const PostComments = ({ postId }) => {
           </div>
         </form>
       ) : (
-        <Link to="/sign-in" className="flex flex-col py-10">
+        <Link to="/sign-in" className="flex flex-col py-10 ">
           <Button
             label="Đăng nhập để bình luận"
-            styles="flex items-center justify-center bg-white dark:bg-transparent text-black dark:text-gray-500 px-4 py-1.5 rounded-full border"
+            styles="flex items-center justify-center bg-white dark:bg-transparent text-black dark:text-gray-400 px-4 py-1.5 rounded-full border"
           />
         </Link>
       )}
@@ -121,20 +121,20 @@ const PostComments = ({ postId }) => {
               />
               <div className="w-full -mt-2">
                 <div className="w-full flex items-center gap-2">
-                  <p className="text-slate-700 dark:text-gray-400 font-medium">
+                  <p className="text-slate-700 dark:text-gray-300 font-medium">
                     {el?.user?.name}
                   </p>
-                  <span className="text-slate-700 text-xs italic">
+                  <span className="text-slate-700  dark:text-gray-400 text-xs italic">
                     {moment(el?.createdAt).fromNow()}
                   </span>
                 </div>
 
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2 dark:text-gray-400">
                   <span className="text-sm">{el?.desc}</span>
 
                   {user?.user?._id === el?.user?._id && (
                     <span
-                      className="text-base text-red-600 cursor-pointer"
+                      className="text-base text-red-600 dark:text-red-500 cursor-pointer"
                       onClick={() => handleDeleteComment(el?._id)}
                     >
                       Xóa

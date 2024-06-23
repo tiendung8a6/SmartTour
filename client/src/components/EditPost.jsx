@@ -222,7 +222,7 @@ const EditPost = ({ opened, close }) => {
 
       <div className="w-full flex items-end justify-end mt-6">
         <Button
-          className={theme ? "bg-blue-600" : "bg-black"}
+          className={theme ? "bg-sky-600" : "bg-sky-600"}
           onClick={() => handleSubmit()}
         >
           Cập Nhật
