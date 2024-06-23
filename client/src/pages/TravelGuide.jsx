@@ -57,21 +57,30 @@ const Recommendations = ({ place, isLoading, recommendations }) => {
   }
 
   if (recommendations) {
+    const hasData = Object.values(recommendations).some(
+      (list) => list.length > 0
+    );
+
+    if (!hasData) {
+      return (
+        <p className="mt-10">⚠️ Hệ thống đang bảo trì. Vui lòng thử lại sau.</p>
+      );
+    }
+
     return (
       <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {recommendations &&
-          Object.entries(recommendations).map(([title, list]) => (
-            <div key={title} className="prose">
-              <h2 className="mt-0 mb-4 font-bold text-gray-900">
-                AI khuyên bạn nên {title}
-              </h2>
-              <ul className="list-none pl-0">
-                {list.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
+        {Object.entries(recommendations).map(([title, list]) => (
+          <div key={title} className="prose">
+            <h2 className="mt-0 mb-4 font-bold text-gray-900">
+              AI khuyên bạn nên {title}
+            </h2>
+            <ul className="list-none pl-0">
+              {list.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
     );
   }

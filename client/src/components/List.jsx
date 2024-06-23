@@ -159,7 +159,7 @@ const Detail = ({ el, img, newaddress, child, refProp, index }) => {
                   ? "Mở cửa"
                   : "Đóng cửa"}
               </div>
-              <div className="rounded-full bg-blue-100 px-2 py-0.5 text-blue-700">
+              <div className="rounded-full bg-orange-100 px-2 py-0.5 text-orange-700">
                 {Math.floor(
                   el.distance
                     ? el.distance
@@ -195,10 +195,10 @@ const Detail = ({ el, img, newaddress, child, refProp, index }) => {
               {/* <Money />   //API đã có sắn  */}
             </span>
             <a
-              href={el.website}
+              href={el.website || el.web_url}
               target="_blank"
               rel="noreferrer"
-              className="my-5 rounded-md px-5 py-2 text-center transition hover:scale-105 bg-orange-600 text-white sm:ml-auto"
+              className="my-5 rounded-md px-5 py-2 text-center transition hover:scale-105 bg-sky-600 text-white sm:ml-auto"
             >
               Website
             </a>

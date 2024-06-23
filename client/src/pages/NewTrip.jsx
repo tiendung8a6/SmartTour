@@ -21,6 +21,7 @@ import { DateInput } from "@mantine/dates";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
 import cities from "../assets/cities.json";
+import { getUser } from "../utils/apiCalls";
 
 // Hàm chuyển đổi chuỗi sang dạng không dấu
 const removeDiacritics = (str) => {
@@ -70,17 +71,33 @@ const NewTrip = () => {
   const [status, setStatus] = useState(false);
   const [description, setDescription] = useState(null);
   const [hashtag, setHashtag] = useState([]);
-
   const [fileURL, setFileURL] = useState(null);
-
   const theme = colorScheme === "dark";
-
   //Gọi Danh sách city từ Json
   const cityOptions = cities.map((cityData) => cityData.city);
+  const [userInfo, setUserInfo] = useState(null);
 
   useEffect(() => {
     file && uploadFile(setFileURL, file);
   }, [file]);
+
+  //TRUY VẤN DỮ NGƯỜI DÙNG --> Cập nhật Real-Time POINT
+  const fetchUser = async () => {
+    try {
+      const data = await getUser(user?.user?._id);
+
+      setUserInfo(data || []);
+    } catch (error) {
+      console.error("Error fetching trip or popular content:", error);
+    } finally {
+    }
+  };
+  useEffect(() => {
+    if (user?.user?._id) {
+      fetchUser();
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }
+  }, [user?.user?._id]);
 
   const handleSubmit = async () => {
     if (!tripName) {
@@ -120,6 +137,10 @@ const NewTrip = () => {
         toast.error("Vui lòng nhập tag nổi bật.");
         return;
       }
+    }
+    if (userInfo?.points < 20) {
+      toast.error("Bạn không có đủ điểm để tạo chuyến đi.");
+      return;
     }
     setIsLoading(true);
     mutate({
@@ -259,6 +280,24 @@ const NewTrip = () => {
               </div>
             </>
           )}
+
+          <div className=" justify-start items-center text-sm text-gray-500 pt-6">
+            <span className="mr-1 font-medium text-red-600  items-center">
+              Điều khoản:
+            </span>
+            <span className=" items-center">
+              Việc lập kế hoạch chuyến đi sẽ khiến bạn bị trừ 20 điểm thưởng,
+              nhưng bạn sẽ nhận lại được 5 điểm thưởng khi công khai chuyến đi.
+              Để biết rõ hơn hãy xem{" "}
+            </span>
+            <span className="ml-auto text-sm font-semibold text-sky-600 underline decoration-2">
+              <Link to="/policy" target="_blank">
+                {" "}
+                Chính sách và Điều khoản
+              </Link>
+            </span>
+            <span className=" items-center"> của chúng tôi.</span>
+          </div>
         </Grid.Col>
 
         <Grid.Col span={{ base: 12, md: 3, lg: 3 }} offset={0.5}>
@@ -305,7 +344,7 @@ const NewTrip = () => {
             radius="md"
             onClick={() => handleSubmit()}
           >
-            Lưu
+            Tạo
           </Button>
         </div>
       </div>
