@@ -79,7 +79,9 @@ function App() {
 
   return (
     <main className={theme}>
-      <div className={`w-full min-h-sreen relative dark:bg-[#020b19] bg-white`}>
+      <div
+        className={`w-full min-h-screen relative dark:bg-[#1a1a1c] bg-white`}
+      >
         <Routes>
           <Route element={<Layout />}>
             {/* <Route path="/" /> */}

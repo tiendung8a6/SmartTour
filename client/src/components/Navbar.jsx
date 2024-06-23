@@ -107,7 +107,7 @@ const MobileMenu = ({ user, signOut }) => {
                 >
                   Tài khoản của tôi
                 </Link>
-                <hr />
+                <hr className="pt-4" />
                 <button
                   className="bg-black dark:bg-sky-600 text-white dark:text-white px-8 py-1.5 rounded-full text-center outline-none"
                   onClick={() => signOut()}
