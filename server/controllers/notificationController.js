@@ -185,7 +185,7 @@ export const deleteNotifications = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Đã xóa thông báo thành công",
+      message: "Xóa thông báo thành công",
     });
   } catch (error) {
     console.log(error);

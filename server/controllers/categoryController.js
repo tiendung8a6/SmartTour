@@ -85,7 +85,7 @@ export const deleteCategory = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Đã xóa danh mục thành công",
+      message: "Xóa danh mục thành công",
     });
   } catch (error) {
     console.log(error);

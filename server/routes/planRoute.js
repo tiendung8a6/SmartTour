@@ -21,6 +21,7 @@ import {
   updatePlanRail,
   updatePlanLodging,
   updatePlanRestaurant,
+  deletePlan,
 } from "../controllers/planController.js";
 
 const router = express.Router();
@@ -51,4 +52,8 @@ router.patch("/update/restaurant/:id", userAuth, updatePlanRestaurant); //restau
 
 //GET
 router.get("/:planId", getPlanById);
+
+//DELETE
+router.delete("/:id", userAuth, deletePlan);
+
 export default router;

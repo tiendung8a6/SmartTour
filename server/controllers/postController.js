@@ -320,7 +320,7 @@ export const deleteComment = async (req, res, next) => {
     if (result.modifiedCount > 0) {
       res
         .status(200)
-        .json({ success: true, message: "Đã xóa bình luận thành công" });
+        .json({ success: true, message: "Xóa bình luận thành công" });
     } else {
       res
         .status(404)
@@ -658,7 +658,7 @@ export const deleteFollower = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Đã xóa người theo dõi thành công",
+      message: "Xóa người theo dõi thành công",
       updatedUser,
     });
   } catch (error) {
@@ -681,7 +681,7 @@ export const deleteClientComment = async (req, res, next) => {
     if (result.modifiedCount > 0) {
       res
         .status(200)
-        .json({ success: true, message: "Đã xóa bình luận thành công" });
+        .json({ success: true, message: "Xóa bình luận thành công" });
     } else {
       res
         .status(404)
