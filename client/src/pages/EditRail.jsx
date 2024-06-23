@@ -166,6 +166,7 @@ const EditRail = () => {
       web,
       email,
       number,
+      describe,
       form,
       endAddress,
       estimatedPrice,
