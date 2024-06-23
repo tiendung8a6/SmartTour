@@ -28,6 +28,7 @@ export const createPlanActivity = async (req, res, next) => {
       estimatedPrice,
       actualPrice: price,
       startAddress,
+      endAddress: startAddress,
       info,
       type: "activity",
     });
@@ -83,6 +84,7 @@ export const createPlanLodging = async (req, res, next) => {
       endDate,
       endTime,
       startAddress,
+      endAddress: startAddress,
       info,
       phone,
       web,
@@ -216,6 +218,7 @@ export const createPlanCar = async (req, res, next) => {
       endDate,
       endTime,
       startAddress,
+      endAddress: startAddress,
       phone,
       web,
       email,
@@ -279,6 +282,7 @@ export const createPlanConcert = async (req, res, next) => {
       endDate,
       endTime,
       startAddress,
+      endAddress: startAddress,
       info,
       phone,
       web,
@@ -342,6 +346,7 @@ export const createPlanTheater = async (req, res, next) => {
       endDate,
       endTime,
       startAddress,
+      endAddress: startAddress,
       info,
       phone,
       web,
@@ -377,69 +382,6 @@ export const createPlanTheater = async (req, res, next) => {
     res.status(500).json({ success: false, message: "Lỗi máy chủ" });
   }
 };
-export const createPlanCamp = async (req, res, next) => {
-  try {
-    const {
-      planName,
-      startDate,
-      startTime,
-      endDate,
-      endTime,
-      startAddress,
-      info,
-      phone,
-      web,
-      email,
-      number,
-      describe,
-      form,
-      price,
-      departureGate,
-    } = req.body;
-    const { id } = req.params;
-
-    const plan = await Plans.create({
-      planName,
-      startDate,
-      startTime,
-      endDate,
-      endTime,
-      startAddress,
-      info,
-      phone,
-      web,
-      email,
-      number,
-      describe,
-      form,
-      price,
-      departureGate,
-      type: "camp",
-    });
-
-    const trip = await Trips.findById(id);
-    if (!trip) {
-      return res.status(404).json({
-        success: false,
-        message: "Không tìm thấy chuyến đi",
-      });
-    }
-
-    trip.plans.push(plan._id);
-    await trip.save();
-
-    res.status(201).json({
-      success: true,
-      message:
-        "Lập kế hoạch cho cắm trại thành công và đã được thêm vào chuyến đi",
-      data: plan,
-      tripId: trip._id,
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ success: false, message: "Lỗi máy chủ" });
-  }
-};
 export const createPlanParking = async (req, res, next) => {
   try {
     const {
@@ -465,6 +407,7 @@ export const createPlanParking = async (req, res, next) => {
       endDate,
       endTime,
       startAddress,
+      endAddress: startAddress,
       info,
       phone,
       web,
@@ -525,6 +468,7 @@ export const createPlanRestaurant = async (req, res, next) => {
       endDate,
       endTime,
       startAddress,
+      endAddress: startAddress,
       info,
       phone,
       web,
@@ -670,7 +614,10 @@ export const updatePlanActivity = async (req, res, next) => {
     if (startTime) updatedFields.startTime = startTime;
     if (endDate) updatedFields.endDate = endDate;
     if (endTime) updatedFields.endTime = endTime;
-    if (startAddress) updatedFields.startAddress = startAddress;
+    if (startAddress) {
+      updatedFields.startAddress = startAddress;
+      updatedFields.endAddress = startAddress;
+    }
     if (info) updatedFields.info = info;
     if (estimatedPrice) updatedFields.estimatedPrice = estimatedPrice;
     if (actualPrice) updatedFields.actualPrice = actualPrice;
@@ -789,7 +736,10 @@ export const updatePlanConcert = async (req, res, next) => {
     if (startTime) updatedFields.startTime = startTime;
     if (endDate) updatedFields.endDate = endDate;
     if (endTime) updatedFields.endTime = endTime;
-    if (startAddress) updatedFields.startAddress = startAddress;
+    if (startAddress) {
+      updatedFields.startAddress = startAddress;
+      updatedFields.endAddress = startAddress;
+    }
     if (info) updatedFields.info = info;
     if (phone) updatedFields.phone = phone;
     if (web) updatedFields.web = web;
@@ -848,7 +798,10 @@ export const updatePlanTheater = async (req, res, next) => {
     if (startTime) updatedFields.startTime = startTime;
     if (endDate) updatedFields.endDate = endDate;
     if (endTime) updatedFields.endTime = endTime;
-    if (startAddress) updatedFields.startAddress = startAddress;
+    if (startAddress) {
+      updatedFields.startAddress = startAddress;
+      updatedFields.endAddress = startAddress;
+    }
     if (info) updatedFields.info = info;
     if (phone) updatedFields.phone = phone;
     if (web) updatedFields.web = web;
@@ -907,7 +860,10 @@ export const updatePlanCar = async (req, res, next) => {
     if (startTime) updatedFields.startTime = startTime;
     if (endDate) updatedFields.endDate = endDate;
     if (endTime) updatedFields.endTime = endTime;
-    if (startAddress) updatedFields.startAddress = startAddress;
+    if (startAddress) {
+      updatedFields.startAddress = startAddress;
+      updatedFields.endAddress = startAddress;
+    }
     if (phone) updatedFields.phone = phone;
     if (web) updatedFields.web = web;
     if (info) updatedFields.info = info;
@@ -964,7 +920,10 @@ export const updatePlanParking = async (req, res, next) => {
     if (startTime) updatedFields.startTime = startTime;
     if (endDate) updatedFields.endDate = endDate;
     if (endTime) updatedFields.endTime = endTime;
-    if (startAddress) updatedFields.startAddress = startAddress;
+    if (startAddress) {
+      updatedFields.startAddress = startAddress;
+      updatedFields.endAddress = startAddress;
+    }
     if (info) updatedFields.info = info;
     if (phone) updatedFields.phone = phone;
     if (web) updatedFields.web = web;
@@ -1036,7 +995,6 @@ export const updatePlanRail = async (req, res, next) => {
     if (form) updatedFields.form = form;
     if (arrivalGate) updatedFields.arrivalGate = arrivalGate;
     if (departureGate) updatedFields.departureGate = departureGate;
-
     const plan = await Plans.findByIdAndUpdate(id, updatedFields, {
       new: true,
     });
@@ -1084,7 +1042,10 @@ export const updatePlanLodging = async (req, res, next) => {
     if (startTime) updatedFields.startTime = startTime;
     if (endDate) updatedFields.endDate = endDate;
     if (endTime) updatedFields.endTime = endTime;
-    if (startAddress) updatedFields.startAddress = startAddress;
+    if (startAddress) {
+      updatedFields.startAddress = startAddress;
+      updatedFields.endAddress = startAddress;
+    }
     if (info) updatedFields.info = info;
     if (phone) updatedFields.phone = phone;
     if (estimatedPrice) updatedFields.estimatedPrice = estimatedPrice;
@@ -1141,7 +1102,10 @@ export const updatePlanRestaurant = async (req, res, next) => {
     if (startTime) updatedFields.startTime = startTime;
     if (endDate) updatedFields.endDate = endDate;
     if (endTime) updatedFields.endTime = endTime;
-    if (startAddress) updatedFields.startAddress = startAddress;
+    if (startAddress) {
+      updatedFields.startAddress = startAddress;
+      updatedFields.endAddress = startAddress;
+    }
     if (info) updatedFields.info = info;
     if (phone) updatedFields.phone = phone;
     if (web) updatedFields.web = web;
