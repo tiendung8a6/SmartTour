@@ -9,7 +9,7 @@ const Pricing = () => {
     });
   };
   return (
-    <div className="place-content-center max-w-screen-xl px-2 py-4 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+    <div className="justify-center items-center px-2 py-4 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
       <div className="max-w-xl sm:mx-auto lg:max-w-2xl">
         <div className="flex flex-col mb-16 sm:text-center sm:mb-0">
           <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
