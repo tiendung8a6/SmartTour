@@ -24,7 +24,7 @@ const Blog = () => {
 
   if (posts?.length < 1)
     return (
-      <div className="w-full h-full py-8 flex items-center justify-center">
+      <div className="w-full h-full py-8 flex items-center justify-center dark:text-white">
         <span className="text-lg text-slate-500">Chưa có bài viết</span>
       </div>
     );
@@ -42,7 +42,7 @@ const Blog = () => {
           <div className="w-full flex flex-wrap py-10 gap-8">
             {CATEGORIES.map((cat) => (
               <Link
-                to={`/category?cat=${cat?._id}`}
+                to={`/blog/category?cat=${cat?._id}`}
                 className={`flex items-center justify-center gap-3 border border-gray-400 dark:border-gray-600 rounded-full text-gray-700 dark:text-white font-semibold text-base px-4 py-2 cursor-pointer`}
                 key={cat._id}
               >

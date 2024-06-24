@@ -5,7 +5,7 @@ const Map = ({ setBounds, userLocation, data, setChild }) => {
   return (
     <div className="w-full" style={{ height: "35vh" }}>
       <GoogleMapReact
-        // bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
+        bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
         defaultCenter={userLocation}
         center={userLocation}
         defaultZoom={11}

@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import useStore from "../store";
+import { useMantineColorScheme } from "@mantine/core";
 
 const ThemeSwitch = () => {
-  const { theme, setTheme } = useStore();
-  const [isDarkMode, setIsDarkMode] = useState(theme === "dark");
-
-  //   console.log(isDarkMode);
+  const { setTheme } = useStore();
+  const { colorScheme, setColorScheme } = useMantineColorScheme();
+  const [isDarkMode, setIsDarkMode] = useState(colorScheme === "dark");
 
   const toggleTheme = () => {
     const newTheme = isDarkMode ? "light" : "dark";
     setIsDarkMode(!isDarkMode);
     setTheme(newTheme);
+    setColorScheme(newTheme);
     localStorage.setItem("theme", newTheme);
   };
 

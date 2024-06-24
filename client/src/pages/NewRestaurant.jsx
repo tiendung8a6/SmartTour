@@ -175,7 +175,7 @@ const NewRestaurant = () => {
     <div className="px-[100px] mb-10">
       <Link to={`/trip/${trip?._id}/plans/create`}>
         <Button
-          className="border-none hover:text-[#0782c5] hover:bg-transparent flex justify-start ml-[-20px] "
+          className="dark:bg-inherit border-none hover:text-[#0782c5] hover:bg-transparent flex justify-start ml-[-20px] "
           leftSection={<IconArrowLeft className="text-[#0782c5]" size={30} />}
           variant="default"
           color="#0782c5"
@@ -349,7 +349,7 @@ const NewRestaurant = () => {
             </Grid.Col>
           </Grid>
 
-          <div className=" text-lg	text-black	mt-16">
+          <div className=" text-lg mt-16">
             <p
               className={`${
                 theme ? "text-white" : "text-slate-700"
@@ -391,7 +391,7 @@ const NewRestaurant = () => {
             </Grid>
           </div>
 
-          <div className=" text-lg text-black mt-16">
+          <div className=" text-lg mt-16">
             <p
               className={`${
                 theme ? "text-white" : "text-slate-700"

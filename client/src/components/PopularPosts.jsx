@@ -30,14 +30,14 @@ const PopularPosts = ({ posts }) => {
             {catLabel}
           </span>
           <Link
-            to={`/${post?.slug}/${post?._id}`}
+            to={`/blog/${post?.slug}/${post?._id}`}
             className="text-black dark:text-white text-justify"
           >
             {post?.title.slice(0, 80) + "..."}
           </Link>
           <div className="flex gap-2 text-sm">
             <span className="font-medium">{post?.user?.name}</span>
-            <span className="text-gray-500">
+            <span className="text-gray-700 dark:text-slate-400">
               Ngày {moment(post?.createdAt).format("LL")}
             </span>
           </div>
@@ -48,7 +48,7 @@ const PopularPosts = ({ posts }) => {
 
   return (
     <div className="w-full flex flex-col gap-8">
-      <p className="text-xl font-bold -mb-3 text-gray-600 dark:text-slate-500">
+      <p className="text-xl font-bold -mb-3 text-gray-700 dark:text-slate-200">
         Các bài viết phổ biến
       </p>
       {posts?.map((post, id) => (

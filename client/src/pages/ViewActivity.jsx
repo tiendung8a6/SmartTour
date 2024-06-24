@@ -100,7 +100,7 @@ const ViewActivity = () => {
     <div className="px-[100px] mb-10">
       <Link to={`/trip/${id}`}>
         <Button
-          className="border-none hover:text-[#0782c5] hover:bg-transparent flex justify-start ml-[-20px] "
+          className="dark:bg-inherit border-none hover:text-[#0782c5] hover:bg-transparent flex justify-start ml-[-20px] "
           leftSection={<IconArrowLeft className="text-[#0782c5]" size={30} />}
           variant="default"
           color="#0782c5"
@@ -119,8 +119,8 @@ const ViewActivity = () => {
       <br />
 
       <div>
-        <div className="max-w-full bg-white flex flex-col rounded overflow-hidden shadow-lg">
-          <div className="flex flex-row items-center flex-nowrap bg-gray-100 p-2">
+        <div className="dark:bg-gray-700 max-w-full flex flex-col rounded overflow-hidden shadow-lg">
+          <div className="dark:bg-gray-800 flex flex-row items-center flex-nowrap bg-gray-100 p-2">
             <div className="flex items-center text-sky-600">
               <IconWalk size="2rem" stroke={2} />
             </div>
@@ -130,29 +130,37 @@ const ViewActivity = () => {
           </div>
           <div className="mt-2 flex sm:flex-row mx-6 sm:justify-between flex-wrap ">
             <div className="flex flex-col p-2">
-              <p className="font-bold">{startTime}</p>
-              <p className="text-gray-500">
-                <span className="font-bold">Ngày bắt đầu: </span>
+              <p className="font-bold dark:text-white">{startTime}</p>
+              <p className="text-gray-500 dark:text-gray-400">
+                <span className="font-bold dark:text-white">
+                  Ngày bắt đầu:{" "}
+                </span>
                 {moment(startDate).format("LL")}
               </p>
-              <p className="text-gray-500">{startAddress}</p>
+              <p className="text-gray-500 dark:text-gray-400">{startAddress}</p>
             </div>
             <div className="flex flex-col flex-wrap p-2">
               <p className="font-bold">{endTime}</p>
-              <p className="text-gray-500">
-                <span className="font-bold">Ngày kết thúc: </span>
+              <p className="text-gray-500 dark:text-gray-400">
+                <span className="font-bold dark:text-white">
+                  Ngày kết thúc:{" "}
+                </span>
                 {moment(endDate).format("LL")}
               </p>
-              <p className="text-gray-500">{startAddress}</p>
+              <p className="text-gray-500 dark:text-gray-400">{startAddress}</p>
             </div>
             <div className="flex flex-row place-items-center p-2">
               <div className="flex flex-col ml-2">
-                <p className="text-xs text-black font-bold">Thông tin</p>
-                <p className="text-xs text-gray-500">{info}</p>
+                <p className="text-base text-black font-bold dark:text-white">
+                  Thông tin
+                </p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  {info}
+                </p>
               </div>
             </div>
           </div>
-          <div className="mt-4 bg-gray-100 flex flex-row flex-wrap md:flex-nowrap justify-between">
+          <div className="dark:bg-gray-800 mt-4 bg-gray-100 flex flex-row flex-wrap md:flex-nowrap justify-between">
             <div className="flex mx-6 py-4 flex-row flex-wrap items-center">
               <QRCode
                 id="qrCodeEl"
@@ -162,29 +170,6 @@ const ViewActivity = () => {
                 bgColor={"#FFFFFF"}
                 level={"M"}
               />
-
-              {/* <div className="text-sm mx-2 flex flex-col space-y-2">
-                <div className="flex items-center text-xs text-sky-700 ">
-                  <IconInfoTriangle size="1rem" stroke={2} className="mr-2" />
-                  <span className="max-w-[200px] break-words">{info}</span>
-                </div>
-                <div className="flex items-center text-xs text-sky-700">
-                  <IconPhone size="1rem" stroke={2} className="mr-2" />
-                  <a href={`tel:${phone}`}>{phone}</a>
-                </div>
-                <div className="flex items-center text-xs text-sky-700">
-                  <IconWorld size="1rem" stroke={2} className="mr-2" />
-                  <a href={`${web}`} target="_blank" rel="noreferrer">
-                    {web}
-                  </a>
-                </div>
-                <div className="flex items-center text-xs text-sky-700">
-                  <IconMail size="1rem" stroke={2} className="mr-2" />
-                  <span>
-                    <a href={`mailto:${email}`}>{email}</a>
-                  </span>
-                </div>
-              </div> */}
             </div>
             <div className="md:border-l-2 mx-6 md:border-dotted flex flex-row items-center py-4 mr-6 flex-wrap">
               <IconWalk
@@ -192,13 +177,17 @@ const ViewActivity = () => {
                 stroke={2}
               />
 
-              <div className="text-sm mx-2 flex flex-col">
-                <p className="text-black">
-                  <span className="font-bold">Chi phí dự kiến: </span>
+              <div className="text-sm mx-2 flex flex-col ">
+                <p className="text-black dark:text-sky-500">
+                  <span className="font-bold dark:text-white">
+                    Chi phí dự kiến:{" "}
+                  </span>
                   {formatCurrency(estimatedPrice)}
                 </p>
-                <p className="text-black">
-                  <span className="font-bold">Chi phí thực tế: </span>
+                <p className="text-black dark:text-sky-500">
+                  <span className="font-bold dark:text-white">
+                    Chi phí thực tế:{" "}
+                  </span>
                   {formatCurrency(actualPrice)}
                 </p>
               </div>

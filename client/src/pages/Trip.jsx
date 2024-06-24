@@ -17,6 +17,7 @@ const Trip = () => {
               leftSection={
                 <IconLuggage style={{ width: rem(15), height: rem(15) }} />
               }
+              className="dark:text-white dark:hover:bg-slate-700"
             >
               Chuyến đi của tôi
             </Tabs.Tab>
@@ -26,6 +27,7 @@ const Trip = () => {
               leftSection={
                 <IconAirBalloon style={{ width: rem(15), height: rem(15) }} />
               }
+              className="dark:text-white dark:hover:bg-slate-700"
             >
               Chuyến đi công khai
             </Tabs.Tab>

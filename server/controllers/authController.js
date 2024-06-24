@@ -1,5 +1,6 @@
 import Users from "../models/userModel.js";
 import Contacts from "../models/contactModel.js";
+import Notifications from "../models/notificationModel.js";
 
 import { compareString, createJWT, hashString } from "../utils/index.js";
 import { sendVerificationEmail } from "../utils/sendEmail.js";
@@ -35,6 +36,14 @@ export const register = async (req, res, next) => {
       image,
       accountType,
       provider,
+      points: 100, // Add 100 reward points by default
+    });
+
+    // Create a notification
+    await Notifications.create({
+      user: user._id,
+      pointsDeducted: 100,
+      reason: "Nhận được 100 điểm thưởng dành cho người dùng mới",
     });
 
     user.password = undefined;
@@ -75,6 +84,14 @@ export const googleSignUp = async (req, res, next) => {
       image,
       provider: "Google",
       emailVerified,
+      points: 100, // Add 100 reward points by default
+    });
+
+    // Create a notification
+    await Notifications.create({
+      user: user._id,
+      pointsDeducted: 100,
+      reason: "Nhận được 100 điểm thưởng dành cho người dùng mới",
     });
 
     user.password = undefined;
@@ -254,7 +271,7 @@ export const forgotPassword = async (req, res, next) => {
     const mailOptions = {
       from: AUTH_EMAIL,
       to: email,
-      subject: "Password Reset",
+      subject: "Đổi mật khẩu SmartTour",
       html: `<div
       style='font-family: Arial, sans-serif; font-size: 20px; color: #333; background-color: #f7f7f7; padding: 20px; border-radius: 5px;'>
       <h3 style="color: rgb(8, 56, 188)">Password Reset Request</h3>

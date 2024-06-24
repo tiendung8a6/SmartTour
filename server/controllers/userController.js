@@ -71,7 +71,7 @@ export const OPTVerification = async (req, res, next) => {
     if (expiresAt < Date.now()) {
       await Verification.findOneAndDelete({ userId });
 
-      const message = "Mã thông báo xác minh đã hết hạn.";
+      const message = "Mã xác thực người dùng đã hết hạn.";
       res.status(404).json({ message });
     } else {
       const isMatch = await compareString(otp, token);

@@ -26,6 +26,8 @@ export const createTrip = async (req, res, next) => {
       });
     }
 
+    // Kiểm tra số điểm hiện tại của người dùng ==> Kiểm tra bên Client
+
     // Tạo trip mới
     const trip = await Trips.create({
       user: userId,
@@ -41,12 +43,21 @@ export const createTrip = async (req, res, next) => {
       receivedPoints: status,
     });
 
+    // Trừ 10 điểm của người dùng
+    await Users.findByIdAndUpdate(userId, { $inc: { points: -20 } });
+    await Notifications.create({
+      user: userId,
+      pointsDeducted: -20,
+      reason: `Trừ 20 điểm vì đã tạo chuyến đi ${trip.tripName}`,
+    });
+
+    // Thêm điểm nếu chuyến đi được công khai
     if (status) {
-      await Users.findByIdAndUpdate(userId, { $inc: { points: 10 } });
+      await Users.findByIdAndUpdate(userId, { $inc: { points: 5 } });
       await Notifications.create({
         user: userId,
-        pointsDeducted: 10,
-        reason: `Nhận được 10 điểm vì đã công khai chuyến đi ${trip.tripName}`,
+        pointsDeducted: 5,
+        reason: `Nhận được 5 điểm vì đã công khai chuyến đi ${trip.tripName}`,
       });
     }
 
@@ -216,7 +227,7 @@ export const updateTrip = async (req, res, next) => {
       });
       await Notifications.create({
         user: req.body.user.userId,
-        pointsDeducted: +10,
+        pointsDeducted: 10,
         reason: `Nhận được 10 điểm vì đã công khai chuyến đi ${trip.tripName}`,
       });
     }

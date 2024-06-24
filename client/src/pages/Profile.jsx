@@ -136,7 +136,7 @@ const Profile = () => {
             }
             className="mt-[20px] mb-[10px] hover:bg-gray-100 hover:text-black"
           >
-            Viết Blog
+            Viết blog
           </Tabs.Tab>
 
           <Tabs.Tab

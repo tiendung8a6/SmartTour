@@ -79,7 +79,9 @@ function App() {
 
   return (
     <main className={theme}>
-      <div className={`w-full min-h-sreen relative dark:bg-[#020b19] bg-white`}>
+      <div
+        className={`w-full min-h-screen relative dark:bg-[#05132b] bg-white`}
+      >
         <Routes>
           <Route element={<Layout />}>
             {/* <Route path="/" /> */}
@@ -92,10 +94,13 @@ function App() {
             <Route path="/cancel" element={<Cancel />} />
             <Route path="/success" element={<Success />} />
             <Route path="/notification" element={<Notification />} />
-            <Route path="/checkout/:paymentType" element={<Checkout />} />
-            <Route path="/category" element={<CategoryPage />} />
-            <Route path="/:slug/:id?" element={<BlogDetail />} />
-            <Route path="/writer/:id" element={<WriterPage />} />
+            <Route
+              path="/pricing/checkout/:paymentType"
+              element={<Checkout />}
+            />
+            <Route path="/blog/category" element={<CategoryPage />} />
+            <Route path="/blog/:slug/:id?" element={<BlogDetail />} />
+            <Route path="/blog/writer/:id" element={<WriterPage />} />
             <Route path="/travel-guide" element={<TravelGuide />} />
             <Route path="/trip" element={<Trip />} />
             <Route path="/my-trips" element={<MyTripsPanel />} />

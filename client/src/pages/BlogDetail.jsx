@@ -54,13 +54,13 @@ const BlogDetail = () => {
               {post?.cat?.label}
             </span>
 
-            <span className="flex flex-1 items-baseline text-2xl font-medium text-slate-700 dark:text-gray-400">
+            <span className="flex flex-1 items-baseline text-2xl font-medium text-slate-700 dark:text-gray-300">
               {post?.views?.length}
               <span className="pl-2 text-base text-sky-600"> Lượt xem</span>
             </span>
           </div>
 
-          <Link to={`/writer/${post?.user?._id}`} className="flex gap-3">
+          <Link to={`/blog/writer/${post?.user?._id}`} className="flex gap-3">
             <img
               src={post?.user?.image}
               alt={post?.user?.name}
@@ -70,7 +70,7 @@ const BlogDetail = () => {
               <p className="text-slate-800 dark:text-white font-medium">
                 {post?.user?.name}
               </p>
-              <span className="text-slate-600">
+              <span className="text-slate-600 dark:text-gray-400">
                 Ngày {moment(post?.createdAt).format("LL")}
               </span>
             </div>
@@ -83,9 +83,9 @@ const BlogDetail = () => {
         />
       </div>
 
-      <div className="w-full flex flex-col md:flex-row gapx-10 2xl:gap-x-28 mt-10">
+      <div className="w-full flex flex-col md:flex-row gap-10 2xl:gap-x-28 mt-10">
         {/* LEFT */}
-        <div className="w-full md:w-2/3 flex flex-col text-black dark:text-gray-500 ">
+        <div className="w-full md:w-2/3 flex flex-col text-black dark:text-gray-200">
           {post?.desc && (
             <Markdown
               options={{ wrapper: "article" }}

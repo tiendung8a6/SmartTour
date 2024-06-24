@@ -23,7 +23,7 @@ const List = ({ data, isLoading, child, filter }) => {
           </div>
         ) : (
           <div
-            className="px-4 py-2 pt-3 overflow-y-scroll"
+            className="px-4 py-2 pt-3 overflow-y-scroll "
             style={{ maxWidth: "100%", height: "100%" }}
           >
             {data && data.length > 0 ? (
@@ -55,7 +55,7 @@ const List = ({ data, isLoading, child, filter }) => {
                 );
               })
             ) : (
-              <div className="text-center text-xl font-bold text-gray-500 mt-4">
+              <div className="text-center text-xl font-bold text-gray-500 mt-4 dark:text-gray-300">
                 500 | Hệ thống hiện đang bảo trì. Vui lòng thử lại sau !
               </div>
             )}
@@ -97,7 +97,7 @@ const Detail = ({ el, img, newaddress, child, refProp, index }) => {
         </a>
         <div className="pl-10 col-span-3 flex flex-col space-y-3 pr-8 text-left">
           <a
-            className="mt-3 overflow-hidden text-2xl font-semibold hover:text-gray-900"
+            className="mt-3 overflow-hidden text-2xl font-semibold hover:text-gray-900 dark:text-white"
             href={el.web_url}
             target="_blank"
             rel="noreferrer"
@@ -123,7 +123,9 @@ const Detail = ({ el, img, newaddress, child, refProp, index }) => {
                 <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
               </svg>
             </span>
-            <span>{el.address ? el.address : "Đang cập nhật"}. </span>
+            <span className="dark:text-gray-400">
+              {el.address ? el.address : "Đang cập nhật"}.{" "}
+            </span>
           </div>
 
           <div className="flex text-sm text-gray-600 items-center">
@@ -144,12 +146,19 @@ const Detail = ({ el, img, newaddress, child, refProp, index }) => {
                 <path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
               </svg>
             </span>
-            <span>{el.phone ? el.phone : "Đang cập nhật"}</span>
+            <span className="dark:text-gray-400">
+              {el.phone ? el.phone : "Đang cập nhật"}
+            </span>
           </div>
 
           <div className="text-sm text-gray-600" href="#">
-            <span className="font-semibold text-gray-500">Xếp hạng: </span>
-            {el.ranking ? el.ranking : "Đang cập nhật"}
+            <span className="font-semibold text-gray-500 dark:text-gray-200">
+              Xếp hạng:{" "}
+            </span>
+            <span className="dark:text-gray-400">
+              {" "}
+              {el.ranking ? el.ranking : "Đang cập nhật"}
+            </span>
           </div>
 
           <div className="flex flex-col text-gray-700 sm:flex-row">
@@ -159,7 +168,7 @@ const Detail = ({ el, img, newaddress, child, refProp, index }) => {
                   ? "Mở cửa"
                   : "Đóng cửa"}
               </div>
-              <div className="rounded-full bg-blue-100 px-2 py-0.5 text-blue-700">
+              <div className="rounded-full bg-orange-100 px-2 py-0.5 text-orange-700">
                 {Math.floor(
                   el.distance
                     ? el.distance
@@ -195,10 +204,10 @@ const Detail = ({ el, img, newaddress, child, refProp, index }) => {
               {/* <Money />   //API đã có sắn  */}
             </span>
             <a
-              href={el.website}
+              href={el.website || el.web_url}
               target="_blank"
               rel="noreferrer"
-              className="my-5 rounded-md px-5 py-2 text-center transition hover:scale-105 bg-orange-600 text-white sm:ml-auto"
+              className="my-5 rounded-md px-5 py-2 text-center transition hover:scale-105 bg-sky-600 text-white sm:ml-auto"
             >
               Website
             </a>

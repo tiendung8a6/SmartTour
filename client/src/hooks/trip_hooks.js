@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import useStore from "../store";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { updateURL } from "../utils";
@@ -65,4 +66,26 @@ export const useTrips = () => {
     numOfPages,
     setPage,
   };
+};
+
+export const useDeleteTrip = (toast, token) => {
+  return useMutation({
+    mutationFn: async (id) => {
+      const { data } = await axios.delete(`${REACT_APP_API_URL}/trips/` + id, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return data;
+    },
+    onError: (error) => {
+      toast.error(error?.response?.data?.message ?? error.message);
+    },
+    onSuccess: (data) => {
+      toast.success(data?.message);
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
+    },
+  });
 };

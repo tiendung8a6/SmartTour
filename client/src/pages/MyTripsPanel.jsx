@@ -38,9 +38,9 @@ const MyTripsPanel = () => {
         <div className="w-full flex justify-between items-center flex-wrap py-5 gap-7">
           <Link
             to={`/trip/create`}
-            className={`flex items-center justify-center gap-3  dark:border-gray-600  text-[#0782c5] dark:text-white font-semibold text-base  mt-[-10px] cursor-pointer`}
+            className={`flex items-center justify-center gap-3  dark:border-gray-600 text-[#0782c5] dark:text-sky-500 font-semibold text-base  mt-[-10px] cursor-pointer`}
           >
-            <span className="border rounded-full border-[#0782c5]">
+            <span className="border rounded-full border-[#0782c5] ">
               <IconPlus stroke={2} />
             </span>
             Thêm chuyến đi

@@ -116,7 +116,7 @@ const ViewTheater = () => {
     <div className="px-[100px] mb-10">
       <Link to={`/trip/${id}`}>
         <Button
-          className="border-none hover:text-[#0782c5] hover:bg-transparent flex justify-start ml-[-20px] "
+          className="dark:bg-inherit border-none hover:text-[#0782c5] hover:bg-transparent flex justify-start ml-[-20px] "
           leftSection={<IconArrowLeft className="text-[#0782c5]" size={30} />}
           variant="default"
           color="#0782c5"
@@ -135,8 +135,8 @@ const ViewTheater = () => {
       <br />
 
       <div>
-        <div className="max-w-full bg-white flex flex-col rounded overflow-hidden shadow-lg">
-          <div className="flex flex-row items-center flex-nowrap bg-gray-100 p-2">
+        <div className="dark:bg-gray-700 max-w-full bg-white flex flex-col rounded overflow-hidden shadow-lg">
+          <div className="dark:bg-gray-800 flex flex-row items-center flex-nowrap bg-gray-100 p-2">
             <div className="flex items-center text-sky-600">
               <IconMasksTheater size="2rem" stroke={2} />
             </div>
@@ -146,31 +146,43 @@ const ViewTheater = () => {
           </div>
           <div className="mt-2 flex sm:flex-row mx-6 sm:justify-between flex-wrap ">
             <div className="flex flex-col p-2">
-              <p className="font-bold">{startTime}</p>
-              <p className="text-gray-500">
-                <span className="font-bold">Ngày bắt đầu: </span>
+              <p className="font-bold dark:text-white">{startTime}</p>
+              <p className="text-gray-500 dark:text-gray-400">
+                <span className="font-bold dark:text-white">
+                  Ngày bắt đầu:{" "}
+                </span>
                 {moment(startDate).format("LL")}
               </p>
-              <p className="text-gray-500">{startAddress}</p>
+              <p className="text-gray-500 dark:text-gray-400">{startAddress}</p>
             </div>
             <div className="flex flex-col flex-wrap p-2">
               <p className="font-bold">{endTime}</p>
-              <p className="text-gray-500">
-                <span className="font-bold">Ngày kết thúc: </span>
+              <p className="text-gray-500 dark:text-gray-400">
+                <span className="font-bold dark:text-white">
+                  Ngày kết thúc:{" "}
+                </span>
                 {moment(endDate).format("LL")}
               </p>
-              <p className="text-gray-500">{startAddress}</p>
+              <p className="text-gray-500 dark:text-gray-400">{startAddress}</p>
             </div>
             <div className="flex flex-row place-items-center p-2">
               <div className="flex flex-col ml-2">
-                <p className="text-xs text-black font-bold">Thông tin ghế</p>
-                <p className="text-xs text-gray-500">loại ghế: {form}</p>
-                <p className="text-xs text-gray-500">Số ghế: {number}</p>
-                <p className="text-xs text-gray-500">Cổng: {departureGate}</p>
+                <p className="text-base text-black font-bold dark:text-white">
+                  Thông tin ghế
+                </p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  Loại ghế: {form}
+                </p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  Số ghế: {number}
+                </p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  Cổng: {departureGate}
+                </p>
               </div>
             </div>
           </div>
-          <div className="mt-4 bg-gray-100 flex flex-row flex-wrap md:flex-nowrap justify-between">
+          <div className="dark:bg-gray-800 mt-4 bg-gray-100 flex flex-row flex-wrap md:flex-nowrap justify-between">
             <div className="flex mx-6 py-4 flex-row flex-wrap items-center">
               <QRCode
                 id="qrCodeEl"
@@ -210,13 +222,17 @@ const ViewTheater = () => {
                 stroke={2}
               />
 
-              <div className="text-sm mx-2 flex flex-col">
-                <p className="text-black">
-                  <span className="font-bold">Giá vé dự kiến: </span>
+              <div className="text-sm mx-2 flex flex-col ">
+                <p className="text-black dark:text-sky-500">
+                  <span className="font-bold dark:text-white">
+                    Giá vé dự kiến:{" "}
+                  </span>
                   {formatCurrency(estimatedPrice)}
                 </p>
-                <p className="text-black">
-                  <span className="font-bold">Giá vé thực tế: </span>
+                <p className="text-black dark:text-sky-500">
+                  <span className="font-bold dark:text-white">
+                    Giá vé thực tế:{" "}
+                  </span>
                   {formatCurrency(actualPrice)}
                 </p>
               </div>

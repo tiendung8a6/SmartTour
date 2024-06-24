@@ -12,14 +12,14 @@ const Cancel = () => {
         />
       </div>
       <div className="w-full lg:w-1/2">
-        <h1 className="py-4 text-3xl lg:text-4xl font-bold text-gray-800">
+        <h1 className="py-4 text-3xl lg:text-4xl font-bold text-gray-800 dark:text-white">
           Rất tiếc! Giao dịch của bạn không thể hoàn tất
         </h1>
-        <p className="py-4 text-base text-gray-800 text-justify">
+        <p className="py-4 text-base text-gray-800 text-justify dark:text-gray-400">
           Đã xảy ra lỗi trong quá trình xử lý. Có thể do vấn đề với phương thức
           thanh toán của bạn hoặc sự cố tạm thời.
         </p>
-        <p className="py-2 text-base text-gray-800 text-justify">
+        <p className="py-2 text-base text-gray-800 text-justify dark:text-gray-400">
           Chúng tôi xin lỗi vì sự bất tiện này! Vui lòng thử lại hoặc truy cập
           trang liên hệ của chúng tôi để được trợ giúp thêm.
         </p>
