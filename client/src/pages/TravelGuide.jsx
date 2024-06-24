@@ -18,7 +18,7 @@ const getRandomLoadingMessage = (place) => {
 const Header = ({ place, setPlace, handleSearch }) => (
   <header>
     <div className="prose">
-      <h1 className="mt-0 mb-6 font-bold text-gray-900 text-center text-3xl">
+      <h1 className="mt-0 mb-6 font-bold text-gray-900 text-center text-3xl dark:text-white">
         Hướng dẫn du lịch với AI hỗ trợ
       </h1>
     </div>
@@ -33,7 +33,7 @@ const Header = ({ place, setPlace, handleSearch }) => (
             handleSearch();
           }
         }}
-        className="flex-grow min-w-0 px-4 py-2 mr-4 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="dark:bg-white dark:text-black text-black flex-grow min-w-0 px-4 py-2 mr-4 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
       <button
         className="px-4 py-2 text-lg text-white bg-sky-500 hover:bg-sky-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500/50"
@@ -124,8 +124,10 @@ const About = () => {
     <div className="grid mt-10 gap-8 lg:grid-cols-3">
       {aboutLists.map(({ title, items }) => (
         <div key={title} className="prose">
-          <h2 className="mt-0 mb-4 font-bold text-gray-900">{title}</h2>
-          <ul className="pl-5">
+          <h2 className="mt-0 mb-4 font-bold text-gray-900 dark:text-sky-500">
+            {title}
+          </h2>
+          <ul className="pl-5 dark:text-gray-400">
             {items.map((item) => (
               <li key={item}>{item}</li>
             ))}

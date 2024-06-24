@@ -77,28 +77,36 @@ const Checkout = () => {
   };
   return (
     <>
-      <div className="flex flex-col items-center border-b bg-white py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32"></div>
+      <div className="flex flex-col items-center border-b py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32 dark:border-transparent"></div>
       <div className="grid sm:px-10 lg:grid-cols-2 lg:px-20 xl:px-32">
         <div className="px-4 pt-8">
-          <p className="text-xl font-medium">Thông Tin Tổng Quan</p>
-          <p className="text-gray-400">
+          <p className="text-xl font-medium dark:text-white">
+            Thông Tin Tổng Quan
+          </p>
+          <p className="text-gray-400 dark:text-gray-400">
             Kiểm tra thông tin. Và lựa chọn phương thức thanh toán phù hợp.
           </p>
-          <div className="mt-8 space-y-3 rounded-lg border bg-white px-2 py-4 sm:px-6">
-            <div className="flex flex-col rounded-lg bg-white sm:flex-row">
+          <div className="mt-8 space-y-3 rounded-lg border  px-2 py-4 sm:px-6">
+            <div className="flex flex-col rounded-lg sm:flex-row">
               <img
                 className="m-2 h-24 w-28 rounded-md border object-cover object-center"
                 src="https://firebasestorage.googleapis.com/v0/b/smarttour-mern.appspot.com/o/17164768997521.png?alt=media&token=0dc98415-9cb9-4431-a5fa-b91b618efa58"
                 alt=""
               />
               <div className="flex w-full flex-col px-4 py-4">
-                <span className="font-semibold">{name}</span>
-                <span className="float-right text-gray-400">{points} Điểm</span>
-                <p className="text-lg font-bold">{formatCurrency(amount)}</p>
+                <span className="font-semibold dark:text-sky-500">{name}</span>
+                <span className="float-right text-gray-400 dark:text-white">
+                  {points} Điểm
+                </span>
+                <p className="text-lg font-bold dark:text-red-500">
+                  {formatCurrency(amount)}
+                </p>
               </div>
             </div>
           </div>
-          <p className="mt-8 text-lg font-medium">Phương Thức Thanh Toán</p>
+          <p className="mt-8 text-lg font-medium pb-2 dark:text-white">
+            Phương Thức Thanh Toán
+          </p>
           <div className="relative">
             <input
               className="peer hidden"
@@ -108,9 +116,9 @@ const Checkout = () => {
               checked={paymentMethods === "vnpay"}
               onChange={() => setPaymentMethods("vnpay")}
             />
-            <span className="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white" />
+            <span className="dark:peer-checked:bg-sky-500 peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 " />
             <label
-              className="peer-checked:border-2 peer-checked:border-sky-600 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
+              className="dark:bg-inherit dark:peer-checked:bg-inherit peer-checked:border-2 peer-checked:border-sky-600 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
               htmlFor="radio_1"
             >
               <img
@@ -119,8 +127,10 @@ const Checkout = () => {
                 alt=""
               />
               <div className="ml-5">
-                <span className="mt-2 font-semibold">Thanh toán VNPAY </span>
-                <p className="text-slate-500 text-sm leading-6">
+                <span className="mt-2 font-semibold dark:text-white">
+                  Thanh toán VNPAY
+                </span>
+                <p className="text-slate-500 text-sm leading-6 dark:text-gray-400">
                   Xử lý: 1-2 phút
                 </p>
               </div>
@@ -137,9 +147,9 @@ const Checkout = () => {
                 checked={paymentMethods === "stripe"}
                 onChange={() => setPaymentMethods("stripe")}
               />
-              <span className="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white" />
+              <span className="dark:peer-checked:bg-sky-500 peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 " />
               <label
-                className="peer-checked:border-2 peer-checked:border-sky-600 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
+                className="dark:bg-inherit peer-checked:border-2 peer-checked:border-sky-600 peer-checked:bg-gray-50 dark:peer-checked:bg-inherit flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
                 htmlFor="radio_2"
               >
                 <img
@@ -148,8 +158,10 @@ const Checkout = () => {
                   alt=""
                 />
                 <div className="ml-5">
-                  <span className="mt-2 font-semibold">Thanh Toán Stripe</span>
-                  <p className="text-slate-500 text-sm leading-6">
+                  <span className="mt-2 font-semibold dark:text-white">
+                    Thanh Toán Stripe
+                  </span>
+                  <p className="text-slate-500 text-sm leading-6 dark:text-gray-400">
                     Xử lý: 1-2 phút
                   </p>
                 </div>
@@ -157,9 +169,11 @@ const Checkout = () => {
             </div>
           </form>
         </div>
-        <div className="mt-10 bg-gray-50 px-4 pt-8 lg:mt-0">
-          <p className="text-xl font-medium">Thông tin tài khoản</p>
-          <p className="text-gray-400">
+        <div className="mt-10 bg-gray-100 px-4 pt-8 lg:mt-0 dark:bg-[#1a2537] ">
+          <p className="text-xl font-medium dark:text-white">
+            Thông tin tài khoản
+          </p>
+          <p className="text-gray-400 dark:text-gray-400">
             Hoàn tất quá trình thanh toán của bạn bằng cách cung cấp chi tiết
             thông tin bên dưới.
           </p>
@@ -167,7 +181,7 @@ const Checkout = () => {
             {/* EMAIL */}
             <label
               htmlFor="email"
-              className="mt-4 mb-2 block text-sm font-medium"
+              className="mt-4 mb-2 block text-sm font-medium dark:text-white "
             >
               Email <span className="text-red-500">*</span>
             </label>
@@ -177,13 +191,13 @@ const Checkout = () => {
                 id="email"
                 name="email"
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
+                className="dark:bg-white dark:text-black w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
                 placeholder="email@gmail.com"
               />
               <div className="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4 text-gray-400"
+                  className="h-4 w-4 text-gray-400 dark:text-gray-700"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -200,7 +214,7 @@ const Checkout = () => {
             {/* SDT */}
             <label
               htmlFor="card-holder"
-              className="mt-4 mb-2 block text-sm font-medium"
+              className="mt-4 mb-2 block text-sm font-medium dark:text-white"
             >
               Số Điện Thoại <span className="text-red-500">*</span>
             </label>
@@ -212,13 +226,13 @@ const Checkout = () => {
                 min="0"
                 step="1"
                 onChange={(e) => setPhone(e.target.value)}
-                className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
+                className="dark:bg-white dark:text-black w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
                 placeholder="Nhập số điện thoại"
               />
               <div className="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4 text-gray-400"
+                  className="h-4 w-4 text-gray-400 dark:text-gray-700"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -235,26 +249,34 @@ const Checkout = () => {
             {/* Total */}
             <div className="mt-6 border-t border-b py-2">
               <div className="flex items-center justify-between">
-                <p className="text-sm font-medium text-gray-900">Giá Tiền</p>
-                <p className="font-semibold text-gray-900">
+                <p className="text-sm font-medium text-gray-900 dark:text-white">
+                  Giá Tiền
+                </p>
+                <p className="font-semibold text-gray-900 dark:text-white">
                   {formatCurrency(amount)}
                 </p>
               </div>
               <div className="flex items-center justify-between">
-                <p className="text-sm font-medium text-gray-900">Điểm</p>
-                <p className="font-semibold text-gray-900 ">{points} Điểm</p>
+                <p className="text-sm font-medium text-gray-900 dark:text-white">
+                  Điểm
+                </p>
+                <p className="font-semibold text-gray-900 dark:text-white">
+                  {points} Điểm
+                </p>
               </div>
             </div>
             <div className="mt-6 flex items-center justify-between">
-              <p className="text-sm font-medium text-gray-900">Tổng</p>
-              <p className="text-2xl font-semibold text-gray-900">
+              <p className="text-sm font-medium text-gray-900 dark:text-white">
+                Tổng
+              </p>
+              <p className="text-2xl font-semibold text-gray-900 dark:text-sky-500">
                 {formatCurrency(amount)}
               </p>
             </div>
           </div>
           <button
             onClick={handlePayment}
-            className="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white"
+            className="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white hover:bg-slate-800 dark:bg-sky-800 dark:hover:bg-sky-700 "
           >
             Thanh Toán
           </button>

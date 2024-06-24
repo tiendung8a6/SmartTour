@@ -207,7 +207,7 @@ const EditActivity = () => {
     <div className="px-[100px] mb-10">
       <Link to={`/trip/${id}`}>
         <Button
-          className="border-none hover:text-[#0782c5] hover:bg-transparent flex justify-start ml-[-20px] "
+          className="dark:bg-inherit border-none hover:text-[#0782c5] hover:bg-transparent flex justify-start ml-[-20px] "
           leftSection={<IconArrowLeft className="text-[#0782c5]" size={30} />}
           variant="default"
           color="#0782c5"
@@ -229,7 +229,7 @@ const EditActivity = () => {
         <Grid.Col span={{ base: 12, md: 7, lg: 7 }}>
           <Grid className="mb-6 mt-1">
             <Grid.Col span={{ base: 12, md: 12, lg: 12 }}>
-              <div className="w-full flex flex-col md:flex-row flex-wrap  ">
+              <div className="w-full flex flex-col md:flex-row flex-wrap">
                 <TextInput
                   withAsterisk
                   label="Tên sự kiện"

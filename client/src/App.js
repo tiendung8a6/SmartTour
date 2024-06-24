@@ -80,7 +80,7 @@ function App() {
   return (
     <main className={theme}>
       <div
-        className={`w-full min-h-screen relative dark:bg-[#05132b]  bg-white`}
+        className={`w-full min-h-screen relative dark:bg-[#05132b] bg-white`}
       >
         <Routes>
           <Route element={<Layout />}>
@@ -94,7 +94,10 @@ function App() {
             <Route path="/cancel" element={<Cancel />} />
             <Route path="/success" element={<Success />} />
             <Route path="/notification" element={<Notification />} />
-            <Route path="/checkout/:paymentType" element={<Checkout />} />
+            <Route
+              path="/pricing/checkout/:paymentType"
+              element={<Checkout />}
+            />
             <Route path="/blog/category" element={<CategoryPage />} />
             <Route path="/blog/:slug/:id?" element={<BlogDetail />} />
             <Route path="/blog/writer/:id" element={<WriterPage />} />

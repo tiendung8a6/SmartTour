@@ -85,7 +85,7 @@ const PostComments = ({ postId }) => {
             value={desc}
             required={true}
             placeholder="Nhập bình luận..."
-            className="dark:text-gray-500 bg-transparent w-full p-2 border border-gray-300 focus:outline-none focus:border-blue-600  focus:ring-blue-600 rounded"
+            className="dark:text-gray-300 bg-transparent w-full p-2 border border-gray-300 focus:outline-none focus:border-blue-600  focus:ring-blue-600 rounded"
           ></textarea>
 
           <div className="w-full flex justify-end mt-2">
@@ -106,14 +106,14 @@ const PostComments = ({ postId }) => {
         </Link>
       )}
 
-      <div className="w-full h-full flex flex-col gap-10 2xl:gap-y-14 px-2">
+      <div className="w-full h-full flex flex-col gap-10 2xl:gap-y-14 px-2 ">
         {comments?.length === 0 ? (
-          <span className="text-base text-slate-600">
+          <span className="text-base text-slate-600 dark:text-gray-300">
             Chưa có bình luận nào, hãy là người đầu tiên bình luận
           </span>
         ) : (
           comments?.map((el) => (
-            <div key={el?._id} className="w-full flex gap-4 items-start">
+            <div key={el?._id} className="w-full flex gap-4 items-start ">
               <img
                 src={el?.user?.image || Profile}
                 alt={el?.user?.name}

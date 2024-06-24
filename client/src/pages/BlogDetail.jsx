@@ -83,9 +83,9 @@ const BlogDetail = () => {
         />
       </div>
 
-      <div className="w-full flex flex-col md:flex-row gapx-10 2xl:gap-x-28 mt-10">
+      <div className="w-full flex flex-col md:flex-row gap-10 2xl:gap-x-28 mt-10">
         {/* LEFT */}
-        <div className="w-full md:w-2/3 flex flex-col text-black dark:text-gray-300 ">
+        <div className="w-full md:w-2/3 flex flex-col text-black dark:text-gray-200">
           {post?.desc && (
             <Markdown
               options={{ wrapper: "article" }}

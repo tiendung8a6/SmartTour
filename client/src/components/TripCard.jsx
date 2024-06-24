@@ -57,8 +57,7 @@ const TripCard = ({ trip, index }) => {
       {" "}
       <div
         key={trip?._id}
-        className={`w-full flex flex-col gap-8 items-center rounded
-    md:flex-row border `}
+        className={`w-full flex flex-col gap-8 items-center rounded md:flex-row border-2 dark:border dark:border-sky-500 `}
       >
         <div className="w-full md:w-full flex flex-col gap-3 py-[5px] px-[20px]  ">
           <h6 className=" text-[1.5rem] font-semibold text-[#0782c5] dark:text-white text-justify">
@@ -69,12 +68,14 @@ const TripCard = ({ trip, index }) => {
             </span>
           </h6>
           <div className=" flex gap-2 flex-col mt[-10px]">
-            <span>{trip?.city?.slice(0, 100)}</span>
-            <span className="text-sm text-gray-600">
+            <span className="dark:text-gray-400">
+              {trip?.city?.slice(0, 100)}
+            </span>
+            <span className="text-sm text-gray-600 dark:text-gray-400 ">
               {trip?.total?.slice(0, 120)}
             </span>
 
-            <span className="text-sm text-gray-600">
+            <span className="text-sm text-gray-600 dark:text-gray-400">
               {new Date(trip?.startDate).toLocaleDateString("vi-VN")} -
               {new Date(trip?.endDate).toLocaleDateString("vi-VN")} (
               {diffDays === 0 ? "1 ngày" : `${diffDays} ngày`})
@@ -85,8 +86,8 @@ const TripCard = ({ trip, index }) => {
                 variant="light"
                 color={
                   trip?.status === true
-                    ? "rgba(31, 105, 13, 1)"
-                    : "rgba(207, 2, 125, 1)"
+                    ? "rgb(8, 153, 30)"
+                    : "rgba(194, 21, 125, 1)"
                 }
               >
                 {trip?.status === true ? "Công khai" : "Chỉ mình tôi"}
@@ -106,12 +107,12 @@ const TripCard = ({ trip, index }) => {
                           className="text-[white] m-[1px] h-[17px] w-[17px] "
                         />
                       </span>
-                      <span className="ml-[10px] ">
-                        <div className="text-[#0782c5] flex items-center font-medium text-sm">
+                      <span className="ml-[10px]">
+                        <div className="text-[#0782c5] dark:text-sky-500 flex items-center font-medium text-sm">
                           Chia sẻ
                           <IconChevronDown
                             stroke={2}
-                            className="text-[#0782c5] ml-1 mt-[1px] h-[17px] w-[17px] "
+                            className="text-[#0782c5] dark:text-sky-500 ml-1 mt-[1px] h-[17px] w-[17px] "
                           />
                         </div>
                       </span>
@@ -149,8 +150,8 @@ const TripCard = ({ trip, index }) => {
               span={{ base: 12, md: 6, lg: 3 }}
               className="flex items-center"
             >
-              <span className="flex items-center">
-                <span className="bg-transparent border-[#0782c5] border rounded-full w-[24px] h-[24px] p-[2px]    ">
+              <span className="flex items-center ">
+                <span className="bg-transparent border-[#0782c5] border rounded-full w-[24px] h-[24px] p-[2px]  ">
                   <IconPencil
                     stroke={2}
                     className="text-[#0782c5] m-[1px] h-[17px] w-[17px] "
@@ -159,7 +160,7 @@ const TripCard = ({ trip, index }) => {
                 <span className="ml-[10px] ">
                   <Link
                     to={`/trip/${trip._id}/edit`}
-                    className="text-[#0782c5] flex items-center font-medium text-sm"
+                    className="text-[#0782c5] dark:text-sky-500 flex items-center font-medium text-sm"
                   >
                     Chỉnh sửa chuyến đi
                   </Link>
@@ -177,7 +178,7 @@ const TripCard = ({ trip, index }) => {
                       />
                     </span>
                     <span className="ml-[10px] ">
-                      <div className="text-[#0782c5] flex items-center font-medium text-sm">
+                      <div className="text-[#0782c5] dark:text-sky-500 flex items-center font-medium text-sm">
                         Lựa chọn khác
                         <IconChevronDown
                           stroke={2}

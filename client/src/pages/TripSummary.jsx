@@ -203,13 +203,15 @@ const TripSummary = () => {
       <div className="m-[50px] h-fit">
         <Link to="/trip">
           <Button
-            className="border-none hover:text-[#0782c5] hover:bg-transparent"
+            className="border-none hover:text-[#0782c5] hover:bg-transparent dark:bg-inherit"
             leftSection={<IconArrowLeft className="text-[#0782c5]" size={30} />}
             variant="default"
             color="#0782c5"
             size="md"
           >
-            <span className="text-[#0782c5]">Trở lại danh sách chuyến đi</span>
+            <span className="text-[#0782c5] dark:text-sky-500">
+              Trở lại danh sách chuyến đi
+            </span>
           </Button>
         </Link>
 
@@ -217,23 +219,27 @@ const TripSummary = () => {
           <div className="w-full md:w-full flex flex-col gap-3 py-[5px] px-[20px]">
             <h6 className="text-[1.5rem] font-semibold dark:text-white text-justify">
               <span>
-                <div>{trip?.tripName.slice(0, 70)}</div>
+                <div className="dark:text-white">
+                  {trip?.tripName.slice(0, 70)}
+                </div>
               </span>
             </h6>
             <div className="flex gap-2 flex-col mt-[10px]">
-              <span>{trip?.city?.slice(0, 100)}</span>
+              <span className="dark:text-gray-300">
+                {trip?.city?.slice(0, 100)}
+              </span>
 
-              <span className="text-sm text-gray-600">
+              <span className="text-sm text-gray-600 dark:text-gray-300">
                 {trip?.total?.slice(0, 100)}
               </span>
 
-              <span className="text-sm text-gray-600">
+              <span className="text-sm text-gray-600 dark:text-gray-300">
                 {new Date(trip?.startDate).toLocaleDateString("vi-VN")} -{" "}
                 {new Date(trip?.endDate).toLocaleDateString("vi-VN")} (
                 {diffDays === 0 ? "1 ngày" : `${diffDays} ngày`})
               </span>
 
-              <div className="flex gap-1 text-sm text-gray-600">
+              <div className="flex gap-1 text-sm text-gray-600 dark:text-gray-300">
                 Tổng chi phí dự kiến:
                 <NumberFormatter
                   thousandSeparator="."
@@ -248,7 +254,7 @@ const TripSummary = () => {
                 </span>
               </div>
 
-              <div className="flex gap-1 text-sm text-gray-600 ">
+              <div className="flex gap-1 text-sm text-gray-600 dark:text-gray-300 ">
                 Tổng chi phí thực tế:
                 <NumberFormatter
                   thousandSeparator="."
@@ -267,8 +273,8 @@ const TripSummary = () => {
                   variant="light"
                   color={
                     trip?.status === true
-                      ? "rgba(31, 105, 13, 1)"
-                      : "rgba(207, 2, 125, 1)"
+                      ? "rgb(8, 153, 30)"
+                      : "rgba(194, 21, 125, 1)"
                   }
                 >
                   {trip?.status === true ? "Công khai" : "Chỉ mình tôi"}
@@ -396,9 +402,9 @@ const TripSummary = () => {
 
         <Link
           to={`/trip/${trip._id}/plans/create`}
-          className="flex mx-auto h-[50px] w-fit p-4 shadow-xl border rounded-full  text-[#0782c5]"
+          className="flex mx-auto h-[50px] w-fit p-4 shadow-xl border rounded-full dark:border-sky-500 text-[#0782c5]"
         >
-          <span className="flex justify-center mt-[-3px]">
+          <span className="flex justify-center mt-[-3px] dark:text-sky-500 ">
             <IconCirclePlus stroke={2} className="mr-1" />
             Thêm kế hoạch
           </span>
@@ -482,7 +488,6 @@ const TripSummary = () => {
                             isLastItemOfDay ? "none" : ""
                           }`}
                         >
-                          {/* {`${item.planName} - ${item.typeTime === "start" ? "Start" : "End"}`}  */}
                           <br />
                         </div>
                       </div>
@@ -499,20 +504,18 @@ const TripSummary = () => {
                               : "text-black"
                           }`}
                       >
-                        <span className=" ml-5">
+                        <span className=" ml-5 dark:text-white">
                           {new Date(item.time).toLocaleDateString("vi-VN")}
                         </span>
                       </div>
                     )}
 
                     <Grid className="mt-[30px] flex">
-                      {/* <br /> */}
-                      {/* <div ></div> */}
                       <Grid.Col span={{ base: 12, md: 6, lg: 8 }}>
                         <Link
                           to={`/trip/${trip?._id}/${item?.type}/${item?._id}/view`}
                         >
-                          <span className="text-xl font-medium text-[#0d4d84f4]">
+                          <span className="text-xl font-medium text-[#0d4d84f4] dark:text-sky-500">
                             {`${item.planName} ${
                               item.typeTime === "start"
                                 ? "(Hoạt động bắt đầu )"
@@ -520,9 +523,9 @@ const TripSummary = () => {
                             } `}
                           </span>
                         </Link>
-                        <span className="">
+                        <span className="dark:text-gray-200">
                           {item.typeTime === "start" ? (
-                            <p className="my-5">
+                            <p className="my-5 ">
                               Ngày:{" "}
                               {new Date(item.time).toLocaleDateString("vi-VN")}
                             </p>
@@ -534,12 +537,12 @@ const TripSummary = () => {
                           )}
                         </span>
 
-                        <span>
+                        <span className="dark:text-gray-200">
                           {item.typeTime === "start" && item.startTime && (
                             <p className="my-5 ">Thời gian: {item.startTime}</p>
                           )}
                         </span>
-                        <span>
+                        <span className="dark:text-gray-200">
                           {item.typeTime === "start" && item.estimatedPrice && (
                             <p className="my-5">
                               Chi phí dự kiến:{" "}
@@ -552,7 +555,7 @@ const TripSummary = () => {
                             </p>
                           )}
                         </span>
-                        <span>
+                        <span className="dark:text-gray-200">
                           {item.typeTime === "start" && item.actualPrice && (
                             <p className="my-5">
                               Chi phí thực tế:{" "}
@@ -565,17 +568,17 @@ const TripSummary = () => {
                             </p>
                           )}
                         </span>
-                        <span>
+                        <span className="dark:text-gray-200">
                           {item.typeTime === "start" && item.startAddress && (
                             <p className="my-5">Địa chỉ: {item.startAddress}</p>
                           )}
                         </span>
-                        <span>
+                        <span className="dark:text-gray-200">
                           {item.typeTime === "end" && item.endTime && (
                             <p className="my-5">Thời gian: {item.endTime}</p>
                           )}
                         </span>
-                        <span>
+                        <span className="dark:text-gray-200">
                           {item.typeTime === "end" && item.estimatedPrice && (
                             <p className="my-5">
                               Chi phí dự kiến:{" "}
@@ -588,7 +591,7 @@ const TripSummary = () => {
                             </p>
                           )}
                         </span>
-                        <span>
+                        <span className="dark:text-gray-200">
                           {item.typeTime === "end" && item.actualPrice && (
                             <p className="my-5">
                               Chi phí thực tế:{" "}
@@ -602,7 +605,7 @@ const TripSummary = () => {
                           )}
                         </span>
 
-                        <span>
+                        <span className="dark:text-gray-200">
                           {item.typeTime === "end" && item.endAddress && (
                             <p className="my-5">Địa chỉ: {item.endAddress}</p>
                           )}

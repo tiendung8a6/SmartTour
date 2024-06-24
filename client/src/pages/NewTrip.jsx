@@ -158,23 +158,19 @@ const NewTrip = () => {
 
   return (
     <div className="px-[100px] ">
-      <p
-        className={`${
-          theme ? "text-white" : "text-slate-700"
-        } text-lg pb-1 font-semibold `}
-      >
+      <p className="text-slate-700 text-lg pb-1 font-semibold dark:text-white ">
         Thêm Chuyến Đi
       </p>
       <br />
 
       <Grid className="">
         <Grid.Col span={{ base: 12, md: 7, lg: 7 }}>
-          <p>
+          <p className="dark:text-gray-400">
             Lập kế hoạch chuyến đi là bước đầu tiên để khám phá những điều mới
             mẻ và tạo ra những kỷ niệm đáng nhớ.
           </p>
 
-          <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
+          <div className="dark:text-gray-300 w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
             <TextInput
               withAsterisk
               label="Tên chuyến đi"
@@ -185,7 +181,7 @@ const NewTrip = () => {
             />
           </div>
 
-          <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
+          <div className="dark:text-gray-300 w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
             <Autocomplete
               withAsterisk
               label="Thành phố"
@@ -197,7 +193,7 @@ const NewTrip = () => {
               filter={optionsFilter}
             />
           </div>
-          <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
+          <div className="dark:text-gray-300 w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
             <Autocomplete
               withAsterisk
               label="Số lượng người tham gia"
@@ -211,7 +207,7 @@ const NewTrip = () => {
           </div>
           <Grid className="mt-6">
             <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
-              <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
+              <div className="dark:text-gray-300 w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
                 <DateInput
                   leftSection={
                     <IconCalendarEvent className="text-[#107ac5]" size={24} />
@@ -229,7 +225,7 @@ const NewTrip = () => {
               </div>
             </Grid.Col>
             <Grid.Col span={{ base: 12, md: 6, lg: 6 }}>
-              <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
+              <div className="dark:text-gray-300 w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5">
                 <DateInput
                   leftSection={
                     <IconCalendarEvent className="text-[#107ac5]" size={24} />
@@ -247,7 +243,7 @@ const NewTrip = () => {
               </div>
             </Grid.Col>
           </Grid>
-          <div className="w-full flex items-end justify-start mt-2">
+          <div className="dark:text-gray-300 w-full flex items-end justify-start mt-2">
             <Switch
               color="indigo"
               label="Công khai chuyển đi"
@@ -257,7 +253,7 @@ const NewTrip = () => {
           </div>
           {status && (
             <>
-              <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
+              <div className="dark:text-gray-300 w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
                 <TextInput
                   withAsterisk
                   label="Mô tả"
@@ -267,7 +263,7 @@ const NewTrip = () => {
                   onChange={(e) => setDescription(e.target.value)}
                 />
               </div>
-              <div className="w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
+              <div className="dark:text-gray-300 w-full flex flex-col md:flex-row flex-wrap gap-5 mb-5 mt-6">
                 <TagsInput
                   withAsterisk
                   label="Tag nổi bật"
@@ -285,7 +281,7 @@ const NewTrip = () => {
             <span className="mr-1 font-medium text-red-600  items-center">
               Điều khoản:
             </span>
-            <span className=" items-center">
+            <span className="dark:text-gray-400 items-center">
               Việc lập kế hoạch chuyến đi sẽ khiến bạn bị trừ 20 điểm thưởng,
               nhưng bạn sẽ nhận lại được 5 điểm thưởng khi công khai chuyến đi.
               Để biết rõ hơn hãy xem{" "}
@@ -308,7 +304,7 @@ const NewTrip = () => {
               )}
             </div>
             <label
-              className="flex  gap-1 text-sm font-medium cursor-pointer mt-6 "
+              className="flex dark:text-gray-300 gap-1 text-sm font-medium cursor-pointer mt-6 "
               htmlFor="imgUpload"
             >
               <input
@@ -320,7 +316,7 @@ const NewTrip = () => {
                 accept=".jpg, .png, .jpeg"
               />
               <BiImages />
-              <span>Image</span>
+              <span className="dark:text-gray-300">Hình ảnh</span>
               <span className="text-rose-500 mr-[10px]">*</span>
             </label>
           </div>

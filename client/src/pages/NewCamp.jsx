@@ -139,7 +139,7 @@ const NewCamp = () => {
     <div className="px-[100px] mb-10">
       <Link to={`/trip/${trip?._id}/plans/create`}>
         <Button
-          className="border-none hover:text-[#0782c5] hover:bg-transparent flex justify-start ml-[-20px] "
+          className="dark:bg-inherit border-none hover:text-[#0782c5] hover:bg-transparent flex justify-start ml-[-20px] "
           leftSection={<IconArrowLeft className="text-[#0782c5]" size={30} />}
           variant="default"
           color="#0782c5"
@@ -301,7 +301,7 @@ const NewCamp = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div className="mt-[40px] text-lg	text-black	">
+          <div className="mt-[40px] text-lg">
             <p
               className={`${
                 theme ? "text-white" : "text-slate-700"
@@ -367,7 +367,7 @@ const NewCamp = () => {
 
       <div className="flex justify-start gap-3">
         <div className=" flex items-end justify-start mt-6">
-          <Link to="/trip/">
+          <Link to={`/trip/${trip?._id}/plans/create`}>
             <Button variant="outline" color="Red" size="md" radius="md">
               Hủy
             </Button>

@@ -116,7 +116,7 @@ const PublicTripsPanel = () => {
   if (publicTrip?.length < 1)
     return (
       <div className="w-full h-full py-8 flex items-center justify-center">
-        <span className="text-lg text-slate-500">
+        <span className="text-lg text-slate-500 dark:text-white">
           Chưa có chuyến đi nào được công khai
         </span>
       </div>
@@ -162,7 +162,7 @@ const PublicTripsPanel = () => {
                 </div>
               </div>
             )}
-            <Group wrap="nowrap" gap={0}>
+            <Group className="dark:bg-[#05132b]" wrap="nowrap" gap={0}>
               <div className="w-full h-auto md:h-[275px] md:w-1/4 lg:w-[380px] hidden md:block ">
                 <Image
                   src={publicTrip?.image}
@@ -173,10 +173,10 @@ const PublicTripsPanel = () => {
 
               <div className={classes.body}>
                 <Badge w="fit-content" variant="light" size="md">
-                  {publicTrip?.city}
+                  <p className="dark:text-teal-500"> {publicTrip?.city}</p>
                 </Badge>
                 <Text className={classes.title} mt="xs" mb="md">
-                  {publicTrip?.tripName}
+                  <p className="dark:text-white">{publicTrip?.tripName}</p>
                 </Text>
                 <Group wrap="nowrap" gap="xs">
                   <Group gap="xs" wrap="nowrap">
@@ -185,13 +185,19 @@ const PublicTripsPanel = () => {
                       src={publicTrip?.user?.image}
                       alt="Ảnh cá nhân"
                     />
-                    <Text size="sm">{publicTrip?.user?.name}</Text>
+                    <Text size="sm">
+                      <p className="dark:text-gray-100">
+                        {publicTrip?.user?.name}
+                      </p>
+                    </Text>
                   </Group>
                   <Text size="xs" c="dimmed">
-                    •
+                    <p className="dark:text-gray-400">•</p>
                   </Text>
                   <Text size="xs" c="dimmed">
-                    {moment(publicTrip?.createdAt).format("L")}
+                    <p className="dark:text-gray-400">
+                      {moment(publicTrip?.createdAt).format("L")}
+                    </p>
                   </Text>
                 </Group>
 
@@ -203,14 +209,16 @@ const PublicTripsPanel = () => {
                   fw={700}
                   size="xs"
                 >
-                  {publicTrip?.description}
+                  <p className="dark:text-gray-400">
+                    {publicTrip?.description}
+                  </p>
                 </Text>
 
                 <Space h="sm" />
                 <Group gap="xs">
                   {publicTrip?.hashtag.map((tag, index) => (
                     <Pill key={index} className="text-cyan-600">
-                      {tag}
+                      <p className="dark:text-cyan-500">{tag}</p>
                     </Pill>
                   ))}
                 </Group>
