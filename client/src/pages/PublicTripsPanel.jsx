@@ -271,7 +271,7 @@ const PublicTripsPanel = () => {
         {/* <LoadingClient visible={isPending} /> */}
         <Toaster richColors />
         <div className="w-full flex items-center justify-center">
-          <Pagination totalPages={numOfPages} onPageChange={handlePageChange} />
+          {/* <Pagination totalPages={numOfPages} onPageChange={handlePageChange} /> */}
         </div>
       </div>
     </div>

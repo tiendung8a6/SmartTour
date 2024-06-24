@@ -63,7 +63,11 @@ const Notifications = () => {
                   <img
                     alt="Thông báo"
                     className="h-8 w-8 rounded-full object-cover mx-1"
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRX2Ycbywy8vTtHVpMRpvzLVDhB1ohFUeuOJg&s"
+                    src={
+                      notification.sender === "system"
+                        ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRX2Ycbywy8vTtHVpMRpvzLVDhB1ohFUeuOJg&s"
+                        : "https://www.pngall.com/wp-content/uploads/5/Profile-Male-PNG.png"
+                    }
                   />
                   <p className="text-gray-600 text-sm mx-2">
                     <span className="font-bold text-sm">

@@ -44,7 +44,11 @@ const Notification = () => {
                   <img
                     alt="Thông báo"
                     className="h-10 w-10 rounded-full object-cover"
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRX2Ycbywy8vTtHVpMRpvzLVDhB1ohFUeuOJg&s"
+                    src={
+                      notification.sender === "system"
+                        ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRX2Ycbywy8vTtHVpMRpvzLVDhB1ohFUeuOJg&s"
+                        : "https://www.pngall.com/wp-content/uploads/5/Profile-Male-PNG.png"
+                    }
                   />
                   <div className="ml-4 flex flex-col sm:w-96">
                     <p className="mb-1 font-bold text-gray-800 dark:text-white">
