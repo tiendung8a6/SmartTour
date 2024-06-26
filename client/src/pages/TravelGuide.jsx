@@ -71,10 +71,10 @@ const Recommendations = ({ place, isLoading, recommendations }) => {
       <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {Object.entries(recommendations).map(([title, list]) => (
           <div key={title} className="prose">
-            <h2 className="mt-0 mb-4 font-bold text-gray-900">
+            <h2 className="mt-0 mb-4 font-bold text-gray-900 dark:text-white">
               AI khuyên bạn nên {title}
             </h2>
-            <ul className="list-none pl-0">
+            <ul className="list-none pl-0 dark:text-gray-300">
               {list.map((item) => (
                 <li key={item}>{item}</li>
               ))}

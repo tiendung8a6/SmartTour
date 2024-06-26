@@ -1,7 +1,6 @@
 import {
   Button,
   Menu,
-  Pagination,
   Table,
   TextInput,
   useMantineColorScheme,
@@ -24,6 +23,7 @@ import {
   EditPost,
   Loading,
   WritePost,
+  Pagination,
 } from "../components";
 import { useAction, useTrip, useDeleteTrip } from "../hooks/trip-hook";
 import useCommentStore from "../store/comments";
@@ -325,11 +325,6 @@ const Trips = () => {
         <div className="w-full mt-5 flex items-center justify-center">
           <Pagination
             total={data?.numOfPage}
-            siblings={1}
-            defaultValue={data?.page}
-            // gap={10}
-            // color='lime'
-            withEdges
             onChange={(value) => setPage(value)}
           />
         </div>

@@ -13,15 +13,15 @@ const Hero = () => {
                   Xin chào
                 </p>
               </div>
-              <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none">
+              <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none dark:text-white">
                 Cùng SmartTour,
                 <br className="hidden md:block" />
                 khám phá thế giới
-                <span className="inline-block text-deep-purple-accent-400">
+                <span className="inline-block text-deep-purple-accent-400 dark:text-white">
                   một cách thông minh
                 </span>
               </h2>
-              <p className="text-base text-gray-700 md:text-lg">
+              <p className="text-base text-gray-700 md:text-lg dark:text-gray-300">
                 Lên kế hoạch và tổ chức lịch trình du lịch không còn là vấn đề
                 mất thời gian với SmartTour. Hệ thống tối ưu hóa và đề xuất lịch
                 trình du lịch hiệu quả, giúp dễ dàng tạo và tùy chỉnh các lịch
@@ -38,7 +38,7 @@ const Hero = () => {
               <a
                 href="/"
                 aria-label=""
-                className="inline-flex items-center font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-700"
+                className="inline-flex items-center font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-700 dark:text-white"
               >
                 Tìm hiểu thêm
               </a>

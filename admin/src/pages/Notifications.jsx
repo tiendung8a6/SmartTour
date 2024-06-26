@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
   Button,
   Menu,
-  Pagination,
   Table,
   TextInput,
   useMantineColorScheme,
@@ -28,6 +27,7 @@ import {
   EmailNotifications,
   ConfirmDialog,
   Loading,
+  Pagination,
 } from "../components";
 import {
   useNotifications,
@@ -348,11 +348,6 @@ const Notifications = () => {
         <div className="w-full mt-5 flex items-center justify-center">
           <Pagination
             total={data?.numOfPage}
-            siblings={1}
-            defaultValue={data?.page}
-            // gap={10}
-            // color='lime'
-            withEdges
             onChange={(value) => setPage(value)}
           />
         </div>

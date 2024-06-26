@@ -1,7 +1,6 @@
 import {
   Button,
   Menu,
-  Pagination,
   Table,
   TextInput,
   useMantineColorScheme,
@@ -14,7 +13,13 @@ import { BiDotsVerticalRounded, BiMailSend } from "react-icons/bi";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Toaster, toast } from "sonner";
 import { IconSearch } from "@tabler/icons-react";
-import { Comments, ConfirmDialog, EditContact, Loading } from "../components";
+import {
+  Comments,
+  ConfirmDialog,
+  EditContact,
+  Loading,
+  Pagination,
+} from "../components";
 import { useContacts } from "../hooks/contacts_hook";
 
 import useCommentStore from "../store/comments";
@@ -257,11 +262,6 @@ const Contacts = () => {
         <div className="w-full mt-5 flex items-center justify-center">
           <Pagination
             total={data?.numOfPages}
-            siblings={3}
-            defaultValue={data?.page}
-            // gap={10}
-            color="gray"
-            withEdges
             onChange={(value) => setPage(value)}
           />
         </div>

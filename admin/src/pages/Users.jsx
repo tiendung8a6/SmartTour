@@ -1,7 +1,6 @@
 import {
   Button,
   Menu,
-  Pagination,
   Table,
   TextInput,
   useMantineColorScheme,
@@ -17,8 +16,13 @@ import { BiSolidLike } from "react-icons/bi";
 import { IconSearch, IconUserPlus, IconCoinBitcoin } from "@tabler/icons-react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Toaster, toast } from "sonner";
-
-import { ConfirmDialog, Loading, Followers, CreateAdmin } from "../components";
+import {
+  ConfirmDialog,
+  Loading,
+  Followers,
+  CreateAdmin,
+  Pagination,
+} from "../components";
 import { useUserAction, useUsers, useDeleteUser } from "../hooks/user-hook";
 import useStore from "../store/store";
 import { formatNumber, updateURL } from "../utils";
@@ -354,12 +358,12 @@ const Users = () => {
         <div className="w-full mt-5 flex items-center justify-center">
           <Pagination
             total={data?.numOfPages}
-            siblings={1}
-            defaultValue={data?.page}
+            onChange={(value) => setPage(value)}
+            // siblings={1}
+            // defaultValue={data?.page}
             // gap={10}
             // color="lime"
-            withEdges
-            onChange={(value) => setPage(value)}
+            // withEdges
           />
         </div>
 
