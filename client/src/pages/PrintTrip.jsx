@@ -53,6 +53,12 @@ const PrintTrip = () => {
   const diffTime = Math.abs(endDate - startDate);
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
+  const formatCurrency = (value) => {
+    return value.toLocaleString("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    });
+  };
   const fetchTrip = async () => {
     try {
       setIsLoading(true);
@@ -97,6 +103,8 @@ const PrintTrip = () => {
         time: item.startDate,
         typeTime: "start",
         startTime: item.startTime,
+        estimatedPrice: item.estimatedPrice,
+        startAddress: item.startAddress,
       });
     }
     if (item.endDate) {
@@ -106,6 +114,8 @@ const PrintTrip = () => {
         typeTime: "end",
         endTime: item.endTime,
         type: item.type, // Add type for end events
+        actualPrice: item.actualPrice,
+        endAddress: item.endAddress,
       });
     }
   });
@@ -174,17 +184,33 @@ const PrintTrip = () => {
   console.log(`Tổng số mục trong ngày trước đó: ${totalItemsInPreviousDay}`);
   const isPassperItem = totalItemsInPreviousDay - 1;
 
+  const calculateTotalPrices = () => {
+    let totalEstimatedPrice = 0;
+    let totalActualPrice = 0;
+
+    trip?.plans?.forEach((plan) => {
+      totalEstimatedPrice += plan.estimatedPrice || 0;
+      totalActualPrice += plan.actualPrice || 0;
+    });
+
+    return { totalEstimatedPrice, totalActualPrice };
+  };
+
+  const { totalEstimatedPrice, totalActualPrice } = calculateTotalPrices();
+
   return (
     <div className="m-[50px] h-fit">
       <Link to="/trip">
         <Button
-          className=" border-none hover:text-[#0782c5] hover:bg-transparent"
+          className=" border-none hover:text-[#0782c5] hover:bg-transparent dark:bg-inherit"
           leftSection={<IconArrowLeft className="text-[#0782c5]" size={30} />}
           variant="default"
           color="#0782c5"
           size="md"
         >
-          <span className="text-[#0782c5]">Trở lại danh sách chuyến đi</span>
+          <span className="text-[#0782c5] dark:text-sky-500">
+            Trở lại danh sách chuyến đi
+          </span>
         </Button>
       </Link>
       <br></br>
@@ -210,15 +236,25 @@ const PrintTrip = () => {
                 <div>{trip?.tripName}</div>
               </span>
             </h6>
-            <div className="flex gap-2 flex-col">
+            <div className="flex gap-2 flex-col dark:text-gray-200">
               <span>{trip?.city}</span>
 
-              <span className="text-sm text-gray-600">{trip?.total}</span>
+              <span className="text-sm text-gray-600 dark:text-gray-400">
+                {trip?.total}
+              </span>
 
-              <span className="text-sm text-gray-600">
+              <span className="text-sm text-gray-600 dark:text-gray-400">
                 {new Date(trip?.startDate).toLocaleDateString("vi-VN")} -
                 {new Date(trip?.endDate).toLocaleDateString("vi-VN")} (
                 {diffDays === 0 ? "1 ngày" : `${diffDays} ngày`})
+              </span>
+
+              <span className="text-sm text-gray-600 dark:text-gray-400">
+                Tổng chi phí dự kiến: {formatCurrency(totalEstimatedPrice)}
+              </span>
+
+              <span className="text-sm text-gray-600 dark:text-gray-400">
+                Tổng chi phí thực tế: {formatCurrency(totalActualPrice)}
               </span>
             </div>
           </div>
@@ -314,7 +350,7 @@ const PrintTrip = () => {
 
                     {showNewDate && (
                       <div
-                        className={`bg-[#dee2e6] h-[50px] mt-[-85px] ml-[-100px] p-3
+                        className={`bg-[#dee2e6] h-[50px] mt-[-85px] ml-[-100px] p-3 dark:bg-gray-600 dark:text-white	
                           ${isCurrentDate ? "" : isPassedDate ? "" : ""}`}
                       >
                         <span>
@@ -348,7 +384,24 @@ const PrintTrip = () => {
                         {item.typeTime === "end" && item.endTime && (
                           <p>Thời gian kết thúc : {item.endTime}</p>
                         )}
-
+                        {item.typeTime === "start" && item.estimatedPrice && (
+                          <p>
+                            {" "}
+                            Chi phí dự kiến :{" "}
+                            {formatCurrency(item.estimatedPrice)}
+                          </p>
+                        )}
+                        {item.typeTime === "end" && item.actualPrice && (
+                          <p>
+                            Chi phí thực tế : {formatCurrency(item.actualPrice)}
+                          </p>
+                        )}
+                        {item.typeTime === "start" && item.startAddress && (
+                          <p> Địa chỉ : {item.startAddress}</p>
+                        )}
+                        {item.typeTime === "end" && item.endAddress && (
+                          <p>Địa chỉ : {item.endAddress}</p>
+                        )}
                         {/* Thêm hai thẻ <br> nếu là phần tử cuối cùng của một ngày */}
                         {isLastItemOfDay && (
                           <>
