@@ -104,28 +104,28 @@ const Footer = () => {
         </p>
         <ul className="flex flex-col mb-3 space-y-2 lg:mb-0 sm:space-y-0 sm:space-x-5 sm:flex-row">
           <li>
-            <a
-              href="/"
+            <Link
+              to="/pricing"
               className="text-sm text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400 dark:text-white"
             >
-              F.A.Q
-            </a>
+              Mua điểm
+            </Link>
           </li>
           <li>
-            <a
-              href="/"
+            <Link
+              to="/contact"
               className="text-sm text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400 dark:text-white"
             >
-              Chính sách
-            </a>
+              Liên hệ
+            </Link>
           </li>
           <li>
-            <a
-              href="/"
+            <Link
+              to="/policy"
               className="text-sm text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400 dark:text-white"
             >
-              Điều khoản &amp; Dịch vụ
-            </a>
+              Chính sách &amp; Điều khoản
+            </Link>
           </li>
         </ul>
       </div>

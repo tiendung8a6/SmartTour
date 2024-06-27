@@ -1,57 +1,44 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const Policy = () => {
+  const [policyData, setPolicyData] = useState(null);
+
+  useEffect(() => {
+    const fetchPolicyData = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/users/policy`
+        );
+        setPolicyData(response.data);
+      } catch (error) {
+        console.error("Error fetching policy data:", error);
+      }
+    };
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    fetchPolicyData();
+  }, []);
+
   return (
-    <div className="w-screen bg-white pt-20">
-      <main className="relative mx-auto px-10 md:max-w-screen-md">
+    <div className=" h-full pt-10">
+      <main className="relative mx-auto px-15 md:max-w-screen-md">
         <article className="text-gray-800">
-          <h2 id="section-one" className="mb-4 text-3xl font-bold">
-            Section One
-          </h2>
-          <p className="mb-10 text-gray-600">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur
-            quae asperiores error hic minima dicta. Assumenda, enim. Voluptate
-            facere ea eveniet quaerat neque ipsam iste corrupti sapiente sed!
-            Temporibus, magni?
-          </p>
-          <p className="mb-10 text-gray-600">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat,
-            quasi! Vitae voluptatibus, illum voluptatum dolores excepturi,
-            architecto rem voluptatem minus nulla expedita tempore, ratione non
-            animi dicta eum consequatur nam hic veniam accusantium vel? Cumque
-            magni provident eius temporibus soluta iusto corporis vel eum at
-            consectetur architecto eos nisi voluptas quas natus dolores,
-            reiciendis incidunt esse inventore ab impedit quos. Expedita
-            exercitationem qui quae architecto libero reiciendis laborum nostrum
-            commodi, omnis vero, earum dicta provident! Necessitatibus
-            cupiditate, voluptate eos est incidunt soluta nam voluptatum? Quidem
-            repellendus neque enim quos nobis ex fugiat autem placeat officia
-            illum inventore, itaque quibusdam rerum? Lorem ipsum dolor sit amet
-            consectetur adipisicing elit. Placeat, quasi! Vitae voluptatibus,
-            illum voluptatum dolores excepturi, architecto rem voluptatem minus
-            nulla expedita tempore, ratione non animi dicta eum consequatur nam
-            hic veniam accusantium vel? Cumque magni provident eius temporibus
-            soluta iusto corporis vel eum at consectetur architecto eos nisi
-            voluptas quas natus dolores, reiciendis incidunt esse inventore ab
-            impedit quos. Expedita exercitationem qui quae architecto libero
-            reiciendis laborum nostrum commodi, omnis vero, earum dicta
-            provident! Necessitatibus cupiditate, voluptate eos est incidunt
-            soluta nam voluptatum? Quidem repellendus neque enim quos nobis ex
-            fugiat autem placeat officia illum inventore, itaque quibusdam
-            rerum? Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Placeat, quasi! Vitae voluptatibus, illum voluptatum dolores
-            excepturi, architecto rem voluptatem minus nulla expedita tempore,
-            ratione non animi dicta eum consequatur nam hic veniam accusantium
-            vel? Cumque magni provident eius temporibus soluta iusto corporis
-            vel eum at consectetur architecto eos nisi voluptas quas natus
-            dolores, reiciendis incidunt esse inventore ab impedit quos.
-            Expedita exercitationem qui quae architecto libero reiciendis
-            laborum nostrum commodi, omnis vero, earum dicta provident!
-            Necessitatibus cupiditate, voluptate eos est incidunt soluta nam
-            voluptatum? Quidem repellendus neque enim quos nobis ex fugiat autem
-            placeat officia illum inventore, itaque quibusdam rerum?
-          </p>
+          {policyData && policyData.success ? (
+            <>
+              <h2
+                id="section-one"
+                className="mb-4 text-3xl font-bold text-center"
+              >
+                {policyData.data[0].title}
+              </h2>
+              <p
+                className="mb-10 text-base text-gray-600 text-justify"
+                dangerouslySetInnerHTML={{ __html: policyData.data[0].content }}
+              ></p>
+            </>
+          ) : (
+            <p>Đang tải...</p>
+          )}
         </article>
       </main>
     </div>
