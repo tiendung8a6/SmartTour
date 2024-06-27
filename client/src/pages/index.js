@@ -53,6 +53,7 @@ import ViewActivity from "./ViewActivity";
 import Notification from "./Notification";
 import TripSummaryPublic from "./TripSummaryPublic";
 import MapPage from "./MapPage";
+import Policy from "./Policy";
 export {
   MapPage,
   BlogDetail,
@@ -109,4 +110,5 @@ export {
   ViewActivity,
   Notification,
   TripSummaryPublic,
+  Policy,
 };
