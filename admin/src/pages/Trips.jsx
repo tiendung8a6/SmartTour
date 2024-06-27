@@ -181,16 +181,6 @@ const Trips = () => {
             </Button>
           </div>
         </div>
-        {/* <div className="flex justify-end items-center mb-4 ">
-          <Button
-            leftSection={<IconPencilPlus size={15} />}
-            radius="xl"
-            className={theme ? "bg-blue-600" : "bg-black"}
-            onClick={() => handleSubmit()}
-          >
-            Đăng Bài
-          </Button>
-        </div> */}
         <Table highlightOnHover withTableBorder>
           <Table.Thead>
             <Table.Tr className="bg-black text-white">
@@ -273,9 +263,10 @@ const Trips = () => {
                               : "hover:bg-gray-100"
                           }
                           leftSection={<AiOutlineEye />}
-                          onClick={() => handleEdit(el)}
                         >
-                          <Link to={`http://localhost:3000/trip/${el?._id}`}>
+                          <Link
+                            to={`${process.env.REACT_APP_BASE_URL}/trip/${el?._id}/public`}
+                          >
                             Xem Chi Tiết
                           </Link>
                         </Menu.Item>
@@ -341,21 +332,6 @@ const Trips = () => {
           handleClick={handleActions}
         />
       )}
-
-      {/* {editPost && (
-        <EditPost
-          key={selected}
-          opened={opened}
-          close={() => {
-            close();
-            setEditPost(false);
-          }}
-        />
-      )} */}
-
-      {/* {commentId && <Comments />} */}
-
-      {/* {!editPost && <WritePost opened={opened} close={close} />} */}
     </>
   );
 };
