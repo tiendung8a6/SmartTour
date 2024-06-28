@@ -18,7 +18,7 @@ const Home = () => {
       <Feature></Feature>
       <Feature2></Feature2>
       <CTASections></CTASections>
-      {/* <Feature3></Feature3> */}
+      <Feature3></Feature3>
       {/* <Blog></Blog> */}
       <Accordion></Accordion>
 

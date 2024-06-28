@@ -128,10 +128,10 @@ const TínhNăng = () => {
     <section className="py-14">
       <div className="max-w-screen-xl mx-auto px-4 text-center text-gray-600 md:px-8">
         <div className="max-w-2xl mx-auto">
-          <h3 className="text-gray-800 text-3xl font-semibold sm:text-4xl">
+          <h3 className="text-gray-800 text-3xl font-semibold sm:text-4xl dark:text-white">
             Cách nhanh nhất để khám phá thế giới
           </h3>
-          <p className="mt-3">
+          <p className="mt-3 dark:text-gray-300">
             Khám phá thế giới một cách dễ dàng và linh hoạt, để bạn có những
             trải nghiệm du lịch đáng nhớ nhất.
           </p>
@@ -143,10 +143,10 @@ const TínhNăng = () => {
                 <div className="w-12 h-12 mx-auto bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center">
                   {item.icon}
                 </div>
-                <h4 className="text-lg text-gray-800 font-semibold">
+                <h4 className="text-lg text-gray-800 font-semibold dark:text-sky-500">
                   {item.title}
                 </h4>
-                <p>{item.desc}</p>
+                <p className="dark:text-gray-400">{item.desc}</p>
               </li>
             ))}
           </ul>

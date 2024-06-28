@@ -64,24 +64,24 @@ const Feature2 = () => {
             <h3 className="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-400">
               Tính năng
             </h3>
-            <p className="text-gray-800 text-3xl font-semibold sm:text-4xl">
+            <p className="text-gray-800 text-3xl font-semibold sm:text-4xl dark:text-gray-50">
               Lập Kế Hoạch Thông Minh với Trợ Lý Ảo
             </p>
-            <p>
+            <p className="dark:text-gray-300">
               Tính năng Lập Kế Hoạch với Trợ Lý Ảo giúp tận hưởng hành trình một
               cách suôn sẻ và không bao giờ bỏ lỡ những điều thú vị dọc đường.
               Hãy để Trợ Lý Ảo dẫn đường và tạo ra kế hoạch tuyệt vời cho bạn.
             </p>
           </div>
           <div className="pt-4">
-            <a
+            <Link
               className="group px-4 py-2 text-indigo-600 font-medium bg-indigo-50 rounded-full inline-flex items-center"
-              href="/travel-guide"
+              to="/travel-guide"
             >
               Khám phá ngay
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 ml-1 duration-150 group-hover:translate-x-1"
+                className="h-6 w-6 ml-1 duration-150 group-hover:translate-x-"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -93,7 +93,7 @@ const Feature2 = () => {
                   d="M13 7l5 5m0 0l-5 5m5-5H6"
                 />
               </svg>
-            </a>
+            </Link>
           </div>
           <div className="mt-12 max-w-lg lg:max-w-none">
             <ul className="space-y-8">
@@ -103,10 +103,10 @@ const Feature2 = () => {
                     {item.icon}
                   </div>
                   <div>
-                    <h4 className="text-lg text-gray-800 font-semibold">
+                    <h4 className="text-lg text-gray-800 font-semibold dark:text-sky-500">
                       {item.title}
                     </h4>
-                    <p className="mt-3">{item.desc}</p>
+                    <p className="mt-3 dark:text-gray-500">{item.desc}</p>
                   </div>
                 </li>
               ))}
@@ -115,8 +115,8 @@ const Feature2 = () => {
         </div>
         <div className="mt-12 lg:mt-0">
           <img
-            // src="https://raw.githubusercontent.com/sidiDev/remote-assets/main/Safari%20(Big%20Sur)%20-%20Light.png"
-            src="https://firebasestorage.googleapis.com/v0/b/smarttour-mern.appspot.com/o/999.png?alt=media&token=02ac9c5f-e4d0-4175-b4bc-13d75aae5844"
+            src="https://firebasestorage.googleapis.com/v0/b/smarttour-mern.appspot.com/o/1719545462962Screenshot%202024-06-28%20103042.png?alt=media&token=573ae5ab-4313-4d49-b4d6-eac9de1c469d"
+            alt="AI hỗ trợ"
             className="w-full shadow-lg rounded-lg border"
           />
         </div>

@@ -4,24 +4,27 @@ import { Link } from "react-router-dom";
 const Testimonials = () => {
   const testimonials = [
     {
-      avatar: "https://api.uifaces.co/our-content/donated/xZ4wg2Xj.jpg",
-      name: "Hồng Sơn",
+      avatar: "https://avatars.githubusercontent.com/u/136337696?v=4",
+      name: "Tiến Dũng",
       title: "Khách du lịch",
       quote:
-        "Thật ấn tượng, tôi đã có một trải nghiệm tuyệt vời khi lập kế hoạch nhờ vào SmartTour.",
+        "Thật ấn tượng, tôi đã có một trải nghiệm tuyệt vời khi lập kế hoạch ở SmartTour.",
     },
     {
-      avatar: "https://randomuser.me/api/portraits/men/46.jpg",
-      name: "Nguyễn hà",
+      avatar:
+        "https://firebasestorage.googleapis.com/v0/b/smarttour-mern.appspot.com/o/1719548540783z5581660288780_b6c70210498376dca82e3e0c01ad94e2.jpg?alt=media&token=3f080b9f-c6b7-4fc5-9b81-3da7f355f8e8",
+      name: "Duy Anh",
       title: "Khách du lịch",
       quote:
         "Tôi cảm thấy hài lòng với dịch vụ của SmartTour, mọi thứ đều rất tốt.",
     },
     {
-      avatar: "https://randomuser.me/api/portraits/men/86.jpg",
-      name: "Quốc Cường",
+      avatar:
+        "https://firebasestorage.googleapis.com/v0/b/smarttour-mern.appspot.com/o/1719548646002z5581666545332_a16dcecd9052edee8cd83595532a3fc1.jpg?alt=media&token=1ec5292a-61d6-4752-8cef-b53c6e61b3de",
+      name: "Nhật Hào",
       title: "Khách du lịch",
-      quote: "Dịch vụ rất tuyệt vời, tôi sẽ quay lại lần sau khi có cơ hội.",
+      quote:
+        "Dịch vụ rất tuyệt vời, tôi sẽ quay lại lần sau khi có chuyến du lịch mới.",
     },
   ];
 
@@ -29,10 +32,10 @@ const Testimonials = () => {
     <section className="relative py-14">
       <div className="relative z-10 max-w-screen-xl mx-auto px-4 md:px-8">
         <div className="max-w-xl sm:text-center md:mx-auto">
-          <h3 className="text-gray-800 text-3xl font-semibold sm:text-4xl">
+          <h3 className="text-gray-800 text-3xl font-semibold sm:text-4xl dark:text-white">
             Phản hồi từ khách hàng
           </h3>
-          <p className="mt-3 text-gray-600">
+          <p className="mt-3 text-gray-600 dark:text-gray-500">
             Đây là những lời đánh giá, phản hồi, và cảm nhận từ phía các Khách
             hàng đã trải nghiệm dịch vụ của chúng tôi. Chúng tôi luôn đánh giá
             cao mọi ý kiến đóng góp của quý vị để không ngừng cải thiện chất
@@ -44,7 +47,10 @@ const Testimonials = () => {
         <div className="mt-12">
           <ul className="grid items-center gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {testimonials.map((item, idx) => (
-              <li key={idx} className="bg-white rounded-xl border shadow-md">
+              <li
+                key={idx}
+                className="bg-white rounded-xl border shadow-md dark:bg-inherit"
+              >
                 <div className="p-4">
                   <svg
                     className="w-9 h-9 text-gray-300"
@@ -60,20 +66,21 @@ const Testimonials = () => {
                 </div>
                 <figure>
                   <blockquote>
-                    <p className="text-gray-800 text-lg font-semibold px-4 py-1">
+                    <p className="text-gray-800 text-lg font-semibold px-4 py-1 dark:text-gray-400">
                       {item.quote}
                     </p>
                   </blockquote>
-                  <div className="flex items-center gap-x-4 p-4 mt-6 bg-indigo-50">
+                  <div className="flex items-center gap-x-4 p-4 mt-6 bg-sky-100 dark:bg-inherit ">
                     <img
                       src={item.avatar}
-                      className="w-16 h-16 rounded-full border-2 border-indigo-500"
+                      alt="ảnh đại diện"
+                      className="w-16 h-16 rounded-full border-2 border-indigo-500 dark:border-sky-400"
                     />
                     <div>
-                      <span className="block text-gray-800 font-semibold">
+                      <span className="block text-gray-800 font-semibold dark:text-gray-100">
                         {item.name}
                       </span>
-                      <span className="block text-indigo-600 text-sm mt-0.5">
+                      <span className="block text-indigo-600 text-sm mt-0.5 dark:text-sky-400">
                         {item.title}
                       </span>
                     </div>

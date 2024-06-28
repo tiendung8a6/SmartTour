@@ -144,7 +144,7 @@ const Profile = () => {
             leftSection={
               <IconPhoto style={{ width: rem(16), height: rem(16) }} />
             }
-            className="mt-[10px] mb-[20px] hover:bg-gray-100 hover:text-black"
+            className="mt-[10px] mb-[20px] hover:bg-gray-100 hover:text-black "
           >
             Bài viết của tôi
           </Tabs.Tab>
@@ -382,12 +382,12 @@ const Profile = () => {
 
               <Tabs.Panel value="ChangePass" pt="xs">
                 <Container>
-                  <div className="shadow-xl m-2 h-[350px] rounded-lg">
+                  <div className="shadow-xl m-2 h-[350px] border rounded-lg ">
                     <div className="m-2 font-medium">Thay đổi mật khẩu</div>
                     <hr></hr>
                     <form
                       onSubmit={form.onSubmit(handleSubmit)}
-                      className=" flex-col   px-5 pb-5 "
+                      className=" flex-col px-5 pb-5 "
                     >
                       <TextInput
                         className="w-full mt-5"

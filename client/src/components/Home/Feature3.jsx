@@ -3,26 +3,25 @@ import { Link } from "react-router-dom";
 
 const Feature3 = () => {
   const plan = {
-    name: "Basic plan",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    price: 32,
+    name: "Đăng kí gói phù hợp",
     isMostPop: true,
+    desc: "Lựa chọn các gói điểm phù hợp với nhu cầu.",
     features: [
-      "Curabitur faucibus",
-      "Curabitur faucibus",
-      "Curabitur faucibus",
-      "Curabitur faucibus",
-      "Curabitur faucibus",
-      "Curabitur faucibus",
-      "Curabitur faucibus",
-      "Curabitur faucibus",
+      "Nhận được điểm thưởng",
+      "Xem kế hoạch công khai",
+      "Email hỗ trợ",
+      "Trở thành hội viên",
+      "Hỗ trợ 24/7",
+      "Nhóm chat hội viên",
+      "Lập được nhiều kế hoạch",
+      "Các ưu đãi cho lần mua sau",
     ],
   };
 
   const features = [
     {
-      name: "Scalable",
-      desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text",
+      name: "Chuyển đổi điểm thưởng",
+      desc: "Người dùng có thể sử dụng điểm thưởng để đổi lấy các dịch vụ lập kế hoạch du lịch hoặc xem kế hoạch công khai",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -41,8 +40,8 @@ const Feature3 = () => {
       ),
     },
     {
-      name: "Flexible",
-      desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text",
+      name: "Tích lũy điểm khi công khai chuyến đi",
+      desc: "Chia sẻ kế hoạch hoặc trải nghiệm chuyến đi lên trên SmartTour thì sẽ được tích lũy thêm điểm thưởng. Điều này khuyến khích người dùng chia sẻ và kết nối với nhau.",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -61,8 +60,8 @@ const Feature3 = () => {
       ),
     },
     {
-      name: "Smooth",
-      desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text",
+      name: "Quản lý và theo dõi điểm dễ dàng",
+      desc: "Dễ dàng theo dõi số điểm thưởng tích lũy và lịch sử giao dịch trên SmartTour. Tính năng này giúp quản lý điểm hiệu quả và lập kế hoạch sử dụng điểm cho chuyến đi một cách thông minh",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -81,8 +80,8 @@ const Feature3 = () => {
       ),
     },
     {
-      name: "Secure",
-      desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text",
+      name: "Thanh toán đa dạng và bảo mật",
+      desc: "Hệ thống thanh toán điểm thưởng hỗ trợ nhiều phương thức thanh toán khác nhau như VNPAY và Stripe giúp đảm bảo an toàn bảo mật thông tin cá nhân của người dùng.",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -105,14 +104,16 @@ const Feature3 = () => {
     <section className="relative py-14">
       <div className="max-w-screen-xl mx-auto text-gray-600 md:px-8">
         <div className="relative max-w-xl space-y-3 px-4 md:px-0">
-          <h3 className="text-indigo-600 font-semibold">Pricing</h3>
-          <p className="text-gray-800 text-3xl font-semibold sm:text-4xl">
-            Pay as you grow
+          <h3 className="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-400">
+            Mua điểm thưởng
+          </h3>
+          <p className="text-gray-800 text-3xl font-semibold sm:text-4xl dark:text-white">
+            Gói điểm thưởng của SmartTour
           </p>
-          <div className="max-w-xl">
+          <div className="max-w-xl dark:text-gray-300">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-              efficitur consequat nunc.
+              Mua các gói Bạc, Vàng, Kim Cương để nhận ngay điểm, mở rộng quyền
+              truy cập và tận hưởng đặc quyền độc đáo trong cộng đồng.
             </p>
           </div>
         </div>
@@ -124,10 +125,12 @@ const Feature3 = () => {
                   {item.icon}
                 </div>
                 <div>
-                  <h4 className="text-lg text-gray-800 font-medium">
+                  <h4 className="text-lg text-gray-800 font-medium dark:text-sky-500">
                     {item.name}
                   </h4>
-                  <p className="text-gray-600 mt-2 md:text-sm">{item.desc}</p>
+                  <p className="text-gray-600 mt-2 md:text-sm dark:text-gray-400">
+                    {item.desc}
+                  </p>
                 </div>
               </li>
             ))}
@@ -136,29 +139,27 @@ const Feature3 = () => {
             <div className="p-4 py-8 border-b md:p-8">
               <div className="justify-between flex">
                 <div className="max-w-xs">
-                  <span className="text-2xl text-gray-800 font-semibold sm:text-3xl">
+                  <span className="text-2xl text-gray-800 font-semibold sm:text-3xl dark:text-sky-500 ">
                     {plan.name}
                   </span>
-                  <p className="mt-3 sm:text-sm">{plan.desc}</p>
-                </div>
-                <div className="flex-none text-gray-800 text-2xl font-semibold sm:text-3xl">
-                  ${plan.price}{" "}
-                  <span className="text-xl text-gray-600 font-normal">/mo</span>
+                  <p className="mt-3 sm:text-sm dark:text-gray-400">
+                    {plan.desc}
+                  </p>
                 </div>
               </div>
               <button className="mt-4 px-3 py-3 rounded-lg w-full font-semibold text-sm duration-150 text-white bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700">
-                Get Started
+                <Link to="/pricing"> Khám phá</Link>
               </button>
             </div>
             <ul className="p-4 space-y-3 sm:grid sm:grid-cols-2 md:block md:p-8 lg:grid">
-              <div className="pb-2 col-span-2 text-gray-800 font-medium">
-                <p>Features</p>
+              <div className="pb-2 col-span-2 text-gray-800 font-medium dark:text-sky-400">
+                <p>Tính năng</p>
               </div>
               {plan.features.map((featureItem, idx) => (
-                <li key={idx} className="flex items-center gap-5">
+                <li key={idx} className="flex items-center gap-5 ">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 text-indigo-600"
+                    className="h-5 w-5 text-indigo-600 dark:text-sky-500"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
@@ -168,7 +169,7 @@ const Feature3 = () => {
                       clip-rule="evenodd"
                     ></path>
                   </svg>
-                  {featureItem}
+                  <p className="dark:text-gray-200"> {featureItem}</p>
                 </li>
               ))}
             </ul>
