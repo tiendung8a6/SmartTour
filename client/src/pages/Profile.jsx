@@ -32,6 +32,7 @@ import { LoadingClient } from "../components";
 import { NewPost } from "../components";
 import { MyPosts } from "../components";
 import classes from "./Profile.module.css";
+import moment from "moment";
 
 const Profile = () => {
   const { colorScheme } = useMantineColorScheme();
@@ -92,7 +93,7 @@ const Profile = () => {
       <Tabs
         variant="unstyled"
         className=""
-        defaultValue="createBlcdcd ogc"
+        defaultValue="profile"
         orientation="vertical"
         classNames={classes}
       >
@@ -119,22 +120,22 @@ const Profile = () => {
           </div>
           <hr />
 
-          {/* <Tabs.Tab
+          <Tabs.Tab
             value="profile"
             leftSection={
               <IconUser style={{ width: rem(16), height: rem(16) }} />
             }
-            className="my-[20px] hover:bg-gray-100 hover:text-black"
+            className="my-[20px] hover:bg-sky-400 hover:text-black"
           >
             Trang Cá Nhân
-          </Tabs.Tab> */}
+          </Tabs.Tab>
           <hr />
           <Tabs.Tab
             value="createBlog"
             leftSection={
               <IconMessageCircle style={{ width: rem(16), height: rem(16) }} />
             }
-            className="mt-[20px] mb-[10px] hover:bg-gray-100 hover:text-black"
+            className="mt-[20px] mb-[10px] hover:bg-sky-400 hover:text-black"
           >
             Viết blog
           </Tabs.Tab>
@@ -144,7 +145,7 @@ const Profile = () => {
             leftSection={
               <IconPhoto style={{ width: rem(16), height: rem(16) }} />
             }
-            className="mt-[10px] mb-[20px] hover:bg-gray-100 hover:text-black "
+            className="mt-[10px] mb-[20px] hover:bg-sky-400 hover:text-black "
           >
             Bài viết của tôi
           </Tabs.Tab>
@@ -154,7 +155,7 @@ const Profile = () => {
             leftSection={
               <IconSettings style={{ width: rem(16), height: rem(16) }} />
             }
-            className="my-[20px] hover:bg-gray-100 hover:text-black"
+            className="my-[20px] hover:bg-sky-400 hover:text-black"
           >
             Cài đặt
           </Tabs.Tab>
@@ -190,19 +191,21 @@ const Profile = () => {
                 <Grid>
                   <Grid.Col span="12">
                     <div className="bg-white p-[20px] rounded-2xl drop-shadow-2xl">
-                      <span className="text-xl font-medium "> Giới thiệu</span>
+                      <span className="text-xl font-medium ">Thông tin</span>
                       <div className="mt-5 flex ">
                         <IconUsers stroke={2} className="mr-2" /> Là thành viên
-                        của SmartTour từ
+                        của SmartTour từ{" "}
+                        {moment(user?.user?.createdAt).fromNow()}
                       </div>
                     </div>
                   </Grid.Col>
                   <Grid.Col span="12">
                     <div className="bg-white p-[20px] rounded-2xl drop-shadow-2xl">
-                      <span className="text-xl font-medium "> Giới thiệu</span>
+                      <span className="text-xl font-medium ">Cập nhật</span>
                       <div className="mt-5 flex ">
-                        <IconUsers stroke={2} className="mr-2" /> Là thành viên
-                        của SmartTour từ
+                        <IconUsers stroke={2} className="mr-2" />
+                        Thay đổi thông tin gần nhất từ{" "}
+                        {moment(user?.user?.updatedAt).fromNow()}
                       </div>
                     </div>
                   </Grid.Col>
@@ -212,27 +215,28 @@ const Profile = () => {
                 span={{ base: 12, md: 6, lg: 7 }}
                 className="bg-white p-[20px] rounded-2xl drop-shadow-2xl  "
               >
-                <span className="text-xl font-medium">Bài viết của tôi</span>
+                <span className="text-xl font-medium">Thành tích</span>
 
                 <Grid className="mt-4">
                   <Grid.Col
                     span={{ base: 12, md: 6, lg: 5 }}
                     className="p-[10px] "
                   >
-                    <img
+                    <p>Chưa có thông tin.</p>
+                    {/* <img
                       className="min-w-[228px]  h-[128px] bg-black rounded-md"
                       src="https://i.pinimg.com/736x/2e/0a/ac/2e0aac9175f250eeb4a3a5feabbeb2b7.jpg"
-                    ></img>
+                    ></img> */}
                   </Grid.Col>
                   <Grid.Col
                     span={{ base: 12, md: 6, lg: 7 }}
                     className="text-wrap"
                   >
-                    <span className="text-lg font-medium">Tên Bài Viết</span>{" "}
+                    {/* <span className="text-lg font-medium">Tên Bài Viết</span>{" "}
                     <br></br>
                     <span className="break-words">
                       llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
-                    </span>
+                    </span> */}
                   </Grid.Col>
                 </Grid>
 
