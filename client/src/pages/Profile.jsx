@@ -33,16 +33,18 @@ import { NewPost } from "../components";
 import { MyPosts } from "../components";
 import classes from "./Profile.module.css";
 import moment from "moment";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const { colorScheme } = useMantineColorScheme();
   const theme = colorScheme === "dark";
-
-  const { user, editProfile, setEditProfile, signIn } = useStore();
+  const { user, editProfile, setEditProfile, signIn, signOut } = useStore();
   const { data, mutate, isPending, isSuccess } = useUpdateUser(
     toast,
     user?.token
   );
+  const navigate = useNavigate();
+
   const iconStyle = { width: rem(12), height: rem(12) };
   const [isUploading, setIsUploading] = useState(false);
   const [file, setFile] = useState("");
@@ -87,6 +89,12 @@ const Profile = () => {
   }, [file]);
   const userEmail = user?.user?.email;
   const username1 = userEmail ? userEmail.split("@")[0] : "";
+
+  const handleSignOut = () => {
+    localStorage.removeItem("userInfo");
+    signOut();
+    navigate("/");
+  };
 
   return (
     <>
@@ -449,6 +457,7 @@ const Profile = () => {
                           size="sm"
                           radius="md"
                           className="mt-2 flex top-px"
+                          onClick={handleSignOut}
                         >
                           Xóa tài khoản
                         </Button>

@@ -29,12 +29,12 @@ const WebNotifications = ({ opened, close }) => {
 
   const handleSubmit = async () => {
     if (users.length === 0) {
-      toast.error("users are required.");
+      toast.error("Vui lòng chọn người nhận.");
       return;
     }
 
     if (!reason) {
-      toast.error("Please enter reason in the reason field.");
+      toast.error("Vui lòng nhập nội dung.");
       return;
     }
 

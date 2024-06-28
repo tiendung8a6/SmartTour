@@ -53,11 +53,11 @@ const CreateAdmin = ({ opened, close }) => {
 
   const handleSubmit = async () => {
     if (!firstName || !lastName || !email || !password) {
-      toast.error("All fields are required.");
+      toast.error("Vui lòng nhập các trường bắt buộc.");
       return;
     }
     if (!fileURL) {
-      toast.error("Please upload an image.");
+      toast.error("Vui lòng nhập tải lên hình ảnh.");
       return;
     }
 

@@ -60,19 +60,19 @@ const WritePost = () => {
 
   const handleSubmit = async () => {
     if (!title) {
-      toast.error("Title is required.");
+      toast.error("Vui lòng nhập tiêu đề.");
       return;
     }
     if (!category) {
-      toast.error("Category is required.");
+      toast.error("Vui lòng chọn danh mục.");
       return;
     }
     if (!fileURL) {
-      toast.error("Please upload an image.");
+      toast.error("Vui lòng tải lên hình ảnh.");
       return;
     }
     if (editor.getHTML().trim() === "<p></p>") {
-      toast.error("Please enter content in the Content field.");
+      toast.error("Vui lòng nhập nội dung.");
       return;
     }
     const slug = createSlug(title);

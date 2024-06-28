@@ -58,7 +58,7 @@ const EditContact = ({ opened, close }) => {
 
   const handleSubmit = async () => {
     if (editor.getHTML().trim() === "<p></p>") {
-      toast.error("Please enter content in the Response Content field.");
+      toast.error("Vui lòng nhập nội dung phản hồi.");
       return;
     }
     mutate({

@@ -58,11 +58,11 @@ const EditPolicy = ({ opened, close }) => {
 
   const handleSubmit = async () => {
     if (!title) {
-      toast.error("Please fill in the Title field.");
+      toast.error("Vui lòng nhập tiêu đề.");
       return;
     }
     if (editor.getHTML().trim() === "<p></p>") {
-      toast.error("Please fill in the Content field.");
+      toast.error("Vui lòng nhập nội dung.");
       return;
     }
 
@@ -86,10 +86,10 @@ const EditPolicy = ({ opened, close }) => {
       // fullScreen // ={isMobile}
       radius={0}
       transitionProps={{ transition: "fade", duration: 200 }}
-      title={"Edit policy"}
+      title={"Chỉnh sửa chính sách"}
     >
       <div className="p-4">
-        <span className="text-base">Title</span>
+        <span className="text-base">Tiêu đề</span>
         <span className="text-rose-500 mr-[10px] ml-1">*</span>
         <TextInput
           required
@@ -99,7 +99,7 @@ const EditPolicy = ({ opened, close }) => {
           className="mb-4"
         />
 
-        <span className="text-base">Content</span>
+        <span className="text-base">Nội dung</span>
         <span className="text-rose-500 mr-[10px] ml-1">*</span>
         <RichTextEditor editor={editor}>
           {editor && (
