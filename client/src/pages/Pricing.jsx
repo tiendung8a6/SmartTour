@@ -8,6 +8,7 @@ const Pricing = () => {
       currency: "VND",
     });
   };
+  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   return (
     <div className="justify-center items-center px-2 py-4 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
       <div className="max-w-xl sm:mx-auto lg:max-w-2xl">

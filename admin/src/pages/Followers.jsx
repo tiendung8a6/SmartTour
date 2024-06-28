@@ -1,10 +1,10 @@
-import { Pagination, Table, useMantineColorScheme } from "@mantine/core";
+import { Table, useMantineColorScheme } from "@mantine/core";
 import moment from "moment";
 import "moment/locale/vi";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Toaster, toast } from "sonner";
-import { Loading } from "../components";
+import { Loading, Pagination } from "../components";
 import { useFollowers } from "../hooks/followers_hook";
 import useStore from "../store/store";
 import { IconCoinBitcoin } from "@tabler/icons-react";
@@ -136,11 +136,6 @@ const Followers = () => {
       <div className="w-full mt-5 flex items-center justify-center">
         <Pagination
           total={data?.numOgPages}
-          siblings={1}
-          defaultValue={data?.page}
-          // gap={10}
-          // color='lime'
-          withEdges
           onChange={(value) => setPage(value)}
         />
       </div>

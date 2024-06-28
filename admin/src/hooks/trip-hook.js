@@ -71,3 +71,30 @@ export const useAction = (toast, token) => {
     },
   });
 };
+
+export const useGetTrip = (toast, token) => {
+  return useMutation({
+    mutationFn: async ({ id, label, color }) => {
+      console.log(token);
+      const { data } = await axios.patch(
+        `${REACT_APP_API_URL}/trips/${id}`,
+        { label, color },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return data;
+    },
+    onError: (error) => {
+      toast.error(error?.response?.data?.message ?? error.message);
+    },
+    onSuccess: (data) => {
+      toast.success(data?.message);
+
+      window.location.reload();
+    },
+  });
+};

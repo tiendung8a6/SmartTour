@@ -204,14 +204,16 @@ const EditTrip = () => {
     return (
       <div className="w-full h-full py-[100px] flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-9xl font-black text-gray-200">404</h1>
-          <p className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Uh-oh!
+          <h1 className="text-9xl font-black text-gray-500">404</h1>
+          <p className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-white">
+            Đã có lỗi xảy ra
           </p>
-          <p className="mt-4 text-gray-500">Vui lòng đăng nhập.</p>
+          <p className="mt-4 text-gray-500 font-medium dark:text-gray-300">
+            Vui lòng đăng nhập.
+          </p>
           <Link
-            to={`/sign-in`}
-            className="mt-6 inline-block rounded bg-indigo-600 px-5 py-3 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring"
+            to="/sign-in"
+            className="mt-6 inline-block rounded bg-sky-600 px-5 py-3 text-sm font-medium text-white hover:bg-sky-700 focus:outline-none focus:ring"
           >
             Đăng nhập
           </Link>

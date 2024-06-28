@@ -1,7 +1,5 @@
 import {
   Button,
-  Menu,
-  Pagination,
   Table,
   TextInput,
   useMantineColorScheme,
@@ -11,12 +9,9 @@ import { useDisclosure } from "@mantine/hooks";
 import moment from "moment";
 import "moment/locale/vi";
 import React, { useEffect, useState } from "react";
-import { AiOutlineEye, AiOutlineSetting } from "react-icons/ai";
-import { BiDotsVerticalRounded, BiSolidEdit } from "react-icons/bi";
-import { MdMessage, MdOutlineDeleteOutline } from "react-icons/md";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Toaster, toast } from "sonner";
-import { IconSearch, IconPencilPlus } from "@tabler/icons-react";
+import { IconSearch } from "@tabler/icons-react";
 
 import {
   Comments,
@@ -24,6 +19,7 @@ import {
   EditPost,
   Loading,
   WritePost,
+  Pagination,
 } from "../components";
 import { useAction, usePayment, useDeletePost } from "../hooks/post-hook";
 import useCommentStore from "../store/comments";
@@ -250,11 +246,6 @@ const Payments = () => {
         <div className="w-full mt-5 flex items-center justify-center">
           <Pagination
             total={data?.numOfPage}
-            siblings={1}
-            defaultValue={data?.page}
-            // gap={10}
-            // color='lime'
-            withEdges
             onChange={(value) => setPage(value)}
           />
         </div>

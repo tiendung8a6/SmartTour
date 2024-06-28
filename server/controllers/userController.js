@@ -466,3 +466,19 @@ export const getUsersNotifications = async (req, res, next) => {
     res.status(500).json({ message: error.message });
   }
 };
+export const getPolicy = async (req, res, next) => {
+  try {
+    const policies = await Policy.find().sort({
+      _id: -1,
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Dữ liệu chính sách đã được tải thành công",
+      data: policies,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: "Đã xảy ra lỗi. Vui lòng thử lại!" });
+  }
+};

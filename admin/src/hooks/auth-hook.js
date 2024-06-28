@@ -77,7 +77,7 @@ export const useVerification = (toast) => {
 
       setTimeout(() => {
         localStorage.removeItem("otp_data");
-        window.location.replace("/");
+        window.location.replace("/sign-in");
       }, 1000);
     },
   });

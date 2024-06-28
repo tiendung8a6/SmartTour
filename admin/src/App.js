@@ -38,7 +38,7 @@ function Layout() {
       <UpdateProfile key={new Date()} />
     </div>
   ) : (
-    <Navigate to="/" state={{ from: location }} replace />
+    <Navigate to="/sign-in" state={{ from: location }} replace />
   );
 }
 
@@ -46,9 +46,8 @@ function App() {
   return (
     <main className="w-full min-h-screen">
       <Routes>
-        <Route index path="/" element={<StartPage />} />
         <Route element={<Layout />}>
-          {/* <Route index path="/" element={<Navigate to="/analytics" />} /> */}
+          <Route index path="/" element={<Navigate to="/analytics" />} />
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/policy" element={<Policy />} />
           <Route path="/categories" element={<Categories />} />
@@ -60,6 +59,7 @@ function App() {
           <Route path="/payments" element={<Payments />} />
           <Route path="/notifications" element={<Notifications />} />
         </Route>
+        <Route path="/sign-in" element={<StartPage />} />
         {/* <Route path="/otp-verification" element={<OTPVerification />} /> */}
       </Routes>
     </main>

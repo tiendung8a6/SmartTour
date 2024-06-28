@@ -19,7 +19,6 @@ const EditCategory = ({ opened, close }) => {
   const { colorScheme } = useMantineColorScheme();
   const { user } = useStore();
   const { post } = useCommentStore();
-  const isMobile = useMediaQuery("(max-width: 50em)");
   const [label, setLabel] = useState(post.label);
   const [color, setColor] = useState(post.color);
   const [selectedColor, setSelectedColor] = useState(post.color); // Lưu màu đã chọn

@@ -193,7 +193,7 @@ const TripSummaryPublic = () => {
     <div className="m-[50px] h-fit">
       <Link to="/trip">
         <Button
-          className="border-none hover:text-[#0782c5] hover:bg-transparent"
+          className="border-none hover:text-[#0782c5] hover:bg-transparent dark:bg-inherit"
           leftSection={<IconArrowLeft className="text-[#0782c5]" size={30} />}
           variant="default"
           color="#0782c5"
@@ -210,20 +210,20 @@ const TripSummaryPublic = () => {
               <div>{trip?.tripName.slice(0, 70)}</div>
             </span>
           </h6>
-          <div className="flex gap-2 flex-col mt-[10px]">
+          <div className="flex gap-2 flex-col mt-[10px] dark:text-gray-300">
             <span>{trip?.city?.slice(0, 100)}</span>
 
-            <span className="text-sm text-gray-600">
+            <span className="text-sm text-gray-600 dark:text-gray-500">
               {trip?.total?.slice(0, 100)}
             </span>
 
-            <span className="text-sm text-gray-600">
+            <span className="text-sm text-gray-600 dark:text-gray-500">
               {new Date(trip?.startDate).toLocaleDateString("vi-VN")} -{" "}
               {new Date(trip?.endDate).toLocaleDateString("vi-VN")} (
               {diffDays === 0 ? "1 ngày" : `${diffDays} ngày`})
             </span>
 
-            <div className="flex gap-1 text-sm text-gray-600">
+            <div className="flex gap-1 text-sm text-gray-600 dark:text-gray-500">
               Tổng chi phí dự kiến:
               <NumberFormatter
                 thousandSeparator="."
@@ -238,7 +238,7 @@ const TripSummaryPublic = () => {
               </span>
             </div>
 
-            <div className="flex gap-1 text-sm text-gray-600 ">
+            <div className="flex gap-1 text-sm text-gray-600 dark:text-gray-500">
               Tổng chi phí thực tế:
               <NumberFormatter
                 thousandSeparator="."
@@ -264,130 +264,17 @@ const TripSummaryPublic = () => {
                 {trip?.status === true ? "Công khai" : "Chỉ mình tôi"}
               </Badge>
             </span>
-            {/* <span className="flex">
-              <span className="bg-[#0782c5] border-[#0782c5] border rounded-full w-[24px] h-[24px] p-[2px]">
-                <IconCirclesRelation
-                  stroke={2}
-                  className="text-[white] m-[1px] h-[17px] w-[17px]"
-                />
-              </span>
-              <span className="ml-[10px]">
-                <Link className="text-[#0782c5] font-medium text-sm">
-                  Chia sẻ
-                </Link>
-              </span>
-            </span> */}
           </div>
-          {/* <Grid>
-            <Grid.Col
-              span={{ base: 12, md: 6, lg: 3 }}
-              className="flex items-center"
-            >
-              <span className="flex items-center">
-                <span className="bg-transparent border-[#0782c5] border rounded-full w-[24px] h-[24px] p-[2px]">
-                  <IconPencil
-                    stroke={2}
-                    className="text-[#0782c5] mt-[1px] ml-0.5px  h-[17px] w-[17px]"
-                  />
-                </span>
-                <span className="ml-[10px] ">
-                  <Link
-                    to={`/trip/${trip._id}/edit`}
-                    className="text-[#0782c5] flex items-center font-medium text-sm"
-                  >
-                    Chỉnh sửa chuyến đi
-                  </Link>
-                </span>
-              </span>
-            </Grid.Col>
-            <Grid.Col span={{ base: 12, md: 6, lg: 3 }} className="ml-[-19px]">
-              <Menu shadow="md" width={200}>
-                <Menu.Target>
-                  <Button className="flex bg-transparent hover:bg-transparent">
-                    <span className="bg-transparent border-[#0782c5] border rounded-full w-[24px] h-[24px] p-[2px]">
-                      <IconDots
-                        stroke={2}
-                        className="text-[#0782c5] mt-[1px] ml-[0.5px]  h-[17px] w-[17px]"
-                      />
-                    </span>
-                    <span className="ml-[10px] ">
-                      <div className="text-[#0782c5] flex items-center font-medium text-sm">
-                        Lựa chọn khác
-                        <IconChevronDown
-                          stroke={2}
-                          className="text-[#0782c5] ml-1 mt-[1px] h-[17px] w-[17px]"
-                        />
-                      </div>
-                    </span>
-                  </Button>
-                </Menu.Target>
-
-                <Menu.Dropdown>
-                  <Menu.Label>Chức năng</Menu.Label>
-                  <Menu.Item
-                    leftSection={
-                      <IconPrinter
-                        style={{ width: rem(14), height: rem(14) }}
-                      />
-                    }
-                    className="text-[#0782c5] flex items-center"
-                  >
-                    <Link
-                      to={`/trip/${trip._id}/print`}
-                      className="text-[#0782c5] flex items-center "
-                    >
-                      In chuyến đi
-                    </Link>
-                  </Menu.Item>
-                  <Menu.Item
-                    leftSection={
-                      <IconDownload
-                        style={{ width: rem(14), height: rem(14) }}
-                      />
-                    }
-                    className="text-[#0782c5] flex items-center"
-                  >
-                    Tải chuyến đi
-                  </Menu.Item>
-
-                  <Menu.Divider />
-
-                  <Menu.Label>Cẩn trọng</Menu.Label>
-                  <Menu.Item
-                    color="red"
-                    leftSection={
-                      <IconTrash style={{ width: rem(14), height: rem(14) }} />
-                    }
-                  >
-                    Xóa chuyến đi
-                  </Menu.Item>
-                </Menu.Dropdown>
-              </Menu>
-            </Grid.Col>
-          </Grid> */}
         </div>
 
-        <Link
-          to={`/trip/${trip._id}`}
-          className="w-full h-auto md:h-64 md:w-1/4 lg:w-[380px] hidden md:block"
-        >
+        <div className="w-full h-auto md:h-64 md:w-1/4 lg:w-[380px] hidden md:block">
           <img
             src={trip?.image}
             alt={trip?.tripName}
             className="object-cover w-full md:h-[100%] rounded"
           />
-        </Link>
+        </div>
       </div>
-
-      {/* <Link
-        to={`/trip/${trip._id}/plans/create`}
-        className="flex mx-auto h-[50px] w-fit p-4 shadow-xl border rounded-full  text-[#0782c5]"
-      >
-        <span className="flex justify-center mt-[-3px]">
-          <IconCirclePlus stroke={2} className="mr-1" />
-          Thêm kế hoạch
-        </span>
-      </Link> */}
 
       {/* Time line */}
 
@@ -493,17 +380,15 @@ const TripSummaryPublic = () => {
                     {/* <br /> */}
                     {/* <div ></div> */}
                     <Grid.Col span={{ base: 12, md: 6, lg: 8 }}>
-                      <Link
-                      // to={`/trip/${trip?._id}/${item?.type}/${item?._id}/view`}
-                      >
-                        <span className="text-xl font-medium text-[#0d4d84f4]">
+                      <div>
+                        <span className="text-xl font-medium text-[#0d4d84f4] dark:text-sky-500">
                           {`${item.planName} ${
                             item.typeTime === "start"
                               ? "(Hoạt động bắt đầu )"
                               : "(Hoạt động kết thúc)"
                           } `}
                         </span>
-                      </Link>
+                      </div>
                       <span className="">
                         {item.typeTime === "start" ? (
                           <p className="my-5">
@@ -600,62 +485,6 @@ const TripSummaryPublic = () => {
                         </>
                       )}
                     </Grid.Col>
-                    {/* <Grid.Col
-                      span={{ base: 12, md: 6, lg: 4 }}
-                      className="mt-[-10px] flex justify-end"
-                    >
-                      <Menu shadow="md" width={200}>
-                        <Menu.Target>
-                          <Button className="flex bg-transparent hover:bg-transparent">
-                            <span className="bg-transparent border-[#0782c5] border rounded-full w-[24px] h-[24px] p-[2px]">
-                              <IconDots
-                                stroke={2}
-                                className="text-[#0782c5] mt-[1px] ml-[0.5px]  h-[17px] w-[17px]"
-                              />
-                            </span>
-                            <span className="ml-[10px] ">
-                              <div className="text-[#0782c5] flex items-center font-medium text-sm">
-                                Lựa chọn khác
-                                <IconChevronDown
-                                  stroke={2}
-                                  className="text-[#0782c5] ml-1 mt-[1px] h-[17px] w-[17px]"
-                                />
-                              </div>
-                            </span>
-                          </Button>
-                        </Menu.Target>
-
-                        <Menu.Dropdown>
-                          <Menu.Item
-                            leftSection={
-                              <IconPencil
-                                style={{ width: rem(14), height: rem(14) }}
-                              />
-                            }
-                            className="text-[#0782c5] flex items-center"
-                          >
-                            <Link
-                              to={`/trip/${trip?._id}/${item?.type}/${item?._id}/edit`}
-                            >
-                              Chỉnh sửa kế hoạch
-                            </Link>
-                          </Menu.Item>
-
-                          <Menu.Divider />
-
-                          <Menu.Item
-                            color="red"
-                            leftSection={
-                              <IconTrash
-                                style={{ width: rem(14), height: rem(14) }}
-                              />
-                            }
-                          >
-                            Xóa kế hoạch
-                          </Menu.Item>
-                        </Menu.Dropdown>
-                      </Menu>
-                    </Grid.Col> */}
                   </Grid>
                 </Timeline.Item>
               );

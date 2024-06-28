@@ -4,7 +4,7 @@ import { Toaster, toast } from "sonner"; // Import Toaster và toast từ thư v
 
 const Contact = () => {
   const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
-
+  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   const [formData, setFormData] = useState({
     name: "",
     email: "",

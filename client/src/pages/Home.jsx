@@ -8,7 +8,8 @@ import { Feature } from "../components";
 import { Feature2 } from "../components";
 import { Feature3 } from "../components";
 import { Testimonials } from "../components";
-import { Contact } from "../components";
+import { Contact } from "../pages";
+
 const Home = () => {
   return (
     <div>

@@ -133,7 +133,7 @@ const Policy = () => {
                   key={el?._id}
                   className={theme ? "text-gray-400" : `text-slate-600`}
                 >
-                  <Table.Td className="flex gap-2 items-center text-justify">
+                  <Table.Td className="flex gap-2 items-center">
                     {el?.title}
                   </Table.Td>
                   <Table.Td className="text-justify">

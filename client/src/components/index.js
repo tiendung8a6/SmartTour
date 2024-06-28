@@ -24,7 +24,6 @@ import Feature from "./Home/Feature";
 import Feature2 from "./Home/Feature2";
 import Feature3 from "./Home/Feature3";
 import Testimonials from "./Home/Testimonials";
-import Contact from "./Home/Contact";
 import TripCard from "./TripCard";
 import ConfirmDialog from "./ConfirmDialog";
 import EditPost from "./EditPost";
@@ -67,7 +66,6 @@ export {
   Feature2,
   Feature3,
   Testimonials,
-  Contact,
   TripCard,
   EditPost,
   ConfirmDialog,
