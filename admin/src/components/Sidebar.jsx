@@ -52,7 +52,7 @@ const mockdata = [
   { icon: IconClipboardText, label: "Liên hệ", to: "contacts" },
   { icon: IconThumbUp, label: "Người theo dõi", to: "followers" },
   { icon: IconLicense, label: "Chính sách", to: "policy" },
-  { icon: IconSettings, label: "Cài đặt" },
+  // { icon: IconSettings, label: "Cài đặt" },
 ];
 
 const Sidebar = ({ close = () => {} }) => {
@@ -78,7 +78,7 @@ const Sidebar = ({ close = () => {} }) => {
   ));
 
   return (
-    <nav className="h-full flex flex-col gap-1 md:border-r border-slate-700 px-6 2xl:px-8 bg-cover bg-local">
+    <nav className="h-full flex flex-col gap-3 md:border-r border-slate-700 px-6 2xl:px-8 bg-cover bg-local">
       <p className="py-2 pt-4 text-lg font-semibold ">Quản lý</p>
       <div>
         <Stack justify="center" gap={10}>

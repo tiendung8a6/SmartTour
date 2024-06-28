@@ -54,12 +54,12 @@ const EmailNotifications = ({ opened, close }) => {
 
   const handleSubmit = async () => {
     if (users.length === 0) {
-      toast.error("users are required.");
+      toast.error("Vui lòng chọn người nhận.");
       return;
     }
 
     if (editor.getHTML().trim() === "<p></p>") {
-      toast.error("Please enter content in the Content field.");
+      toast.error("Vui lòng nhập nội dung.");
       return;
     }
 

@@ -46,14 +46,13 @@ const EditCategory = ({ opened, close }) => {
 
   const handleSubmit = async () => {
     if (!label) {
-      toast.error("Please fill in the label field.");
+      toast.error("Vui lòng nhập Tên danh mục.");
       return;
     }
     if (!color) {
-      toast.error("Please fill in the color field.");
+      toast.error("Vui lòng chọn màu sắc.");
       return;
     }
-
     mutate({
       id: post._id,
       label: label,

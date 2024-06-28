@@ -27,12 +27,12 @@ const Policy = () => {
             <>
               <h2
                 id="section-one"
-                className="mb-4 text-3xl font-bold text-center"
+                className="mb-4 text-3xl font-bold text-center dark:text-white"
               >
                 {policyData.data[0].title}
               </h2>
               <p
-                className="mb-10 text-base text-gray-600 text-justify"
+                className="mb-10 text-base text-gray-600 text-justify dark:text-gray-400"
                 dangerouslySetInnerHTML={{ __html: policyData.data[0].content }}
               ></p>
             </>
