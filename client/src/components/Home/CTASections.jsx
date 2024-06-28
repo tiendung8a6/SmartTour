@@ -14,13 +14,13 @@ const BlogSections = () => {
             />
           </div>
           <div className="max-w-xl px-4 space-y-3 mt-6 sm:px-0 md:mt-0 lg:max-w-2xl">
-            <h3 className="text-indigo-600 font-semibold">
-              Chia Sẻ Trải Nghiệm
+            <h3 className="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-400">
+              Chia sẽ trải nghiệm
             </h3>
-            <p className="text-gray-800 text-3xl font-semibold sm:text-4xl">
+            <p className="text-gray-800 text-3xl font-semibold sm:text-4xl dark:text-white">
               Chia sẻ những kinh nghiệm đáng giá từ cộng đồng của chúng tôi
             </p>
-            <p className="mt-3 text-gray-600">
+            <p className="mt-3 text-gray-600 dark:text-gray-300">
               Chúng tôi tạo ra nơi cho bạn để chia sẻ và khám phá những câu
               chuyện thú vị từ cộng đồng. Hãy cùng nhau tìm hiểu về những trải
               nghiệm đặc biệt, những địa điểm mới, và những lời khuyên hữu ích
@@ -28,7 +28,7 @@ const BlogSections = () => {
             </p>
             <Link
               to="/blog"
-              className="inline-flex gap-x-1 items-center text-indigo-600 hover:text-indigo-500 duration-150 font-medium"
+              className="inline-flex gap-x-1 items-center text-indigo-600 hover:text-indigo-500 duration-150 font-medium dark:text-indigo-400"
             >
               Khám Phá
               <svg

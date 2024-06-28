@@ -17,7 +17,7 @@ const Accordion = ({ question, answer }) => {
       onClick={toggleAccordion}
     >
       <h4 className="cursor-pointer pb-5 flex items-center justify-between text-lg text-gray-700 font-medium">
-        {question}
+        <p className="dark:text-gray-300">{question}</p>
         {isOpen ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -56,7 +56,7 @@ const Accordion = ({ question, answer }) => {
         style={{ height: answerHeight }}
       >
         <div>
-          <p className="text-gray-500">{answer}</p>
+          <p className="text-gray-500 dark:text-gray-400">{answer}</p>
         </div>
       </div>
     </div>
@@ -90,15 +90,15 @@ export default () => {
   return (
     <section className="leading-relaxed max-w-screen-xl mt-12 mx-auto px-4 md:px-8">
       <div className="space-y-3 text-center">
-        <h1 className="text-3xl text-gray-800 font-semibold">
+        <h1 className="text-3xl text-gray-800 font-semibold dark:text-white">
           Câu Hỏi Thường Gặp
         </h1>
-        <p className="text-gray-600 max-w-lg mx-auto text-lg">
+        <p className="text-gray-600 max-w-lg mx-auto text-lg dark:text-gray-400">
           Đã trả lời tất cả các câu hỏi thường gặp, Vẫn còn băn khoăn? Hãy liên
           hệ với chúng tôi.
         </p>
       </div>
-      <div className="mt-14 max-w-2xl mx-auto">
+      <div className="mt-14 max-w-2xl mx-auto dark:text-gray-400">
         {faqsList.map((item, idx) => (
           <Accordion key={idx} question={item.q} answer={item.a} />
         ))}

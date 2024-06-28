@@ -193,8 +193,8 @@ const MyPosts = () => {
                   key={el?._id}
                   className={
                     theme
-                      ? "text-gray-400 hover:bg-gray-100"
-                      : `text-slate-600 hover:bg-gray-100`
+                      ? "text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 "
+                      : `text-slate-600 hover:bg-gray-100 dark:hover:bg-gray-800`
                   }
                 >
                   <Table.Td className="flex gap-2 items-center">
