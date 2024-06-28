@@ -190,20 +190,30 @@ const Profile = () => {
               <Grid.Col span={{ base: 12, md: 6, lg: 5 }}>
                 <Grid>
                   <Grid.Col span="12">
-                    <div className="bg-white p-[20px] rounded-2xl drop-shadow-2xl">
-                      <span className="text-xl font-medium ">Thông tin</span>
+                    <div className="border shadow-xl p-[20px] rounded-2xl drop-shadow-2xl">
+                      <span className="text-xl font-medium dark:text-sky-500">
+                        Thông tin
+                      </span>
                       <div className="mt-5 flex ">
-                        <IconUsers stroke={2} className="mr-2" /> Là thành viên
-                        của SmartTour từ{" "}
+                        <IconUsers
+                          stroke={2}
+                          className="mr-2 dark:text-gray-300"
+                        />{" "}
+                        Là thành viên của SmartTour từ{" "}
                         {moment(user?.user?.createdAt).fromNow()}
                       </div>
                     </div>
                   </Grid.Col>
                   <Grid.Col span="12">
-                    <div className="bg-white p-[20px] rounded-2xl drop-shadow-2xl">
-                      <span className="text-xl font-medium ">Cập nhật</span>
+                    <div className="border shadow-xl p-[20px] rounded-2xl drop-shadow-2xl">
+                      <span className="text-xl font-medium dark:text-sky-500">
+                        Cập nhật
+                      </span>
                       <div className="mt-5 flex ">
-                        <IconUsers stroke={2} className="mr-2" />
+                        <IconUsers
+                          stroke={2}
+                          className="mr-2 dark:text-gray-300"
+                        />
                         Thay đổi thông tin gần nhất từ{" "}
                         {moment(user?.user?.updatedAt).fromNow()}
                       </div>
@@ -213,16 +223,18 @@ const Profile = () => {
               </Grid.Col>
               <Grid.Col
                 span={{ base: 12, md: 6, lg: 7 }}
-                className="bg-white p-[20px] rounded-2xl drop-shadow-2xl  "
+                className="border shadow-xl p-[20px] rounded-2xl drop-shadow-2xl  "
               >
-                <span className="text-xl font-medium">Thành tích</span>
+                <span className="text-xl font-medium dark:text-sky-500">
+                  Thành tích
+                </span>
 
                 <Grid className="mt-4">
                   <Grid.Col
                     span={{ base: 12, md: 6, lg: 5 }}
                     className="p-[10px] "
                   >
-                    <p>Chưa có thông tin.</p>
+                    <p className="dark:text-gray-300">Chưa có thông tin.</p>
                     {/* <img
                       className="min-w-[228px]  h-[128px] bg-black rounded-md"
                       src="https://i.pinimg.com/736x/2e/0a/ac/2e0aac9175f250eeb4a3a5feabbeb2b7.jpg"
@@ -291,7 +303,7 @@ const Profile = () => {
 
                           <label
                             className={clsx(
-                              "absolute bottom-0 -right-1 w-6 h-6 shadow-xl rounded-full bg-white text-base cursor-pointer flex items-center justify-center text-gray-600"
+                              "absolute bottom-0 -right-1 w-6 h-6 shadow-xl rounded-full border text-base cursor-pointer flex items-center justify-center text-gray-600"
                             )}
                             htmlFor="imgUpload"
                           >
