@@ -137,7 +137,7 @@ const Navbar = () => {
             <UserMenu user={user?.user} theme={theme} />
           ) : (
             <Link
-              to="/"
+              to="/sign-in"
               onClick={handleLogin}
               className={clsx(
                 `flex items-center gap-2 rounded-full 2xl:mr-10 text-base`,
