@@ -15,12 +15,12 @@ const LoginForm = ({ toast, isSignin, setIsSignin, setFormClose, toggle }) => {
   const { signIn } = useStore();
   const { data, isSuccess, mutate } = useSignin(toast, toggle);
   const [strength, setStrength] = useState(0);
-  const [passValue, setPassValue] = useInputState("");
+  const [passValue, setPassValue] = useInputState("12345678a");
   const navigate = useNavigate();
 
   const form = useForm({
     initialValues: {
-      email: "",
+      email: "smarttour@gmail.com",
     },
     validate: {
       email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
@@ -55,6 +55,7 @@ const LoginForm = ({ toast, isSignin, setIsSignin, setFormClose, toggle }) => {
         withAsterisk
         label="Email"
         placeholder="Email"
+        defaultValue={form.values.email}
         {...form.getInputProps("email")}
       />
 
@@ -63,6 +64,7 @@ const LoginForm = ({ toast, isSignin, setIsSignin, setFormClose, toggle }) => {
         setValue={setPassValue}
         setStrength={setStrength}
         isSignin={true}
+        
       />
 
       <Group

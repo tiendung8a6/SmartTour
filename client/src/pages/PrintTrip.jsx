@@ -1,26 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Button, Container, GridCol, Timeline } from "@mantine/core";
 import useStore from "../store";
 import { getSingleTrip } from "../utils/apiCalls";
-import { Grid, Menu, rem } from "@mantine/core";
-import { IconArrowLeft, IconCirclePlus } from "@tabler/icons-react";
+import { Grid, Button, Timeline } from "@mantine/core";
 
 import {
-  IconGitBranch,
-  IconGitPullRequest,
-  IconGitCommit,
-  IconMessageDots,
-  IconCirclesRelation,
-  IconPencil,
-  IconDots,
   IconPrinter,
-  IconChevronDown,
-  IconSearch,
-  IconPhoto,
-  IconDownload,
-  IconTrash,
-  IconArrowsLeftRight,
   IconPlaneInflight,
   IconCar,
   IconBuildingSkyscraper,
@@ -28,12 +13,12 @@ import {
   IconParkingCircle,
   IconWalk,
   IconNote,
-  IconBrandZoom,
   IconMusic,
   IconToolsKitchen2,
   IconMasksTheater,
-  IconEditCircle,
   IconCampfire,
+  IconArrowLeft,
+  IconCirclePlus,
 } from "@tabler/icons-react";
 const handleClickPrint = () => {
   // Khi người dùng click vào nút, kích hoạt sự kiện Ctrl + P

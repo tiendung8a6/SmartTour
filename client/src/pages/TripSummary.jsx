@@ -25,13 +25,21 @@ import {
   IconMasksTheater,
   IconCampfire,
   IconCurrencyDong,
+  IconBrandFacebook,
+  IconBrandTwitter,
+  IconBrandLinkedin,
+  IconMail,
 } from "@tabler/icons-react";
 import { useDeletePlan } from "../hooks/plan-hook";
 import { Toaster, toast } from "sonner";
 import { ConfirmDialog, LoadingClient } from "../components";
 import { useDisclosure } from "@mantine/hooks";
+import { saveAs } from "file-saver";
+import { pdf } from "@react-pdf/renderer";
+import TripDocument from "../components/TripDocument";
 
 const TripSummary = () => {
+  const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL;
   const { setIsLoading, user } = useStore();
   const { id } = useParams();
   const useDelete = useDeletePlan(toast, user?.token);
@@ -45,6 +53,11 @@ const TripSummary = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const [isOpening, setIsOpening] = useState(false);
   const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
+
+  const handleDownload = async () => {
+    const blob = await pdf(<TripDocument />).toBlob();
+    saveAs(blob, "smarttour.pdf");
+  };
 
   const fetchTrip = async () => {
     try {
@@ -199,8 +212,6 @@ const TripSummary = () => {
   // console.log(`Tổng số mục trong ngày trước đó tính từ ngày hiện tại (${currentDate}) lùi về trước: ${totalItemsInPreviousDay}`);
   const isPassperItem = itemsUntilCurrentDate - 1;
 
-  //Bổ xung check điều kiện Đăng nhập và Đúng kế hoạch của tôi
-  const isUserValid = user?.user?._id === trip?.user?._id;
   if (!trip) {
     return (
       <div className="w-full h-full py-8 flex items-center justify-center">
@@ -227,16 +238,6 @@ const TripSummary = () => {
             Đăng nhập
           </Link>
         </div>
-      </div>
-    );
-  }
-  // Check user
-  if (!isUserValid) {
-    return (
-      <div className="w-full h-full py-8 flex items-center justify-center">
-        <span className="text-lg text-slate-500">
-          Đây không phải kế hoạch của bạn
-        </span>
       </div>
     );
   }
@@ -323,17 +324,89 @@ const TripSummary = () => {
                 </Badge>
               </span>
               <span className="flex">
-                <span className="bg-[#0782c5] border-[#0782c5] border rounded-full w-[24px] h-[24px] p-[2px]">
-                  <IconCirclesRelation
-                    stroke={2}
-                    className="text-[white] m-[1px] h-[17px] w-[17px]"
-                  />
-                </span>
-                <span className="ml-[10px]">
-                  <Link className="text-[#0782c5] font-medium text-sm">
-                    Chia sẻ
-                  </Link>
-                </span>
+                <Menu shadow="md" width={210}>
+                  <Menu.Target className="py-3">
+                    <div className="flex justify-normal bg-transparent hover:bg-transparent">
+                      <span className="bg-[#0782c5] border-[#0782c5] border rounded-full w-[24px] h-[24px] p-[2px]">
+                        <IconCirclesRelation
+                          stroke={2}
+                          className="text-[white] m-[1px] h-[17px] w-[17px] "
+                        />
+                      </span>
+                      <span className="ml-[10px]">
+                        <div className="text-[#0782c5] dark:text-sky-500 flex items-center font-medium text-sm">
+                          Chia sẻ
+                          <IconChevronDown
+                            stroke={2}
+                            className="text-[#0782c5] dark:text-sky-500 ml-1 mt-[1px] h-[17px] w-[17px] "
+                          />
+                        </div>
+                      </span>
+                    </div>
+                  </Menu.Target>
+
+                  <Menu.Dropdown>
+                    <Menu.Item
+                      leftSection={
+                        <IconBrandFacebook
+                          style={{ width: rem(14), height: rem(14) }}
+                        />
+                      }
+                      className="text-[#0782c5] flex items-center"
+                    >
+                      <a
+                        href={`https://www.facebook.com/sharer/sharer.php?u=${REACT_APP_BASE_URL}/trip/${trip._id}/public`}
+                        target="_blank"
+                      >
+                        Chia sẻ lên Facebook
+                      </a>
+                    </Menu.Item>
+                    <Menu.Item
+                      leftSection={
+                        <IconBrandTwitter
+                          style={{ width: rem(14), height: rem(14) }}
+                        />
+                      }
+                      className="text-[#0782c5] flex items-center"
+                    >
+                      <a
+                        href={`http://twitter.com/share?text=Im Sharing on Twitter&url=${REACT_APP_BASE_URL}/trip/${trip._id}/public&hashtags=smarttour,chuyendi,trainghiem,khampha`}
+                        target="_blank"
+                      >
+                        Chia sẻ lên Twitter
+                      </a>
+                    </Menu.Item>
+                    <Menu.Item
+                      leftSection={
+                        <IconBrandLinkedin
+                          style={{ width: rem(14), height: rem(14) }}
+                        />
+                      }
+                      className="text-[#0782c5] flex items-center"
+                    >
+                      <a
+                        href={`https://www.linkedin.com/sharing/share-offsite/?url=${REACT_APP_BASE_URL}/trip/${trip._id}/public`}
+                        target="_blank"
+                        title="Share on LinkedIn"
+                      >
+                        Chia sẻ lên linkedin
+                      </a>
+                    </Menu.Item>
+                    <Menu.Item
+                      leftSection={
+                        <IconMail style={{ width: rem(14), height: rem(14) }} />
+                      }
+                      className="text-[#0782c5] flex items-center"
+                    >
+                      <a
+                        href={`https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=&su=Hãy cùng nhau lập kế hoạch du lịch thật thú vị cùng với SmartTour&body=Hỡi bạn ơi,Hãy lập kế hoạch cùng với tôi và Smartour tại đây nào: ${REACT_APP_BASE_URL}/trip/${trip._id}/public+&ui=2&tf=1&pli=1`}
+                        target="_blank"
+                      >
+                        Chia sẻ lên Gmail
+                      </a>
+                    </Menu.Item>
+                  </Menu.Dropdown>
+                </Menu>
               </span>
             </div>
             <Grid>
@@ -345,7 +418,7 @@ const TripSummary = () => {
                   <span className="bg-transparent border-[#0782c5] border rounded-full w-[24px] h-[24px] p-[2px]">
                     <IconPencil
                       stroke={2}
-                      className="text-[#0782c5] mt-[1px] ml-0.5px  h-[17px] w-[17px]"
+                      className="text-[#0782c5] mt-[1px] ml-0.5px h-[17px] w-[17px]"
                     />
                   </span>
                   <span className="ml-[10px] ">
@@ -407,6 +480,7 @@ const TripSummary = () => {
                         />
                       }
                       className="text-[#0782c5] flex items-center"
+                      onClick={handleDownload}
                     >
                       Tải chuyến đi
                     </Menu.Item>
