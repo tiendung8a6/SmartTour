@@ -1,67 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <!-- Essetial Meta Tags -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <meta charset="utf-8" />
-  <link rel="icon" href="%PUBLIC_URL%/logo.png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#000000" />
-  <!-- <meta name="description" content="Web site created using create-react-app" /> -->
-  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo.png" />
-  <meta property="og:title" content="SmartTour">
-  <meta property="og:description" content="Hệ thống SmartTour giúp tối ưu hóa và đề xuất lịch trình du lịch hiệu quả.">
-  <meta property="og:image" content="https://github.com/tiendung8a6/SmartTour/blob/main/client/public/logo.png">
-  <meta property="og:url" content="https://207ct27665.is-tech.vn">
-  <meta name="og:site_name" content="SmartTour, Inc.">
-  <meta property="fb:app_id" content="1978119382621687" />
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="Lập kế hoạch du lịch hiệu quả cùng với SmartTour" />
-  <meta property="og:image" content="https://github.com/tiendung8a6/SmartTour/blob/main/client/public/logo.png" />
+    <!-- Primary Meta Tags -->
+    <title>SmartTour</title>
+    <meta
+      name="description"
+      content="Hệ thống SmartTour giúp tối ưu hóa và đề xuất lịch trình du lịch hiệu quả."
+    />
 
-  <meta name="keywords"
-    content="smarttour, du lịch, lập kế hoạch, lập chuyến đi, điểm đến quanh đây, cẩm nang du lịch" />
-  <meta name="description" content="Hệ thống SmartTour giúp tối ưu hóa và đề xuất lịch trình du lịch hiệu quả." />
-  <meta name="subject" content="SmartTour">
-  <meta name="copyright" content="SmartTour, Inc.">
-  <meta name="language" content="VN">
-  <meta name="robots" content="index,follow" />
-  <meta name="revised" content="Thứ Sáu, 28 Tháng Sáu, 2024, 9:00 am" />
-  <meta name="abstract" content="">
-  <meta name="topic" content="">
-  <meta name="summary" content="">
-  <meta name="Classification" content="Business">
-  <meta name="author" content="Alex Ngo, tiendung8a6@gmail.com">
-  <meta name="designer" content="Alex Ngo">
-  <meta name="copyright" content="tiendung8a6@gmail.com">
-  <meta name="reply-to" content="tiendung8a6@gmail.com">
-  <meta name="owner" content="tiendung8a6@gmail.com">
-  <meta name="url" content="https://207ct27665.is-tech.vn">
-  <meta name="identifier-URL" content="https://207ct27665.is-tech.vn">
-  <meta name="directory" content="submission">
-  <meta name="category" content="">
-  <meta name="coverage" content="Worldwide">
-  <meta name="distribution" content="Global">
-  <meta name="rating" content="General">
-  <meta name="revisit-after" content="7 days">
-  <meta http-equiv="Expires" content="0">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Cache-Control" content="no-cache">
+    <!-- Secodary Meta Tags -->
+    <meta name="application-name" content="SmartTour" />
+    <meta name="apple-mobile-web-app-title" content="SmartTour" />
+    <meta http-equiv="content-language" content="pt-br" />
+    <meta name="author" content="NgoTienDung" />
+    <meta name="copyright" content="copyright@2025" />
+    <meta name="creator" content="tiendung8a6" />
 
-  <!--
+    <!-- Open Graph Facebook and WhatsApp -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://client-smarttour.netlify.app/" />
+    <meta property="og:title" content="SmartTour" />
+    <meta
+      property="og:description"
+      content="Hệ thống SmartTour giúp tối ưu hóa và đề xuất lịch trình du lịch hiệu quả."
+    />
+    <meta property="og:site_name" content="SmartTour" />
+    <meta property="og:image" itemprop="image" content="/public/logo.png" />
+    <meta property="og:image:width" content="600" />
+    <meta property="og:image:height" content="315" />
+    <meta property="og:image:alt" content="SmartTour" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta
+      property="og:image:secure_url"
+      content="https://raw.githubusercontent.com/tiendung8a6/SmartTour/refs/heads/main/client/public/logo.png"
+    />
+    <meta property="fb:page_id" content="1086849938XXXXX" />
+
+    <!-- Twitter -->
+    <meta name="twitter:creator" content="@tiendung8a6" />
+    <meta
+      name="twitter:card"
+      content="Hệ thống SmartTour giúp tối ưu hóa và đề xuất lịch trình du lịch hiệu quả."
+    />
+    <meta name="twitter:title" content="SmartTour" />
+    <meta
+      name="twitter:description"
+      content="Hệ thống SmartTour giúp tối ưu hóa và đề xuất lịch trình du lịch hiệu quả."
+    />
+    <meta name="twitter:site" content="https://client-smarttour.netlify.app/" />
+    <meta
+      name="twitter:image"
+      content="https://raw.githubusercontent.com/tiendung8a6/SmartTour/refs/heads/main/client/public/logo.png"
+    />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/x-icon" href="/public/logo.png" />
+    <link rel="apple-touch-icon" sizes="57x57" href="/public/logo.png" />
+    <link rel="apple-touch-icon" sizes="60x60" href="/public/logo.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/public/logo.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="/public/logo.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/public/logo.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="/public/logo.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/public/logo.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="/public/logo.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/public/logo.png" />
+    <link rel="apple-touch-icon" href="/public/logo.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/public/logo.png" />
+    <link rel="icon" type="image/png" sizes="128x128" href="/public/logo.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/public/logo.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/public/logo.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/public/logo.png" />
+    <link rel="manifest" href="/public/manifest.json" />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="msapplication-TileImage" content="/public/logo.png" />
+
+    <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-  <script
-    src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&region=vn&key=%REACT_APP_GOOGLE_MAPS_API_KEY%">
-    </script>
+    <link rel="manifest" href="/public/manifest.json" />
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&region=vn&key=%REACT_APP_GOOGLE_MAPS_API_KEY%"></script>
 
-  <title>SmartTour</title>
-</head>
+    <title>SmartTour</title>
+  </head>
 
-<body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root"></div>
-</body>
-
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  </body>
 </html>
