@@ -811,7 +811,7 @@ export const useActivateTrip = (toast, token) => {
       toast.success(data?.message);
 
       setTimeout(() => {
-        window.location.replace(`/trip/${id}`);
+        window.location.replace(`/trip/${id}/public`);
       }, 500);
     },
   });
