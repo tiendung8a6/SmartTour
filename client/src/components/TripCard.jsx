@@ -11,14 +11,20 @@ import {
   IconTrash,
   IconBrandFacebook,
   IconBrandTwitter,
+  IconBrandLinkedin,
+  IconMail,
 } from "@tabler/icons-react";
 import useStore from "../store";
 import { useDeleteTrip } from "../hooks/trip_hooks";
 import { Toaster, toast } from "sonner";
 import { ConfirmDialog, LoadingClient } from "../components";
 import { useDisclosure } from "@mantine/hooks";
+import { saveAs } from "file-saver";
+import { pdf } from "@react-pdf/renderer";
+import TripDocument from "../components/TripDocument";
 
 const TripCard = ({ trip, index }) => {
+  const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL;
   const startDate = new Date(trip?.startDate);
   const endDate = new Date(trip?.endDate);
 
@@ -34,6 +40,11 @@ const TripCard = ({ trip, index }) => {
   const [opened, { open, close }] = useDisclosure(false);
   const [isOpening, setIsOpening] = useState(false);
   const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
+
+  const handleDownload = async () => {
+    const blob = await pdf(<TripDocument />).toBlob();
+    saveAs(blob, "smarttour.pdf");
+  };
 
   const handleActions = () => {
     switch (type) {
@@ -128,7 +139,12 @@ const TripCard = ({ trip, index }) => {
                       }
                       className="text-[#0782c5] flex items-center"
                     >
-                      Chia sẻ lên Facebook
+                      <a
+                        href={`https://www.facebook.com/sharer/sharer.php?u=${REACT_APP_BASE_URL}/trip/${trip._id}/public`}
+                        target="_blank"
+                      >
+                        Chia sẻ lên Facebook
+                      </a>
                     </Menu.Item>
                     <Menu.Item
                       leftSection={
@@ -138,7 +154,41 @@ const TripCard = ({ trip, index }) => {
                       }
                       className="text-[#0782c5] flex items-center"
                     >
-                      Chia sẻ lên Twitter
+                      <a
+                        href={`http://twitter.com/share?text=Im Sharing on Twitter&url=${REACT_APP_BASE_URL}/trip/${trip._id}/public&hashtags=smarttour,chuyendi,trainghiem,khampha`}
+                        target="_blank"
+                      >
+                        Chia sẻ lên Twitter
+                      </a>
+                    </Menu.Item>
+                    <Menu.Item
+                      leftSection={
+                        <IconBrandLinkedin
+                          style={{ width: rem(14), height: rem(14) }}
+                        />
+                      }
+                      className="text-[#0782c5] flex items-center"
+                    >
+                      <a
+                        href={`https://www.linkedin.com/sharing/share-offsite/?url=${REACT_APP_BASE_URL}/trip/${trip._id}/public`}
+                        target="_blank"
+                        title="Share on LinkedIn"
+                      >
+                        Chia sẻ lên linkedin
+                      </a>
+                    </Menu.Item>
+                    <Menu.Item
+                      leftSection={
+                        <IconMail style={{ width: rem(14), height: rem(14) }} />
+                      }
+                      className="text-[#0782c5] flex items-center"
+                    >
+                      <a
+                        href={`https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=&su=Hãy cùng nhau lập kế hoạch du lịch thật thú vị cùng với SmartTour&body=Hỡi bạn ơi,Hãy lập kế hoạch cùng với tôi và Smartour tại đây nào: ${REACT_APP_BASE_URL}/trip/${trip._id}/public+&ui=2&tf=1&pli=1`}
+                        target="_blank"
+                      >
+                        Chia sẻ lên Gmail
+                      </a>
                     </Menu.Item>
                   </Menu.Dropdown>
                 </Menu>
@@ -213,6 +263,7 @@ const TripCard = ({ trip, index }) => {
                       />
                     }
                     className="text-[#0782c5] flex items-center"
+                    onClick={handleDownload}
                   >
                     Tải chuyến đi
                   </Menu.Item>

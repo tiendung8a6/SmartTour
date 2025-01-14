@@ -13,8 +13,8 @@ function SignIn() {
   const { user, signIn, setIsLoading } = useStore();
 
   const [data, setData] = useState({
-    email: "",
-    password: "",
+    email: "client@gmail.com",
+    password: "12345678a",
   });
 
   const handleChange = (e) => {

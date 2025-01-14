@@ -202,28 +202,60 @@ const Navbar = () => {
       <Logo />
       <div className="hidden md:flex gap-12 items-center">
         <ul className="flex gap-8 text-base">
-          <Link to="/" className={getNavLinkClass("/")}>
+          <Link
+            to="/"
+            className={`${getNavLinkClass(
+              "/"
+            )} hover:text-sky-500 dark:hover:text-sky-600`}
+          >
             Trang Chủ
           </Link>
-          <Link to="/trip" className={getNavLinkClass("/trip")}>
+          <Link
+            to="/trip"
+            className={`${getNavLinkClass(
+              "/trip"
+            )} hover:text-sky-500 dark:hover:text-sky-600`}
+          >
             Chuyến Đi
           </Link>
-          <Link to="/travel-guide" className={getNavLinkClass("/travel-guide")}>
+          <Link
+            to="/travel-guide"
+            className={`${getNavLinkClass(
+              "/travel-guide"
+            )} hover:text-sky-500 dark:hover:text-sky-600`}
+          >
             Hướng Dẫn Viên AI
           </Link>
           <Link
             to="/map/restaurants"
-            className={getNavLinkClass("/map/restaurants")}
+            className={`${getNavLinkClass(
+              "/map/restaurants"
+            )} hover:text-sky-500 dark:hover:text-sky-600`}
           >
             Điểm Đến
           </Link>
-          <Link to="/blog" className={getNavLinkClass("/blog")}>
+          <Link
+            to="/blog"
+            className={`${getNavLinkClass(
+              "/blog"
+            )} hover:text-sky-500 dark:hover:text-sky-600`}
+          >
             Blog
           </Link>
-          <Link to="/pricing" className={getNavLinkClass("/pricing")}>
+          <Link
+            to="/pricing"
+            className={`${getNavLinkClass(
+              "/pricing"
+            )} hover:text-sky-500 dark:hover:text-sky-600`}
+          >
             Mua Điểm
           </Link>
-          <Link to="/contact" className={getNavLinkClass("/contact")}>
+          <Link
+            to="/contact"
+            className={`${getNavLinkClass(
+              "/contact"
+            )} hover:text-sky-500 dark:hover:text-sky-600`}
+          >
             Liên Hệ
           </Link>
         </ul>
