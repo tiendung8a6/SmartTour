@@ -9,6 +9,7 @@ import { compareString, createJWT, hashString } from "../utils/index.js";
 import { sendVerificationEmail } from "../utils/sendEmail.js";
 import Contacts from "../models/contactModel.js";
 import nodemailer from "nodemailer";
+import axios from "axios";
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -312,7 +313,7 @@ export const deleteUser = async (req, res, next) => {
 };
 
 export const createContact = async (req, res) => {
-  const { name, email, phone, message } = req.body;
+  const { name, email, phone, message, token } = req.body;
 
   if (!name || !email || !phone || !message) {
     return res
@@ -321,12 +322,22 @@ export const createContact = async (req, res) => {
   }
 
   try {
+    // Verify reCAPTCHA
+    const response = await axios.post(
+      `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}`
+    );
+
+    if (!response.data.success) {
+      return res.status(400).json({ message: "Xác minh reCAPTCHA thất bại!" });
+    }
+
     // Create a new contact
     const newContact = new Contact({
       name,
       email,
       phone,
       message,
+      token,
     });
 
     // Save the new contact

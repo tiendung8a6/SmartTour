@@ -266,6 +266,7 @@ const Trips = () => {
                         >
                           <Link
                             to={`${process.env.REACT_APP_BASE_URL}/trip/${el?._id}/public`}
+                            target="_blank"
                           >
                             Xem Chi Tiết
                           </Link>

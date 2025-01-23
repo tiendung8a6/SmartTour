@@ -79,7 +79,7 @@ const PostCategory = () => {
                     <img
                       src={img}
                       alt={title}
-                      className="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover"
+                      className="w-10 h-10 md:w-10 md:h-10 object-cover"
                     />
                     <div className="w-full">
                       <div className="w-full flex justify-between">

@@ -8,6 +8,7 @@ const contactSchema = new mongoose.Schema(
     message: { type: String, required: true },
     isReply: { type: Boolean, default: false },
     content: { type: String, required: false },
+    token: { type: String, required: true },
   },
   { timestamps: true }
 );
