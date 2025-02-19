@@ -47,7 +47,7 @@ const Hero = () => {
         <div className="inset-y-0 right-0 w-full max-w-xl px-4 mx-auto lg:pl-8 lg:pr-0 lg:mb-0 lg:mx-0 lg:w-1/2 lg:max-w-full lg:absolute xl:px-0">
           <img
             className="object-cover w-full h-56 rounded shadow-lg lg:rounded-none lg:shadow-none sm:h-96 lg:h-full"
-            src="https://www.anlamtravel.vn/storage/pagedata/100921/img/images/menu/2_1.jpg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
+            src="https://firebasestorage.googleapis.com/v0/b/smarttour-mern.appspot.com/o/17399317255922_1.jpg?alt=media&token=2f71d2d3-f122-47f1-af85-2b610dec71a6?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
             alt=""
           />
         </div>
